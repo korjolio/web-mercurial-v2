@@ -409,7 +409,7 @@ strong { font-weight: 700; color: var(--c-primary); }
   transition: background-color 0.3s;
 }
 .check-riesgo::before {
-  content: 'FOCO ESTRATÉGICO';
+  content: 'INGENIERÍA DE RIESGOS';
   font-size: 0.65rem;
   color: var(--c-primary);
   letter-spacing: 0.5px;
