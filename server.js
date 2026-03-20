@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname)); // Servir archivos estáticos (index.html, etc.)
 
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 
