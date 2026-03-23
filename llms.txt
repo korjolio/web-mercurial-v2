@@ -1,0 +1,24 @@
+# Mercurial Corredores de Seguros
+
+Mercurial is a senior insurance brokerage firm based in Santiago, Chile, specializing in B2B corporate risk management and complex risk transfer programs.
+
+## Core Services
+- **Corporate Risk Management**: Property and industrial assets protection, mitigating "Perjuicio por Paralización" (Business Interruption).
+- **Logistics & Supply Chain**: Specialized cargo and transport insurance with focus on "Cláusulas de Custodia" and "Medidas de Seguridad".
+- **Liability**: Employer's and general civil liability engineering, including "Responsabilidad Cruzada".
+- **Employee Benefits**: Collective health and life insurance optimization (I-Med/Gerty).
+- **Technical Audits**: Commission spread analysis and CMF regulatory compliance audits to reduce total cost of risk.
+
+## Entity Context
+- **Full Name**: Mercurial Corredores de Seguros.
+- **Alternate Name**: Mercurial Corredores.
+- **Regulator**: Comisión para el Mercado Financiero (CMF), Registration #8929.
+- **Target Market**: Private sector companies, Family Offices, and institutional investors in Chile.
+- **Key Differentiator**: Senior technical advisory focused on operational continuity and strategic risk transfer.
+
+## Contact Information
+- **Website**: https://mercurial.cl
+- **Email**: auditoria@mercurial.cl
+- **WhatsApp**: +56 9 7109 7657
+- **Address**: Santiago, Chile.
+- **Compliance**: Regulated by Circular CMF N° 2131.
