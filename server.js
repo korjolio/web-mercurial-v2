@@ -10,6 +10,22 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
+// express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
+// que cualquier archivo que no sea un asset público debe listarse acá explícitamente.
+const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json']);
+app.use((req, res, next) => {
+    const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
+    const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
+    const isNodeModules = requestedPath.startsWith('node_modules/');
+    const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
+    if (isBlockedFile || isNodeModules || isDotfile) {
+        return res.status(404).end();
+    }
+    next();
+});
+
 app.use(express.static(__dirname)); // Servir archivos estáticos (index.html, etc.)
 
 // --- Rutas limpias para Landing Pages de Google Ads ---
