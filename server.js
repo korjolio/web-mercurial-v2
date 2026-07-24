@@ -405,14 +405,22 @@ app.post('/api/leads', async (req, res) => {
                 // utm_content desconocido o ausente: no se asume nada, se omiten cluster/producto_de_interes.
             }
 
+            const dealAssociations = [{
+                to: { id: contactId },
+                types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 }]
+            }];
+            if (companyId) {
+                dealAssociations.push({
+                    to: { id: companyId },
+                    types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 5 }] // Deal to primary company
+                });
+            }
+
             await axios.post(
                 'https://api.hubapi.com/crm/v3/objects/deals',
                 {
                     properties: dealProperties,
-                    associations: [{
-                        to: { id: contactId },
-                        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 }]
-                    }]
+                    associations: dealAssociations
                 },
                 { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
             );
