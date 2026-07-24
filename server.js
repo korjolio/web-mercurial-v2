@@ -316,6 +316,7 @@ app.post('/api/leads', async (req, res) => {
         // de forma confiable las propiedades conectadas (name/rut) en ella — se maneja acá
         // por CRM API, igual que el Contact: buscar por RUT, crear si no existe, asociar.
         let companyId = null;
+        let __debugCompany = {}; // TEMP: diagnóstico, remover tras confirmar el fix
         if (rut) {
             try {
                 const companySearch = await axios.post(
@@ -332,6 +333,7 @@ app.post('/api/leads', async (req, res) => {
                     );
                 }
             } catch (companySearchError) {
+                __debugCompany.search = companySearchError.response?.data || companySearchError.message;
                 console.error('[Leads] Búsqueda de Company por RUT falló:', companySearchError.response?.data || companySearchError.message);
             }
         }
@@ -350,7 +352,9 @@ app.post('/api/leads', async (req, res) => {
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
                 companyId = companyCreateResponse.data.id;
+                __debugCompany.createdId = companyId;
             } catch (companyCreateError) {
+                __debugCompany.create = companyCreateError.response?.data || companyCreateError.message;
                 console.error('[Leads] No se pudo crear la Company:', companyCreateError.response?.data || companyCreateError.message);
             }
         } else if (companyId) {
@@ -361,6 +365,7 @@ app.post('/api/leads', async (req, res) => {
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
             } catch (associateError) {
+                __debugCompany.associate = associateError.response?.data || associateError.message;
                 console.error('[Leads] No se pudo asociar la Company existente al Contact:', associateError.response?.data || associateError.message);
             }
         }
@@ -407,7 +412,7 @@ app.post('/api/leads', async (req, res) => {
         // TODO: disparo de mensaje de WhatsApp Business al recibir el lead.
         // Pendiente: número de WhatsApp Business aún sin verificar en Meta.
 
-        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
+        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente', __debugCompany });
 
     } catch (error) {
         console.error('[Leads] Error inesperado:', error.response?.data || error.message);
