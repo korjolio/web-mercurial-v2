@@ -312,7 +312,60 @@ app.post('/api/leads', async (req, res) => {
             }
         }
 
-        // 5. Crear el Deal con la segmentación de cluster/canal/producto.
+        // 5. Company: la Forms API crea la Company por matching de dominio pero NO escribe
+        // de forma confiable las propiedades conectadas (name/rut) en ella — se maneja acá
+        // por CRM API, igual que el Contact: buscar por RUT, crear si no existe, asociar.
+        let companyId = null;
+        if (rut) {
+            try {
+                const companySearch = await axios.post(
+                    'https://api.hubapi.com/crm/v3/objects/companies/search',
+                    { filterGroups: [{ filters: [{ propertyName: 'rut', operator: 'EQ', value: rut }] }] },
+                    { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
+                );
+                if (companySearch.data.total > 0) {
+                    companyId = companySearch.data.results[0].id;
+                    await axios.patch(
+                        `https://api.hubapi.com/crm/v3/objects/companies/${companyId}`,
+                        { properties: { name: company, rut } },
+                        { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
+                    );
+                }
+            } catch (companySearchError) {
+                console.error('[Leads] Búsqueda de Company por RUT falló:', companySearchError.response?.data || companySearchError.message);
+            }
+        }
+
+        if (!companyId && (company || rut)) {
+            try {
+                const companyCreateResponse = await axios.post(
+                    'https://api.hubapi.com/crm/v3/objects/companies',
+                    {
+                        properties: { name: company, rut },
+                        associations: [{
+                            to: { id: contactId },
+                            types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 2 }]
+                        }]
+                    },
+                    { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
+                );
+                companyId = companyCreateResponse.data.id;
+            } catch (companyCreateError) {
+                console.error('[Leads] No se pudo crear la Company:', companyCreateError.response?.data || companyCreateError.message);
+            }
+        } else if (companyId) {
+            try {
+                await axios.put(
+                    `https://api.hubapi.com/crm/v4/objects/companies/${companyId}/associations/contacts/${contactId}`,
+                    [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 2 }],
+                    { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
+                );
+            } catch (associateError) {
+                console.error('[Leads] No se pudo asociar la Company existente al Contact:', associateError.response?.data || associateError.message);
+            }
+        }
+
+        // 6. Crear el Deal con la segmentación de cluster/canal/producto.
         try {
             const clusterLabel = cluster_source === 'condominio' ? 'Condominio' : 'Transporte';
             const dealProperties = {
