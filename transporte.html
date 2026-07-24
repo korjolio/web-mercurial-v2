@@ -50,17 +50,61 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero con formulario visible sin scroll -->
   <header id="inicio" class="hero">
     <div class="hero-bg-accent"></div>
     <div class="container hero-container">
-      <div class="hero-content fade-in-up">
-        <div class="badge">Seguro de Transporte de Carga</div>
-        <h1 class="hero-title">Seguro para <span class="text-primary">Camión, Carga y Ocupantes.</span></h1>
-        <p class="hero-subtitle">Ya seas dueño de tu flota o gestiones carga como importador o agente de aduana,
-          diseñamos la cobertura técnica que tu operación necesita.</p>
-        <div class="hero-actions">
-          <a href="#contacto" class="btn btn-primary btn-lg">Solicitar Asesoría de Transporte</a>
+      <div class="hero-split">
+        <div class="hero-split-copy fade-in-up">
+          <h1 class="hero-title">Cobertura para <span class="text-primary">cada kilómetro de tu operación.</span>
+          </h1>
+          <p class="hero-subtitle">Camión propio, carga de terceros o mercadería en tránsito: diseñamos la cobertura
+            técnica para lo que realmente está en riesgo en tu operación de transporte.</p>
+          <ul class="hero-split-bullets">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Cobertura para camión y flota
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Carga protegida, nacional e internacional
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Un ejecutivo te contacta en 1-2 horas
+            </li>
+          </ul>
+        </div>
+
+        <div id="contacto" class="hero-form-card fade-in-up" style="animation-delay: 0.15s;">
+          <h2>Completa tus datos y un ejecutivo especializado te contactará.</h2>
+          <form class="contact-form" id="leadForm" method="POST">
+            <div class="form-grid">
+              <input type="text" id="lead_firstname" placeholder="Nombre" required class="input-field">
+              <input type="text" id="lead_lastname" placeholder="Apellidos" required class="input-field">
+            </div>
+            <div class="form-grid">
+              <input type="email" id="lead_email" placeholder="Correo Corporativo" required class="input-field">
+              <input type="tel" id="lead_phone" placeholder="Celular" required class="input-field">
+            </div>
+            <input type="text" id="lead_company" placeholder="Empresa / Razón Social" required class="input-field"
+              style="margin-bottom: 1rem;">
+            <input type="text" id="lead_rut" placeholder="RUT" required class="input-field"
+              style="margin-bottom: 1rem;">
+            <button type="submit" id="lead_submit_btn" class="btn btn-primary btn-block">Necesito asesoría</button>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--c-text-secondary); line-height: 1.5;">
+              Atención bajo cumplimiento normativo según Circular CMF N° 2131. Tus datos serán tratados con estricta
+              confidencialidad.</p>
+          </form>
         </div>
       </div>
     </div>
@@ -88,32 +132,6 @@
             durante el trayecto.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Formulario de Contacto -->
-  <section id="contacto" class="section text-center">
-    <div class="container container-sm fade-in-up">
-      <h2 class="section-title">Solicita tu Análisis de Riesgo</h2>
-      <p class="section-desc mb-2">Cuéntanos sobre tu operación de transporte y un ejecutivo especializado te
-        contactará para estructurar tu cobertura.</p>
-
-      <form class="contact-form" id="leadForm" method="POST">
-        <div class="form-grid">
-          <input type="text" id="lead_firstname" placeholder="Nombre" required class="input-field">
-          <input type="text" id="lead_lastname" placeholder="Apellidos" required class="input-field">
-          <input type="email" id="lead_email" placeholder="Correo Corporativo" required class="input-field">
-          <input type="tel" id="lead_phone" placeholder="Teléfono de Contacto" required class="input-field">
-          <input type="text" id="lead_company" placeholder="Nombre de tu Empresa / Razón Social" required
-            class="input-field">
-          <input type="text" id="lead_rut" placeholder="RUT" required class="input-field">
-        </div>
-        <button type="submit" id="lead_submit_btn" class="btn btn-primary btn-block"
-          style="margin-top: 1.5rem;">Solicitar Asesoría de Transporte</button>
-        <p style="margin-top: 1rem; font-size: 0.82rem; color: var(--c-text-secondary); line-height: 1.5;">Atención
-          bajo cumplimiento normativo según Circular CMF N° 2131. Tus datos serán tratados con estricta
-          confidencialidad.</p>
-      </form>
     </div>
   </section>
 
