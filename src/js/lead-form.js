@@ -79,12 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const utm_content = params.get('utm_content') || '';
     const utm_term = params.get('utm_term') || '';
 
-    function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? decodeURIComponent(match[2]) : '';
-    }
-    const hutk = getCookie('hubspotutk');
-
     const leadForm = document.getElementById('leadForm');
     const submitBtn = document.getElementById('lead_submit_btn');
 
@@ -141,10 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const payload = {
                 firstName, lastName, email, phone, company, rut,
                 cluster_source: cluster,
-                gclid, utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-                hutk,
-                pageUri: window.location.href,
-                pageName: document.title
+                gclid, utm_source, utm_medium, utm_campaign, utm_content, utm_term
             };
 
             try {
