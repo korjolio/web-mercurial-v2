@@ -199,8 +199,6 @@ app.post('/api/leads', async (req, res) => {
             hutk, pageUri, pageName
         } = req.body;
 
-        let __debug = {}; // TEMP: diagnóstico, remover tras confirmar el fix
-
         if (!email || !firstName || !company || !rut || !['condominio', 'transporte'].includes(cluster_source)) {
             return res.status(400).json({
                 success: false,
@@ -310,11 +308,9 @@ app.post('/api/leads', async (req, res) => {
             }
         }
 
-        __debug.contactId = contactId;
-
         if (!contactId) {
             console.error(`[Leads] No se pudo ubicar el contactId para ${email} (cluster: ${cluster_source}) tras el submit. Requiere revisión manual en HubSpot.`);
-            return res.status(200).json({ success: true, message: 'Solicitud recibida correctamente', __debug });
+            return res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
         }
 
         // 4. gclid + teléfono de respaldo en el Contact (best-effort, nunca bloquea la creación del Deal).
@@ -344,7 +340,6 @@ app.post('/api/leads', async (req, res) => {
                     { filterGroups: [{ filters: [{ propertyName: 'rut', operator: 'EQ', value: rut }] }] },
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
-                __debug.companySearchTotal = companySearch.data.total;
                 if (companySearch.data.total > 0) {
                     companyId = companySearch.data.results[0].id;
                     await axios.patch(
@@ -352,10 +347,8 @@ app.post('/api/leads', async (req, res) => {
                         { properties: { name: company, rut } },
                         { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                     );
-                    __debug.companyPatchedId = companyId;
                 }
             } catch (companySearchError) {
-                __debug.companySearchError = companySearchError.response?.data || companySearchError.message;
                 console.error('[Leads] Búsqueda de Company por RUT falló:', companySearchError.response?.data || companySearchError.message);
             }
         }
@@ -374,9 +367,7 @@ app.post('/api/leads', async (req, res) => {
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
                 companyId = companyCreateResponse.data.id;
-                __debug.companyCreatedId = companyId;
             } catch (companyCreateError) {
-                __debug.companyCreateError = companyCreateError.response?.data || companyCreateError.message;
                 console.error('[Leads] No se pudo crear la Company:', companyCreateError.response?.data || companyCreateError.message);
             }
         } else if (companyId) {
@@ -386,13 +377,10 @@ app.post('/api/leads', async (req, res) => {
                     [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 2 }],
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
-                __debug.companyAssociated = true;
             } catch (associateError) {
-                __debug.companyAssociateError = associateError.response?.data || associateError.message;
                 console.error('[Leads] No se pudo asociar la Company existente al Contact:', associateError.response?.data || associateError.message);
             }
         }
-        __debug.companyId = companyId;
 
         // 6. Crear el Deal con la segmentación de cluster/canal/producto.
         try {
@@ -429,8 +417,7 @@ app.post('/api/leads', async (req, res) => {
                 });
             }
 
-            __debug.dealAssociations = dealAssociations;
-            const dealResponse = await axios.post(
+            await axios.post(
                 'https://api.hubapi.com/crm/v3/objects/deals',
                 {
                     properties: dealProperties,
@@ -438,16 +425,14 @@ app.post('/api/leads', async (req, res) => {
                 },
                 { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
             );
-            __debug.dealId = dealResponse.data.id;
         } catch (dealError) {
-            __debug.dealError = dealError.response?.data || dealError.message;
             console.error('[Leads] No se pudo crear el Deal:', dealError.response?.data || dealError.message);
         }
 
         // TODO: disparo de mensaje de WhatsApp Business al recibir el lead.
         // Pendiente: número de WhatsApp Business aún sin verificar en Meta.
 
-        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente', __debug });
+        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
 
     } catch (error) {
         console.error('[Leads] Error inesperado:', error.response?.data || error.message);
