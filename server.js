@@ -207,16 +207,17 @@ app.post('/api/leads', async (req, res) => {
         }
 
         // 1. Submit a HubSpot Forms API — trackea "Original Traffic Source" nativo vía hutk.
-        // Internal names confirmados en vivo contra el form (no son los estándar del Contact):
-        // teléfono -> hs_whatsapp_phone_number | razón social -> name (objeto Empresa) | rut -> rut (objeto Empresa)
+        // OJO: no se mandan "name" (razón social) ni "rut" acá aunque el form los tenga
+        // conectados al objeto Empresa — hacerlo dispara la auto-creación de una Company
+        // "fantasma" por matching de dominio (en blanco, sin estos datos) que HubSpot deja
+        // como empresa principal del Contact, compitiendo con la que se crea bien más abajo
+        // por CRM API. Esos 2 campos se manejan exclusivamente en el paso 5 (Company).
         const formFields = [
             { name: 'email', value: email },
             { name: 'firstname', value: firstName }
         ];
         if (lastName) formFields.push({ name: 'lastname', value: lastName });
-        if (company) formFields.push({ name: 'name', value: company });
         if (phone) formFields.push({ name: 'hs_whatsapp_phone_number', value: phone });
-        if (rut) formFields.push({ name: 'rut', value: rut });
 
         const context = {};
         if (pageUri) context.pageUri = pageUri;
