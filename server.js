@@ -292,26 +292,30 @@ app.post('/api/leads', async (req, res) => {
 
         // 3. Ubicar el contactId (la Forms API no siempre lo devuelve en la respuesta).
         let contactId = null;
-        for (let attempt = 0; attempt < 2 && !contactId; attempt++) {
-            if (attempt === 1) await new Promise(r => setTimeout(r, 800));
+        let __debug = { contactSubmitted, attempts: [] }; // TEMP: diagnóstico, remover tras confirmar el fix
+        for (let attempt = 0; attempt < 3 && !contactId; attempt++) {
+            if (attempt > 0) await new Promise(r => setTimeout(r, 1200));
             try {
                 const searchResponse = await axios.post(
                     'https://api.hubapi.com/crm/v3/objects/contacts/search',
                     { filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ', value: email }] }] },
                     { headers: { 'Authorization': `Bearer ${HUBSPOT_API_KEY}`, 'Content-Type': 'application/json' } }
                 );
+                __debug.attempts.push({ attempt, total: searchResponse.data.total });
                 if (searchResponse.data.total > 0) {
                     contactId = searchResponse.data.results[0].id;
                 }
             } catch (searchError) {
+                __debug.attempts.push({ attempt, error: searchError.response?.data || searchError.message });
                 console.error('[Leads] Búsqueda de contacto falló:', searchError.response?.data || searchError.message);
             }
         }
 
         if (!contactId) {
             console.error(`[Leads] No se pudo ubicar el contactId para ${email} (cluster: ${cluster_source}) tras el submit. Requiere revisión manual en HubSpot.`);
-            return res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
+            return res.status(200).json({ success: true, message: 'Solicitud recibida correctamente', __debug });
         }
+        __debug.contactId = contactId;
 
         // 4. gclid + teléfono de respaldo en el Contact (best-effort, nunca bloquea la creación del Deal).
         const contactPatchProps = {};
@@ -432,7 +436,8 @@ app.post('/api/leads', async (req, res) => {
         // TODO: disparo de mensaje de WhatsApp Business al recibir el lead.
         // Pendiente: número de WhatsApp Business aún sin verificar en Meta.
 
-        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
+        __debug.companyId = companyId;
+        res.status(200).json({ success: true, message: 'Solicitud recibida correctamente', __debug });
 
     } catch (error) {
         console.error('[Leads] Error inesperado:', error.response?.data || error.message);
