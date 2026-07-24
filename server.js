@@ -199,10 +199,10 @@ app.post('/api/leads', async (req, res) => {
             hutk, pageUri, pageName
         } = req.body;
 
-        if (!email || !firstName || !company || !['condominio', 'transporte'].includes(cluster_source)) {
+        if (!email || !firstName || !company || !rut || !['condominio', 'transporte'].includes(cluster_source)) {
             return res.status(400).json({
                 success: false,
-                message: 'Faltan campos obligatorios (nombre, email, empresa o landing de origen inválida).'
+                message: 'Faltan campos obligatorios (nombre, email, empresa, RUT o landing de origen inválida).'
             });
         }
 
