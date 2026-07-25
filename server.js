@@ -32,6 +32,9 @@ app.use(express.static(__dirname)); // Servir archivos estáticos (index.html, e
 app.get('/condominio', (req, res) => res.sendFile('condominio.html', { root: __dirname }));
 app.get('/transporte', (req, res) => res.sendFile('transporte.html', { root: __dirname }));
 
+// --- Ruta limpia para Política de Privacidad (requerida por Meta for Developers / WhatsApp Business API) ---
+app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { root: __dirname }));
+
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 
 if (!HUBSPOT_API_KEY) {
