@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguro de Mascotas con Respaldo BCI Seguros | Mercurial Corredores de Seguros</title>
+  <meta name="description"
+    content="Protege a tu perro o gato con un seguro de BCI Seguros y la asesoría de Mercurial. Cotiza 100% online en 2 minutos, sin llamadas ni papeleos.">
+  <link rel="canonical" href="https://mercurial.cl/seguro-mascotas">
+
+  <!-- Google Fonts: Lora (display) + Inter (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K4SL5KSF');</script>
+  <!-- End Google Tag Manager -->
+
+  <style>
+    :root {
+      --m-bg: #fbf6ef;
+      --m-surface: #ffffff;
+      --m-text: #3d3229;
+      --m-text-soft: #7a6b5b;
+      --m-accent: #c2703d;
+      --m-accent-soft: rgba(194, 112, 61, 0.12);
+      --m-border: #ecdfcc;
+      --m-blue: #2399C6;
+      --m-blue-hover: #1e85ae;
+      --m-footer: #2e2620;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Lora', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-family: var(--font-body); background: var(--m-bg); color: var(--m-text); font-size: 16px; line-height: 1.6; }
+    body { overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: var(--m-accent); transition: color 0.15s ease-in-out; }
+    a:hover { color: #a55a2e; }
+
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Navbar */
+    .navbar { display: flex; align-items: center; height: 80px; background: var(--m-bg); }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .logo-img { height: 38px; width: auto; object-fit: contain; }
+
+    .btn-cotizar {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.65rem 1.5rem; font-weight: 600; font-size: 0.9rem;
+      border-radius: 24px; background: var(--m-blue); color: #fff; cursor: pointer;
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-cotizar:hover { background: var(--m-blue-hover); color: #fff; transform: translateY(-2px); }
+
+    /* Hero */
+    .hero { padding: 3rem 0 4.5rem; }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 3.5rem; } }
+
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--m-accent); margin-bottom: 1.25rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+      font-weight: 600; line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 1.25rem;
+    }
+    .hero-subtitle { font-size: 1.1rem; color: var(--m-text-soft); line-height: 1.65; max-width: 520px; margin-bottom: 1.75rem; }
+
+    .hero-cta-row { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
+    .btn-hero {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.95rem 2.1rem; font-weight: 600; font-size: 1rem;
+      border-radius: 28px; background: var(--m-blue); color: #fff;
+      box-shadow: 0 8px 20px rgba(35, 153, 198, 0.3);
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-hero:hover { background: var(--m-blue-hover); color: #fff; transform: translateY(-2px); }
+    .hero-cta-note { font-size: 0.88rem; color: var(--m-text-soft); }
+
+    /* Visual del hero: composición cálida (reemplazar por foto real cuando esté disponible) */
+    .hero-visual { position: relative; }
+    .hero-visual-circle {
+      position: absolute; top: -1.5rem; right: -1rem; width: 8rem; height: 8rem;
+      border-radius: 50%; background: var(--m-accent-soft);
+    }
+    .hero-photo {
+      position: relative; height: clamp(300px, 42vw, 440px); border-radius: 24px; overflow: hidden;
+      background: linear-gradient(135deg, #f3e3cf 0%, #ecd7bd 55%, #e4c9a8 100%);
+      border: 1px solid #e8d9c4;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo-paws { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.35; }
+
+    /* Razones */
+    .razones { background: var(--m-surface); border-top: 1px solid #f0e6d8; border-bottom: 1px solid #f0e6d8; padding: 3.5rem 0; }
+    .razones-grid { display: grid; grid-template-columns: 1fr; gap: 2.25rem; }
+    @media (min-width: 768px) { .razones-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+    .razon svg { color: var(--m-accent); margin-bottom: 0.75rem; }
+    .razon h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.6rem; }
+    .razon p { font-size: 0.95rem; color: var(--m-text-soft); line-height: 1.65; }
+
+    /* Planes */
+    .planes { padding: 4.5rem 0 4rem; }
+    .planes-header { text-align: center; margin-bottom: 2.5rem; }
+    .planes-header h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.15rem); font-weight: 600; margin-bottom: 0.6rem; }
+    .planes-header p { font-size: 1.02rem; color: var(--m-text-soft); max-width: 640px; margin: 0 auto; }
+    .planes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 850px) { .planes-grid { grid-template-columns: repeat(3, 1fr); } }
+    .plan-card {
+      background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 20px;
+      padding: 1.9rem 1.75rem; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .plan-card.plan-destacado { border-color: var(--m-accent); box-shadow: 0 12px 28px rgba(194, 112, 61, 0.12); }
+    .plan-nombre { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+    .plan-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--m-accent); background: var(--m-accent-soft); border-radius: 12px; padding: 0.25rem 0.7rem; align-self: flex-start; }
+    .plan-cobertura { font-size: 0.95rem; color: var(--m-text); font-weight: 600; line-height: 1.5; }
+    .plan-cobertura span { color: var(--m-text-soft); font-weight: 400; display: block; font-size: 0.85rem; }
+    .plan-lista { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; padding: 0; margin: 0; }
+    .plan-lista li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem; color: var(--m-text-soft); line-height: 1.5; }
+    .plan-lista svg { flex-shrink: 0; color: var(--m-accent); margin-top: 0.2rem; }
+    .planes-nota { margin-top: 1.75rem; text-align: center; font-size: 0.82rem; color: var(--m-text-soft); line-height: 1.6; max-width: 760px; margin-left: auto; margin-right: auto; }
+
+    /* Cotizador */
+    .cotizador-section { padding: 4.5rem 0; }
+    .cotizador-header { text-align: center; margin-bottom: 2.5rem; }
+    .cotizador-header h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.15rem); font-weight: 600; margin-bottom: 0.6rem; }
+    .cotizador-header p { font-size: 1.05rem; color: var(--m-text-soft); max-width: 620px; margin: 0 auto; }
+
+    .cotizador-frame {
+      background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 20px;
+      overflow: hidden; box-shadow: 0 16px 32px rgba(61, 50, 41, 0.06);
+    }
+    /* El cotizador BCI es cross-origin (no se puede leer su altura). Alturas medidas contra el
+       contenido real: paso 1 = 774px desktop / 1204px móvil; paso 2 (tabla de planes) ≈ 1725px.
+       El marco parte compacto y se expande a la altura del paso más alto cuando el usuario
+       cambia de paso (ver script), evitando scroll interno sin dejar hueco inicial. */
+    .cotizador-frame iframe { display: block; width: 100%; height: 950px; border: 0; transition: height 0.5s ease; }
+    .cotizador-frame.expandido iframe { height: 1780px; }
+    @media (max-width: 600px) {
+      .cotizador-frame iframe { height: 1280px; }
+      .cotizador-frame.expandido iframe { height: 2200px; }
+    }
+    .cotizador-fallback { margin-top: 1.1rem; text-align: center; font-size: 0.88rem; color: var(--m-text-soft); }
+    .cotizador-fallback a { font-weight: 600; }
+
+    .cotizador-legal { margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--m-text-soft); line-height: 1.6; }
+
+    /* Footer */
+    .footer { background: var(--m-footer); padding: 2.5rem 0; text-align: center; }
+    .footer p { color: var(--m-bg); opacity: 0.75; font-size: 0.88rem; }
+
+    /* WhatsApp flotante */
+    .ws-floating-btn {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--m-blue); color: #fff;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.15); z-index: 100;
+      transition: transform 0.15s ease-in-out;
+    }
+    .ws-floating-btn:hover { transform: scale(1.05) translateY(-5px); color: #fff; }
+
+    .fade-in-up { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="/" aria-label="Ir al inicio de Mercurial">
+        <img src="src/img/Mercurial Sin Fondo.png" alt="Mercurial Corredores de Seguros" class="logo-img" loading="eager">
+      </a>
+      <a href="#cotizador" class="btn-cotizar" data-track="cta-nav">Cotizar en línea</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="fade-in-up">
+        <span class="hero-kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5.5" cy="10" r="1.8"></circle><circle cx="9.5" cy="6" r="1.8"></circle>
+            <circle cx="14.5" cy="6" r="1.8"></circle><circle cx="18.5" cy="10" r="1.8"></circle>
+            <path d="M12 11c-2.5 0-4.8 2.1-5.4 4.6-.4 1.7.9 3.4 2.7 3.4h5.4c1.8 0 3.1-1.7 2.7-3.4-.6-2.5-2.9-4.6-5.4-4.6z"></path>
+          </svg>
+          Seguro de mascotas · BCI Seguros
+        </span>
+        <h1 class="hero-title">Protege a quien te espera todos los días en casa.</h1>
+        <p class="hero-subtitle">Tu perro o tu gato es parte de la familia. Asegúralo con el respaldo de BCI Seguros y
+          la asesoría cercana de Mercurial: cotiza en línea en 2 minutos, sin trámites.</p>
+        <div class="hero-cta-row">
+          <a href="#cotizador" class="btn-hero" data-track="cta-hero">Cotiza para tu mascota</a>
+          <span class="hero-cta-note">Perros y gatos, de 6 meses a 10 años</span>
+        </div>
+      </div>
+      <div class="hero-visual fade-in-up" style="animation-delay: 0.15s;">
+        <div class="hero-visual-circle"></div>
+        <div class="hero-photo">
+          <img src="src/img/mascota.jpeg" alt="Dueña abrazando a su perro en casa"
+            loading="eager" width="1122" height="1402">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="razones">
+    <div class="container razones-grid">
+      <div class="razon fade-in-up" style="animation-delay: 0.1s;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+        </svg>
+        <h3>Porque es de la familia</h3>
+        <p>Un imprevisto no debería ser una decisión económica: el seguro cubre urgencias por enfermedad o accidente
+          de tu perro o gato, más responsabilidad civil ante daños a terceros.</p>
+      </div>
+      <div class="razon fade-in-up" style="animation-delay: 0.2s;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <h3>Respaldo real</h3>
+        <p>La póliza la emite BCI Seguros, líder en protección de mascotas en Chile con una red de más de 70 clínicas
+          veterinarias, y te acompaña Mercurial, corredores regulados por la CMF (Registro N° 8929).</p>
+      </div>
+      <div class="razon fade-in-up" style="animation-delay: 0.3s;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline>
+        </svg>
+        <h3>Sin trámites ni reembolsos</h3>
+        <p>Cotizas en línea en 3 pasos y, en la red veterinaria, pagas solo tu copago con Bono Pet: directo en la
+          clínica, sin reembolsos ni papeleo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="planes">
+    <div class="container">
+      <div class="planes-header">
+        <h2>Tres planes, según cuánta protección quieras</h2>
+        <p>Todos incluyen telemedicina veterinaria ilimitada, vacunación, microchip, cremación, apoyo psicológico al
+          tutor y orientación legal. Compara y elige el tuyo en el cotizador.</p>
+      </div>
+      <div class="planes-grid">
+        <div class="plan-card">
+          <div class="plan-nombre">Esencial</div>
+          <div class="plan-cobertura">Urgencias: 60% hasta UF 10<span>por enfermedad o accidente, en red veterinaria BCI</span></div>
+          <ul class="plan-lista">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Responsabilidad civil hasta UF 50</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>60% dcto. en medicamentos (Salcobrand)</li>
+          </ul>
+        </div>
+        <div class="plan-card plan-destacado">
+          <div class="plan-tag">Cobertura equilibrada</div>
+          <div class="plan-nombre">Pro</div>
+          <div class="plan-cobertura">Urgencias: 70% hasta UF 20<span>por enfermedad o accidente, en red veterinaria BCI</span></div>
+          <ul class="plan-lista">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Responsabilidad civil hasta UF 100</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>70% dcto. en medicamentos (Salcobrand)</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Suma hotel, baño y etólogo</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="plan-nombre">Infinite</div>
+          <div class="plan-cobertura">Urgencias: 80% hasta UF 40<span>por enfermedad o accidente, en red veterinaria BCI</span></div>
+          <ul class="plan-lista">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Responsabilidad civil hasta UF 150</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>80% dcto. en medicamentos (Salcobrand)</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Suma exámenes preventivos y pet sitter</li>
+          </ul>
+        </div>
+      </div>
+      <p class="planes-nota">Coberturas en la red veterinaria BCI Seguros; vía libre elección aplica reembolso del 50%
+        con topes según plan. Urgencias con tope de 2 eventos al año por mascota y carencia general de 30 días.</p>
+    </div>
+  </section>
+
+  <section id="cotizador" class="cotizador-section">
+    <div class="container">
+      <div class="cotizador-header">
+        <h2>Cotiza aquí, sin salir del sitio</h2>
+        <p>Este es el cotizador oficial de BCI Seguros para el convenio de Mercurial. Completa los 3 pasos y recibe tu
+          cotización al instante.</p>
+      </div>
+      <div class="cotizador-frame">
+        <!-- El src se asigna recién cuando el visitante llega a la sección (ver script):
+             la app de BCI roba el foco al cargar y arrastra el scroll de toda la página. -->
+        <iframe id="cotizadorBci"
+          data-src="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE"
+          title="Cotizador de seguro de mascotas de BCI Seguros"></iframe>
+      </div>
+      <p class="cotizador-fallback">¿Problemas para cotizar?
+        <a href="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE"
+          target="_blank" rel="noopener noreferrer" data-track="cotizador-nueva-pestana">ábrelo en una pestaña
+          nueva</a>
+      </p>
+      <p class="cotizador-legal">*Sólo se puede asegurar una mascota por póliza. Seguro sólo para perros y gatos: al
+        contratar, la mascota debe tener entre 6 meses y 9 años con 364 días de edad, con permanencia máxima hasta los
+        12 años. No cubre preexistencias, ni mascotas destinadas a actividad laboral o reproducción, ni con enfermedad
+        terminal.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Mercurial Corredores de Seguros. Regulado por la CMF (Registro N° 8929).</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/56971097657?text=Hola%20Mercurial,%20quiero%20cotizar%20el%20seguro%20para%20mi%20mascota."
+    class="ws-floating-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+      </path>
+    </svg>
+  </a>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    // Clic en CTAs. El evento del botón "cotizador-bci" es la conversión principal de la
+    // página: el visitante partió al cotizador oficial de BCI (el lead queda en la bandeja
+    // BCI del convenio Mercurial).
+    document.querySelectorAll('[data-track]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        window.dataLayer.push({ event: 'mascotas_cta_click', cta: el.getAttribute('data-track') });
+        var href = el.getAttribute('href') || '';
+        if (href.charAt(0) === '#') {
+          e.preventDefault();
+          var destino = document.querySelector(href);
+          if (destino) destino.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // --- Cotizador embebido de BCI ---
+    // Restricciones del iframe cross-origin: no se puede leer su altura ni sus clics, y la app
+    // de BCI roba el foco al terminar de cargar (arrastrando el scroll de la página al iframe).
+    // Defecto conocido y asumido: el banner de cookies de BCI (OneTrust) recarga su propia
+    // página al aceptar y su consentimiento no persiste en contexto de terceros, así que puede
+    // reaparecer entre visitas. Es del sitio de BCI; no se corrige desde acá (cerrarlo con la
+    // "X" no recarga).
+    //
+    // 1) Carga diferida: el src se asigna recién cuando el visitante llega a la sección, para
+    //    que el autofocus de BCI no secuestre el scroll de quien está viendo el hero.
+    // 2) Expansión: el marco parte compacto (paso 1 mide 774px desktop / 1204px móvil) y crece
+    //    a la altura del paso más alto (~1725px, la tabla de planes) cuando el usuario cambia
+    //    de paso, para que ningún paso genere scroll interno. El espacio extra crece hacia
+    //    abajo, fuera de la vista.
+    var cotizadorIframe = document.getElementById('cotizadorBci');
+    var cotizadorFrame = document.querySelector('.cotizador-frame');
+
+    function expandirCotizador() {
+      cotizadorFrame.classList.add('expandido');
+    }
+
+    new IntersectionObserver(function (entries, observer) {
+      if (!entries.some(function (e) { return e.isIntersecting; })) return;
+      observer.disconnect();
+      cotizadorIframe.src = cotizadorIframe.getAttribute('data-src');
+      window.dataLayer.push({ event: 'cotizador_visto' });
+
+      // Expansión al cambiar de paso: la navegación interna del iframe (paso 1 → paso 2)
+      // crece el historial compartido, lo único observable cross-origin. Para no confundirla
+      // con el arranque, la base se recalibra tras cada carga real del iframe ('load': carga
+      // inicial, recarga del banner de cookies) más 3s de gracia, que absorben el redirect SPA
+      // de arranque (/wallet/... → /contratar/datos-contratante/...). Pasada la calibración,
+      // cualquier crecimiento es un cambio de paso. Red de seguridad: 60s en la sección.
+      var historialBase = history.length;
+      var calibrado = false;
+
+      function recalibrarHistorial() {
+        calibrado = false;
+        historialBase = history.length;
+        setTimeout(function () { historialBase = history.length; calibrado = true; }, 3000);
+      }
+      cotizadorIframe.addEventListener('load', recalibrarHistorial);
+      recalibrarHistorial();
+
+      var vigilante = setInterval(function () {
+        if (calibrado && history.length > historialBase) {
+          expandirCotizador();
+          clearInterval(vigilante);
+        }
+      }, 400);
+      setTimeout(function () { expandirCotizador(); clearInterval(vigilante); }, 60000);
+    }, { threshold: 0.3 }).observe(cotizadorFrame);
+
+    // Señal de analytics (mejor esfuerzo, solo desktop): hover sostenido sobre el cotizador, o
+    // clic que mete el foco al iframe con el mouse encima. Se reporta una sola vez.
+    var cotizadorTracked = false;
+    var mouseSobreCotizador = false;
+    var hoverTimer = null;
+
+    function marcarInteraccionCotizador() {
+      if (cotizadorTracked) return;
+      cotizadorTracked = true;
+      window.dataLayer.push({ event: 'cotizador_interaccion' });
+    }
+
+    cotizadorIframe.addEventListener('mouseenter', function () {
+      mouseSobreCotizador = true;
+      hoverTimer = setTimeout(marcarInteraccionCotizador, 900);
+    });
+    cotizadorIframe.addEventListener('mouseleave', function () {
+      mouseSobreCotizador = false;
+      clearTimeout(hoverTimer);
+    });
+    window.addEventListener('blur', function () {
+      if (document.activeElement === cotizadorIframe && mouseSobreCotizador) {
+        marcarInteraccionCotizador();
+      }
+    });
+  </script>
+</body>
+
+</html>

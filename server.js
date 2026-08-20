@@ -35,11 +35,23 @@ app.get('/transporte', (req, res) => res.sendFile('transporte.html', { root: __d
 // --- Ruta limpia para Política de Privacidad (requerida por Meta for Developers / WhatsApp Business API) ---
 app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { root: __dirname }));
 
+// --- Landing Seguro de Mascotas (convenio BCI Seguros "Mascotas S20", cotizador embebido) ---
+app.get('/seguro-mascotas', (req, res) => res.sendFile('mascotas.html', { root: __dirname }));
+
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 
+// Sin la clave el sitio funciona igual (landings, cotizador de mascotas); solo se
+// deshabilitan los endpoints de leads hacia HubSpot (condominio/transporte).
 if (!HUBSPOT_API_KEY) {
-    process.exit(1);
+    console.warn('[AVISO] HUBSPOT_API_KEY no definida: el sitio funciona, pero los endpoints /api/hubspot/* responderán 503.');
 }
+
+app.use('/api/hubspot', (req, res, next) => {
+    if (!HUBSPOT_API_KEY) {
+        return res.status(503).json({ success: false, error: 'HubSpot no configurado (falta HUBSPOT_API_KEY).' });
+    }
+    next();
+});
 
 // --- Endpoint de Diagnóstico ---
 app.get('/api/hubspot/test', async (req, res) => {
