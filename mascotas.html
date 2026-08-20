@@ -392,7 +392,9 @@
       // con el arranque, la base se recalibra tras cada carga real del iframe ('load': carga
       // inicial, recarga del banner de cookies) más 3s de gracia, que absorben el redirect SPA
       // de arranque (/wallet/... → /contratar/datos-contratante/...). Pasada la calibración,
-      // cualquier crecimiento es un cambio de paso. Red de seguridad: 60s en la sección.
+      // cualquier crecimiento es un cambio de paso.
+      // Sin temporizadores de respaldo: expandir "por si acaso" tras N segundos deja un hueco
+      // blanco enorme a quien todavía está llenando el paso 1 (que toma más de un minuto).
       var historialBase = history.length;
       var calibrado = false;
 
@@ -410,7 +412,6 @@
           clearInterval(vigilante);
         }
       }, 400);
-      setTimeout(function () { expandirCotizador(); clearInterval(vigilante); }, 60000);
     }, { threshold: 0.3 }).observe(cotizadorFrame);
 
     // Señal de analytics (mejor esfuerzo, solo desktop): hover sostenido sobre el cotizador, o
