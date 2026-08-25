@@ -14,7 +14,7 @@ app.use(express.json());
 // Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
 // express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
 // que cualquier archivo que no sea un asset público debe listarse acá explícitamente.
-const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json']);
+const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'CLAUDE.md']);
 app.use((req, res, next) => {
     const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
     const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
