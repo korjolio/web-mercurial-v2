@@ -1,0 +1,97 @@
+/* /cotizar-pyme — formulario largo de antecedentes para Seguro Pyme. Complementa styles.css. */
+.cp-main { padding: 7.5rem 0 4rem; background: var(--c-gray-light); min-height: 100vh; }
+.cp-intro { max-width: 760px; margin: 0 auto 2rem; text-align: center; }
+.cp-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-primary); margin-bottom: 0.75rem; }
+.cp-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--c-gray-dark); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 0.75rem; }
+.cp-lead { color: var(--c-text-secondary); font-size: 1.05rem; }
+.cp-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-top: 1.25rem; font-size: 0.85rem; color: var(--c-text-secondary); }
+.cp-steps li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.cp-steps li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-primary); }
+
+.cp-form { max-width: 960px; margin: 0 auto; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 16px; box-shadow: var(--shadow-lg); }
+.cp-section { padding: 2rem 1.25rem; border-bottom: 1px solid var(--c-border); }
+.cp-section:last-of-type { border-bottom: none; }
+@media (min-width: 768px) { .cp-section { padding: 2.5rem 2.5rem; } }
+.cp-section-head { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+.cp-num { flex: 0 0 34px; width: 34px; height: 34px; border-radius: 50%; background: var(--c-primary); color: #fff; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; justify-content: center; }
+.cp-section-head h2 { font-size: 1.25rem; font-weight: 700; color: var(--c-gray-dark); line-height: 1.3; }
+.cp-section-head p { color: var(--c-text-secondary); font-size: 0.92rem; margin-top: 0.2rem; }
+.cp-optional { display: inline-block; margin-left: 0.5rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-text-secondary); background: var(--c-gray-light); border-radius: 999px; padding: 0.15rem 0.6rem; vertical-align: middle; }
+
+.cp-grid { display: grid; grid-template-columns: 1fr; gap: 1.1rem 1.25rem; }
+@media (min-width: 640px) { .cp-grid-2, .cp-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .cp-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.cp-span-2 { grid-column: 1 / -1; }
+@media (min-width: 900px) { .cp-grid-3 .cp-span-2 { grid-column: span 2; } }
+
+.cp-field { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; position: relative; }
+.cp-field > label { font-size: 0.88rem; font-weight: 600; color: var(--c-gray-dark); }
+.cp-field .req { color: #e0475f; margin-left: 2px; }
+.cp-help { font-size: 0.78rem; color: var(--c-text-secondary); line-height: 1.45; }
+.cp-error { display: none; font-size: 0.78rem; color: #c0273f; font-weight: 500; }
+.cp-field.has-error .cp-error { display: block; }
+.cp-field.has-error .input-field, .cp-field.has-error .cp-select, .cp-field.has-error .cp-uf { border-color: #e0475f; }
+
+.cp-select { width: 100%; padding: 0.9rem 2.5rem 0.9rem 1.1rem; background: var(--c-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6a80' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 0.9rem center; border: 1px solid var(--c-border); border-radius: 6px; color: var(--c-text); font: inherit; font-size: 1rem; appearance: none; -webkit-appearance: none; transition: all var(--transition-fast); }
+.cp-select:focus { outline: none; border-color: var(--c-primary); box-shadow: 0 0 0 3px rgba(35, 153, 198, 0.15); }
+.cp-select:invalid, .cp-select.is-placeholder { color: var(--c-text-secondary); }
+.input-field { padding: 0.9rem 1.1rem; }
+
+.cp-uf { display: flex; align-items: stretch; border: 1px solid var(--c-border); border-radius: 6px; background: var(--c-surface); transition: all var(--transition-fast); overflow: hidden; }
+.cp-uf:focus-within { border-color: var(--c-primary); box-shadow: 0 0 0 3px rgba(35, 153, 198, 0.15); }
+.cp-uf span { display: inline-flex; align-items: center; padding: 0 0.9rem; background: var(--c-gray-light); color: var(--c-text-secondary); font-weight: 700; font-size: 0.85rem; border-right: 1px solid var(--c-border); }
+.cp-uf input, .cp-uf select { flex: 1; min-width: 0; border: none; padding: 0.9rem 1rem; font: inherit; font-size: 1rem; color: var(--c-text); background: transparent; }
+.cp-uf input:focus, .cp-uf select:focus { outline: none; }
+.cp-uf select { appearance: none; -webkit-appearance: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6a80' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 0.9rem center; padding-right: 2.5rem; }
+input[type=number] { -moz-appearance: textfield; }
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Segmentado Sí/No y Natural/Jurídica */
+.cp-seg { display: inline-flex; border: 1px solid var(--c-border); border-radius: 6px; overflow: hidden; background: var(--c-surface); }
+.cp-seg label { position: relative; padding: 0.7rem 1.25rem; font-size: 0.92rem; font-weight: 600; color: var(--c-text-secondary); cursor: pointer; user-select: none; transition: all var(--transition-fast); }
+.cp-seg label + label { border-left: 1px solid var(--c-border); }
+.cp-seg input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.cp-seg label:has(input:checked) { background: var(--c-primary); color: #fff; }
+.cp-seg label:has(input:focus-visible) { box-shadow: inset 0 0 0 2px rgba(35, 153, 198, 0.5); }
+
+.cp-question { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; padding: 1rem 1.25rem; background: #fffbea; border: 1px solid #f6e7a6; border-radius: 8px; }
+.cp-question p { font-size: 0.92rem; color: var(--c-gray-dark); font-weight: 500; flex: 1 1 260px; }
+
+/* Combobox (comuna, actividad) */
+.cp-combo { position: relative; }
+.cp-combo-list { position: absolute; top: calc(100% + 4px); left: 0; right: 0; max-height: 260px; overflow-y: auto; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; box-shadow: var(--shadow-hover); z-index: 20; display: none; }
+.cp-combo.open .cp-combo-list { display: block; }
+.cp-combo-list li { padding: 0.65rem 1rem; font-size: 0.92rem; cursor: pointer; color: var(--c-text); }
+.cp-combo-list li small { display: block; color: var(--c-text-secondary); font-size: 0.75rem; }
+.cp-combo-list li:hover, .cp-combo-list li[aria-selected="true"] { background: rgba(35, 153, 198, 0.08); }
+.cp-combo-list li.cp-combo-empty { color: var(--c-text-secondary); cursor: default; }
+.cp-combo-list li.cp-combo-other { border-top: 1px solid var(--c-border); font-weight: 600; color: var(--c-primary); }
+
+/* Casillas de medidas de seguridad */
+.cp-checks { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
+@media (min-width: 640px) { .cp-checks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cp-checks label { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem 0.9rem; border: 1px solid var(--c-border); border-radius: 8px; font-size: 0.88rem; color: var(--c-text); cursor: pointer; transition: all var(--transition-fast); background: var(--c-surface); }
+.cp-checks label:hover { border-color: var(--c-primary); }
+.cp-checks label:has(input:checked) { border-color: var(--c-primary); background: rgba(35, 153, 198, 0.06); }
+.cp-checks input { margin-top: 3px; width: 16px; height: 16px; flex: 0 0 16px; accent-color: var(--c-primary); }
+.cp-subhead { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-text-secondary); margin: 0.25rem 0 0.75rem; }
+.cp-subhead:not(:first-child) { margin-top: 1.5rem; }
+
+/* Coberturas adicionales colapsables */
+.cp-details { border: 1px solid var(--c-border); border-radius: 12px; background: var(--c-gray-light); }
+.cp-details summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; cursor: pointer; font-weight: 600; color: var(--c-gray-dark); }
+.cp-details summary::-webkit-details-marker { display: none; }
+.cp-details summary small { display: block; font-weight: 400; color: var(--c-text-secondary); font-size: 0.85rem; margin-top: 0.15rem; }
+.cp-details summary svg { flex: 0 0 auto; transition: transform var(--transition-fast); }
+.cp-details[open] summary svg { transform: rotate(180deg); }
+.cp-details-body { padding: 0 1.25rem 1.25rem; }
+.cp-extra { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-primary); border-radius: 8px; padding: 1rem 1.1rem; }
+
+.cp-textarea { min-height: 110px; resize: vertical; }
+.cp-submit { padding: 2rem 1.25rem 2.5rem; text-align: center; }
+@media (min-width: 768px) { .cp-submit { padding: 2rem 2.5rem 2.5rem; } }
+.cp-submit .btn { min-width: 260px; }
+.cp-legal { margin-top: 1rem; font-size: 0.8rem; color: var(--c-text-secondary); line-height: 1.5; max-width: 620px; margin-left: auto; margin-right: auto; }
+.cp-form-error { display: none; margin: 0 auto 1rem; max-width: 620px; padding: 0.85rem 1rem; background: #fdecee; border: 1px solid #f5c2c9; border-radius: 8px; color: #b3243b; font-size: 0.9rem; }
+.cp-form-error.show { display: block; }
+.hidden { display: none !important; }

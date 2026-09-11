@@ -11,6 +11,8 @@ npm start          # http://localhost:3001
 
 No requiere `HUBSPOT_API_KEY` para levantar: sin ella el sitio funciona igual y solo los endpoints `/api/hubspot/*` responden 503. Con HubSpot: copiar la clave a `.env` como `HUBSPOT_API_KEY`.
 
+El formulario `/cotizar-pyme` necesita `CRM_URL` (p. ej. `https://app.mercurial.cl`) y `CRM_API_KEY` (misma clave que `PUBLIC_PROSPECTS_API_KEY` en el CRM). Sin ellas, `/api/cotizaciones/pyme` responde 503 y la página muestra el error con alternativa WhatsApp. Para probar en local sin CRM, levantar un servidor falso que acepte `POST /api/public/prospects`.
+
 `npm run frontend` (puerto 3000) sirve archivos estáticos con `npx serve`, **pero ahí no existen las rutas limpias** (`/seguro-mascotas`, `/condominio`, …). Para probar el sitio real, usar siempre `npm start`.
 
 ## Deploy
@@ -33,19 +35,21 @@ Después conviene `git pull` en esa otra carpeta para que no quede atrás.
 | `/condominio` | `condominio.html` | Landing Google Ads (Ley 21.442). `noindex`. Formulario propio → HubSpot. |
 | `/transporte` | `transporte.html` | Landing Google Ads. `noindex`. Formulario propio → HubSpot. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |
+| `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**, no a HubSpot. Estilos propios en `src/css/cotizar-pyme.css`. |
 | `/politica-privacidad` | `privacidad.html` | Requerida por Meta/WhatsApp Business API. |
 | — | `terminos.html` | |
 
-`server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles y `node_modules/` ya están bloqueados por el middleware.
+`server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles, `node_modules/` y `docs/` ya están bloqueados por el middleware. `src/data/` es público a propósito (catálogos que carga el navegador).
 
 Estilos: `styles.css` es el sistema compartido (variables en `:root`, azul corporativo `--c-primary: #2399C6`, Inter). **Excepción**: `mascotas.html` es autocontenida y lleva su propio CSS inline (paleta cálida distinta).
 
 ## Captura de leads
 
-Dos caminos, según la página:
+Tres caminos, según la página:
 
 1. **Condominio y transporte**: formulario propio → `src/js/lead-form.js` → `POST /api/leads` → HubSpot CRM API (crea Contact + Company + Deal). El cluster se declara en cada HTML con `window.MERCURIAL_LEAD_CLUSTER` y el backend solo acepta `'condominio'` o `'transporte'`. `lead-form.js` también arrastra `gclid` y las UTM de la URL, y aporta el scroll suave y las animaciones `fade-in`.
 2. **Mascotas**: **no pasa por HubSpot**. El lead queda registrado en BCI Seguros al completar el paso 1 del cotizador embebido; se consulta en la bandeja de trabajo de `sau.bciseguros.cl` (convenio "Mascotas S20", corredor Mercurial).
+3. **Pyme (`/cotizar-pyme`)**: **no pasa por HubSpot**. `src/js/cotizar-pyme.js` → `POST /api/cotizaciones/pyme` (server.js valida contra `src/data/pyme-catalogos.js`, `comunas.json` y `ans-pyme-actividades.json`) → `POST {CRM_URL}/api/public/prospects` con header `x-api-key` e `Idempotency-Key` → prospecto en etapa "Nuevo" del CRM (`app.mercurial.cl`, repo `korjolio/studio`) con ramo "Multiriesgo Pyme", el resumen del riesgo en Notas y el JSON completo en `rawData`. Las listas del formulario son las exactas del cotizador "Seguro de Pymes" de ANS; la referencia está en `docs/referencia/ans-pyme-campos.md`. **No inventar opciones**: si el portal cambia, actualizar catálogo en la web y en el CRM a la vez.
 
 ## Analítica
 
@@ -58,6 +62,8 @@ Eventos propios que emite `mascotas.html` al `dataLayer`:
 - `mascotas_cta_click` (con atributo `cta`) — clic en un CTA.
 
 **Pendiente**: crear los triggers en GTM y marcarlos como conversión en GA4 (los eventos se emiten, pero no hay tags configurados).
+
+`cotizar-pyme.html` emite `cotizacion_pyme_submit` (con `form_cluster: 'pyme'`) al enviar con éxito.
 
 Convención de campañas: cada persona identifica sus links con `utm_campaign`. Alejandro usa sus iniciales, p. ej. `mercurial.cl/seguro-mascotas?utm_campaign=as`.
 

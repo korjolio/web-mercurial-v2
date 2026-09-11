@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>Cotiza el seguro para tu pyme | Mercurial Corredores de Seguros</title>
+  <meta name="description"
+    content="Entrega los antecedentes de tu empresa y un ejecutivo de Mercurial cotiza tu seguro pyme (incendio, contenidos, responsabilidad civil y más) en las principales compañías.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K4SL5KSF');</script>
+  <!-- End Google Tag Manager -->
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="src/css/cotizar-pyme.css">
+</head>
+
+<body data-theme="light">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-link">
+        <img src="src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" class="logo-img"
+          loading="eager"
+          onerror="this.style.display='none'; this.nextElementSibling.style='display:block;font-weight:800;font-size:1.5rem;color:var(--c-text);letter-spacing:-0.5px;';">
+        <span class="logo-text"
+          style="display:none;font-weight:800;font-size:1.5rem;color:var(--c-text);letter-spacing:-0.5px;">MERCURIAL.</span>
+      </a>
+      <a href="https://wa.me/56971097657?text=Hola%20Mercurial,%20tengo%20una%20duda%20sobre%20la%20cotizaci%C3%B3n%20del%20seguro%20para%20mi%20pyme."
+        class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">¿Dudas? Escríbenos</a>
+    </div>
+  </nav>
+
+  <main class="cp-main">
+    <div class="container">
+      <header class="cp-intro">
+        <span class="cp-eyebrow">Seguro Pyme · Multiriesgo</span>
+        <h1 class="cp-title">Cuéntanos de tu empresa y nosotros cotizamos por ti.</h1>
+        <p class="cp-lead">Con estos antecedentes un ejecutivo de Mercurial cotiza tu seguro en las principales
+          compañías y te envía las alternativas. Te toma unos 10 minutos.</p>
+        <ul class="cp-steps">
+          <li>Tus datos</li>
+          <li>Contratante</li>
+          <li>Ubicación y construcción</li>
+          <li>Montos</li>
+          <li>Coberturas y seguridad</li>
+        </ul>
+      </header>
+
+      <form class="cp-form" id="pymeForm" novalidate>
+
+        <!-- 1. Contacto -->
+        <section class="cp-section" id="sec-contacto">
+          <div class="cp-section-head">
+            <span class="cp-num">1</span>
+            <div>
+              <h2>Tus datos de contacto</h2>
+              <p>A quién le enviamos la cotización.</p>
+            </div>
+          </div>
+          <div class="cp-grid cp-grid-2">
+            <div class="cp-field">
+              <label for="c_nombre">Nombre <span class="req">*</span></label>
+              <input class="input-field" id="c_nombre" name="c_nombre" type="text" autocomplete="given-name" maxlength="80" required>
+              <span class="cp-error">Ingresa tu nombre.</span>
+            </div>
+            <div class="cp-field">
+              <label for="c_apellido">Apellido <span class="req">*</span></label>
+              <input class="input-field" id="c_apellido" name="c_apellido" type="text" autocomplete="family-name" maxlength="80" required>
+              <span class="cp-error">Ingresa tu apellido.</span>
+            </div>
+            <div class="cp-field">
+              <label for="c_email">Correo electrónico <span class="req">*</span></label>
+              <input class="input-field" id="c_email" name="c_email" type="email" autocomplete="email" maxlength="120" required>
+              <span class="cp-error">Ingresa un correo válido.</span>
+            </div>
+            <div class="cp-field">
+              <label for="c_telefono">Celular <span class="req">*</span></label>
+              <input class="input-field" id="c_telefono" name="c_telefono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" maxlength="20" required>
+              <span class="cp-error">Ingresa un celular de contacto.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Contratante -->
+        <section class="cp-section" id="sec-contratante">
+          <div class="cp-section-head">
+            <span class="cp-num">2</span>
+            <div>
+              <h2>Datos del contratante</h2>
+              <p>Quién será el titular de la póliza.</p>
+            </div>
+          </div>
+          <div class="cp-grid cp-grid-3">
+            <div class="cp-field">
+              <label>Tipo de persona <span class="req">*</span></label>
+              <div class="cp-seg" role="radiogroup" aria-label="Tipo de persona">
+                <label><input type="radio" name="tipo_persona" value="juridica" checked> Empresa</label>
+                <label><input type="radio" name="tipo_persona" value="natural"> Persona natural</label>
+              </div>
+            </div>
+            <div class="cp-field">
+              <label for="rut">RUT <span class="req">*</span></label>
+              <input class="input-field" id="rut" name="rut" type="text" inputmode="text" placeholder="76.826.322-1" maxlength="12" required>
+              <span class="cp-error">Ingresa un RUT válido.</span>
+            </div>
+            <div class="cp-field" data-persona="juridica">
+              <label for="razon_social">Razón social <span class="req">*</span></label>
+              <input class="input-field" id="razon_social" name="razon_social" type="text" autocomplete="organization" maxlength="160">
+              <span class="cp-error">Ingresa la razón social.</span>
+            </div>
+            <div class="cp-field hidden" data-persona="natural">
+              <label for="p_nombres">Nombres <span class="req">*</span></label>
+              <input class="input-field" id="p_nombres" name="p_nombres" type="text" maxlength="80">
+              <span class="cp-error">Ingresa los nombres.</span>
+            </div>
+            <div class="cp-field hidden" data-persona="natural">
+              <label for="p_apellido1">Primer apellido <span class="req">*</span></label>
+              <input class="input-field" id="p_apellido1" name="p_apellido1" type="text" maxlength="80">
+              <span class="cp-error">Ingresa el primer apellido.</span>
+            </div>
+            <div class="cp-field hidden" data-persona="natural">
+              <label for="p_apellido2">Segundo apellido</label>
+              <input class="input-field" id="p_apellido2" name="p_apellido2" type="text" maxlength="80">
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Ubicación y construcción -->
+        <section class="cp-section" id="sec-ubicacion">
+          <div class="cp-section-head">
+            <span class="cp-num">3</span>
+            <div>
+              <h2>Ubicación y construcción del riesgo</h2>
+              <p>El lugar físico que quieres asegurar: local, oficina, bodega, planta.</p>
+            </div>
+          </div>
+          <div class="cp-grid cp-grid-3">
+            <div class="cp-field">
+              <label for="tipo_ubicacion">Tipo de ubicación <span class="req">*</span></label>
+              <select class="cp-select" id="tipo_ubicacion" name="tipo_ubicacion" required data-catalogo="tipoUbicacion"></select>
+              <span class="cp-error">Selecciona una opción.</span>
+            </div>
+            <div class="cp-field cp-span-2">
+              <label for="direccion">Dirección <span class="req">*</span></label>
+              <input class="input-field" id="direccion" name="direccion" type="text" autocomplete="street-address" placeholder="Calle y número" maxlength="200" required>
+              <span class="cp-error">Ingresa la dirección.</span>
+            </div>
+            <div class="cp-field cp-combo" id="combo_comuna">
+              <label for="comuna">Comuna <span class="req">*</span></label>
+              <input class="input-field" id="comuna" name="comuna" type="text" placeholder="Escribe para buscar" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="comuna_list" required>
+              <ul class="cp-combo-list" id="comuna_list" role="listbox"></ul>
+              <span class="cp-error">Elige una comuna de la lista.</span>
+            </div>
+            <div class="cp-field">
+              <label for="unidad">Depto / oficina / otros</label>
+              <input class="input-field" id="unidad" name="unidad" type="text" placeholder="Oficina 302, Bodega 4, Parcela…" maxlength="80">
+            </div>
+            <div class="cp-field">
+              <label for="pisos">N° de pisos del inmueble <span class="req">*</span></label>
+              <input class="input-field" id="pisos" name="pisos" type="number" inputmode="numeric" min="1" max="99" step="1" placeholder="Ej: 2" required>
+              <span class="cp-error">Ingresa un número entre 1 y 99.</span>
+            </div>
+            <div class="cp-field">
+              <label for="muro">Material de los muros <span class="req">*</span></label>
+              <select class="cp-select" id="muro" name="muro" required data-catalogo="muro"></select>
+              <span class="cp-help">La estructura principal. Si hay varios, el predominante.</span>
+              <span class="cp-error">Selecciona el material de los muros.</span>
+            </div>
+            <div class="cp-field">
+              <label for="techo">Material del techo <span class="req">*</span></label>
+              <select class="cp-select" id="techo" name="techo" required data-catalogo="techo"></select>
+              <span class="cp-error">Selecciona el material del techo.</span>
+            </div>
+            <div class="cp-field">
+              <label for="antiguedad">Antigüedad de la construcción <span class="req">*</span></label>
+              <select class="cp-select" id="antiguedad" name="antiguedad" required data-catalogo="antiguedad"></select>
+              <span class="cp-error">Selecciona la antigüedad.</span>
+            </div>
+            <div class="cp-field cp-span-2 cp-combo" id="combo_actividad">
+              <label for="actividad">Actividad o giro del negocio <span class="req">*</span></label>
+              <input class="input-field" id="actividad" name="actividad" type="text" placeholder="Ej: restaurante, ferretería, oficina…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="actividad_list" required>
+              <ul class="cp-combo-list" id="actividad_list" role="listbox"></ul>
+              <span class="cp-help">Escribe y elige la que más se parezca. Si no aparece, selecciona "Otra" y descríbela.</span>
+              <span class="cp-error">Elige una actividad de la lista o "Otra".</span>
+            </div>
+            <div class="cp-field hidden" id="field_actividad_otra">
+              <label for="actividad_otra">Describe la actividad <span class="req">*</span></label>
+              <input class="input-field" id="actividad_otra" name="actividad_otra" type="text" maxlength="160" placeholder="Qué hace tu empresa en este lugar">
+              <span class="cp-error">Describe la actividad.</span>
+            </div>
+          </div>
+
+          <div class="cp-grid" style="margin-top: 1.25rem;">
+            <div class="cp-question">
+              <p>¿El lugar está a menos de 3 cuadras del mar, o a menos de 15 metros de altura sobre su nivel?</p>
+              <div class="cp-seg" role="radiogroup" aria-label="Cercanía al mar">
+                <label><input type="radio" name="cerca_mar" value="no" checked> No</label>
+                <label><input type="radio" name="cerca_mar" value="si"> Sí</label>
+              </div>
+            </div>
+            <div class="cp-question">
+              <p>¿El lugar está a menos de 3 cuadras de un río, o a menos de 15 metros de altura sobre su nivel?</p>
+              <div class="cp-seg" role="radiogroup" aria-label="Cercanía a un río">
+                <label><input type="radio" name="cerca_rio" value="no" checked> No</label>
+                <label><input type="radio" name="cerca_rio" value="si"> Sí</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Montos -->
+        <section class="cp-section" id="sec-montos">
+          <div class="cp-section-head">
+            <span class="cp-num">4</span>
+            <div>
+              <h2>Montos a asegurar</h2>
+              <p>En UF. Son valores estimados de reposición: si tienes dudas, indica un aproximado y el ejecutivo lo
+                revisa contigo. Completa al menos uno.</p>
+            </div>
+          </div>
+          <div class="cp-grid cp-grid-3">
+            <div class="cp-field">
+              <label for="m_edificio">Edificio</label>
+              <div class="cp-uf"><span>UF</span><input id="m_edificio" name="m_edificio" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa monto"></div>
+              <span class="cp-help">Solo si el inmueble es tuyo. Valor de construcción, sin el terreno.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_contenido">Instalaciones y contenido</label>
+              <div class="cp-uf"><span>UF</span><input id="m_contenido" name="m_contenido" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa monto"></div>
+              <span class="cp-help">Mobiliario, equipamiento e instalaciones fijas. No incluye mercadería ni maquinaria.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_mercaderias">Mercaderías</label>
+              <div class="cp-uf"><span>UF</span><input id="m_mercaderias" name="m_mercaderias" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa monto"></div>
+              <span class="cp-help">Stock de productos para la venta, materias primas e insumos.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_electronicos">Equipos electrónicos</label>
+              <div class="cp-uf"><span>UF</span><input id="m_electronicos" name="m_electronicos" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa monto"></div>
+              <span class="cp-help">Computadores, servidores, cajas, pantallas, telefonía.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_maquinaria">Maquinaria</label>
+              <div class="cp-uf"><span>UF</span><input id="m_maquinaria" name="m_maquinaria" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa monto"></div>
+              <span class="cp-help">Máquinas y equipos de producción o de trabajo.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_rc">Responsabilidad civil</label>
+              <div class="cp-uf"><span>UF</span><select id="m_rc" name="m_rc" data-catalogo="rcUF" data-default="500"></select></div>
+              <span class="cp-help">Daños a terceros que ocurran por tu operación.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_cristales">Cristales</label>
+              <div class="cp-uf"><span>UF</span><select id="m_cristales" name="m_cristales" data-catalogo="cristalesUF" data-default="50"></select></div>
+              <span class="cp-help">Vitrinas, ventanales y puertas de vidrio.</span>
+            </div>
+            <div class="cp-field">
+              <label for="trabajadores">N° de trabajadores</label>
+              <input class="input-field" id="trabajadores" name="trabajadores" type="number" inputmode="numeric" min="0" max="9999" step="1" placeholder="0">
+              <span class="cp-help">Personas que trabajan en este lugar.</span>
+              <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+            </div>
+            <div class="cp-field">
+              <label for="m_accidentes">Muerte e invalidez accidental</label>
+              <div class="cp-uf"><span>UF</span><select id="m_accidentes" name="m_accidentes" data-catalogo="muerteInvalidezUF" data-default="250"></select></div>
+              <span class="cp-help">Monto por trabajador en caso de accidente.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Coberturas adicionales -->
+        <section class="cp-section" id="sec-coberturas">
+          <div class="cp-section-head">
+            <span class="cp-num">5</span>
+            <div>
+              <h2>Coberturas adicionales <span class="cp-optional">Opcional</span></h2>
+              <p>Si no las necesitas, sigue a la siguiente sección.</p>
+            </div>
+          </div>
+          <details class="cp-details" id="detalles_coberturas">
+            <summary>
+              <div>Ver coberturas adicionales<small>Dinero en caja, remesa de valores, pérdida de utilidades, terrorismo y más.</small></div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="cp-details-body">
+              <div class="cp-grid cp-grid-3">
+                <div class="cp-extra cp-field">
+                  <label for="x_dinero">Dinero en caja fuerte</label>
+                  <div class="cp-uf"><span>UF</span><select id="x_dinero" name="x_dinero" data-catalogo="dineroEnCajaUF" data-default="0"></select></div>
+                  <span class="cp-help">Efectivo guardado en caja fuerte dentro del local.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_remesa">Remesa de valores</label>
+                  <div class="cp-uf"><span>UF</span><select id="x_remesa" name="x_remesa" data-catalogo="remesaValoresUF" data-default="0"></select></div>
+                  <span class="cp-help">Dinero en tránsito, por ejemplo al llevarlo al banco.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_politicos">Riesgos políticos</label>
+                  <select class="cp-select" id="x_politicos" name="x_politicos" data-catalogo="siNo" data-default="NO"></select>
+                  <span class="cp-help">Daños por huelgas, saqueos o desórdenes públicos.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_periodo">Pérdida de utilidades: periodo</label>
+                  <select class="cp-select" id="x_periodo" name="x_periodo" data-catalogo="periodoIndemnizable" data-default="3 Meses"></select>
+                  <span class="cp-help">Meses que cubre el seguro si debes cerrar tras un siniestro.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_pxp">Pérdida de utilidades: monto anual</label>
+                  <div class="cp-uf"><span>UF</span><input id="x_pxp" name="x_pxp" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa un número"></div>
+                  <span class="cp-help">Utilidad bruta anual del negocio en este lugar.</span>
+                  <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_alimentos">RC de alimentos</label>
+                  <select class="cp-select" id="x_alimentos" name="x_alimentos" data-catalogo="siNo" data-default="NO"></select>
+                  <span class="cp-help">Si vendes o elaboras alimentos: daños a clientes por su consumo.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_averia">Avería de maquinaria</label>
+                  <select class="cp-select" id="x_averia" name="x_averia" data-catalogo="siNo" data-default="NO"></select>
+                  <span class="cp-help">Fallas internas de las máquinas, más allá de incendio o robo.</span>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_terrorismo">Terrorismo</label>
+                  <select class="cp-select" id="x_terrorismo" name="x_terrorismo" data-catalogo="siNo" data-default="NO"></select>
+                </div>
+                <div class="cp-extra cp-field">
+                  <label for="x_mejoras">Mejoras al inmueble</label>
+                  <div class="cp-uf"><span>UF</span><input id="x_mejoras" name="x_mejoras" type="number" inputmode="numeric" min="0" step="1" placeholder="Ingresa un número"></div>
+                  <span class="cp-help">Si arriendas: lo invertido en habilitar el local.</span>
+                  <span class="cp-error">Ingresa un número entero mayor o igual a 0.</span>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- 6. Medidas de seguridad -->
+        <section class="cp-section" id="sec-seguridad">
+          <div class="cp-section-head">
+            <span class="cp-num">6</span>
+            <div>
+              <h2>Medidas de seguridad</h2>
+              <p>Marca las que existen hoy en el lugar. Mientras más protecciones, mejores condiciones.</p>
+            </div>
+          </div>
+          <p class="cp-subhead">Contra incendio</p>
+          <div class="cp-checks" id="checks_incendio" data-catalogo="seguridadIncendio" data-name="seg_incendio"></div>
+          <p class="cp-subhead">Contra robo</p>
+          <div class="cp-checks" id="checks_robo" data-catalogo="seguridadRobo" data-name="seg_robo"></div>
+        </section>
+
+        <!-- 7. Comentarios y envío -->
+        <section class="cp-section" id="sec-comentarios">
+          <div class="cp-section-head">
+            <span class="cp-num">7</span>
+            <div>
+              <h2>Comentarios <span class="cp-optional">Opcional</span></h2>
+              <p>Cualquier antecedente que nos ayude a cotizar mejor.</p>
+            </div>
+          </div>
+          <div class="cp-field">
+            <label for="comentarios" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Comentarios</label>
+            <textarea class="input-field cp-textarea" id="comentarios" name="comentarios" maxlength="1500" placeholder="Ej: tenemos dos locales, el segundo está en…"></textarea>
+          </div>
+        </section>
+
+        <div class="cp-submit">
+          <div class="cp-form-error" id="formError" role="alert"></div>
+          <button type="submit" class="btn btn-primary btn-lg" id="pyme_submit_btn">Enviar antecedentes</button>
+          <p class="cp-legal">Al enviar, un ejecutivo de Mercurial te contactará para revisar los antecedentes y enviarte la cotización. Atención bajo cumplimiento normativo según Circular CMF N° 2131. Tus datos serán tratados con estricta confidencialidad. <a href="/politica-privacidad" style="color: var(--c-primary);">Política de privacidad</a>.</p>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer" style="padding: 3rem 0 2rem;">
+    <div class="container">
+      <p style="text-align: center; color: var(--c-surface); opacity: 0.8; font-size: 0.9rem;">
+        &copy; 2026 Mercurial Corredores de Seguros. Regulado por la CMF (Registro N° 8929).
+      </p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/56971097657?text=Hola%20Mercurial,%20tengo%20una%20duda%20sobre%20la%20cotizaci%C3%B3n%20del%20seguro%20para%20mi%20pyme."
+    class="ws-floating-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+      </path>
+    </svg>
+  </a>
+
+  <!-- Modal de Respuesta -->
+  <div id="responseModal" class="modal">
+    <div class="modal-content">
+      <div id="modalIcon" class="modal-icon"></div>
+      <div id="modalTitle" class="modal-title"></div>
+      <p id="modalBody" class="modal-text"></p>
+      <button id="closeModalBtn" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="src/data/pyme-catalogos.js"></script>
+  <script src="src/js/cotizar-pyme.js"></script>
+</body>
+
+</html>

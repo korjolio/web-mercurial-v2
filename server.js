@@ -18,7 +18,7 @@ const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock
 app.use((req, res, next) => {
     const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
     const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
-    const isNodeModules = requestedPath.startsWith('node_modules/');
+    const isNodeModules = requestedPath.startsWith('node_modules/') || requestedPath.startsWith('docs/');
     const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
     if (isBlockedFile || isNodeModules || isDotfile) {
         return res.status(404).end();
@@ -37,6 +37,9 @@ app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { 
 
 // --- Landing Seguro de Mascotas (convenio BCI Seguros "Mascotas S20", cotizador embebido) ---
 app.get('/seguro-mascotas', (req, res) => res.sendFile('mascotas.html', { root: __dirname }));
+
+// --- Formulario Seguro Pyme (antecedentes para cotizar; el lead va al CRM propio app.mercurial.cl) ---
+app.get('/cotizar-pyme', (req, res) => res.sendFile('cotizar-pyme.html', { root: __dirname }));
 
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 
@@ -376,6 +379,117 @@ app.post('/api/leads', async (req, res) => {
             success: false,
             message: 'Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
         });
+    }
+});
+
+// --- Endpoint: Formulario Seguro Pyme -> CRM propio (app.mercurial.cl, repo korjolio/studio) ---
+// La web valida y reenvía al endpoint público del CRM con una clave compartida que nunca llega al
+// navegador. Los catálogos son los mismos que usa el formulario (src/data/pyme-catalogos.js), así
+// cliente, proxy y CRM validan contra las mismas listas del cotizador de ANS.
+const CRM_URL = (process.env.CRM_URL || '').replace(/\/+$/, '');
+const CRM_API_KEY = process.env.CRM_API_KEY;
+const PYME_CATALOGOS = require('./src/data/pyme-catalogos.js');
+const PYME_COMUNAS = new Set(require('./src/data/comunas.json').map(c => c.comuna));
+const PYME_ACTIVIDADES = new Set(require('./src/data/ans-pyme-actividades.json'));
+
+if (!CRM_URL || !CRM_API_KEY) {
+    console.warn('[AVISO] CRM_URL/CRM_API_KEY no definidas: /api/cotizaciones/pyme responderá 503.');
+}
+
+function validarCotizacionPyme(body) {
+    const errors = [];
+    const str = (v, max) => typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max;
+    const optStr = (v, max) => v === undefined || v === null || v === '' || (typeof v === 'string' && v.length <= max);
+    const uint = (v, max = 100000000) => Number.isInteger(v) && v >= 0 && v <= max;
+    const optUint = (v, max) => v === undefined || v === null || uint(v, max);
+    const inList = (v, list) => list.map(String).includes(String(v));
+
+    if (!body || typeof body !== 'object') return ['Cuerpo inválido'];
+    const { contact = {}, holder = {}, location = {}, building = {}, amounts = {}, extras = {}, security = {} } = body;
+
+    if (body.product !== 'pyme') errors.push('product');
+    if (!str(contact.firstName, 80)) errors.push('contact.firstName');
+    if (!str(contact.lastName, 80)) errors.push('contact.lastName');
+    if (!str(contact.email, 120) || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact.email)) errors.push('contact.email');
+    if (!str(contact.phone, 20) || contact.phone.replace(/\D/g, '').length < 8) errors.push('contact.phone');
+
+    if (!inList(holder.personType, PYME_CATALOGOS.tipoPersona)) errors.push('holder.personType');
+    if (!str(holder.rut, 12) || !/^[0-9.]{7,11}-[0-9kK]$/.test(holder.rut.trim())) errors.push('holder.rut');
+    if (holder.personType === 'juridica' && !str(holder.businessName, 160)) errors.push('holder.businessName');
+    if (holder.personType === 'natural' && (!str(holder.firstName, 80) || !str(holder.lastName, 80))) errors.push('holder.name');
+    if (!optStr(holder.secondLastName, 80)) errors.push('holder.secondLastName');
+
+    if (!inList(location.locationType, PYME_CATALOGOS.tipoUbicacion)) errors.push('location.locationType');
+    if (!str(location.address, 200)) errors.push('location.address');
+    if (!optStr(location.unit, 80)) errors.push('location.unit');
+    if (!str(location.comuna, 80) || !PYME_COMUNAS.has(location.comuna)) errors.push('location.comuna');
+    if (!optStr(location.region, 80)) errors.push('location.region');
+
+    if (!inList(building.wallMaterial, PYME_CATALOGOS.muro)) errors.push('building.wallMaterial');
+    if (!inList(building.roofMaterial, PYME_CATALOGOS.techo)) errors.push('building.roofMaterial');
+    if (!inList(building.buildingAge, PYME_CATALOGOS.antiguedad)) errors.push('building.buildingAge');
+    if (!uint(building.floors, 99) || building.floors < 1) errors.push('building.floors');
+    const esOtra = building.activity === PYME_CATALOGOS.actividadOtra;
+    if (!str(building.activity, 160) || (!esOtra && !PYME_ACTIVIDADES.has(building.activity))) errors.push('building.activity');
+    if (esOtra && !str(building.activityOther, 160)) errors.push('building.activityOther');
+    if (typeof building.nearSea !== 'boolean') errors.push('building.nearSea');
+    if (typeof building.nearRiver !== 'boolean') errors.push('building.nearRiver');
+
+    ['building', 'contents', 'goods', 'electronics', 'machinery'].forEach(k => { if (!optUint(amounts[k])) errors.push(`amounts.${k}`); });
+    if (!['building', 'contents', 'goods', 'electronics', 'machinery'].some(k => Number.isInteger(amounts[k]) && amounts[k] > 0)) errors.push('amounts.alguno');
+    if (!inList(amounts.liability, PYME_CATALOGOS.rcUF)) errors.push('amounts.liability');
+    if (!inList(amounts.glass, PYME_CATALOGOS.cristalesUF)) errors.push('amounts.glass');
+    if (!optUint(amounts.workers, 9999)) errors.push('amounts.workers');
+    if (!inList(amounts.accidentalDeath, PYME_CATALOGOS.muerteInvalidezUF)) errors.push('amounts.accidentalDeath');
+
+    if (extras.cashInSafe !== undefined && !inList(extras.cashInSafe, PYME_CATALOGOS.dineroEnCajaUF)) errors.push('extras.cashInSafe');
+    if (extras.valuesTransit !== undefined && !inList(extras.valuesTransit, PYME_CATALOGOS.remesaValoresUF)) errors.push('extras.valuesTransit');
+    if (extras.indemnityPeriod !== undefined && !inList(extras.indemnityPeriod, PYME_CATALOGOS.periodoIndemnizable)) errors.push('extras.indemnityPeriod');
+    ['politicalRisks', 'foodLiability', 'machineryBreakdown', 'terrorism'].forEach(k => { if (extras[k] !== undefined && !inList(extras[k], PYME_CATALOGOS.siNo)) errors.push(`extras.${k}`); });
+    if (!optUint(extras.businessInterruptionAnnual)) errors.push('extras.businessInterruptionAnnual');
+    if (!optUint(extras.tenantImprovements)) errors.push('extras.tenantImprovements');
+
+    const listOk = (arr, cat) => arr === undefined || (Array.isArray(arr) && arr.every(v => cat.includes(v)));
+    if (!listOk(security.fire, PYME_CATALOGOS.seguridadIncendio)) errors.push('security.fire');
+    if (!listOk(security.theft, PYME_CATALOGOS.seguridadRobo)) errors.push('security.theft');
+    if (!optStr(body.comments, 1500)) errors.push('comments');
+    return errors;
+}
+
+app.post('/api/cotizaciones/pyme', async (req, res) => {
+    if (!CRM_URL || !CRM_API_KEY) {
+        return res.status(503).json({ success: false, message: 'El formulario no está disponible en este momento. Escríbenos por WhatsApp.' });
+    }
+    const idempotencyKey = (req.get('Idempotency-Key') || '').trim();
+    if (!/^[A-Za-z0-9-]{8,80}$/.test(idempotencyKey)) {
+        return res.status(400).json({ success: false, message: 'Solicitud inválida (falta identificador de envío).' });
+    }
+    const errors = validarCotizacionPyme(req.body);
+    if (errors.length) {
+        return res.status(400).json({ success: false, message: 'Hay datos incompletos o inválidos. Revisa el formulario.', fields: errors });
+    }
+
+    const payload = {
+        ...req.body,
+        source: 'web-mercurial',
+        tracking: { ...(req.body.tracking || {}), receivedAt: new Date().toISOString() }
+    };
+
+    try {
+        const crmResponse = await axios.post(`${CRM_URL}/api/public/prospects`, payload, {
+            headers: { 'Content-Type': 'application/json', 'x-api-key': CRM_API_KEY, 'Idempotency-Key': idempotencyKey },
+            timeout: 10000
+        });
+        return res.status(200).json({ success: true, message: 'Antecedentes recibidos', prospectId: crmResponse.data?.prospectId || null });
+    } catch (error) {
+        const status = error.response?.status;
+        const detail = error.response?.data || error.message;
+        console.error('[Pyme] El CRM rechazó o no respondió:', status, JSON.stringify(detail).slice(0, 500));
+        if (status === 400) {
+            return res.status(400).json({ success: false, message: 'Hay datos que el sistema no pudo validar. Revisa el formulario o escríbenos por WhatsApp.' });
+        }
+        // 401/403/404/5xx del CRM o timeout: es un problema nuestro, no del cliente.
+        return res.status(502).json({ success: false, message: 'No pudimos registrar tus antecedentes en este momento. Intenta de nuevo o escríbenos por WhatsApp.' });
     }
 });
 
