@@ -132,10 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
 
+            // Mismo event_id para el Lead del píxel y el de la API de conversiones (server.js).
+            const meta = window.mercurialMeta;
+            const metaEventId = meta ? meta.newEventId() : undefined;
+
             const payload = {
                 firstName, lastName, email, phone, company, rut,
                 cluster_source: cluster,
-                gclid, utm_source, utm_medium, utm_campaign, utm_content, utm_term
+                gclid, utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+                meta_event_id: metaEventId,
+                page_url: window.location.href.split('#')[0]
             };
 
             try {
@@ -160,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 window.dataLayer = window.dataLayer || [];
                 window.dataLayer.push({ event: 'lead_form_submit', form_cluster: cluster });
+                if (meta) meta.trackBrowser('Lead', { content_name: cluster === 'condominio' ? 'Seguro Condominio' : 'Seguro Transporte' }, metaEventId);
 
             } catch (error) {
                 const displayMsg = (error.message || '').includes('fetch')

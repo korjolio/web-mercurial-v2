@@ -2,10 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const crypto = require('crypto');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Railway entrega la IP real del visitante en X-Forwarded-For (la usa la API de conversiones).
+app.set('trust proxy', true);
 
 // Middleware
 app.use(cors());
@@ -40,6 +44,93 @@ app.get('/seguro-mascotas', (req, res) => res.sendFile('mascotas.html', { root: 
 
 // --- Formulario Seguro Pyme (antecedentes para cotizar; el lead va al CRM propio app.mercurial.cl) ---
 app.get('/cotizar-pyme', (req, res) => res.sendFile('cotizar-pyme.html', { root: __dirname }));
+
+// --- API de conversiones de Meta (copia de servidor de los eventos del píxel, src/js/meta.js) ---
+// Sin META_CAPI_TOKEN el sitio funciona igual y solo queda el píxel del navegador.
+// META_TEST_EVENT_CODE (opcional) manda los eventos a "Probar eventos" del Administrador de eventos.
+const META_PIXEL_ID = process.env.META_PIXEL_ID || '1129934969998097';
+const META_CAPI_TOKEN = process.env.META_CAPI_TOKEN;
+const META_API_VERSION = process.env.META_API_VERSION || 'v24.0';
+const META_TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE;
+
+if (!META_CAPI_TOKEN) {
+    console.warn('[AVISO] META_CAPI_TOKEN no definida: los eventos de Meta solo saldrán del píxel del navegador.');
+}
+
+const sha256 = (v) => crypto.createHash('sha256').update(v).digest('hex');
+const metaNorm = (v) => (typeof v === 'string' ? v.trim().toLowerCase() : '');
+
+function metaPhone(v) {
+    let digits = String(v || '').replace(/\D/g, '');
+    if (digits.length === 9) digits = `56${digits}`; // celular chileno sin código de país
+    return digits.length >= 10 ? digits : '';
+}
+
+function metaCookie(req, name) {
+    const match = (req.headers.cookie || '').match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`));
+    return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+// Datos del cliente: los de contacto van con hash SHA-256; IP, UA y cookies del píxel, en claro.
+function metaUserData(req, { email, phone, firstName, lastName, city } = {}) {
+    const hashed = { em: metaNorm(email), ph: metaPhone(phone), fn: metaNorm(firstName), ln: metaNorm(lastName), ct: metaNorm(city).replace(/[^\p{L}]/gu, '') };
+    const userData = {
+        client_ip_address: req.ip,
+        client_user_agent: req.get('user-agent'),
+        fbp: metaCookie(req, '_fbp'),
+        fbc: metaCookie(req, '_fbc')
+    };
+    Object.entries(hashed).forEach(([k, v]) => { if (v) userData[k] = [sha256(v)]; });
+    if (userData.em || userData.ph) userData.country = [sha256('cl')];
+    Object.keys(userData).forEach(k => userData[k] === undefined && delete userData[k]);
+    return userData;
+}
+
+// Nunca bloquea ni rompe la respuesta al visitante: se llama sin await y solo deja log si falla.
+async function enviarEventoMeta(req, { eventName, eventId, eventSourceUrl, userData, customData }) {
+    if (!META_CAPI_TOKEN) return;
+    const body = {
+        data: [{
+            event_name: eventName,
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: eventId,
+            event_source_url: eventSourceUrl || req.get('referer'),
+            action_source: 'website',
+            user_data: metaUserData(req, userData),
+            custom_data: customData || {}
+        }]
+    };
+    if (META_TEST_EVENT_CODE) body.test_event_code = META_TEST_EVENT_CODE;
+    try {
+        await axios.post(`https://graph.facebook.com/${META_API_VERSION}/${META_PIXEL_ID}/events`, body, {
+            params: { access_token: META_CAPI_TOKEN },
+            timeout: 5000
+        });
+    } catch (error) {
+        console.error(`[Meta] No se pudo enviar ${eventName}:`, JSON.stringify(error.response?.data || error.message).slice(0, 500));
+    }
+}
+
+const META_EVENTOS_NAVEGADOR = new Set(['ViewContent', 'Contact', 'CustomizeProduct']);
+const metaEventIdValido = (v) => typeof v === 'string' && /^[A-Za-z0-9-]{8,80}$/.test(v);
+
+// Copia de servidor de los eventos sin formulario (los Lead salen de sus propios endpoints).
+// sendBeacon manda el cuerpo como text/plain en algunos navegadores; express.json lo ignora.
+app.post('/api/meta/evento', express.text({ type: 'text/plain', limit: '4kb' }), (req, res) => {
+    let body = req.body;
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
+    const { eventName, eventId, eventSourceUrl, customData } = body || {};
+    if (!META_EVENTOS_NAVEGADOR.has(eventName) || !metaEventIdValido(eventId)) return res.status(400).end();
+    const custom = {};
+    if (customData && typeof customData.content_name === 'string') custom.content_name = customData.content_name.slice(0, 100);
+    if (customData && typeof customData.contact_channel === 'string') custom.contact_channel = customData.contact_channel.slice(0, 20);
+    enviarEventoMeta(req, {
+        eventName, eventId,
+        eventSourceUrl: typeof eventSourceUrl === 'string' ? eventSourceUrl.slice(0, 500) : undefined,
+        customData: custom
+    });
+    res.status(204).end();
+});
 
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
 
@@ -211,7 +302,8 @@ app.post('/api/leads', async (req, res) => {
         const {
             firstName, lastName, email, phone, company, rut,
             cluster_source,
-            gclid, utm_content
+            gclid, utm_content,
+            meta_event_id, page_url
         } = req.body;
 
         if (!email || !firstName || !company || !rut || !['condominio', 'transporte'].includes(cluster_source)) {
@@ -371,6 +463,16 @@ app.post('/api/leads', async (req, res) => {
         // TODO: disparo de mensaje de WhatsApp Business al recibir el lead.
         // Pendiente: número de WhatsApp Business aún sin verificar en Meta.
 
+        if (metaEventIdValido(meta_event_id)) {
+            enviarEventoMeta(req, {
+                eventName: 'Lead',
+                eventId: meta_event_id,
+                eventSourceUrl: typeof page_url === 'string' ? page_url.slice(0, 500) : undefined,
+                userData: { email, phone, firstName, lastName },
+                customData: { content_name: cluster_source === 'condominio' ? 'Seguro Condominio' : 'Seguro Transporte' }
+            });
+        }
+
         res.status(200).json({ success: true, message: 'Solicitud recibida correctamente' });
 
     } catch (error) {
@@ -479,6 +581,15 @@ app.post('/api/cotizaciones/pyme', async (req, res) => {
         const crmResponse = await axios.post(`${CRM_URL}/api/public/prospects`, payload, {
             headers: { 'Content-Type': 'application/json', 'x-api-key': CRM_API_KEY, 'Idempotency-Key': idempotencyKey },
             timeout: 10000
+        });
+        // El Idempotency-Key es también el event_id: un reintento del mismo envío no cuenta doble en Meta.
+        const { contact, location, tracking } = req.body;
+        enviarEventoMeta(req, {
+            eventName: 'Lead',
+            eventId: idempotencyKey,
+            eventSourceUrl: typeof tracking?.pageUrl === 'string' ? tracking.pageUrl.slice(0, 500) : undefined,
+            userData: { email: contact.email, phone: contact.phone, firstName: contact.firstName, lastName: contact.lastName, city: location.comuna },
+            customData: { content_name: 'Seguro Pyme' }
         });
         return res.status(200).json({ success: true, message: 'Antecedentes recibidos', prospectId: crmResponse.data?.prospectId || null });
     } catch (error) {

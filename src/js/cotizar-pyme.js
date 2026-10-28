@@ -381,6 +381,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json().catch(() => ({}));
             if (!response.ok) throw new Error(result.message || 'Error al procesar la solicitud');
 
+            // El servidor usa el Idempotency-Key como event_id del Lead en la API de conversiones.
+            if (window.mercurialMeta) window.mercurialMeta.trackBrowser('Lead', { content_name: 'Seguro Pyme' }, idempotencyKey);
             idempotencyKey = newKey();
             form.reset();
             applyPersona();

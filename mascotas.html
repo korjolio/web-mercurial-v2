@@ -26,6 +26,9 @@
     })(window, document, 'script', 'dataLayer', 'GTM-K4SL5KSF');</script>
   <!-- End Google Tag Manager -->
 
+  <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
+  <script src="/src/js/meta.js"></script>
+
   <style>
     :root {
       --m-bg: #fbf6ef;
@@ -424,6 +427,7 @@
       if (cotizadorTracked) return;
       cotizadorTracked = true;
       window.dataLayer.push({ event: 'cotizador_interaccion' });
+      if (window.mercurialMeta) window.mercurialMeta.track('CustomizeProduct', { content_name: 'Seguro Mascotas' });
     }
 
     cotizadorIframe.addEventListener('mouseenter', function () {
