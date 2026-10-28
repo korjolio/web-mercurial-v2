@@ -67,6 +67,8 @@ Eventos propios que emite `mascotas.html` al `dataLayer`:
 
 `cotizar-pyme.html` emite `cotizacion_pyme_submit` (con `form_cluster: 'pyme'`) al enviar con éxito.
 
+**Caché**: los `.js` y `.css` se sirven con `max-age=14400` (Cloudflare + navegador), el HTML con `max-age=0`. Al cambiar un script, subir su `?v=N` en los HTML que lo cargan; si no, hasta 4 horas de visitantes corren la versión vieja.
+
 ### Consentimiento de cookies
 
 `src/js/consent.js` va en el `<head>` **antes de GTM y de `meta.js`** (orden obligatorio). Muestra el banner hasta que el visitante elige, guarda la elección en `localStorage` (`mercurial_cookie_consent`) y fija Google Consent Mode v2 en denegado por defecto; al aceptar, emite `cookie_consent_update`. `privacidad.html` lo carga solo para el enlace "Configurar cookies" (`mercurialConsent.open()`).
