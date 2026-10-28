@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Políticas de Privacidad | Mercurial Corredores de Seguros</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Banner de cookies: acá solo sirve para el enlace "Configurar cookies" (esta página no mide nada) -->
+  <script src="/src/js/consent.js"></script>
   <style>
     .legal-content {
       padding: 10rem 0 5rem;
@@ -110,7 +112,7 @@
         manipulación no autorizada de los datos.</p>
     </section>
 
-    <section>
+    <section id="cookies">
       <h2>5. Cookies y tecnologías de medición</h2>
       <p>Nuestro sitio utiliza cookies y tecnologías similares de terceros para medir las visitas y el resultado de
         nuestras campañas publicitarias:</p>
@@ -129,8 +131,10 @@
         transformados mediante una función criptográfica irreversible (hash SHA-256), con el único fin de medir la
         efectividad de nuestros anuncios en Facebook e Instagram. Meta trata esta información conforme a su propia
         política de privacidad.</p>
-      <p>Usted puede bloquear o eliminar las cookies desde la configuración de su navegador, y administrar sus
-        preferencias de anuncios desde la configuración de su cuenta de Facebook o Instagram.</p>
+      <p>Estas herramientas solo se activan si usted las acepta en el aviso de cookies que aparece al visitar el sitio.
+        Puede cambiar su elección cuando quiera desde <a href="#cookies" id="configurar-cookies">Configurar
+          cookies</a>. También puede bloquear o eliminar las cookies desde la configuración de su navegador, y
+        administrar sus preferencias de anuncios desde la configuración de su cuenta de Facebook o Instagram.</p>
     </section>
 
     <section>
@@ -155,6 +159,13 @@
         sección.</p>
     </section>
   </main>
+  <script>
+    document.getElementById('configurar-cookies').addEventListener('click', function (e) {
+      if (!window.mercurialConsent) return;
+      e.preventDefault();
+      window.mercurialConsent.open();
+    });
+  </script>
 
   <footer class="footer">
     <div class="container">

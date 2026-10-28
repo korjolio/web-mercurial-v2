@@ -67,6 +67,19 @@ Eventos propios que emite `mascotas.html` al `dataLayer`:
 
 `cotizar-pyme.html` emite `cotizacion_pyme_submit` (con `form_cluster: 'pyme'`) al enviar con éxito.
 
+### Consentimiento de cookies
+
+`src/js/consent.js` va en el `<head>` **antes de GTM y de `meta.js`** (orden obligatorio). Muestra el banner hasta que el visitante elige, guarda la elección en `localStorage` (`mercurial_cookie_consent`) y fija Google Consent Mode v2 en denegado por defecto; al aceptar, emite `cookie_consent_update`. `privacidad.html` lo carga solo para el enlace "Configurar cookies" (`mercurialConsent.open()`).
+
+- GA4 respeta Consent Mode solo. **Las demás etiquetas de GTM no**: la de LinkedIn debe tener en GTM "Requerir consentimiento adicional" (`ad_storage`), o se dispara aunque el visitante rechace.
+- Sin consentimiento, `meta.js` no carga el píxel y `mercurialMeta.newEventId()` devuelve `undefined`, así que `/api/leads` no manda el Lead a Meta; el formulario pyme marca `tracking.metaConsent` y el servidor lo exige.
+
+### Meta (píxel + API de conversiones)
+
+`src/js/meta.js` (navegador) + `enviarEventoMeta` en `server.js` (servidor) mandan cada evento dos veces con el mismo `event_id` para que Meta deduplique. Conjunto de datos `1129934969998097` ("API de Eventos mercurial.cl"). Variables: `META_CAPI_TOKEN` (sin ella solo queda el navegador), `META_TEST_EVENT_CODE` (solo para pruebas, nunca en Railway). Eventos: `ViewContent` (landings), `Contact` (WhatsApp/correo), `CustomizeProduct` (cotizador de mascotas), `Lead` (formularios).
+
+El conjunto de datos tiene categoría "Servicio financiero" con **Configuración de Core activada**: Meta acepta los `Lead` (`events_received: 1`) pero no los muestra en "Probar eventos", y puede restringir datos. Además, un Signals Gateway (`signals.birch.click`) ya reenvía los eventos del píxel por servidor.
+
 Convención de campañas: cada persona identifica sus links con `utm_campaign`. Alejandro usa sus iniciales, p. ej. `mercurial.cl/seguro-mascotas?utm_campaign=as`.
 
 ## Landing de mascotas: el cotizador embebido (leer antes de tocarlo)

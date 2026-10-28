@@ -585,8 +585,9 @@ app.post('/api/cotizaciones/pyme', async (req, res) => {
             timeout: 10000
         });
         // El Idempotency-Key es también el event_id: un reintento del mismo envío no cuenta doble en Meta.
+        // Solo con consentimiento de cookies (tracking.metaConsent lo marca cotizar-pyme.js).
         const { contact, location, tracking } = req.body;
-        enviarEventoMeta(req, {
+        if (tracking?.metaConsent === true) enviarEventoMeta(req, {
             eventName: 'Lead',
             eventId: idempotencyKey,
             eventSourceUrl: typeof tracking?.pageUrl === 'string' ? tracking.pageUrl.slice(0, 500) : undefined,

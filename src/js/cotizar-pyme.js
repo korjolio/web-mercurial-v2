@@ -340,7 +340,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             security: { fire: checks('seg_incendio'), theft: checks('seg_robo') },
             comments: val('comentarios') || undefined,
-            tracking
+            // metaConsent: el servidor solo manda el Lead a Meta si el visitante aceptó las cookies.
+            tracking: { ...tracking, metaConsent: !!(window.mercurialConsent && window.mercurialConsent.aceptado()) }
         };
         if (personType === 'juridica') payload.holder.businessName = val('razon_social');
         else {
