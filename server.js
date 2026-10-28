@@ -23,8 +23,10 @@ app.use((req, res, next) => {
     const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
     const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
     const lowerPath = requestedPath.toLowerCase();
+    // De instagram/ solo se exponen los JPG exportados por mes: la Content Publishing API los descarga por URL
+    const isInstagramMedia = /^instagram\/\d{4}-\d{2}\/[a-z0-9-]+\.jpg$/.test(requestedPath);
     const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/')
-        || lowerPath.startsWith('instagram/');
+        || (lowerPath.startsWith('instagram/') && !isInstagramMedia);
     const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
     if (isBlockedFile || isNodeModules || isDotfile) {
         return res.status(404).end();
