@@ -1,7 +1,10 @@
 # Perfil de @mercurial.corredores
 
-Aprobado el 28-10-2026. La API de Instagram no permite editar el perfil: se aplica desde Meta Business Suite
-(Inicio → "Editar perfil de Instagram", requiere verificar la cuenta) o desde la app de Instagram.
+Aprobado y aplicado el 28-10-2026 desde Meta Business Suite (Inicio → "Editar perfil de Instagram").
+La API de Instagram no permite editar el perfil. Business Suite pide "Verificar cuenta" (login de @mercurial.corredores)
+cada vez que se abre el editor, y no tiene el campo Nombre: ese se cambia en la app.
+
+Estado: foto ✅ · presentación ✅ · 5 enlaces ✅ · categoría ✅ · correo y teléfono ✅ · **nombre pendiente (app)**.
 
 ## Foto de perfil
 
@@ -29,7 +32,7 @@ Aprobado el 28-10-2026. La API de Instagram no permite editar el perfil: se apli
 
 Los UTM hacen que las visitas desde el perfil aparezcan en GA4 como instagram / bio / perfil_ig.
 
-## Información pública del negocio (sugerido, pendiente de aprobación)
+## Información pública del negocio
 
-- Categoría: Agente de seguros (hoy dice "Producto/servicio").
-- Correo: auditoria@mercurial.cl · Teléfono/WhatsApp: +56 9 7109 7657 · Ciudad: Santiago, Chile.
+- Categoría: **Corredor de seguros** (Insurance Broker), visible en el perfil.
+- Correo: auditoria@mercurial.cl · Teléfono: +56 9 7109 7657 (contacto por llamada). Sin dirección.
