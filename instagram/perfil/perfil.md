@@ -35,4 +35,4 @@ Los UTM hacen que las visitas desde el perfil aparezcan en GA4 como instagram / 
 ## Información pública del negocio
 
 - Categoría: **Corredor de seguros** (Insurance Broker), visible en el perfil.
-- Correo: auditoria@mercurial.cl · Teléfono: +56 9 7109 7657 (contacto por llamada). Sin dirección.
+- Correo: auditoria@mercurial.cl · Teléfono: +56 9 3931 9546 (WhatsApp/Chatwoot; contacto por mensaje de texto). Sin dirección.
