@@ -39,7 +39,9 @@ Después conviene `git pull` en esa otra carpeta para que no quede atrás.
 | `/politica-privacidad` | `privacidad.html` | Requerida por Meta/WhatsApp Business API. |
 | — | `terminos.html` | |
 
-`server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles, `node_modules/` y `docs/` ya están bloqueados por el middleware. `src/data/` es público a propósito (catálogos que carga el navegador).
+`server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles, `node_modules/`, `docs/` e `instagram/` ya están bloqueados por el middleware (sin distinguir mayúsculas).
+
+`instagram/` guarda el contenido de redes, no forma parte del sitio: posts generados desde `plantilla.html` + `posts.js` con `render.js`, captions y calendario en `captions.md`. Mismas reglas de contenido que el sitio. `src/data/` es público a propósito (catálogos que carga el navegador).
 
 Estilos: `styles.css` es el sistema compartido (variables en `:root`, azul corporativo `--c-primary: #2399C6`, Inter). **Excepción**: `mascotas.html` es autocontenida y lleva su propio CSS inline (paleta cálida distinta).
 

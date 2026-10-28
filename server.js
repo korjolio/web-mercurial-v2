@@ -22,7 +22,9 @@ const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock
 app.use((req, res, next) => {
     const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
     const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
-    const isNodeModules = requestedPath.startsWith('node_modules/') || requestedPath.startsWith('docs/');
+    const lowerPath = requestedPath.toLowerCase();
+    const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/')
+        || lowerPath.startsWith('instagram/');
     const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
     if (isBlockedFile || isNodeModules || isDotfile) {
         return res.status(404).end();
