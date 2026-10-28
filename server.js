@@ -106,10 +106,12 @@ async function enviarEventoMeta(req, { eventName, eventId, eventSourceUrl, userD
     };
     if (META_TEST_EVENT_CODE) body.test_event_code = META_TEST_EVENT_CODE;
     try {
-        await axios.post(`https://graph.facebook.com/${META_API_VERSION}/${META_PIXEL_ID}/events`, body, {
+        const { data } = await axios.post(`https://graph.facebook.com/${META_API_VERSION}/${META_PIXEL_ID}/events`, body, {
             params: { access_token: META_CAPI_TOKEN },
             timeout: 5000
         });
+        // Una línea por evento: es la única forma de confirmar en los logs de Railway que Meta lo recibió.
+        console.log(`[Meta] ${eventName} recibido por Meta (events_received=${data?.events_received}, event_id=${eventId})`);
     } catch (error) {
         console.error(`[Meta] No se pudo enviar ${eventName}:`, JSON.stringify(error.response?.data || error.message).slice(0, 500));
     }
