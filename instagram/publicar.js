@@ -19,6 +19,8 @@ require('dotenv').config({ path: ENV, quiet: true });
 const fs = require('fs');
 
 const TOKEN = process.env.IG_ACCESS_TOKEN;
+const IG_USERNAME = process.env.IG_USERNAME || 'mercurial.corredores';
+const FB_PAGE_ID = process.env.FB_PAGE_ID || '128713307782112'; // página "Mercurial Corredores de Seguros"
 const API = TOKEN?.startsWith('IG') ? 'https://graph.instagram.com/v23.0' : 'https://graph.facebook.com/v25.0';
 const MEDIA_BASE = (process.env.IG_MEDIA_BASE || 'https://mercurial.cl/instagram/2026-11/').replace(/\/?$/, '/');
 const DIR_POSTS = path.join(__dirname, '2026-11');
@@ -89,11 +91,17 @@ async function configurarToken() {
       grant_type: 'fb_exchange_token', client_id: FB_APP_ID, client_secret: FB_APP_SECRET, fb_exchange_token: TOKEN,
     })).access_token;
   } else {
-    console.log('Sin FB_APP_ID/FB_APP_SECRET: se usa el token tal cual (el de la página caducará con él).');
+    // Sin la clave secreta no se puede canjear aquí: el token debe venir ya extendido
+    // (Depurador de tokens de Meta → "Ampliar token de acceso"); si no, el de la página caduca con él.
+    console.log('Sin FB_APP_ID/FB_APP_SECRET: se usa el token tal cual. Debe ser de larga duración para que el de la página no caduque.');
   }
-  const { data } = await graph('GET', '/me/accounts', { fields: 'name,access_token,instagram_business_account{id,username}' }, usuarioLargo);
-  const pagina = data.find(p => p.instagram_business_account);
-  if (!pagina) throw new Error('Ninguna página del token tiene una cuenta de Instagram vinculada');
+  // La página de Mercurial se administra desde el portfolio comercial y no aparece en /me/accounts:
+  // se pide por FB_PAGE_ID y se exige que su Instagram sea exactamente IG_USERNAME (nunca "la primera" que haya).
+  const campos = { fields: 'name,access_token,instagram_business_account{id,username}' };
+  const pagina = await graph('GET', `/${FB_PAGE_ID}`, campos, usuarioLargo);
+  if (pagina.instagram_business_account?.username !== IG_USERNAME) {
+    throw new Error(`La página ${FB_PAGE_ID} ("${pagina.name}") no está vinculada a @${IG_USERNAME}`);
+  }
   guardarEnv({ IG_ACCESS_TOKEN: pagina.access_token, IG_USER_ID: pagina.instagram_business_account.id });
   console.log(`Listo: página "${pagina.name}", Instagram @${pagina.instagram_business_account.username}. Token e IG_USER_ID guardados en .env.`);
 }
@@ -111,6 +119,8 @@ async function esperarContenedor(id) {
 // Crea el contenedor listo para publicar (imagen simple o carrusel) y devuelve su id
 async function preparar(post) {
   const ig = await usuario();
+  const { username } = await graph('GET', `/${ig}`, { fields: 'username' });
+  if (username !== IG_USERNAME) throw new Error(`IG_USER_ID apunta a @${username}, no a @${IG_USERNAME}: no se publica`);
   const imagenes = imagenesDe(post.id);
   if (imagenes.length === 1) {
     const { id } = await graph('POST', `/${ig}/media`, { image_url: MEDIA_BASE + imagenes[0], caption: post.caption });
@@ -150,6 +160,7 @@ async function publicar(post) {
   } else if (comando === 'verificar') {
     const ig = await usuario();
     const yo = await graph('GET', `/${ig}`, { fields: 'username' });
+    if (yo.username !== IG_USERNAME) throw new Error(`IG_USER_ID apunta a @${yo.username}, no a @${IG_USERNAME}`);
     const cupo = await graph('GET', `/${ig}/content_publishing_limit`, { fields: 'quota_usage,config' });
     console.log(`Cuenta: @${yo.username}, id ${ig}`);
     console.log(`Publicaciones por API en las últimas 24 h: ${cupo.data?.[0]?.quota_usage ?? '?'} de ${cupo.data?.[0]?.config?.quota_total ?? '?'}`);
@@ -171,4 +182,4 @@ async function publicar(post) {
   } else {
     console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(0, 15).join('\n'));
   }
-})().catch(e => { console.error(`Error: ${e.message}`); process.exit(1); });
+})().catch(e => { console.error(`Error: ${e.message}`); process.exitCode = 1; });

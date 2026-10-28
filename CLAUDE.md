@@ -41,7 +41,16 @@ Después conviene `git pull` en esa otra carpeta para que no quede atrás.
 
 `server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles, `node_modules/`, `docs/` e `instagram/` ya están bloqueados por el middleware (sin distinguir mayúsculas).
 
-`instagram/` guarda el contenido de redes, no forma parte del sitio: posts generados desde `plantilla.html` + `posts.js` con `render.js`, captions y calendario en `captions.md`. Mismas reglas de contenido que el sitio. `src/data/` es público a propósito (catálogos que carga el navegador).
+`instagram/` guarda el contenido de redes, no forma parte del sitio: posts generados desde `plantilla.html` + `posts.js` con `render.js`, captions y calendario en `captions.md`. Mismas reglas de contenido que el sitio. **Excepción al bloqueo**: los JPG de `instagram/<año-mes>/` son públicos, porque la Content Publishing API los descarga por URL. `src/data/` es público a propósito (catálogos que carga el navegador).
+
+### Publicar en Instagram (Content Publishing API)
+
+`node instagram/publicar.js verificar | calendario | preparar <id> | publicar <id> --si | pendientes --si`. Publica en **@mercurial.corredores** (IG id `17841415815501470`) a través de la página de Facebook "Mercurial Corredores de Seguros" (`128713307782112`) y la app de Meta **Mercurial** (`1573048407609004`, producto Instagram agregado). `preparar` crea el contenedor sin publicar (caduca en 24 h): úsalo para probar. Publicar es público e irreversible: exige `--si`, y el script se niega si `IG_USER_ID` no corresponde a `@mercurial.corredores`.
+
+- `.env` (no versionado): `IG_ACCESS_TOKEN` (token de **página**, no caduca) e `IG_USER_ID`.
+- **El acceso a datos del token vence el 2027-01-26.** Para renovarlo: Explorador de la API Graph con la app Mercurial → permisos `instagram_basic`, `instagram_content_publish`, `pages_show_list`, `pages_read_engagement` → Generate Access Token → Depurador de tokens → "Ampliar token de acceso" → ese token en `IG_ACCESS_TOKEN` → `node instagram/publicar.js token`.
+- La página de Mercurial se administra desde el portfolio comercial y **no aparece en `/me/accounts`**: el script la pide por ID. Ese mismo usuario administra otras páginas con Instagram (p. ej. Monkey Car Wash); nunca tomar "la primera".
+- La API no programa: hay que correr `pendientes --si` cada día (cron) para seguir el calendario de `captions.md`.
 
 Estilos: `styles.css` es el sistema compartido (variables en `:root`, azul corporativo `--c-primary: #2399C6`, Inter). **Excepción**: `mascotas.html` es autocontenida y lleva su propio CSS inline (paleta cálida distinta).
 
