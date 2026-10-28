@@ -56,6 +56,8 @@ Estilos: `styles.css` es el sistema compartido (variables en `:root`, azul corpo
 
 ## Captura de leads
 
+**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot. Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número. El +56 9 7109 7657 quedó solo como `telephone` del JSON-LD de `index.html` y teléfono de llamada del perfil de Instagram.
+
 Tres caminos, según la página:
 
 1. **Condominio y transporte**: formulario propio → `src/js/lead-form.js` → `POST /api/leads` → HubSpot CRM API (crea Contact + Company + Deal). El cluster se declara en cada HTML con `window.MERCURIAL_LEAD_CLUSTER` y el backend solo acepta `'condominio'` o `'transporte'`. `lead-form.js` también arrastra `gclid` y las UTM de la URL, y aporta el scroll suave y las animaciones `fade-in`.

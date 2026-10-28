@@ -28,7 +28,7 @@ Estado: foto ✅ · presentación ✅ · 5 enlaces ✅ · categoría ✅ · corr
 | Cotiza tu pyme | https://mercurial.cl/cotizar-pyme?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_ig |
 | Condominio Ley 21.442 | https://mercurial.cl/condominio?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_ig |
 | Transporte de carga | https://mercurial.cl/transporte?utm_source=instagram&utm_medium=bio&utm_campaign=perfil_ig |
-| WhatsApp | https://wa.me/56971097657 |
+| WhatsApp | https://wa.me/56939319546 |
 
 Los UTM hacen que las visitas desde el perfil aparezcan en GA4 como instagram / bio / perfil_ig.
 

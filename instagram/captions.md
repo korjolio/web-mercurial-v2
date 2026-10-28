@@ -43,7 +43,7 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > En Mercurial somos corredores de seguros regulados por la CMF. No somos una aseguradora: cotizamos en las principales compañías, comparamos y te acompañamos en todo el proceso.
 >
-> Condominios, transporte de carga, pymes y mascotas. Conversemos en mercurial.cl o al WhatsApp +56 9 7109 7657.
+> Condominios, transporte de carga, pymes y mascotas. Conversemos en mercurial.cl o al WhatsApp +56 9 3931 9546.
 >
 > #MercurialSeguros #CorredoraDeSeguros #SegurosChile #AsesoríaEnSeguros
 
@@ -53,7 +53,7 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Te asesoramos para que la póliza cumpla con la ley y, además, realmente proteja a tu comunidad.
 >
-> ¿Eres administrador o parte del comité? Solicita asesoría en mercurial.cl/condominio o escríbenos al WhatsApp +56 9 7109 7657.
+> ¿Eres administrador o parte del comité? Solicita asesoría en mercurial.cl/condominio o escríbenos al WhatsApp +56 9 3931 9546.
 >
 > #Ley21442 #Condominio #Copropiedad #AdministraciónDeEdificios #SegurosChile
 
@@ -194,7 +194,7 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Camión propio, carga de terceros o mercadería en tránsito: diseñamos la cobertura técnica para lo que realmente está en riesgo en tu operación de transporte.
 >
-> Solicita asesoría en mercurial.cl/transporte o al WhatsApp +56 9 7109 7657.
+> Solicita asesoría en mercurial.cl/transporte o al WhatsApp +56 9 3931 9546.
 >
 > #SeguroDeCarga #TransporteDeCarga #Logística #SegurosChile
 
@@ -249,7 +249,7 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > ¿Te rechazaron el seguro de desgravamen hipotecario?
 >
-> Buscamos alternativas para casos rechazados por motivos de salud. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 7109 7657.
+> Buscamos alternativas para casos rechazados por motivos de salud. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
 >
 > [disclaimer]
 >
@@ -259,7 +259,7 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Tu casa propia todavía puede ser posible.
 >
-> Si tu seguro de desgravamen hipotecario fue rechazado por motivos de salud, buscamos alternativas. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 7109 7657.
+> Si tu seguro de desgravamen hipotecario fue rechazado por motivos de salud, buscamos alternativas. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
 >
 > [disclaimer]
 >
@@ -269,7 +269,7 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Un rechazo no siempre significa renunciar a tu crédito hipotecario.
 >
-> Buscamos alternativas de seguro de desgravamen para casos rechazados por motivos de salud. Escríbenos al WhatsApp +56 9 7109 7657 y solicita una evaluación.
+> Buscamos alternativas de seguro de desgravamen para casos rechazados por motivos de salud. Escríbenos al WhatsApp +56 9 3931 9546 y solicita una evaluación.
 >
 > [disclaimer]
 >
@@ -279,7 +279,7 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Buscamos alternativas de desgravamen para casos rechazados por motivos de salud.
 >
-> Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 7109 7657.
+> Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
 >
 > [disclaimer]
 >
