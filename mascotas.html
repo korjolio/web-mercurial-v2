@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CL">
 
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <!-- Google Fonts: Lora (display) + Inter (texto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- Consentimiento de cookies: debe ir antes de GTM y del píxel de Meta (ver src/js/consent.js) -->
@@ -34,18 +34,18 @@
 
   <style>
     :root {
-      --m-bg: #fbf6ef;
-      --m-surface: #ffffff;
-      --m-text: #3d3229;
-      --m-text-soft: #7a6b5b;
-      --m-accent: #c2703d;
-      --m-accent-soft: rgba(194, 112, 61, 0.12);
-      --m-border: #ecdfcc;
-      --m-blue: #2399C6;
-      --m-blue-hover: #1e85ae;
-      --m-footer: #2e2620;
-      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-display: 'Lora', Georgia, serif;
+      --m-bg: #ffffff;
+      --m-surface: #f4f7fa;
+      --m-text: #13263d;
+      --m-text-soft: #536479;
+      --m-accent: #156585;
+      --m-accent-soft: rgba(26, 124, 164, 0.10);
+      --m-border: #dbe3eb;
+      --m-blue: #1a7ca4;
+      --m-blue-hover: #156585;
+      --m-footer: #0d2340;
+      --font-body: 'Albert Sans', system-ui, -apple-system, sans-serif;
+      --font-display: 'Albert Sans', system-ui, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,7 +54,7 @@
     body { overflow-x: hidden; }
     img { max-width: 100%; height: auto; display: block; }
     a { text-decoration: none; color: var(--m-accent); transition: color 0.15s ease-in-out; }
-    a:hover { color: #a55a2e; }
+    a:hover { color: #0d2340; }
 
     .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 
@@ -66,7 +66,7 @@
     .btn-cotizar {
       display: inline-flex; align-items: center; justify-content: center;
       padding: 0.65rem 1.5rem; font-weight: 600; font-size: 0.9rem;
-      border-radius: 24px; background: var(--m-blue); color: #fff; cursor: pointer;
+      border-radius: 10px; background: var(--m-blue); color: #fff; cursor: pointer;
       transition: all 0.15s ease-in-out;
     }
     .btn-cotizar:hover { background: var(--m-blue-hover); color: #fff; transform: translateY(-2px); }
@@ -83,8 +83,8 @@
     }
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.5vw, 3.25rem);
-      font-weight: 600; line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 1.25rem;
+      font-size: clamp(2.3rem, 4.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.25rem;
     }
     .hero-subtitle { font-size: 1.1rem; color: var(--m-text-soft); line-height: 1.65; max-width: 520px; margin-bottom: 1.75rem; }
 
@@ -92,8 +92,8 @@
     .btn-hero {
       display: inline-flex; align-items: center; justify-content: center;
       padding: 0.95rem 2.1rem; font-weight: 600; font-size: 1rem;
-      border-radius: 28px; background: var(--m-blue); color: #fff;
-      box-shadow: 0 8px 20px rgba(35, 153, 198, 0.3);
+      border-radius: 10px; background: var(--m-blue); color: #fff;
+      box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.45);
       transition: all 0.15s ease-in-out;
     }
     .btn-hero:hover { background: var(--m-blue-hover); color: #fff; transform: translateY(-2px); }
@@ -107,15 +107,15 @@
     }
     .hero-photo {
       position: relative; height: clamp(300px, 42vw, 440px); border-radius: 24px; overflow: hidden;
-      background: linear-gradient(135deg, #f3e3cf 0%, #ecd7bd 55%, #e4c9a8 100%);
-      border: 1px solid #e8d9c4;
+      background: var(--m-surface);
+      border: 1px solid var(--m-border);
       display: flex; align-items: center; justify-content: center;
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
     .hero-photo-paws { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.35; }
 
     /* Razones */
-    .razones { background: var(--m-surface); border-top: 1px solid #f0e6d8; border-bottom: 1px solid #f0e6d8; padding: 3.5rem 0; }
+    .razones { background: var(--m-surface); border-top: 1px solid var(--m-border); border-bottom: 1px solid var(--m-border); padding: 3.5rem 0; }
     .razones-grid { display: grid; grid-template-columns: 1fr; gap: 2.25rem; }
     @media (min-width: 768px) { .razones-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
     .razon svg { color: var(--m-accent); margin-bottom: 0.75rem; }
@@ -125,7 +125,7 @@
     /* Planes */
     .planes { padding: 4.5rem 0 4rem; }
     .planes-header { text-align: center; margin-bottom: 2.5rem; }
-    .planes-header h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.15rem); font-weight: 600; margin-bottom: 0.6rem; }
+    .planes-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
     .planes-header p { font-size: 1.02rem; color: var(--m-text-soft); max-width: 640px; margin: 0 auto; }
     .planes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     @media (min-width: 850px) { .planes-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -133,7 +133,7 @@
       background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 20px;
       padding: 1.9rem 1.75rem; display: flex; flex-direction: column; gap: 1rem;
     }
-    .plan-card.plan-destacado { border-color: var(--m-accent); box-shadow: 0 12px 28px rgba(194, 112, 61, 0.12); }
+    .plan-card.plan-destacado { border-color: var(--m-blue); box-shadow: 0 24px 40px -28px rgba(13, 35, 64, 0.5); }
     .plan-nombre { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
     .plan-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--m-accent); background: var(--m-accent-soft); border-radius: 12px; padding: 0.25rem 0.7rem; align-self: flex-start; }
     .plan-cobertura { font-size: 0.95rem; color: var(--m-text); font-weight: 600; line-height: 1.5; }
@@ -146,12 +146,12 @@
     /* Cotizador */
     .cotizador-section { padding: 4.5rem 0; }
     .cotizador-header { text-align: center; margin-bottom: 2.5rem; }
-    .cotizador-header h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.15rem); font-weight: 600; margin-bottom: 0.6rem; }
+    .cotizador-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
     .cotizador-header p { font-size: 1.05rem; color: var(--m-text-soft); max-width: 620px; margin: 0 auto; }
 
     .cotizador-frame {
       background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 20px;
-      overflow: hidden; box-shadow: 0 16px 32px rgba(61, 50, 41, 0.06);
+      overflow: hidden; box-shadow: 0 24px 50px -36px rgba(13, 35, 64, 0.4);
     }
     /* El cotizador BCI es cross-origin (no se puede leer su altura). Alturas medidas contra el
        contenido real: paso 1 = 774px desktop / 1204px móvil; paso 2 (tabla de planes) ≈ 1725px.
@@ -186,22 +186,85 @@
     .fade-in-up { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
   </style>
+  <link rel="stylesheet" href="/src/css/marco.css?v=2">
 </head>
 
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="camion" viewBox="0 0 24 24"><path d="M3 16V7a1 1 0 0 1 1-1h9v10"/><path d="M13 9h4l3 3.5V16h-1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6M3 16h2"/></symbol>
+    <symbol id="caja" viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m4 7 8 4 8-4M12 11v10"/></symbol>
+    <symbol id="llama" viewBox="0 0 24 24"><path d="M12 21c-4 0-7-2.7-7-6.5 0-3.4 2.6-5.4 3.6-8.5 1.8 1.4 2.4 3 2.4 4.6 1-1 1.6-2.4 1.5-4.1C16.3 8.6 19 11.6 19 14.5 19 18.3 16 21 12 21z"/></symbol>
+    <symbol id="salud" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M9 11h2l1-2 1.5 4 1-2H17"/></symbol>
+    <symbol id="edificio" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 7l8 2v12M3 21h18M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01"/></symbol>
+    <symbol id="huella" viewBox="0 0 24 24"><circle cx="5.5" cy="10" r="1.8"/><circle cx="9.5" cy="6" r="1.8"/><circle cx="14.5" cy="6" r="1.8"/><circle cx="18.5" cy="10" r="1.8"/><path d="M12 11c-2.5 0-4.8 2.1-5.4 4.6-.4 1.7.9 3.4 2.7 3.4h5.4c1.8 0 3.1-1.7 2.7-3.4-.6-2.5-2.9-4.6-5.4-4.6z"/></symbol>
+    <symbol id="casa" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="escudo" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 10 4-1.8 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path d="M9.5 9.5c0 2.8 2.2 5 5 5l1-1.5-2-1-1 .8a3 3 0 0 1-2-2l.8-1-1-2z"/></symbol>
+    <symbol id="doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+    <symbol id="balanza" viewBox="0 0 24 24"><path d="M12 4v16M6 20h12M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0z"/></symbol>
+    <symbol id="mensaje" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="cotizar" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+    <symbol id="personas" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 5.8M21 20c0-2.6-1.7-4.9-4-5.7"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="der" viewBox="0 0 24 24"><path d="M4 12h15M12.5 5.5 19 12l-6.5 6.5"/></symbol>
+    <symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="alerta" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></symbol>
+    <symbol id="okc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></symbol>
+  </svg>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="/" aria-label="Ir al inicio de Mercurial">
-        <img src="src/img/Mercurial Sin Fondo.png" alt="Mercurial Corredores de Seguros" class="logo-img" loading="eager">
-      </a>
-      <a href="#cotizador" class="btn-cotizar" data-track="cta-nav">Cotizar en línea</a>
-    </div>
-  </nav>
+  <div class="util mc-marco"><div class="wrap">
+    <a href="/">Empresas</a><span class="sep">Personas:</span><a class="activo" href="/seguro-mascotas">Seguro de mascotas</a><a href="/desgravamen-rechazado">Desgravamen rechazado</a>
+    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro CMF N° 8929</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+  </div></div>
+
+  <header class="nav mc-marco" id="nav"><div class="wrap">
+    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <nav aria-label="Principal">
+      <ul class="menu">
+        <li id="li-seguros">
+          <button type="button" id="btn-seguros" aria-expanded="false" aria-controls="menu-seguros">Seguros <svg class="ico chev" aria-hidden="true"><use href="#chev"/></svg></button>
+          <div class="t-dropdown" id="menu-seguros" inert>
+            <ul>
+              <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg><div><b>Flotas</b><span>Camiones, camionetas y autos de la empresa</span></div></a></li>
+              <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Transporte</b><span>Carga por ruta, puerto o importada</span></div></a></li>
+              <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg><div><b>Incendio</b><span>Locales, oficinas, bodegas y plantas</span></div></a></li>
+              <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg><div><b>Colectivos de salud</b><span>Complemento a la Isapre o Fonasa</span></div></a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="/#mercurial">Quiénes somos</a></li>
+        <li><a href="/#consultas">Consultas y reclamos</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="acc"><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener">Hablar con un ejecutivo</a><a class="btn btn-azul" href="#cotizador">Cotizar</a></div>
+    <button class="hamb" type="button" id="hamb" aria-label="Menú" aria-expanded="false" aria-controls="panel-movil"><svg class="ico ico-abrir" aria-hidden="true"><use href="#menu"/></svg><svg class="ico ico-cerrar" aria-hidden="true"><use href="#x"/></svg></button>
+  </div></header>
+
+  <div class="panel-movil mc-marco" id="panel-movil" hidden>
+    <nav aria-label="Menú móvil">
+      <ul>
+        <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></li>
+        <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></li>
+        <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></li>
+        <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></li>
+        <li class="sub">Personas</li>
+        <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg>Seguro de mascotas</a></li>
+        <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen rechazado</a></li>
+        <li class="sub">Mercurial</li>
+        <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
+        <li><a href="/#consultas"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
+      </ul>
+      <div class="acc"><a class="btn btn-azul" href="#cotizador">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
+    </nav>
+  </div>
 
   <header class="hero">
     <div class="container hero-grid">
@@ -215,7 +278,7 @@
           </svg>
           Seguro de mascotas · BCI Seguros
         </span>
-        <h1 class="hero-title">Protege a quien te espera todos los días en casa.</h1>
+        <h1 class="hero-title">Protege a quien <b style="font-weight:600">te espera todos los días</b> en casa.</h1>
         <p class="hero-subtitle">Tu perro o tu gato es parte de la familia. Asegúralo con el respaldo de BCI Seguros y
           la asesoría cercana de Mercurial: cotiza en línea en 2 minutos, sin trámites.</p>
         <div class="hero-cta-row">
@@ -268,7 +331,7 @@
   <section class="planes">
     <div class="container">
       <div class="planes-header">
-        <h2>Tres planes, según cuánta protección quieras</h2>
+        <h2>Tres planes, <b style="font-weight:600">según cuánta protección quieras</b></h2>
         <p>Todos incluyen telemedicina veterinaria ilimitada, vacunación, microchip, cremación, apoyo psicológico al
           tutor y orientación legal. Compara y elige el tuyo en el cotizador.</p>
       </div>
@@ -309,7 +372,7 @@
   <section id="cotizador" class="cotizador-section">
     <div class="container">
       <div class="cotizador-header">
-        <h2>Cotiza aquí, sin salir del sitio</h2>
+        <h2>Cotiza aquí, <b style="font-weight:600">sin salir del sitio</b></h2>
         <p>Este es el cotizador oficial de BCI Seguros para el convenio de Mercurial. Completa los 3 pasos y recibe tu
           cotización al instante.</p>
       </div>
@@ -332,22 +395,20 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Mercurial Corredores de Seguros. Regulado por la CMF (Registro N° 8929).</p>
+  <footer class="oscuro mc-marco"><div class="wrap">
+    <div class="pie">
+      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
+      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Cotizar pyme en línea</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen rechazado</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/#consultas">Consultas y reclamos</a></li></ul></div>
+      <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
     </div>
-  </footer>
+    <div class="legal">
+      <div class="fila"><span>© 2026 Mercurial Corredores de Seguros Ltda. Corredora de seguros, no aseguradora: las pólizas las emiten las compañías de seguros.</span><span><a href="/terminos.html">Términos de uso</a> · <a href="/politica-privacidad">Privacidad</a></span></div>
+    </div>
+  </div></footer>
 
-  <a href="https://wa.me/56971097657?text=Hola%20Mercurial,%20quiero%20cotizar%20el%20seguro%20para%20mi%20mascota."
-    class="ws-floating-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path
-        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-      </path>
-    </svg>
-  </a>
 
+  <script src="/src/js/sitio.js?v=2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
 

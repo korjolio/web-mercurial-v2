@@ -1,6 +1,6 @@
 # CLAUDE.md — web-mercurial-v2
 
-Sitio de **Mercurial Corredores de Seguros** (mercurial.cl), corredora chilena regulada por la CMF (Registro N° 8929). Sitio estático servido por un Express mínimo que además expone los endpoints de captura de leads hacia HubSpot.
+Sitio de **Mercurial Corredores de Seguros** (mercurial.cl), corredora chilena regulada por la CMF (Registro N° 8929). Sitio estático servido por un Express mínimo que además reenvía las cotizaciones pyme al CRM propio (`app.mercurial.cl`). **HubSpot ya no se usa** (retirado en octubre de 2026).
 
 ## Cómo correr
 
@@ -8,8 +8,6 @@ Sitio de **Mercurial Corredores de Seguros** (mercurial.cl), corredora chilena r
 npm install
 npm start          # http://localhost:3001
 ```
-
-No requiere `HUBSPOT_API_KEY` para levantar: sin ella el sitio funciona igual y solo los endpoints `/api/hubspot/*` responden 503. Con HubSpot: copiar la clave a `.env` como `HUBSPOT_API_KEY`.
 
 El formulario `/cotizar-pyme` necesita `CRM_URL` (p. ej. `https://app.mercurial.cl`) y `CRM_API_KEY` (misma clave que `PUBLIC_PROSPECTS_API_KEY` en el CRM). Sin ellas, `/api/cotizaciones/pyme` responde 503 y la página muestra el error con alternativa WhatsApp. Para probar en local sin CRM, levantar un servidor falso que acepte `POST /api/public/prospects`.
 
@@ -31,11 +29,12 @@ Después conviene `git pull` en esa otra carpeta para que no quede atrás.
 
 | Ruta | Archivo | Notas |
 |---|---|---|
-| `/` | `index.html` | Home corporativo. Indexable. |
-| `/condominio` | `condominio.html` | Landing Google Ads (Ley 21.442). `noindex`. Formulario propio → HubSpot. |
-| `/transporte` | `transporte.html` | Landing Google Ads. `noindex`. Formulario propio → HubSpot. |
+| `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización, formulario de cotización y de consultas/reclamos → correo. |
+| `/seguros/flotas`, `/seguros/transporte`, `/seguros/incendio`, `/seguros/colectivos-de-salud` | `seguro-*.html` | Páginas de cada línea. Indexables (en `sitemap.xml`). Flotas y Salud sin coberturas hasta que se confirmen. |
+| `/condominio` | `condominio.html` | Landing Google Ads (Ley 21.442). `noindex`, sin menú. Formulario → correo. |
+| `/transporte` | `transporte.html` | Landing Google Ads. `noindex`, sin menú. Formulario → correo. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |
-| `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**, no a HubSpot. Estilos propios en `src/css/cotizar-pyme.css`. |
+| `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**. Estilos propios en `src/css/cotizar-pyme.css`. |
 | `/politica-privacidad` | `privacidad.html` | Requerida por Meta/WhatsApp Business API. |
 | — | `terminos.html` | |
 
@@ -52,15 +51,15 @@ Después conviene `git pull` en esa otra carpeta para que no quede atrás.
 - La página de Mercurial se administra desde el portfolio comercial y **no aparece en `/me/accounts`**: el script la pide por ID. Ese mismo usuario administra otras páginas con Instagram (p. ej. Monkey Car Wash); nunca tomar "la primera".
 - La API no programa: hay que correr `pendientes --si` cada día (cron) para seguir el calendario de `captions.md`.
 
-Estilos: `styles.css` es el sistema compartido (variables en `:root`, azul corporativo `--c-primary: #2399C6`, Inter). **Excepción**: `mascotas.html` es autocontenida y lleva su propio CSS inline (paleta cálida distinta).
+Estilos del sitio nuevo: `src/css/marco.css` (tokens, cabecera de dos niveles, panel móvil, pie; lo cargan todas las páginas) + `src/css/sitio.css` (componentes de página). Albert Sans, azul marino `#0d2340` y azul Mercurial `#1a7ca4`. `src/js/sitio.js` maneja menú, panel móvil, formularios y movimiento (GSAP en `src/vendor/`, respeta `prefers-reduced-motion`). `styles.css` queda solo para el cuerpo de `/cotizar-pyme`; `mascotas.html` lleva su CSS inline con la paleta nueva. Fotos de Wikimedia Commons en `src/img/fotos/` (CC BY / CC BY-SA): **los créditos del pie son obligatorios**.
 
 ## Captura de leads
 
 Tres caminos, según la página:
 
-1. **Condominio y transporte**: formulario propio → `src/js/lead-form.js` → `POST /api/leads` → HubSpot CRM API (crea Contact + Company + Deal). El cluster se declara en cada HTML con `window.MERCURIAL_LEAD_CLUSTER` y el backend solo acepta `'condominio'` o `'transporte'`. `lead-form.js` también arrastra `gclid` y las UTM de la URL, y aporta el scroll suave y las animaciones `fade-in`.
-2. **Mascotas**: **no pasa por HubSpot**. El lead queda registrado en BCI Seguros al completar el paso 1 del cotizador embebido; se consulta en la bandeja de trabajo de `sau.bciseguros.cl` (convenio "Mascotas S20", corredor Mercurial).
-3. **Pyme (`/cotizar-pyme`)**: **no pasa por HubSpot**. `src/js/cotizar-pyme.js` → `POST /api/cotizaciones/pyme` (server.js valida contra `src/data/pyme-catalogos.js`, `comunas.json` y `ans-pyme-actividades.json`) → `POST {CRM_URL}/api/public/prospects` con header `x-api-key` e `Idempotency-Key` → prospecto en etapa "Nuevo" del CRM (`app.mercurial.cl`, repo `korjolio/studio`) con ramo "Multiriesgo Pyme", el resumen del riesgo en Notas y el JSON completo en `rawData`. Las listas del formulario son las exactas del cotizador "Seguro de Pymes" de ANS; la referencia está en `docs/referencia/ans-pyme-campos.md`. **No inventar opciones**: si el portal cambia, actualizar catálogo en la web y en el CRM a la vez.
+1. **Portada, páginas de seguro, condominio y transporte**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
+2. **Mascotas**: el lead queda registrado en BCI Seguros al completar el paso 1 del cotizador embebido; se consulta en la bandeja de trabajo de `sau.bciseguros.cl` (convenio "Mascotas S20", corredor Mercurial).
+3. **Pyme (`/cotizar-pyme`)**: `src/js/cotizar-pyme.js` → `POST /api/cotizaciones/pyme` (server.js valida contra `src/data/pyme-catalogos.js`, `comunas.json` y `ans-pyme-actividades.json`) → `POST {CRM_URL}/api/public/prospects` con header `x-api-key` e `Idempotency-Key` → prospecto en etapa "Nuevo" del CRM (`app.mercurial.cl`, repo `korjolio/studio`) con ramo "Multiriesgo Pyme", el resumen del riesgo en Notas y el JSON completo en `rawData`. Las listas del formulario son las exactas del cotizador "Seguro de Pymes" de ANS; la referencia está en `docs/referencia/ans-pyme-campos.md`. **No inventar opciones**: si el portal cambia, actualizar catálogo en la web y en el CRM a la vez.
 
 ## Analítica
 

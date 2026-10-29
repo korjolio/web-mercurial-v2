@@ -17,7 +17,7 @@ Mercurial es una corredora de seguros senior con sede en Santiago de Chile, espe
 - **Responsabilidad Civil**: Ingeniería de límites para RC Extracontractual, RC Patronal con extensión a Subcontratistas, y diseño de estructuras de Responsabilidad Cruzada.
 - **Property e incendio**: Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
 - **Salud colectiva y beneficios**: Programas con Continuidad de Cobertura y gestión de Extensión Catastrófica. Integración con sistemas de Bonificación en Línea (I-Med/Gerty).
-- **Auditoría técnica de pólizas**: Análisis de spread de comisión del mercado y detección de brechas de cobertura bajo normativa CMF. Potencial de reducción de hasta 15% del costo total de seguros.
+- **Auditoría técnica de pólizas**: Análisis de spread de comisión del mercado y detección de brechas de cobertura bajo normativa CMF.
 - **Seguro de condominio (Ley 21.442)**: Asesoría para el seguro obligatorio de las áreas comunes, estructurado conforme al Art. 43 de la ley (https://mercurial.cl/condominio).
 - **Seguro Pyme multiriesgo**: Cotización en las principales compañías a partir de los antecedentes del local, oficina o bodega (https://mercurial.cl/cotizar-pyme).
 - **Seguro de mascotas**: Convenio con BCI Seguros para perros y gatos, con planes Esencial, Pro e Infinite y cotizador en línea (https://mercurial.cl/seguro-mascotas).
@@ -43,9 +43,9 @@ Mercurial es una corredora de seguros senior con sede en Santiago de Chile, espe
 ## Información de contacto
 
 - **Sitio web**: https://mercurial.cl
-- **Email consultas**: auditoria@mercurial.cl
+- **Email consultas**: contacto@mercurial.cl
 - **Email reclamos**: reclamos@mercurial.cl
-- **WhatsApp**: +56 9 7109 7657
+- **WhatsApp**: +56 9 3931 9546
 - **Dirección**: Santiago, Chile
 - **Horario**: Lunes a viernes, 09:00 – 18:30 hrs
 

@@ -1,0 +1,111 @@
+/* Marco común de mercurial.cl: tokens, botones, cabecera de dos niveles, panel móvil y pie.
+   Lo cargan todas las páginas, incluso las que conservan estilos propios (cotizar-pyme).
+   Todo va bajo clases propias (.mc-*) o elementos del marco, para no pisar el CSS de cada página. */
+:root {
+  --navy: #0d2340; --navy-2: #163659; --azul-b: #1a7ca4; --azul-h: #156585; --azul-claro: #7cc7e8; --celeste: #e8f4fa;
+  --tx: #13263d; --tx2: #536479; --borde: #dbe3eb; --borde-campo: #8a9cb0; --gris: #f4f7fa; --acento: #f2a65a; --error: #b23a27;
+  --sans: 'Albert Sans', system-ui, sans-serif;
+      /* tokens de transitions.dev */
+  --duration-quick: 150ms; --duration-fast: 250ms; --duration-slow: 400ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dropdown-open-dur: 250ms; --dropdown-close-dur: 150ms; --dropdown-pre-scale: 0.97; --dropdown-closing-scale: 0.99;
+  --shake-distance: 6px; --shake-overshoot: 4px; --shake-dur-a: 80ms; --shake-dur-b: 60ms;
+}
+
+.mc-marco, .mc-marco * { box-sizing: border-box; }
+.mc-marco { font-family: var(--sans); color: var(--tx); -webkit-font-smoothing: antialiased; }
+.mc-marco a { color: inherit; text-decoration: none; }
+.mc-marco img { display: block; max-width: 100%; }
+.mc-marco ul { margin: 0; padding: 0; }
+.mc-marco .wrap { width: min(1280px, 100% - 48px); margin-inline: auto; }
+.mc-marco .ico { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.mc-marco :focus-visible { outline: 3px solid var(--azul-h); outline-offset: 3px; border-radius: 6px; }
+footer.mc-marco :focus-visible { outline-color: var(--azul-claro); }
+.mc-marco .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 10px; font: 600 16px/1 var(--sans); border: 0; cursor: pointer; transition-property: background-color, color, transform; transition-duration: var(--duration-quick); transition-timing-function: ease-out; }
+.mc-marco .btn:active { transform: scale(.96); }
+.mc-marco .btn-azul { background: var(--azul-b); color: #fff; } .mc-marco .btn-azul:hover { background: var(--azul-h); }
+.mc-marco .btn-borde { box-shadow: inset 0 0 0 1.5px var(--navy); color: var(--navy); background: #fff; } .mc-marco .btn-borde:hover { background: var(--gris); }
+.mc-marco .btn .ico { width: 18px; height: 18px; transition: transform var(--duration-fast) var(--ease-smooth-out); }
+.mc-marco .btn:hover .ico { transform: translateX(3px); }
+
+/* ---------- Cabecera de dos niveles ---------- */
+.util { border-bottom: 1px solid var(--borde); font-size: 14px; color: var(--tx2); }
+.util .wrap { display: flex; align-items: stretch; gap: 24px; height: 40px; }
+.util a { display: flex; align-items: center; }
+.util a:hover { color: var(--navy); }
+.util .activo { color: var(--navy); font-weight: 600; box-shadow: inset 0 -2px 0 var(--azul-b); }
+.util .der { margin-left: auto; display: flex; gap: 24px; }
+.nav { position: relative; z-index: 40; background: #fff; border-bottom: 1px solid var(--borde); }
+.nav .wrap { display: flex; align-items: center; gap: 32px; height: 80px; }
+.logo { display: block; padding: 2px 0; }
+.logo img { height: 40px; width: auto; }
+.menu { display: flex; gap: 4px; list-style: none; }
+.menu > li { position: relative; }
+.menu > li > a, .menu > li > button { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 0; background: none; color: inherit; font: 500 17px/1 var(--sans); white-space: nowrap; cursor: pointer; transition: background-color var(--duration-quick) ease-out; }
+.menu > li > a:hover, .menu > li > button:hover, .menu button[aria-expanded="true"] { background: var(--gris); }
+.menu .chev { width: 16px; height: 16px; transition: transform var(--duration-fast) var(--ease-smooth-out); }
+.menu button[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.nav .acc { margin-left: auto; display: flex; gap: 10px; }
+.hamb { display: none; margin-left: auto; width: 48px; height: 48px; border-radius: 10px; border: 1.5px solid var(--borde); background: #fff; color: var(--navy); place-items: center; cursor: pointer; }
+.hamb .ico-cerrar { display: none; }
+.hamb[aria-expanded="true"] .ico-abrir { display: none; }
+.hamb[aria-expanded="true"] .ico-cerrar { display: block; }
+
+/* Desplegable de seguros (transitions.dev · menu dropdown) */
+.t-dropdown { position: absolute; top: calc(100% + 12px); left: 0; width: 520px; padding: 10px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--borde), 0 24px 50px -20px rgba(0,0,0,.28);
+  transform-origin: top left; transform: scale(var(--dropdown-pre-scale)); opacity: 0; pointer-events: none;
+  transition: transform var(--dropdown-open-dur) var(--ease-smooth-out), opacity var(--dropdown-open-dur) var(--ease-smooth-out); will-change: transform, opacity; }
+.t-dropdown.is-open { transform: scale(1); opacity: 1; pointer-events: auto; }
+.t-dropdown.is-closing { transform: scale(var(--dropdown-closing-scale)); opacity: 0; pointer-events: none; transition: transform var(--dropdown-close-dur) var(--ease-smooth-out), opacity var(--dropdown-close-dur) var(--ease-smooth-out); }
+.t-dropdown ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.t-dropdown a { display: flex; gap: 12px; padding: 14px; border-radius: 10px; transition: background-color var(--duration-quick) ease-out; }
+.t-dropdown a:hover, .t-dropdown a:focus-visible { background: var(--gris); }
+.t-dropdown .ico { color: var(--azul-b); margin-top: 2px; }
+.t-dropdown b { display: block; font-weight: 600; font-size: 16px; }
+.t-dropdown span { font-size: 14px; color: var(--tx2); }
+
+/* Panel móvil (transitions.dev · panel reveal) */
+.panel-movil { position: fixed; inset: 0; top: var(--cab-movil, 109px); z-index: 39; overflow-y: auto; background: #fff; padding: 8px 16px 32px;
+  opacity: 0; transform: translateY(-8px); filter: blur(2px);
+  transition: opacity var(--duration-slow) var(--ease-smooth-out), transform var(--duration-slow) var(--ease-smooth-out), filter var(--duration-slow) var(--ease-smooth-out); }
+.panel-movil.is-open { opacity: 1; transform: none; filter: none; }
+.panel-movil ul { list-style: none; }
+.panel-movil li a { display: flex; align-items: center; gap: 12px; min-height: 56px; border-bottom: 1px solid var(--borde); font-size: 19px; font-weight: 500; }
+.panel-movil li a .ico { color: var(--azul-b); }
+.panel-movil .acc { display: grid; gap: 10px; margin-top: 24px; }
+.panel-movil .acc .btn { width: 100%; }
+
+/* Pie */
+footer { margin-top: 112px; background: var(--navy); color: #c9d6e4; padding: 72px 0 36px; font-size: 15px; }
+.pie { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px; }
+.logo-pie { height: 40px; width: auto; filter: brightness(0) invert(1); }
+.pie h4 { color: #fff; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.pie ul { list-style: none; display: grid; gap: 8px; }
+.pie a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); display: grid; gap: 12px; font-size: 13px; }
+.legal .fila { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.legal a { text-decoration: underline; text-underline-offset: 3px; }
+
+
+@media (max-width: 1100px) {
+  .nav .acc .btn-borde { display: none; }
+  .nav .wrap { gap: 20px; }
+  .pie { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .util, .menu, .nav .acc { display: none; }
+  .hamb { display: grid; }
+  .nav .wrap { height: 68px; }
+  .logo { padding: 6px 0; }
+  .logo img { height: 32px; }
+}
+@media (max-width: 560px) {
+  .mc-marco .wrap { width: calc(100% - 32px); }
+  .pie { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mc-marco *, .mc-marco *::before, .mc-marco *::after { transition-duration: 0ms !important; animation: none !important; }
+}
+
+.util .sep { display: flex; align-items: center; margin-left: 8px; color: var(--tx2); font-weight: 600; }
+.panel-movil li.sub { padding: 18px 4px 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--tx2); }

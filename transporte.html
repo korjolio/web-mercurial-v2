@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es-CL">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, follow">
   <title>Seguro de Transporte de Carga | Mercurial Corredores de Seguros</title>
-  <meta name="description"
-    content="Asesoría técnica en seguros de transporte de carga: camión, mercadería y ocupantes. Un ejecutivo especializado te contacta en 1-2 horas.">
+  <meta name="description" content="Asesoría en seguros de transporte de carga: camión, mercadería y ocupantes. Un ejecutivo te responde en 3 a 5 horas hábiles.">
+  <link rel="canonical" href="https://mercurial.cl/transporte">
+  <meta property="og:title" content="Seguro de Transporte de Carga | Mercurial Corredores de Seguros">
+  <meta property="og:description" content="Asesoría en seguros de transporte de carga: camión, mercadería y ocupantes. Un ejecutivo te responde en 3 a 5 horas hábiles.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mercurial.cl/transporte">
+  <meta property="og:image" content="https://mercurial.cl/src/img/og-image-dark.png">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Mercurial Corredores de Seguros">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Consentimiento de cookies: debe ir antes de GTM y del píxel de Meta (ver src/js/consent.js) -->
   <script src="/src/js/consent.js?v=1"></script>
@@ -32,148 +38,139 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=2"></script>
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/src/css/marco.css?v=2">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=3">
 </head>
 
-<body data-theme="light">
+<body class="mc-marco">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Navegación minimalista: solo logo, sin links de fuga -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="/" class="logo-link">
-        <img src="src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" class="logo-img"
-          loading="eager"
-          onerror="this.style.display='none'; this.nextElementSibling.style='display:block;font-weight:800;font-size:1.5rem;color:var(--c-text);letter-spacing:-0.5px;';">
-        <span class="logo-text"
-          style="display:none;font-weight:800;font-size:1.5rem;color:var(--c-text);letter-spacing:-0.5px;">MERCURIAL.</span>
-      </a>
-      <a href="#contacto" class="btn btn-primary btn-sm">Solicitar Asesoría</a>
-    </div>
-  </nav>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="camion" viewBox="0 0 24 24"><path d="M3 16V7a1 1 0 0 1 1-1h9v10"/><path d="M13 9h4l3 3.5V16h-1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6M3 16h2"/></symbol>
+    <symbol id="caja" viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m4 7 8 4 8-4M12 11v10"/></symbol>
+    <symbol id="llama" viewBox="0 0 24 24"><path d="M12 21c-4 0-7-2.7-7-6.5 0-3.4 2.6-5.4 3.6-8.5 1.8 1.4 2.4 3 2.4 4.6 1-1 1.6-2.4 1.5-4.1C16.3 8.6 19 11.6 19 14.5 19 18.3 16 21 12 21z"/></symbol>
+    <symbol id="salud" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M9 11h2l1-2 1.5 4 1-2H17"/></symbol>
+    <symbol id="edificio" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 7l8 2v12M3 21h18M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01"/></symbol>
+    <symbol id="huella" viewBox="0 0 24 24"><circle cx="5.5" cy="10" r="1.8"/><circle cx="9.5" cy="6" r="1.8"/><circle cx="14.5" cy="6" r="1.8"/><circle cx="18.5" cy="10" r="1.8"/><path d="M12 11c-2.5 0-4.8 2.1-5.4 4.6-.4 1.7.9 3.4 2.7 3.4h5.4c1.8 0 3.1-1.7 2.7-3.4-.6-2.5-2.9-4.6-5.4-4.6z"/></symbol>
+    <symbol id="casa" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="escudo" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 10 4-1.8 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path d="M9.5 9.5c0 2.8 2.2 5 5 5l1-1.5-2-1-1 .8a3 3 0 0 1-2-2l.8-1-1-2z"/></symbol>
+    <symbol id="doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+    <symbol id="balanza" viewBox="0 0 24 24"><path d="M12 4v16M6 20h12M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0z"/></symbol>
+    <symbol id="mensaje" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="cotizar" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+    <symbol id="personas" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 5.8M21 20c0-2.6-1.7-4.9-4-5.7"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="der" viewBox="0 0 24 24"><path d="M4 12h15M12.5 5.5 19 12l-6.5 6.5"/></symbol>
+    <symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="alerta" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></symbol>
+    <symbol id="okc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></symbol>
+  </svg>
 
-  <!-- Hero con formulario visible sin scroll -->
-  <header id="inicio" class="hero">
-    <div class="hero-bg-accent"></div>
-    <div class="container hero-container">
-      <div class="hero-split">
-        <div class="hero-split-copy fade-in-up">
-          <h1 class="hero-title">Cobertura para <span class="text-primary">cada kilómetro de tu operación.</span>
-          </h1>
-          <p class="hero-subtitle">Camión propio, carga de terceros o mercadería en tránsito: diseñamos la cobertura
-            técnica para lo que realmente está en riesgo en tu operación de transporte.</p>
-          <ul class="hero-split-bullets">
-            <li>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Cobertura para camión y flota
-            </li>
-            <li>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Carga protegida, nacional e internacional
-            </li>
-            <li>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Un ejecutivo te contacta en 1-2 horas
-            </li>
-          </ul>
-        </div>
+  <header class="nav mc-marco" id="nav"><div class="wrap">
+    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <div class="acc" style="display:flex"><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a><a class="btn btn-azul" href="#cotizar">Cotizar</a></div>
+  </div></header>
 
-        <div id="contacto" class="hero-form-card fade-in-up" style="animation-delay: 0.15s;">
-          <h2>Completa tus datos y un ejecutivo especializado te contactará.</h2>
-          <form class="contact-form" id="leadForm" method="POST">
-            <div class="form-grid">
-              <input type="text" id="lead_firstname" placeholder="Nombre" required class="input-field">
-              <input type="text" id="lead_lastname" placeholder="Apellidos" required class="input-field">
-            </div>
-            <div class="form-grid">
-              <input type="email" id="lead_email" placeholder="Correo Electrónico" required class="input-field">
-              <input type="tel" id="lead_phone" placeholder="Celular" required class="input-field">
-            </div>
-            <input type="text" id="lead_company" placeholder="Empresa / Razón Social" required class="input-field"
-              style="margin-bottom: 1rem;">
-            <input type="text" id="lead_rut" placeholder="RUT" required class="input-field"
-              style="margin-bottom: 1rem;">
-            <button type="submit" id="lead_submit_btn" class="btn btn-primary btn-block">Necesito asesoría</button>
-            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--c-text-secondary); line-height: 1.5;">
-              Atención bajo cumplimiento normativo según Circular CMF N° 2131. Tus datos serán tratados con estricta
-              confidencialidad.</p>
-          </form>
+  <main>
+    <section class="hero oscuro" aria-labelledby="titular"><div class="wrap">
+      <div class="panel chico">
+        <img src="/src/img/fotos/valparaiso-puerto.jpg" alt="" fetchpriority="high" style="object-position: 40% 55%">
+        <div class="txt">
+          <span class="sello"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Seguro de transporte de carga</span>
+          <h1 id="titular">Cobertura para <b>cada kilómetro de tu operación</b>.</h1>
+          <p class="sub">Camión propio, carga de terceros o mercadería en tránsito: diseñamos la cobertura para lo que realmente está en riesgo en tu operación de transporte.</p>
+          <ul class="puntos"><li><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg>Respuesta en 3 a 5 horas hábiles</li><li><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Varias compañías, una conversación</li></ul>
         </div>
       </div>
-    </div>
-  </header>
+    </div></section>
+    <section class="barra" id="cotizar" aria-label="Cotización rápida"><div class="wrap"><div>
+      <div class="caja">
+        <form data-envio="cotizacion" data-errores="b-err" novalidate>
+          <div class="celda"><label for="b-seguro">Seguro</label><input id="b-seguro" value="Transporte" readonly tabindex="-1" aria-readonly="true"><input type="hidden" name="seguro" value="Transporte"></div>
+          <div class="celda"><label for="b-empresa">Empresa</label><input id="b-empresa" name="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="160" aria-describedby="b-err" required></div>
+          <div class="celda"><label for="b-tel">Teléfono</label><input id="b-tel" name="telefono" type="tel" inputmode="tel" placeholder="+56 9 1234 5678" autocomplete="tel" maxlength="20" aria-describedby="b-err" required></div>
+          <div class="trampa" aria-hidden="true"><label for="b-sitio">No llenar</label><input id="b-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
+          <button class="btn btn-azul" type="submit"><span class="letra">Cotizar</span> <svg class="ico" aria-hidden="true"><use href="#der"/></svg></button>
+        </form>
+        <p class="ok" hidden tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#okc"/></svg><span><b>Listo.</b> Te llamamos en 3 a 5 horas hábiles al número que nos dejaste.</span></p>
+        <div class="pie-barra"><span>Te llamamos en 3 a 5 horas hábiles, de lunes a viernes de 9:00 a 18:30 h.</span><span class="err" id="b-err" role="alert"></span></div>
+      </div>
+    </div></div></section>
 
-  <!-- Puntos de valor (franja compacta) -->
-  <section class="section bg-light" style="padding: 3rem 0;">
-    <div class="container">
-      <div class="grid grid-3">
-        <div class="fade-in-up" style="animation-delay: 0.1s;">
-          <p style="font-weight: 700; color: var(--c-gray-dark); margin-bottom: 0.5rem;">Camión y Flota</p>
-          <p style="color: var(--c-text-secondary); font-size: 0.95rem;">Cobertura de Robo con Fractura/Asalto y
-            fallas en Equipos de Frío para tu vehículo.</p>
-        </div>
-        <div class="fade-in-up" style="animation-delay: 0.2s;">
-          <p style="font-weight: 700; color: var(--c-gray-dark); margin-bottom: 0.5rem;">Carga Nacional e
-            Internacional</p>
-          <p style="color: var(--c-text-secondary); font-size: 0.95rem;">Protección de tu mercadería en tránsito
-            terrestre y comercio exterior.</p>
-        </div>
-        <div class="fade-in-up" style="animation-delay: 0.3s;">
-          <p style="font-weight: 700; color: var(--c-gray-dark); margin-bottom: 0.5rem;">Asiento del Conductor y
-            Acompañante</p>
-          <p style="color: var(--c-text-secondary); font-size: 0.95rem;">Cobertura para los ocupantes del vehículo
-            durante el trayecto.</p>
+    <section class="confianza oscuro"><div class="wrap">
+      <div><h2>Corredores inscritos <b>en la CMF.</b></h2><p style="color:#c9d6e4;margin-top:12px">Registro N° 8929.</p></div>
+      <div class="dato"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg><b>Camión y flota</b><p>Cobertura de robo con fractura o asalto y fallas en equipos de frío para tu vehículo.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><b>Carga nacional e internacional</b><p>Protección de tu mercadería en tránsito terrestre y comercio exterior.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#personas"/></svg><b>Asiento del conductor y acompañante</b><p>Cobertura para los ocupantes del vehículo durante el trayecto.</p></div>
+    </div></section>
+
+    <section class="sec"><div class="wrap">
+      <div class="cabeza"><h2 class="grande">Qué pasa <b>después de consultar</b></h2><p>Cuatro pasos, desde tu mensaje hasta la póliza.</p></div>
+      <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
+        <ol class="pasos">
+          <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Empresa, teléfono y el seguro que te interesa. Toma menos de un minuto.</p></li>
+          <li class="paso"><span class="n">2</span><h3>Te llamamos</h3><p>En 3 a 5 horas hábiles, para entender qué necesitas asegurar.</p></li>
+          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la aseguradora necesita y te presentamos las alternativas.</p></li>
+          <li class="paso"><span class="n">4</span><h3>Gestionamos tu póliza</h3><p>Si decides contratar, te acompañamos en la emisión y en los cambios que necesites.</p></li>
+        </ol>
+      </div>
+    </div></section>
+
+    <section class="sec" id="contacto"><div class="wrap contacto">
+      <div class="lado">
+        <h2 class="grande">Déjanos tus datos y <b>te llamamos</b></h2>
+        <p>Te respondemos en 3 a 5 horas hábiles. Si prefieres, escríbenos directo.</p>
+        <div class="alt">
+          <a href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg><div><b>WhatsApp +56 9 3931 9546</b><span>Lunes a viernes, de 9:00 a 18:30 h</span></div></a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Footer liviano -->
-  <footer class="footer" style="padding: 3rem 0 2rem;">
-    <div class="container">
-      <p style="text-align: center; color: var(--c-surface); opacity: 0.8; font-size: 0.9rem;">
-        &copy; 2026 Mercurial Corredores de Seguros. Regulado por la CMF (Registro N° 8929).
-      </p>
-    </div>
-  </footer>
-
-  <!-- Botón WhatsApp Flotante -->
-  <a href="https://wa.me/56971097657?text=Hola%20Mercurial,%20necesito%20asesor%C3%ADa%20para%20el%20seguro%20de%20transporte%20de%20mi%20empresa."
-    class="ws-floating-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path
-        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-      </path>
-    </svg>
-  </a>
-
-  <!-- Modal de Respuesta -->
-  <div id="responseModal" class="modal">
-    <div class="modal-content">
-      <div id="modalIcon" class="modal-icon"></div>
-      <div id="modalTitle" class="modal-title" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">
+      <div class="tarjeta-form">
+        <form class="form" data-envio="cotizacion" data-principal novalidate>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="f-nombre">Nombre y apellido</label><input class="t-input" id="f-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="e-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="e-nombre"></span></div>
+            <div class="campo t-input-wrap"><label for="f-empresa">Empresa</label><input class="t-input" id="f-empresa" name="empresa" autocomplete="organization" maxlength="160" required aria-describedby="e-empresa" data-msg="¿Para qué empresa es el seguro?"><span class="t-error-msg" id="e-empresa"></span></div>
+          </div>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="f-correo">Correo</label><input class="t-input" id="f-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="e-correo"></span></div>
+            <div class="campo t-input-wrap"><label for="f-tel">Teléfono</label><input class="t-input" id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required aria-describedby="e-tel" data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg" id="e-tel"></span></div>
+          </div>
+          <input type="hidden" name="seguro" value="Transporte">
+          <div class="campo"><label for="f-msj">Mensaje <small>(opcional)</small></label><textarea class="t-input" id="f-msj" name="mensaje" maxlength="3000" placeholder="Cuéntanos qué necesitas asegurar."></textarea></div>
+          <div class="trampa" aria-hidden="true"><label for="f-sitio">No llenar</label><input id="f-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
+          <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tu consulta.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
+          <button class="btn btn-azul enviar" type="submit"><span class="letra">Enviar consulta</span></button>
+          <p class="nota">Usamos tus datos solo para responder esta consulta. <a href="/politica-privacidad">Política de privacidad</a>.</p>
+        </form>
+        <div class="exito" hidden>
+          <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <h3 tabindex="-1">Recibimos tu consulta.</h3>
+          <p>Te contactamos en 3 a 5 horas hábiles. Si es urgente, escríbenos al WhatsApp +56 9 3931 9546.</p>
+        </div>
+        <p class="sr estado" role="status"></p>
       </div>
-      <p id="modalBody" class="modal-text"></p>
-      <button id="closeModalBtn" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar</button>
-    </div>
-  </div>
+    </div></section>
+  </main>
 
-  <script>window.MERCURIAL_LEAD_CLUSTER = 'transporte';</script>
-  <script src="src/js/lead-form.js"></script>
+  <footer class="oscuro mc-marco"><div class="wrap">
+    <div class="pie">
+      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile.</p></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li></ul></div>
+      <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li></ul></div>
+    </div>
+    <div class="legal">
+      <div class="fila"><span>© 2026 Mercurial Corredores de Seguros Ltda. Corredora de seguros, no aseguradora: las pólizas las emiten las compañías de seguros.</span><span><a href="/terminos.html">Términos de uso</a> · <a href="/politica-privacidad">Privacidad</a></span></div>
+      <p>Fotografías vía Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Port_of_valparaiso_(3049864390).jpg" target="_blank" rel="noopener">Peretz Partensky</a> (CC BY-SA 2.0).</p>
+    </div>
+  </div></footer>
+
+  <script src="/src/vendor/gsap.min.js"></script>
+  <script src="/src/vendor/ScrollTrigger.min.js"></script>
+  <script src="/src/js/sitio.js?v=2"></script>
 </body>
 
 </html>
