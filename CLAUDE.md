@@ -55,6 +55,8 @@ Estilos del sitio nuevo: `src/css/marco.css` (tokens, cabecera de dos niveles, p
 
 ## Captura de leads
 
+**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot. Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número. El +56 9 7109 7657 quedó solo como `telephone` del JSON-LD de `index.html`.
+
 Tres caminos, según la página:
 
 1. **Portada, páginas de seguro, condominio y transporte**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
