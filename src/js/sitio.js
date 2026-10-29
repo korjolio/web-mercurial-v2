@@ -34,21 +34,32 @@
   const hamb = $('#hamb'), panel = $('#panel-movil'), nav = $('#nav');
   if (hamb && panel && nav) {
     let ocultar;
+    // Mientras el panel está abierto, el resto de la página no recibe foco (Tab queda dentro del panel y la cabecera).
+    const exterior = $$('body > :not(#nav):not(#panel-movil):not(script):not(svg):not(noscript)');
+    const fijarInerte = v => exterior.forEach(el => { el.inert = v; });
     const abrirPanel = () => {
       clearTimeout(ocultar);
       panel.style.setProperty('--cab-movil', Math.round(nav.getBoundingClientRect().bottom) + 'px');
       panel.hidden = false; void panel.offsetWidth; panel.classList.add('is-open');
       hamb.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden';
+      fijarInerte(true);
       panel.querySelector('a').focus();
     };
     const cerrarPanel = (foco = true) => {
       if (hamb.getAttribute('aria-expanded') !== 'true') return;
       panel.classList.remove('is-open'); hamb.setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';
+      fijarInerte(false);
       ocultar = setTimeout(() => { panel.hidden = true; }, ms('--duration-slow'));
       if (foco) hamb.focus();
     };
     hamb.addEventListener('click', () => (hamb.getAttribute('aria-expanded') === 'true' ? cerrarPanel() : abrirPanel()));
-    panel.addEventListener('click', e => { if (e.target.closest('a')) cerrarPanel(false); });
+    panel.addEventListener('click', e => {
+      const a = e.target.closest('a'); if (!a) return;
+      cerrarPanel(false);
+      // Ancla en la misma página: el foco pasa al destino para que no quede en un enlace oculto.
+      const destino = a.hash && a.pathname === location.pathname && document.querySelector(a.hash);
+      if (destino) { if (!destino.hasAttribute('tabindex')) destino.setAttribute('tabindex', '-1'); setTimeout(() => destino.focus({ preventScroll: true }), 0); }
+    });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarPanel(); });
     window.matchMedia('(min-width: 861px)').addEventListener('change', m => m.matches && cerrarPanel(false));
   }
@@ -129,16 +140,27 @@
 
       const datos = Object.fromEntries(new FormData(form).entries());
       datos.tipo = datos.tipo || form.dataset.envio;
-      datos.pagina = location.href.split('#')[0];
+      datos.pagina = location.origin + location.pathname;
       enviar.disabled = true; textoSuave(etiqueta, 'Enviando…');
       if (estado) estado.textContent = 'Enviando.';
 
-      let ok = false, mensaje = '';
+      let ok = false, mensaje = '', camposServidor = [];
+      // Tope de 15 s: si la red se queda colgada, el botón vuelve y se ofrece WhatsApp.
+      const corte = new AbortController();
+      const reloj = setTimeout(() => corte.abort(), 15000);
       try {
-        const r = await fetch('/api/contacto', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+        const r = await fetch('/api/contacto', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos), signal: corte.signal });
         const j = await r.json().catch(() => ({}));
-        ok = r.ok && j.success; mensaje = j.message || '';
-      } catch (err) { mensaje = ''; }
+        ok = r.ok && j.success; mensaje = j.message || ''; camposServidor = Array.isArray(j.fields) ? j.fields : [];
+      } catch (err) {
+        mensaje = err.name === 'AbortError' ? 'No pudimos confirmar el envío. Intenta de nuevo o escríbenos por WhatsApp.' : '';
+      } finally { clearTimeout(reloj); }
+      // Errores por campo que devuelve el servidor: se marcan en el control correspondiente.
+      enviar.disabled = false;
+      // Solo controles individuales: los grupos de radios (RadioNodeList) y los ocultos no se marcan.
+      const conError = camposServidor.map(c => form.elements[c]).filter(el => el instanceof HTMLElement && el.type !== 'hidden' && el.type !== 'radio');
+      conError.forEach(el => marcar(el));
+      if (conError.length) conError[0].focus();
 
       enviar.disabled = false;
       if (!ok) {

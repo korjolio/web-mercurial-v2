@@ -13,7 +13,14 @@ app.set('trust proxy', true);
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50kb' }));
+// JSON mal formado o demasiado grande: 400 genérico, sin registrar el cuerpo (puede traer datos personales).
+app.use((err, req, res, next) => {
+    if (err && (err.type === 'entity.parse.failed' || err.type === 'entity.too.large')) {
+        return res.status(400).json({ success: false, message: 'Solicitud inválida.' });
+    }
+    next(err);
+});
 
 // Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
 // express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
@@ -178,13 +185,32 @@ const SITUACIONES_CREDITO = ['Estoy solicitando el crédito', 'Crédito aprobado
 
 // Límite simple por IP para frenar envíos automáticos (5 por 10 minutos).
 const contactoPorIp = new Map();
+const VENTANA_CONTACTO = 10 * 60 * 1000;
+// IP para el límite: la última entrada de X-Forwarded-For es la que agrega el proxy de Railway;
+// las anteriores las puede escribir el propio cliente.
+const ipCliente = req => (req.ips && req.ips.length ? req.ips[req.ips.length - 1] : req.ip) || 'desconocida';
+let ultimaLimpiezaContacto = 0;
 function contactoPermitido(ip) {
     const ahora = Date.now();
-    const recientes = (contactoPorIp.get(ip) || []).filter(t => ahora - t < 10 * 60 * 1000);
+    // Limpieza acotada (como máximo una vez por minuto): se borran solo las IP sin envíos en la ventana.
+    if (contactoPorIp.size > 5000 && ahora - ultimaLimpiezaContacto > 60 * 1000) {
+        ultimaLimpiezaContacto = ahora;
+        for (const [k, ts] of contactoPorIp) if (!ts.some(t => ahora - t < VENTANA_CONTACTO)) contactoPorIp.delete(k);
+    }
+    const recientes = (contactoPorIp.get(ip) || []).filter(t => ahora - t < VENTANA_CONTACTO);
+    // Se guardan como máximo 5 envíos por IP; los intentos rechazados no se acumulan.
+    if (recientes.length >= 5) { contactoPorIp.set(ip, recientes); return false; }
     recientes.push(ahora);
     contactoPorIp.set(ip, recientes);
-    if (contactoPorIp.size > 5000) contactoPorIp.clear();
-    return recientes.length <= 5;
+    return true;
+}
+
+// Solo origen y ruta de mercurial.cl: sin query string (UTM u otros parámetros no van al correo).
+function paginaLimpia(v) {
+    try {
+        const u = new URL(String(v));
+        return /(^|\.)mercurial\.cl$|^localhost$/.test(u.hostname) ? (u.origin + u.pathname).slice(0, 200) : '';
+    } catch (e) { return ''; }
 }
 
 function validarContacto(b) {
@@ -215,7 +241,6 @@ function validarContacto(b) {
         if (!txt(b.mensaje, 3000)) errors.push('mensaje');
     }
     if (!optTxt(b.mensaje, 3000)) errors.push('mensaje');
-    if (!optTxt(b.pagina, 500)) errors.push('pagina');
     return errors;
 }
 
@@ -226,7 +251,7 @@ app.post('/api/contacto', async (req, res) => {
     if (!mailer) {
         return res.status(503).json({ success: false, message: 'El formulario no está disponible en este momento. Escríbenos por WhatsApp.' });
     }
-    if (!contactoPermitido(req.ip)) {
+    if (!contactoPermitido(ipCliente(req))) {
         return res.status(429).json({ success: false, message: 'Recibimos varios envíos seguidos. Espera unos minutos o escríbenos por WhatsApp.' });
     }
     const errors = validarContacto(b);
@@ -236,9 +261,11 @@ app.post('/api/contacto', async (req, res) => {
 
     const tipo = TIPOS_CONTACTO[b.tipo];
     const limpio = v => (typeof v === 'string' ? v.trim() : '');
+    // El asunto lleva texto del visitante: sin saltos de línea ni caracteres de control.
+    const enLinea = v => limpio(v).replace(/[\u0000-\u001f\u007f]+/g, ' ').slice(0, 120);
     const asunto = b.tipo === 'cotizacion'
-        ? `[Web] Cotización ${b.seguro} · ${limpio(b.empresa)}`
-        : `[Web] ${tipo} · ${limpio(b.nombre)}`;
+        ? `[Web] Cotización ${b.seguro} · ${enLinea(b.empresa)}`
+        : `[Web] ${tipo} · ${enLinea(b.nombre)}`;
     const lineas = [
         `Tipo: ${tipo}`,
         b.seguro && `Seguro: ${b.seguro}`,
@@ -249,7 +276,7 @@ app.post('/api/contacto', async (req, res) => {
         b.banco && `Banco: ${limpio(b.banco)}`,
         b.situacion && `Situación del crédito: ${b.situacion}`,
         b.mensaje && `\nMensaje:\n${limpio(b.mensaje)}`,
-        `\nEnviado desde: ${limpio(b.pagina) || req.get('referer') || 'mercurial.cl'}`,
+        `\nEnviado desde: ${paginaLimpia(b.pagina) || 'mercurial.cl'}`,
         `Fecha: ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}`
     ].filter(Boolean);
 
@@ -264,7 +291,7 @@ app.post('/api/contacto', async (req, res) => {
         return res.status(200).json({ success: true });
     } catch (error) {
         // Sin datos personales en el log: solo el tipo y el código del error.
-        console.error(`[Contacto] No se pudo enviar (${b.tipo}):`, error.code || error.message);
+        console.error(`[Contacto] No se pudo enviar (${b.tipo}):`, error.code || error.responseCode || 'ERROR_SMTP');
         return res.status(502).json({ success: false, message: 'No pudimos enviar tu mensaje en este momento. Intenta de nuevo o escríbenos por WhatsApp.' });
     }
 });

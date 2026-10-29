@@ -3,13 +3,16 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Políticas de Privacidad | Mercurial Corredores de Seguros</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/css/marco.css?v=2">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=3">
+  <link rel="stylesheet" href="/src/css/marco.css?v=3">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=4">
   <!-- Banner de cookies: acá solo sirve para el enlace "Configurar cookies" (esta página no mide nada) -->
   <script src="/src/js/consent.js?v=1"></script>
 </head>
@@ -41,8 +44,8 @@
   </svg>
   <!-- Navegación Simplificada -->
   <div class="util mc-marco"><div class="wrap">
-    <a href="/">Empresas</a><span class="sep">Personas:</span><a href="/seguro-mascotas">Seguro de mascotas</a><a href="/desgravamen-rechazado">Desgravamen rechazado</a>
-    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro CMF N° 8929</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+    <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
+    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
   </div></div>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
@@ -52,12 +55,16 @@
         <li id="li-seguros">
           <button type="button" id="btn-seguros" aria-expanded="false" aria-controls="menu-seguros">Seguros <svg class="ico chev" aria-hidden="true"><use href="#chev"/></svg></button>
           <div class="t-dropdown" id="menu-seguros" inert>
-            <ul>
+            <div class="grupo-menu"><p class="tit-menu">Empresas</p><ul>
               <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg><div><b>Flotas</b><span>Camiones, camionetas y autos de la empresa</span></div></a></li>
               <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Transporte</b><span>Carga por ruta, puerto o importada</span></div></a></li>
               <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg><div><b>Incendio</b><span>Locales, oficinas, bodegas y plantas</span></div></a></li>
               <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg><div><b>Colectivos de salud</b><span>Complemento a la Isapre o Fonasa</span></div></a></li>
-            </ul>
+            </ul></div>
+            <div class="grupo-menu"><p class="tit-menu">Personas</p><ul>
+              <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg><div><b>Seguro de mascotas</b><span>Perros y gatos, con BCI Seguros</span></div></a></li>
+              <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg><div><b>Desgravamen rechazado</b><span>Alternativas para tu crédito hipotecario</span></div></a></li>
+            </ul></div>
           </div>
         </li>
         <li><a href="/#mercurial">Quiénes somos</a></li>
@@ -72,11 +79,12 @@
   <div class="panel-movil mc-marco" id="panel-movil" hidden>
     <nav aria-label="Menú móvil">
       <ul>
+        <li class="sub">Seguros para empresas</li>
         <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></li>
         <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></li>
         <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></li>
         <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></li>
-        <li class="sub">Personas</li>
+        <li class="sub">Seguros para personas</li>
         <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg>Seguro de mascotas</a></li>
         <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen rechazado</a></li>
         <li class="sub">Mercurial</li>
@@ -135,8 +143,10 @@
 
     <section>
       <h2>4. Almacenamiento y Seguridad</h2>
-      <p>Las solicitudes de cotización que recibimos por este sitio se almacenan en el sistema de gestión de clientes
-        propio de Mercurial, y las consultas por WhatsApp, en la cuenta de WhatsApp de Mercurial. Aplicamos protocolos técnicos de encriptación y acceso restringido para prevenir pérdida, robo o
+      <p>Las solicitudes de cotización, consultas y reclamos enviadas por los formularios del sitio llegan por correo
+        electrónico a la casilla de Mercurial (contacto@mercurial.cl). Las cotizaciones del formulario Seguro Pyme se
+        almacenan en el sistema de gestión de clientes propio de Mercurial, y las consultas por WhatsApp, en la cuenta de
+        WhatsApp de Mercurial. Aplicamos protocolos técnicos de encriptación y acceso restringido para prevenir pérdida, robo o
         manipulación no autorizada de los datos.</p>
     </section>
 
@@ -154,8 +164,8 @@
           por WhatsApp o correo, o enviar un formulario.</li>
       </ul>
       <p>Para estos fines se registran datos técnicos como la dirección IP, el navegador y dispositivo utilizados, las
-        páginas visitadas y los identificadores guardados en cookies. Cuando usted envía un formulario, además
-        enviamos a Meta su email, teléfono, nombre, apellido y, en el caso del formulario Pyme, la comuna, previamente
+        páginas visitadas y los identificadores guardados en cookies. Cuando usted envía el formulario Seguro Pyme, y solo si aceptó
+        las cookies, además enviamos a Meta su email, teléfono, nombre, apellido y comuna, previamente
         transformados mediante una función criptográfica irreversible (hash SHA-256), con el único fin de medir la
         efectividad de nuestros anuncios en Facebook e Instagram. Meta trata esta información conforme a su propia
         política de privacidad.</p>
@@ -208,7 +218,7 @@
   </div></footer>
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=2"></script>
+  <script src="/src/js/sitio.js?v=5"></script>
 </body>
 
 </html>

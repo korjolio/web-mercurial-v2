@@ -107,5 +107,19 @@ footer { margin-top: 112px; background: var(--navy); color: #c9d6e4; padding: 72
   .mc-marco *, .mc-marco *::before, .mc-marco *::after { transition-duration: 0ms !important; animation: none !important; }
 }
 
-.util .sep { display: flex; align-items: center; margin-left: 8px; color: var(--tx2); font-weight: 600; }
 .panel-movil li.sub { padding: 18px 4px 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--tx2); }
+
+/* El pie va en azul marino: su texto no hereda el color oscuro de .mc-marco */
+footer.mc-marco { color: #c9d6e4; }
+footer.mc-marco a { color: inherit; }
+footer.mc-marco .pie h4 { color: #fff; }
+
+/* Barra superior: texto institucional a la izquierda */
+.util .util-txt { display: flex; align-items: center; gap: 4px; }
+.util .util-txt a { color: var(--azul-h); font-weight: 600; }
+
+/* Menú Seguros: Empresas y Personas */
+.t-dropdown { width: 620px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 8px; }
+.t-dropdown ul { grid-template-columns: 1fr; }
+.t-dropdown .tit-menu { margin: 6px 14px 4px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--tx2); }
+.t-dropdown .grupo-menu + .grupo-menu { border-left: 1px solid var(--borde); padding-left: 8px; }
