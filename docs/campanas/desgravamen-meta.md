@@ -1,6 +1,10 @@
 # Campaña Meta — Desgravamen Hipotecario Plus (rechazados)
 
-Estado al 2026-10-30: propuesta de formulario instantáneo con filtro. **Pendiente**: cargarlo en Meta y cambiar el texto de los anuncios.
+Estado al 2026-10-30: formulario **publicado y funcionando** ("MERC | Hipotecario | Prospectos Nuevos | V1 | Oct 2026"). Lógica condicional verificada en Instagram real: los descartados van a E2 ("Cerrar el formulario", no generan lead). E1 lleva a `https://mercurial.cl/wa/desgravamen` (redirige a WhatsApp con "ref: DH-META").
+
+**Pendiente**: regla de Chatwoot que etiquete `desgravamen-meta` los mensajes entrantes que contienen `DH-META`.
+
+Notas de Meta: el formulario no se edita una vez creado (hay que duplicarlo y cambiarlo en el anuncio); los formularios no aceptan enlaces `wa.me`; cada cuenta de Facebook solo puede enviarlo una vez, así que las pruebas repetidas requieren otra cuenta.
 
 ## El producto (fuente: ficha "RRSS Seguro Desgravamen Hipotecario Plus", AuguStar Seguros)
 
