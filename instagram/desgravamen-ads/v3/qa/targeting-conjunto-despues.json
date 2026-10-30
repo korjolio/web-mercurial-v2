@@ -1,0 +1,21 @@
+{
+  "leido": "2026-10-30 18:10 (-03), API de Meta, objeto publicado",
+  "cambio": "geo_locations.location_types: [\"home\"] -> [\"home\",\"recent\"] (personas que viven o estuvieron recientemente en Chile; opción vigente según la ayuda de Meta para el error #1870194)",
+  "ad_set_id": "120250128845140016",
+  "status": "ACTIVE",
+  "effective_status": "IN_PROCESS",
+  "updated_time": "2026-10-30T18:10:08-0300",
+  "targeting": {
+    "age_min": 18,
+    "age_max": 65,
+    "geo_locations": { "countries": ["CL"], "location_types": ["home", "recent"] },
+    "publisher_platforms": ["facebook", "instagram"],
+    "targeting_automation": { "advantage_audience": 1 },
+    "targeting_optimization": "expansion_all"
+  },
+  "optimization_goal": "LEAD_GENERATION",
+  "destination_type": "ON_AD",
+  "campana_120250128842900016": { "effective_status": "ACTIVE", "daily_budget_CLP": 11400 },
+  "ads_get_errors": "[] (campaña, conjunto y 4 anuncios vigentes)",
+  "lectura_borrador_ui": "no disponible por API para esta cuenta; el borrador 'Cambios sin publicar' que ve Pepa en Ads Manager no se puede leer ni validar desde aquí"
+}

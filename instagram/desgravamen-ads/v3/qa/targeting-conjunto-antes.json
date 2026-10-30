@@ -1,0 +1,18 @@
+{
+  "leido": "2026-10-30, API de Meta (objeto publicado, no el borrador de la UI)",
+  "ad_set_id": "120250128845140016",
+  "status": "ACTIVE",
+  "effective_status": "ACTIVE",
+  "updated_time": "2026-10-30T17:22:09-0300",
+  "targeting": {
+    "age_min": 18,
+    "age_max": 65,
+    "geo_locations": { "countries": ["CL"], "location_types": ["home"] },
+    "publisher_platforms": ["facebook", "instagram"],
+    "targeting_automation": { "advantage_audience": 1 },
+    "targeting_optimization": "expansion_all"
+  },
+  "optimization_goal": "LEAD_GENERATION",
+  "destination_type": "ON_AD",
+  "lectura_borrador_ui": "no disponible: la herramienta de borradores todavía no está habilitada para esta cuenta"
+}
