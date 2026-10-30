@@ -54,3 +54,10 @@ Campaña "MERC | Desgravamen hipotecario | Leads | Chile | 7 días | Oct 2026": 
 - Llave v3, Carrusel y Estática ya usan el formulario nuevo.
 - El texto principal de los 4 anuncios es ambiguo ("¿Te rechazaron el seguro de desgravamen hipotecario?"), no dice "crédito nuevo" y menciona "motivos de salud" (riesgo con la política de atributos personales de Meta).
 - 7 días y $80.000 es poco para que Meta aprenda; con los creativos v2, pasar a campaña continua.
+
+### Segmentación real del conjunto (leída por la API de Meta, 2026-10-30)
+
+El nombre dice "18+ Broad" pero no lo es:
+- Edad 25–65, con **sugerencia 25–50** (al revés del público del producto, que son mayores de 50).
+- Intereses: (hipotecarios / préstamos / bancos) **Y** (iPhone / Mercedes / BMW / Louis Vuitton). Con Advantage+ son solo sugerencias.
+- Ubicaciones automáticas, **incluida Audience Network** (apps de terceros, típica fuente de leads basura en formularios).
