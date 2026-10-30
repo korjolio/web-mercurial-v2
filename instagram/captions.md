@@ -6,7 +6,7 @@ Formatos (ver `posts.js`): portada (foto a sangre), dato (azul, cifra grande), p
 
 Ritmo sugerido: lunes, martes, jueves y viernes, alternando producto y formato.
 
-Reglas que siguen todos los textos: solo afirmaciones publicadas en mercurial.cl (o en las piezas de Ads aprobadas), sin cifras ni coberturas nuevas, y sin el N° de registro CMF. Si cambias un caption, contrástalo con la landing del producto.
+Reglas que siguen todos los textos: solo afirmaciones publicadas en mercurial.cl (o en las piezas de Ads aprobadas), sin cifras ni coberturas nuevas. Cada imagen lleva la franja regulatoria al pie y cada caption termina con el pie regulatorio (antes de los hashtags), igual que el pie del sitio. Si cambias un caption, contrástalo con la landing del producto.
 
 Instagram no deja links en los captions: el link va en la bio o en una historia con sticker de enlace. Por eso el CTA repite la URL y suma el WhatsApp.
 
@@ -45,6 +45,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Condominios, transporte de carga, pymes y mascotas. Conversemos en mercurial.cl o al WhatsApp +56 9 3931 9546.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #MercurialSeguros #CorredoraDeSeguros #SegurosChile #AsesoríaEnSeguros
 
 ## 02-condominio-ley · Jue 5 nov
@@ -54,6 +56,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Te asesoramos para que la póliza cumpla con la ley y, además, realmente proteja a tu comunidad.
 >
 > ¿Eres administrador o parte del comité? Solicita asesoría en mercurial.cl/condominio o escríbenos al WhatsApp +56 9 3931 9546.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Ley21442 #Condominio #Copropiedad #AdministraciónDeEdificios #SegurosChile
 
@@ -66,6 +70,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Solicita asesoría en mercurial.cl/condominio.
 >
 > Foto: Carlos Teixidor Cadenas, CC BY 4.0, vía Wikimedia Commons.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Ley21442 #Condominio #Copropiedad #SegurosChile
 
@@ -81,6 +87,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Foto portada: Deensel, CC BY 2.0, vía Wikimedia Commons.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #Ley21442 #Condominio #Copropiedad #ComitéDeAdministración #SegurosChile
 
 ## 05-condominio-contacto · Jue 26 nov
@@ -88,6 +96,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > 1 a 2 horas: es lo que tarda un ejecutivo especializado en contactarte para revisar el seguro de tu condominio.
 >
 > ¿Administras un condominio o eres parte del comité? Completa tus datos en mercurial.cl/condominio.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #AdministradorDeEdificios #Condominio #Ley21442 #SegurosChile
 
@@ -100,6 +110,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Cotiza en línea en mercurial.cl/seguro-mascotas.
 >
 > Perros y gatos de 6 meses a 9 años y 364 días al momento de contratar. Una mascota por póliza. No cubre preexistencias.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #SeguroDeMascotas #SeguroParaPerros #SeguroParaGatos #MascotasChile #BCISeguros
 
@@ -117,6 +129,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Urgencias por enfermedad o accidente en red veterinaria BCI. Descuento en medicamentos en Salcobrand. RC: responsabilidad civil.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroDeMascotas #MascotasChile #BCISeguros
 
 ## 08-mascotas-red · Mar 3 nov
@@ -124,6 +138,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Más de 70 clínicas en la red veterinaria de BCI Seguros. Sin reembolsos ni papeleo: pagas solo tu copago con Bono Pet, directo en la clínica.
 >
 > Cotiza en 3 pasos en mercurial.cl/seguro-mascotas.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #SeguroDeMascotas #MascotasChile #BonoPet #BCISeguros
 
@@ -138,6 +154,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > mercurial.cl/seguro-mascotas
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroDeMascotas #MascotasChile #BCISeguros
 
 ## 10-pyme-cotizamos · Vie 13 nov
@@ -147,6 +165,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Completa los antecedentes de tu local, oficina o bodega (te toma unos 10 minutos) y un ejecutivo de Mercurial cotiza tu seguro en las principales compañías y te envía las alternativas.
 >
 > mercurial.cl/cotizar-pyme
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #SeguroPyme #Pymes #Emprendedores #SegurosChile
 
@@ -163,6 +183,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Foto portada: Jorge Valdés R., dominio público, vía Wikimedia Commons.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroPyme #Pymes #Emprendedores #SegurosChile
 
 ## 12-pyme-adicionales · Vie 20 nov
@@ -176,6 +198,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Son opcionales y están sujetas a evaluación y aceptación de la aseguradora. Cotiza en mercurial.cl/cotizar-pyme.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroPyme #Pymes #Emprendedores #SegurosChile
 
 ## 13-pyme-seguridad · Vie 6 nov
@@ -186,6 +210,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > mercurial.cl/cotizar-pyme
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroPyme #Pymes #SegurosChile
 
 ## 14-transporte-kilometro · Lun 9 nov
@@ -195,6 +221,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 > Camión propio, carga de terceros o mercadería en tránsito: diseñamos la cobertura técnica para lo que realmente está en riesgo en tu operación de transporte.
 >
 > Solicita asesoría en mercurial.cl/transporte o al WhatsApp +56 9 3931 9546.
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #SeguroDeCarga #TransporteDeCarga #Logística #SegurosChile
 
@@ -210,6 +238,8 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Foto portada: Py4nf, CC BY 4.0, vía Wikimedia Commons.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroDeCarga #TransporteDeCarga #Logística #ComercioExterior #SegurosChile
 
 ## 16-transporte-clausulas · Lun 23 nov
@@ -222,13 +252,15 @@ Desgravamen: los miércoles (4, 11, 18 y 25 de noviembre), ver al final.
 >
 > Foto: cristiantacchi, CC BY 3.0, vía Wikimedia Commons.
 >
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
+>
 > #SeguroDeCarga #TransporteDeCarga #Logística #SegurosChile
 
 ---
 
 ## Desgravamen hipotecario (piezas de Alejandro, `desgravamen-ads/`)
 
-Serie aparte. Los captions se limitan a lo que dicen las piezas; **confirmar con Alejandro el destino del CTA** (aquí va el WhatsApp porque no hay página de desgravamen en el sitio).
+Serie aparte. Los captions se limitan a lo que dicen las piezas; **confirmar con Alejandro el destino del CTA** (WhatsApp y la página mercurial.cl/desgravamen-rechazado).
 
 | Fecha sugerida | Pieza | Formato |
 |---|---|---|
@@ -249,9 +281,11 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > ¿Te rechazaron el seguro de desgravamen hipotecario?
 >
-> Buscamos alternativas para casos rechazados por motivos de salud. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
+> Buscamos alternativas para casos rechazados por motivos de salud. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546 o en mercurial.cl/desgravamen-rechazado.
 >
 > [disclaimer]
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Desgravamen #CréditoHipotecario #CasaPropia #SegurosChile
 
@@ -259,9 +293,11 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Tu casa propia todavía puede ser posible.
 >
-> Si tu seguro de desgravamen hipotecario fue rechazado por motivos de salud, buscamos alternativas. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
+> Si tu seguro de desgravamen hipotecario fue rechazado por motivos de salud, buscamos alternativas. Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546 o en mercurial.cl/desgravamen-rechazado.
 >
 > [disclaimer]
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Desgravamen #CréditoHipotecario #CasaPropia #SegurosChile
 
@@ -269,9 +305,11 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Un rechazo no siempre significa renunciar a tu crédito hipotecario.
 >
-> Buscamos alternativas de seguro de desgravamen para casos rechazados por motivos de salud. Escríbenos al WhatsApp +56 9 3931 9546 y solicita una evaluación.
+> Buscamos alternativas de seguro de desgravamen para casos rechazados por motivos de salud. Escríbenos al WhatsApp +56 9 3931 9546 o en mercurial.cl/desgravamen-rechazado y solicita una evaluación.
 >
 > [disclaimer]
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Desgravamen #CréditoHipotecario #CasaPropia #SegurosChile
 
@@ -279,9 +317,11 @@ Disclaimer que va en **todos** los captions de la serie:
 
 > Buscamos alternativas de desgravamen para casos rechazados por motivos de salud.
 >
-> Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546.
+> Solicita una evaluación con nuestros especialistas al WhatsApp +56 9 3931 9546 o en mercurial.cl/desgravamen-rechazado.
 >
 > [disclaimer]
+>
+> Mercurial Corredores de Seguros Ltda. Corredora de seguros inscrita en la CMF, Registro N° 8929. No somos aseguradora: las pólizas las emiten las compañías de seguros. Consultas y reclamos: contacto@mercurial.cl
 >
 > #Desgravamen #CréditoHipotecario #CasaPropia #SegurosChile
 

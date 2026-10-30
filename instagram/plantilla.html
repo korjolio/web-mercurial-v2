@@ -21,7 +21,7 @@
   body { background: #222; display: flex; flex-direction: column; gap: 40px; padding: 40px; }
   .f {
     position: relative; overflow: hidden; flex: none;
-    width: 1080px; height: 1350px; padding: 64px 84px;
+    width: 1080px; height: 1350px; padding: 64px 84px 104px;
     display: flex; flex-direction: column;
     font-family: 'Source Sans 3', sans-serif; color: var(--navy);
   }
@@ -41,8 +41,13 @@
   .cta { font-size: 34px; font-weight: 700; display: flex; align-items: center; gap: 16px; position: relative; z-index: 2; }
   .cta::before { content: ''; flex: none; width: 52px; height: 6px; border-radius: 3px; background: currentColor; }
   .legal { font-size: 22px; line-height: 1.35; margin-top: 18px; opacity: .75; position: relative; z-index: 2; }
+  /* Información regulatoria obligatoria en cada imagen (igual que el pie del sitio) */
+  .reg {
+    position: absolute; z-index: 3; left: 84px; right: 84px; bottom: 34px;
+    font-size: 19px; line-height: 1.35; opacity: .72; border-top: 1px solid currentColor; padding-top: 12px;
+  }
   .credito {
-    position: absolute; z-index: 3; right: 18px; bottom: 14px;
+    position: absolute; z-index: 3; right: 18px; top: 14px;
     font-size: 17px; color: #fff; background: rgba(15,42,74,.55); padding: 4px 10px; border-radius: 6px;
   }
 
@@ -83,7 +88,7 @@
   /* D · split */
   .split { padding: 0; background: #fff; }
   .split .foto { height: 640px; flex: none; background-size: cover; position: relative; padding: 64px 84px; display: flex; flex-direction: column; }
-  .split .abajo { flex: 1; padding: 60px 84px 64px; display: flex; flex-direction: column; position: relative; }
+  .split .abajo { flex: 1; padding: 60px 84px 104px; display: flex; flex-direction: column; position: relative; }
   .split .abajo::before { content: ''; position: absolute; left: 84px; top: -8px; width: 140px; height: 16px; background: var(--acento); border-radius: 8px; }
   .split .chip { background: transparent; color: var(--acento); padding: 0; letter-spacing: .04em; }
   .split h1 { font-size: 80px; line-height: 1.05; margin-top: 18px; text-wrap: balance; }
@@ -145,7 +150,8 @@
   };
   const legal = t => t ? `<p class="legal">${esc(t)}</p>` : '';
   const dots = (n, i) => `<div class="dots">${Array.from({ length: n }, (_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>`;
-  const frame = (nombre, clase, html) => `<div class="f ${clase}" data-nombre="${nombre}">${html}</div>`;
+  const REG = 'Mercurial Corredores de Seguros Ltda. · Corredora inscrita en la CMF, Registro N° 8929 · No somos aseguradora: las pólizas las emiten las compañías de seguros.';
+  const frame = (nombre, clase, html) => `<div class="f ${clase}" data-nombre="${nombre}">${html}<div class="reg">${REG}</div></div>`;
 
   const FORMATOS = {
     portada: p => [frame(p.id, 'portada', `
