@@ -17,13 +17,15 @@ El formulario `/cotizar-pyme` necesita `CRM_URL` (p. ej. `https://app.mercurial.
 
 **Push a `main` → Railway despliega automático a producción (~1 min).** No hay paso manual. Verificar siempre contra la URL real (`https://mercurial.cl/...`) después de desplegar, no solo en local.
 
-`main` suele estar tomado por otro worktree (`/Users/pepo/Documents/web-mercurial-v2`), así que `git checkout main` falla desde los worktrees de trabajo. Para llevar cambios a producción:
+**Dónde se trabaja: en el Mac** (servidor de Orca "Macbook Pro M1 Pro"), checkout principal en `/Users/pepa/Proyectos/web-mercurial-v2`. Ahí están `node_modules`, Playwright (para `instagram/render.js`) y el `.env` con los tokens de Instagram y Meta; el PC con Windows ya no es el entorno de trabajo.
+
+`main` suele estar tomado por el checkout principal, así que `git checkout main` falla desde los worktrees de trabajo. Para llevar cambios a producción:
 
 ```bash
 git push origin HEAD:main
 ```
 
-Después conviene `git pull` en esa otra carpeta para que no quede atrás.
+Después conviene `git pull` en el checkout principal del Mac para que no quede atrás.
 
 ## Estructura
 
