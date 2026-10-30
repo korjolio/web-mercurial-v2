@@ -59,7 +59,7 @@ app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html',
 // --- Botón final del formulario instantáneo de Meta: Meta no acepta enlaces wa.me, así que pasa por aquí.
 // El texto lleva "DH-META" para que la automatización de Chatwoot etiquete la conversación.
 app.get('/wa/desgravamen', (req, res) => res.redirect(302, 'https://wa.me/56939319546?text=' +
-    encodeURIComponent('Hola, completé el formulario de desgravamen hipotecario (ref: DH-META)')));
+    encodeURIComponent('Hola, me rechazaron el seguro de desgravamen y quiero consultar por una alternativa (ref: DH-META)')));
 
 // --- Ruta limpia para Política de Privacidad (requerida por Meta for Developers / WhatsApp Business API) ---
 app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { root: __dirname }));
@@ -186,7 +186,16 @@ if (!mailer) {
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
 const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen rechazado' };
 // Situación del crédito en el formulario de desgravamen (sin datos de salud).
-const SITUACIONES_CREDITO = ['Estoy solicitando el crédito', 'Crédito aprobado, falta el seguro', 'Ya tengo el crédito', 'Otra'];
+const SITUACIONES_CREDITO = ['Compra con crédito hipotecario nuevo', 'Refinanciamiento o portabilidad', 'Cambiar solo el seguro, sin refinanciar', 'Cobrar o reclamar un seguro'];
+const RECHAZOS_DESGRAVAMEN = ['Sí, me lo rechazaron', 'Todavía no lo solicito', 'No, me lo aprobaron'];
+// Banco donde quedará el crédito (en un refinanciamiento puede ser el mismo banco).
+const BANCOS_DESGRAVAMEN = ['Santander', 'Banco de Chile', 'Itaú', 'BancoEstado', 'Banco Internacional', 'Consorcio', 'Otro'];
+// Capital asegurado = monto del crédito (confirmado por Pepa); mínimo UF 2.000 según la ficha. "No lo sé" pasa a revisión humana.
+const CAPITALES_DESGRAVAMEN = ['Menos de UF 2.000', 'Desde UF 2.000', 'No lo sé, necesito orientación'];
+// Casos válidos pero fuera del alcance: no se envían como lead.
+const fueraDeAlcanceDesgravamen = b =>
+    ['Cambiar solo el seguro, sin refinanciar', 'Cobrar o reclamar un seguro'].includes(b.situacion)
+    || b.rechazo !== 'Sí, me lo rechazaron' || b.banco === 'Otro' || b.capital === 'Menos de UF 2.000';
 
 // Límite simple por IP para frenar envíos automáticos (5 por 10 minutos).
 const contactoPorIp = new Map();
@@ -237,8 +246,10 @@ function validarContacto(b) {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!telOk(b.telefono)) errors.push('telefono');
         if (b.correo && !correoOk(b.correo)) errors.push('correo');
-        if (!optTxt(b.banco, 80)) errors.push('banco');
         if (!SITUACIONES_CREDITO.includes(b.situacion)) errors.push('situacion');
+        if (!RECHAZOS_DESGRAVAMEN.includes(b.rechazo)) errors.push('rechazo');
+        if (!BANCOS_DESGRAVAMEN.includes(b.banco)) errors.push('banco');
+        if (!CAPITALES_DESGRAVAMEN.includes(b.capital)) errors.push('capital');
     } else {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!correoOk(b.correo)) errors.push('correo');
@@ -263,6 +274,9 @@ app.post('/api/contacto', async (req, res) => {
     if (errors.length) {
         return res.status(400).json({ success: false, message: 'Hay datos incompletos o inválidos. Revisa el formulario.', fields: errors });
     }
+    if (b.tipo === 'desgravamen' && fueraDeAlcanceDesgravamen(b)) {
+        return res.status(422).json({ success: false, message: 'Esta alternativa es para compras o refinanciamientos con el seguro de desgravamen rechazado, en los bancos indicados y con un crédito desde UF 2.000. No gestionamos cobros, reclamos ni cambios de seguro sin refinanciar.' });
+    }
 
     const tipo = TIPOS_CONTACTO[b.tipo];
     const limpio = v => (typeof v === 'string' ? v.trim() : '');
@@ -279,7 +293,9 @@ app.post('/api/contacto', async (req, res) => {
         b.correo && `Correo: ${limpio(b.correo)}`,
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
         b.banco && `Banco: ${limpio(b.banco)}`,
-        b.situacion && `Situación del crédito: ${b.situacion}`,
+        b.situacion && `Para qué necesita el seguro: ${b.situacion}`,
+        b.rechazo && `¿Rechazo previo?: ${b.rechazo}`,
+        b.capital && `Monto del crédito a asegurar: ${b.capital}${b.capital.startsWith('No lo sé') ? ' (revisión humana)' : ''}`,
         b.mensaje && `\nMensaje:\n${limpio(b.mensaje)}`,
         `\nEnviado desde: ${paginaLimpia(b.pagina) || 'mercurial.cl'}`,
         `Fecha: ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}`
