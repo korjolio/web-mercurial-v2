@@ -2,6 +2,8 @@
 
 Estado al 2026-10-30: formulario **publicado y funcionando** ("MERC | Hipotecario | Prospectos Nuevos | V1 | Oct 2026"). Lógica condicional verificada en Instagram real: los descartados van a E2 ("Cerrar el formulario", no generan lead). E1 lleva a `https://mercurial.cl/wa/desgravamen` (redirige a WhatsApp con "ref: DH-META").
 
+**Al 2026-10-30 ~16:00 corre la campaña v2** ("MERC | Desgravamen hipotecario | Leads | Chile | v2 | Continua", id 120250127628210016): $11.400 diarios, sin fecha de término, CBO. Conjunto "Chile - Amplio - FB+IG (sin Audience Network) - Formulario V1" (id 120250127629510016): Chile, 18–65, sin intereses, Advantage+, solo Facebook e Instagram. 4 anuncios con los creativos de `instagram/desgravamen-ads/v2/` (feed + versión vertical para historias/reels), todos con el formulario 2227208931193805. Imágenes servidas desde `src/img/anuncios/desgravamen-v2/`. La campaña de 7 días quedó pausada.
+
 **Pendiente**: regla de Chatwoot que etiquete `desgravamen-meta` los mensajes entrantes que contienen `DH-META`.
 
 Notas de Meta: el formulario no se edita una vez creado (hay que duplicarlo y cambiarlo en el anuncio); los formularios no aceptan enlaces `wa.me`; cada cuenta de Facebook solo puede enviarlo una vez, así que las pruebas repetidas requieren otra cuenta.
