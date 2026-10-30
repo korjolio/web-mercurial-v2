@@ -184,7 +184,7 @@ if (!mailer) {
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
-const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen rechazado' };
+const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario' };
 // Situación del crédito en el formulario de desgravamen (sin datos de salud).
 const SITUACIONES_CREDITO = ['Compra con crédito hipotecario nuevo', 'Refinanciamiento o portabilidad', 'Cambiar solo el seguro, sin refinanciar', 'Cobrar o reclamar un seguro'];
 const RECHAZOS_DESGRAVAMEN = ['Sí, me lo rechazaron', 'Todavía no lo solicito', 'No, me lo aprobaron'];
