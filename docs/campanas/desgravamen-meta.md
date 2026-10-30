@@ -45,3 +45,12 @@ Final de los que no califican: explicar en una línea que el seguro es solo para
 - Aclarar "Solo para créditos hipotecarios nuevos".
 - No usar "problemas con tu seguro" ni frases parecidas: atraen siniestros y reclamos.
 - La campaña debe ir en categoría especial de anuncios de **productos financieros**: limita la segmentación por edad, así que el filtro tiene que hacerlo el texto.
+
+## Revisión de la campaña activa (2026-10-30)
+
+Campaña "MERC | Desgravamen hipotecario | Leads | Chile | 7 días | Oct 2026": $80.000 totales, 27 oct → 3 nov, categoría Productos y servicios financieros, conjunto "Chile - 18+ - Broad - Instant Form" (Chile, público Advantage+). Al 30 oct: $8.670 gastados, 2 leads (ambos del anuncio "Llave v3", $2.863 c/u).
+
+- **"Story Reels v3" usa el formulario viejo "Untitled form 10/10/2017"** (seguros generales, sin filtro). Cambiarlo a "MERC | Hipotecario | Prospectos Nuevos | V1".
+- Llave v3, Carrusel y Estática ya usan el formulario nuevo.
+- El texto principal de los 4 anuncios es ambiguo ("¿Te rechazaron el seguro de desgravamen hipotecario?"), no dice "crédito nuevo" y menciona "motivos de salud" (riesgo con la política de atributos personales de Meta).
+- 7 días y $80.000 es poco para que Meta aprenda; con los creativos v2, pasar a campaña continua.
