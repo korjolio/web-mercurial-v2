@@ -2,7 +2,9 @@
 
 Estado al 2026-10-30: formulario **publicado y funcionando** ("MERC | Hipotecario | Prospectos Nuevos | V1 | Oct 2026"). Lógica condicional verificada en Instagram real: los descartados van a E2 ("Cerrar el formulario", no generan lead). E1 lleva a `https://mercurial.cl/wa/desgravamen` (redirige a WhatsApp con "ref: DH-META").
 
-**Al 2026-10-30 ~16:00 corre la campaña v2** ("MERC | Desgravamen hipotecario | Leads | Chile | v2 | Continua", id 120250127628210016): $11.400 diarios, sin fecha de término, CBO. Conjunto "Chile - Amplio - FB+IG (sin Audience Network) - Formulario V1" (id 120250127629510016): Chile, 18–65, sin intereses, Advantage+, solo Facebook e Instagram. 4 anuncios con los creativos de `instagram/desgravamen-ads/v2/` (feed + versión vertical para historias/reels), todos con el formulario 2227208931193805. Imágenes servidas desde `src/img/anuncios/desgravamen-v2/`. La campaña de 7 días quedó pausada.
+**Estado real al 2026-10-30 ~16:00 (leído por API): NADA ACTIVO.** La campaña v2 ("MERC | Desgravamen hipotecario | Leads | Chile | v2 | Continua", id 120250127628210016, $11.400/día, Chile 18–65 sin intereses, solo FB+IG, formulario 2227208931193805) quedó **pausada sin gastar**, porque sus 4 anuncios llevan los creativos anteriores con el nombre "AuguStar" (el dueño pidió sacarlo). La campaña de 7 días también está pausada. Total histórico: $8.787 gastados y 2 leads (ambos de "Llave v3").
+
+Para relanzar: los creativos no se editan; hay que crear 4 anuncios nuevos en el conjunto v2 con las piezas de `instagram/desgravamen-ads/v2/` (ronda "urgencia", sin AuguStar), archivar los 4 actuales y reactivar la campaña. Las imágenes deben estar en una URL pública para que Meta las descargue (se retiraron de `src/img/anuncios/`).
 
 **Pendiente**: regla de Chatwoot que etiquete `desgravamen-meta` los mensajes entrantes que contienen `DH-META`.
 
