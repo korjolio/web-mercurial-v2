@@ -294,6 +294,8 @@ app.post('/api/contacto', async (req, res) => {
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
         b.banco && `Banco: ${limpio(b.banco)}`,
         b.situacion && `Para qué necesita el seguro: ${b.situacion}`,
+        // Referencia fija de la campaña de Meta (lista blanca); cualquier otro valor se ignora.
+        b.tipo === 'desgravamen' && b.ref === 'DH-META' && 'Procedencia: anuncio de Meta, formulario V2 (ref: DH-META)',
         b.rechazo && `¿Rechazo previo?: ${b.rechazo}`,
         b.capital && `Monto del crédito a asegurar: ${b.capital}${b.capital.startsWith('No lo sé') ? ' (revisión humana)' : ''}`,
         b.mensaje && `\nMensaje:\n${limpio(b.mensaje)}`,

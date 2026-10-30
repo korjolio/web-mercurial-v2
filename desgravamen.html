@@ -220,6 +220,20 @@
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
   <script>
+  // Trazabilidad de la campaña de Meta: solo se acepta la referencia fija DH-META (lista blanca).
+  // Con ?ref=DH-META, todos los botones de WhatsApp llevan "(ref: DH-META)" y el formulario la envía como procedencia.
+  // No es una prueba autenticada: solo ayuda a identificar el origen a mano en Chatwoot y en el correo.
+  (() => {
+    if (new URLSearchParams(location.search).get('ref') !== 'DH-META') return;
+    const texto = 'Hola Mercurial, me rechazaron el seguro de desgravamen y quiero consultar por una alternativa (ref: DH-META)';
+    document.querySelectorAll('a[href^="https://wa.me/56939319546"]').forEach(a => {
+      a.href = 'https://wa.me/56939319546?text=' + encodeURIComponent(texto);
+    });
+    const f = document.querySelector('form[data-envio="desgravamen"]');
+    if (f) { const i = document.createElement('input'); i.type = 'hidden'; i.name = 'ref'; i.value = 'DH-META'; f.appendChild(i); }
+  })();
+  </script>
+  <script>
   // Filtro de alcance del formulario de desgravamen: los casos fuera de la oferta no se envían.
   (() => {
     const f = document.querySelector('form[data-envio="desgravamen"]'); if (!f) return;
