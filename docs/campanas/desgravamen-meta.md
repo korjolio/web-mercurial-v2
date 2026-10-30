@@ -2,25 +2,18 @@
 
 Estado al 2026-10-30: formulario **publicado y funcionando** ("MERC | Hipotecario | Prospectos Nuevos | V1 | Oct 2026"). Lógica condicional verificada en Instagram real: los descartados van a E2 ("Cerrar el formulario", no generan lead). E1 lleva a `https://mercurial.cl/wa/desgravamen` (redirige a WhatsApp con "ref: DH-META").
 
-**Estado al 2026-10-30 ~17:30 — campaña nueva v3 ACTIVA, anuncios en revisión de Meta.**
+**Estado al 2026-10-30 ~17:45 — campaña v3 ACTIVA con el formulario V3 (URL final marcada); anuncios en revisión de Meta.**
 
-- Campaña `120250128842900016` "MERC | Desgravamen rechazado | Compra y refinanciamiento | Leads | Chile | v3": objetivo clientes potenciales, categoría especial **Productos y servicios financieros** (CL), CBO **$11.400 CLP/día**, puja de menor costo, sin fecha de término. effective_status: ACTIVE.
-- Conjunto `120250128845140016` "Chile - Amplio - FB+IG (sin Audience Network) - Formulario V2 sin SMS": Chile, 18–65, sin intereses, Advantage+, **solo Facebook e Instagram**, optimización por clientes potenciales, página 128713307782112. effective_status: ACTIVE.
-- Anuncios (todos con el formulario 1125698943209590 y los JPG v3 de feed y story servidos desde `mercurial.cl/src/img/anuncios/desgravamen-v3/`), effective_status **IN_PROCESS** (en revisión de Meta; todavía no aprobados ni entregando):
-  - `120250128849310016` 01 Crédito aprobado, desgravamen rechazado (creativo 1689125012759223)
-  - `120250128851250016` 02 Sin desgravamen no hay crédito (creativo 985831834599172)
-  - `120250128853160016` 03 Desgravamen rechazado al refinanciar (creativo 2034413187945226)
-  - `120250128854700016` 04 El banco dijo sí, el seguro dijo no (creativo 1190624523288470)
-- **Formulario `1125698943209590`** "MERC | Desgravamen rechazado | Compra y refinanciamiento | V2": Mayor grado de intención, **sin verificación por SMS**, entrega flexible apagada, teléfono obligatorio y correo opcional (evidencia: `instagram/desgravamen-ads/v3/qa/formulario-v2-sin-sms.jpg`). Rutas verificadas en el editor antes de publicar:
-  - P1 ¿Para qué necesitas el seguro de desgravamen?: Compra / Refinanciamiento o portabilidad → P2; Cambiar solo el seguro sin refinanciar / Cobrar o reclamar → E2.
-  - P2 ¿En qué banco quedará tu crédito? (puede ser tu mismo banco): 6 bancos → P3; Otro → E2.
-  - P3 ¿Por cuánto es el crédito que debe cubrir el seguro?: Menos de UF 2.000 → E2; Desde UF 2.000 / No lo sé → P4.
-  - P4 ¿La aseguradora del banco rechazó tu seguro de desgravamen?: Sí → P5; Todavía no lo solicito / No, me lo aprobaron → E2.
-  - P5 ¿Para cuándo necesitas el seguro?: todas → enviar (E1).
-  - E1: "Te contactaremos lo antes posible por WhatsApp desde el +56 9 3931 9546" + aviso de evaluación; botón "Ver más información" → `https://mercurial.cl/desgravamen-rechazado` (Meta rechaza `/wa/desgravamen` porque detecta la redirección a WhatsApp).
-- Campañas antiguas en pausa: "7 días | Oct 2026" (120249961807260016), "v2 | Continua" (120250127628210016, con creativos que nombran a la aseguradora, no reactivar) y "6 Bancos" (120249963085870016).
-- Landing y `/wa/desgravamen` desplegadas (commit 7ca3544). QA en producción, sin envíos ni trackers: escritorio y móvil sin desborde; cambio de seguro, cobros y "sin rechazo" bloquean el botón; el servidor responde 422 a casos fuera de alcance y 400 si faltan datos. El caso válido se probó solo en local (MAIL_DRY_RUN), para no generar leads ni correos falsos.
-- **Atribución por Chatwoot pendiente:** el botón de E1 ya no abre WhatsApp con "ref: DH-META"; lleva a la landing, cuyo botón de WhatsApp no trae la referencia. La regla de Chatwoot no está creada ni probada.
+- Campaña `120250128842900016` "MERC | Desgravamen rechazado | Compra y refinanciamiento | Leads | Chile | v3": categoría especial Productos y servicios financieros (CL), CBO **$11.400 CLP/día** (sin cambios), sin fecha de término. ACTIVE.
+- Conjunto `120250128845140016`: Chile, 18–65, sin intereses, Advantage+, solo Facebook e Instagram. ACTIVE.
+- **Formulario vigente `1379946230630779`** "… | V3": duplicado del V2 (`1125698943209590`) con la **misma lógica**, sin verificación por SMS (evidencia `instagram/desgravamen-ads/v3/qa/formulario-v3-sin-sms.jpg`), entrega flexible apagada. Rutas verificadas antes de publicar, iguales al V2 (P1 compra/refinanciamiento → P2; cambio de seguro/cobros → cierre; P2 6 bancos → P3, Otro → cierre; P3 menos de UF 2.000 → cierre, desde UF 2.000 / No lo sé → P4; P4 Sí → P5, otras → cierre; P5 → E1). Lo único que cambió es la URL final de E1:
+  `https://mercurial.cl/desgravamen-rechazado?utm_source=meta&utm_medium=paid_social&utm_campaign=desgravamen_compra_refinanciamiento_v3&utm_content=formulario_v2&ref=DH-META` (botón "Ver más información").
+- Anuncios activos (creativos v3 + formulario V3), effective_status **IN_PROCESS** (en revisión, todavía sin aprobar ni entregar): `120250129022220016` (01), `120250129023740016` (02), `120250129024950016` (03), `120250129026040016` (04).
+- Anuncios con el formulario V2, pausados para no duplicar gasto: `120250128849310016`, `120250128851250016`, `120250128853160016`, `120250128854700016`.
+- Campañas antiguas pausadas: "7 días | Oct 2026", "v2 | Continua" (nombra a la aseguradora: no reactivar) y "6 Bancos".
+- **Por qué no se usa `/wa/desgravamen` en el formulario:** al publicar, Meta rechaza esa URL ("Los formularios instantáneos no admiten enlaces de WhatsApp…") porque la ruta redirige con un 302 a `wa.me`. El V1 la tiene porque se publicó a la 1:57 pm, el mismo minuto del commit 644b209 (13:57:40). Lo más probable, sin poder confirmarlo, es que en ese momento la redirección todavía no estuviera desplegada.
+- **Referencia DH-META en la landing** (commit 6732d7e): con `?ref=DH-META`, y solo con ese valor exacto (lista blanca), todos los botones de WhatsApp abren "Hola Mercurial, me rechazaron el seguro de desgravamen y quiero consultar por una alternativa (ref: DH-META)", y el formulario de la landing agrega al correo "Procedencia: anuncio de Meta, formulario V2 (ref: DH-META)". Sin `ref`, o con otro valor, todo queda normal. No es una prueba autenticada del origen. No se tocaron CRM, GTM, píxel, CAPI ni consentimiento. QA en producción en escritorio y móvil, sin envíos (las llamadas a `/api/contacto` se interceptaron); el contenido del correo se probó en local con MAIL_DRY_RUN.
+- **Chatwoot:** no hay acceso desde aquí. Por ahora los mensajes con "(ref: DH-META)" se identifican a mano; no hay etiquetado automático.
 
 **Pendiente**: regla de Chatwoot que etiquete `desgravamen-meta` los mensajes entrantes que contienen `DH-META`.
 
