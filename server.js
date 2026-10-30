@@ -56,6 +56,11 @@ app.get('/seguros/colectivos-de-salud', (req, res) => res.sendFile('seguro-colec
 // --- Landing de campaña: desgravamen hipotecario rechazado (personas; noindex) ---
 app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html', { root: __dirname }));
 
+// --- Botón final del formulario instantáneo de Meta: Meta no acepta enlaces wa.me, así que pasa por aquí.
+// El texto lleva "DH-META" para que la automatización de Chatwoot etiquete la conversación.
+app.get('/wa/desgravamen', (req, res) => res.redirect(302, 'https://wa.me/56939319546?text=' +
+    encodeURIComponent('Hola, completé el formulario de desgravamen hipotecario (ref: DH-META)')));
+
 // --- Ruta limpia para Política de Privacidad (requerida por Meta for Developers / WhatsApp Business API) ---
 app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { root: __dirname }));
 

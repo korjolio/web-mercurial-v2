@@ -1,0 +1,43 @@
+# Campaña Meta — Desgravamen Hipotecario Plus (rechazados)
+
+Estado al 2026-10-30: propuesta de formulario instantáneo con filtro. **Pendiente**: cargarlo en Meta y cambiar el texto de los anuncios.
+
+## El producto (fuente: ficha "RRSS Seguro Desgravamen Hipotecario Plus", AuguStar Seguros)
+
+- Desgravamen hipotecario para personas con **condiciones especiales de salud o mayores de 50 años**.
+- Cubre **fallecimiento**. Capital asegurado **desde UF 2.000**.
+- Cumple el requisito de desgravamen que exige la institución financiera.
+- Solo **créditos hipotecarios nuevos**.
+- Instituciones donde se acepta (nota manuscrita): Santander, Banco de Chile, Consorcio, Itaú, BancoEstado, Internacional.
+- Nota manuscrita sin confirmar: "65% / 40% prima neta". No usar en anuncios.
+
+## Problema actual
+
+Llegan leads que quieren cobrar el seguro o que tienen problemas con un desgravamen vigente. El anuncio y el formulario tienen que dejarlos fuera.
+
+## Formulario instantáneo (tipo "Mayor intención")
+
+1. **¿En qué etapa está tu crédito hipotecario?**
+   - Es un crédito nuevo y la aseguradora del banco me rechazó el desgravamen → 2
+   - Ya tengo un crédito hipotecario vigente → FIN (no califica)
+   - Quiero cobrar o reclamar mi seguro → FIN (no califica)
+2. **¿Con qué institución estás tramitando el crédito?**
+   - Santander / Banco de Chile / Itaú / BancoEstado / Banco Internacional / Consorcio → 3
+   - Otra → FIN (por ahora no trabajamos con esa institución)
+3. **¿De cuánto es el crédito?**
+   - Menos de UF 2.000 → FIN (no califica)
+   - UF 2.000 a 4.000 / UF 4.000 a 8.000 / Más de UF 8.000 → 4
+4. **¿Para cuándo necesitas el seguro?** Esta semana / Este mes / Más adelante
+5. Nombre, teléfono, correo (autocompletados).
+
+Final de los que califican: "Te escribimos por WhatsApp desde el +56 9 3931 9546".
+Final de los que no califican: explicar en una línea que el seguro es solo para créditos nuevos.
+
+**No preguntar por salud** (enfermedad, motivo del rechazo, tratamientos): las políticas de anuncios de clientes potenciales de Meta lo prohíben sin autorización previa. Eso se conversa por WhatsApp.
+
+## Anuncio
+
+- El primer texto filtra: "¿La aseguradora del banco te rechazó el desgravamen y tu crédito hipotecario nuevo quedó en pausa?"
+- Aclarar "Solo para créditos hipotecarios nuevos".
+- No usar "problemas con tu seguro" ni frases parecidas: atraen siniestros y reclamos.
+- La campaña debe ir en categoría especial de anuncios de **productos financieros**: limita la segmentación por edad, así que el filtro tiene que hacerlo el texto.
