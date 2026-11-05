@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/src/img/logo/favicon.svg">
   <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,12 +36,12 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=2"></script>
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="src/css/cotizar-pyme.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/src/css/cotizar-pyme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/css/marco.css?v=3">
+  <link rel="stylesheet" href="/src/css/marco.css?v=5">
   <style>
     /* Marco nuevo sobre el formulario intacto: azul de botones y espacio superior sin cabecera fija. */
     :root { --c-primary: #1a7ca4; --c-primary-hover: #156585; }
@@ -82,11 +83,11 @@
 
   <div class="util mc-marco"><div class="wrap">
     <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
-    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
   </div></div>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
-    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <a class="logo" href="/"><img src="/src/img/logo/mercurial-horizontal-color.svg" alt="Mercurial Corredores de Seguros, inicio" width="655" height="190"></a>
     <nav aria-label="Principal">
       <ul class="menu">
         <li id="li-seguros">
@@ -105,7 +106,7 @@
           </div>
         </li>
         <li><a href="/#mercurial">Quiénes somos</a></li>
-        <li><a href="/#consultas">Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li>
         <li><a href="/#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -126,7 +127,7 @@
         <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen hipotecario</a></li>
         <li class="sub">Mercurial</li>
         <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
-        <li><a href="/#consultas"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
       </ul>
       <div class="acc"><a class="btn btn-azul" href="#pymeForm">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
     </nav>
@@ -448,7 +449,7 @@
             <span class="cp-num">6</span>
             <div>
               <h2>Medidas de seguridad</h2>
-              <p>Marca las que existen hoy en el lugar. Mientras más protecciones, mejores condiciones.</p>
+              <p>Marca las medidas de seguridad que existen hoy. La compañía de seguros las considera al evaluar el riesgo y las condiciones de la propuesta.</p>
             </div>
           </div>
           <p class="cp-subhead">Contra incendio</p>
@@ -475,7 +476,7 @@
         <div class="cp-submit">
           <div class="cp-form-error" id="formError" role="alert"></div>
           <button type="submit" class="btn btn-primary btn-lg" id="pyme_submit_btn">Enviar antecedentes</button>
-          <p class="cp-legal">Al enviar, un ejecutivo de Mercurial te contactará para revisar los antecedentes y enviarte la cotización. Atención bajo cumplimiento normativo según Circular CMF N° 2131. Tus datos serán tratados con estricta confidencialidad. <a href="/politica-privacidad" style="color: var(--c-primary);">Política de privacidad</a>.</p>
+          <p class="cp-legal">Un ejecutivo revisará los antecedentes y te contactará para preparar la cotización. Enviar este formulario no contrata un seguro. Tus datos serán tratados con estricta confidencialidad. <a href="/politica-privacidad" style="color: var(--c-primary);">Política de privacidad</a>.</p>
         </div>
       </form>
     </div>
@@ -483,9 +484,9 @@
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
-      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
-      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Cotizar pyme en línea</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/#consultas">Consultas y reclamos</a></li></ul></div>
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
+      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
       <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
     </div>
     <div class="legal">
@@ -495,18 +496,19 @@
 
 
   <!-- Modal de Respuesta -->
-  <div id="responseModal" class="modal">
+  <div id="responseModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
     <div class="modal-content">
       <div id="modalIcon" class="modal-icon"></div>
       <div id="modalTitle" class="modal-title"></div>
       <p id="modalBody" class="modal-text"></p>
+      <a id="modalWa" class="btn btn-primary btn-block" href="https://wa.me/56939319546" target="_blank" rel="noopener" style="display:none;margin-top:1.5rem">Pedir ayuda por WhatsApp</a>
       <button id="closeModalBtn" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar</button>
     </div>
   </div>
 
-  <script src="src/data/pyme-catalogos.js"></script>
-  <script src="src/js/cotizar-pyme.js?v=2"></script>
-  <script src="/src/js/sitio.js?v=5"></script>
+  <script src="/src/data/pyme-catalogos.js"></script>
+  <script src="/src/js/cotizar-pyme.js?v=7"></script>
+  <script src="/src/js/sitio.js?v=7"></script>
 </body>
 
 </html>

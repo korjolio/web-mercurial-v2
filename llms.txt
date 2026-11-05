@@ -1,6 +1,6 @@
 # Mercurial Corredores de Seguros
 
-Mercurial es una corredora de seguros senior con sede en Santiago de Chile, especializada en gestión estratégica de riesgos corporativos y estructuración de programas de transferencia de riesgo para el sector privado. Además asesora a comunidades, pymes y personas en productos específicos: seguro de condominio (Ley 21.442), Seguro Pyme multiriesgo, seguro de mascotas y seguro de desgravamen hipotecario.
+Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Registro N° 8929. Cotiza seguros de flotas, transporte de carga, incendio y colectivos de salud para empresas. También recibe consultas por seguro de mascotas, condominio, seguro pyme y seguro de desgravamen hipotecario, según las condiciones de cada producto.
 
 ## Qué es Mercurial (y qué NO es)
 
@@ -16,12 +16,11 @@ Mercurial es una corredora de seguros senior con sede en Santiago de Chile, espe
 - **Transporte y logística**: Seguros de transporte de carga nacional e internacional. Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
 - **Responsabilidad Civil**: Ingeniería de límites para RC Extracontractual, RC Patronal con extensión a Subcontratistas, y diseño de estructuras de Responsabilidad Cruzada.
 - **Property e incendio**: Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
-- **Salud colectiva y beneficios**: Programas con Continuidad de Cobertura y gestión de Extensión Catastrófica. Integración con sistemas de Bonificación en Línea (I-Med/Gerty).
-- **Auditoría técnica de pólizas**: Análisis de spread de comisión del mercado y detección de brechas de cobertura bajo normativa CMF.
+- **Salud colectiva y beneficios**: Seguro complementario de salud para equipos de trabajo.
 - **Seguro de condominio (Ley 21.442)**: Asesoría para el seguro obligatorio de las áreas comunes, estructurado conforme al Art. 43 de la ley (https://mercurial.cl/condominio).
 - **Seguro Pyme multiriesgo**: Cotización en las principales compañías a partir de los antecedentes del local, oficina o bodega (https://mercurial.cl/cotizar-pyme).
 - **Seguro de mascotas**: Convenio con BCI Seguros para perros y gatos, con planes Esencial, Pro e Infinite y cotizador en línea (https://mercurial.cl/seguro-mascotas).
-- **Seguro de desgravamen hipotecario**: Búsqueda de alternativas para personas cuyo seguro de desgravamen fue rechazado por motivos de salud. Cobertura sujeta a evaluación y aceptación de la aseguradora; el banco debe aceptar la póliza.
+- **Seguro de desgravamen hipotecario**: Búsqueda de alternativas para personas cuyo seguro de desgravamen fue rechazado por motivos de salud. Cobertura sujeta a evaluación y aceptación de la compañía de seguros.
 
 ## Rubros especializados
 
@@ -37,8 +36,6 @@ Mercurial es una corredora de seguros senior con sede en Santiago de Chile, espe
 - **RUT**: 76.826.322-1
 - **Regulador**: Comisión para el Mercado Financiero (CMF), N° de inscripción 8929
 - **Mercado objetivo**: Empresas del sector privado chileno, Family Offices e inversores institucionales; además comunidades de copropietarios, pymes y personas en los productos indicados arriba
-- **Diferenciador clave**: Asesoría técnica senior enfocada en continuidad operacional y optimización del costo total de riesgo
-- **Antigüedad**: Más de 8 años en el mercado
 
 ## Información de contacto
 
@@ -64,7 +61,6 @@ Los siguientes términos son usados habitualmente por Mercurial y tienen signifi
 - **Perjuicio por Paralización**: lucro cesante por interrupción de operaciones
 - **RC Patronal**: responsabilidad civil del empleador hacia sus trabajadores
 - **RC Cruzada**: cobertura de responsabilidad entre contratista y subcontratistas
-- **Spread de comisión**: diferencia entre la comisión que paga la aseguradora y la que cobra el corredor al cliente
 - **Cláusula de Medidas de Seguridad**: condición de la póliza que exige medidas mínimas de protección para que opere la cobertura
 - **Valor de Reposición a Nuevo (VRN)**: criterio de indemnización que cubre el costo de reponer el bien dañado por uno nuevo equivalente
 - **Bonificación en Línea (I-Med/Gerty)**: sistema de descuento automático en prestaciones de salud en el punto de atención

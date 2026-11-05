@@ -71,7 +71,7 @@
     const radio = $(`input[name="seguro"][value="${valor}"]`, form);
     const select = $('select[name="seguro"]', form);
     if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true })); }
-    else if (select && [...select.options].some(o => o.value === valor)) select.value = valor;
+    else if (select && [...select.options].some(o => o.value === valor)) { select.value = valor; select.dispatchEvent(new Event('change', { bubbles: true })); }
   };
   $$('[data-interes]').forEach(a => a.addEventListener('click', () => marcarSeguro(a.dataset.interes)));
 
@@ -189,23 +189,152 @@
     });
   });
 
-  /* GSAP: entrada sobria y revelados una sola vez */
+  /* Desplegables con el diseño del sitio. Con mouse, el <select> queda oculto y sigue siendo la fuente del valor
+     (formularios y validaciones no cambian). En pantallas táctiles se deja el selector nativo del teléfono. */
+  if (matchMedia('(pointer: fine)').matches) {
+    let abierto = null;
+    const nuevoId = (() => { let n = 0; return () => 'sel-op-' + (++n); })();
+    $$('select').forEach(sel => {
+      const btn = document.createElement('button');
+      const lista = document.createElement('ul');
+      const clases = [...sel.classList].filter(c => c !== 'is-placeholder').join(' ');
+      btn.type = 'button';
+      btn.className = ('sel-btn ' + clases).trim();
+      btn.setAttribute('role', 'combobox');
+      btn.setAttribute('aria-haspopup', 'listbox');
+      btn.setAttribute('aria-expanded', 'false');
+      lista.className = 'sel-lista';
+      lista.setAttribute('role', 'listbox');
+      lista.id = nuevoId();
+      lista.hidden = true;
+      btn.setAttribute('aria-controls', lista.id);
+      const etiqueta = sel.id && $(`label[for="${sel.id}"]`);
+      sel.classList.add('sel-oculto');
+      sel.tabIndex = -1;
+      sel.setAttribute('aria-hidden', 'true');
+      sel.after(btn);
+      document.body.appendChild(lista);
+
+      const opciones = () => [...sel.options].filter(o => !o.disabled && !o.hidden && o.value !== '');
+      const pintar = () => {
+        const o = sel.options[sel.selectedIndex];
+        btn.textContent = o ? o.textContent : '';
+        btn.classList.toggle('is-ph', !sel.value);
+        btn.disabled = sel.disabled;
+        btn.setAttribute('aria-label', (etiqueta ? etiqueta.textContent.trim() + ': ' : '') + btn.textContent);
+      };
+      let activa = -1;
+      const items = () => [...lista.children];
+      const marcar = i => {
+        activa = i;
+        items().forEach((li, n) => li.classList.toggle('is-activa', n === i));
+        const li = items()[i];
+        if (li) { btn.setAttribute('aria-activedescendant', li.id); li.scrollIntoView({ block: 'nearest' }); }
+      };
+      const ubicar = () => {
+        const r = btn.getBoundingClientRect();
+        const caja = (btn.closest('.celda, .cp-uf') || btn).getBoundingClientRect();
+        const abajo = innerHeight - r.bottom - 12, arriba = r.top - 12;
+        const alto = Math.min(lista.scrollHeight, 300);
+        lista.style.left = caja.left + 'px';
+        lista.style.width = Math.max(caja.width, 220) + 'px';
+        lista.style.maxHeight = Math.max(abajo >= alto || abajo >= arriba ? abajo : arriba, 140) + 'px';
+        if (abajo >= alto || abajo >= arriba) { lista.style.top = (r.bottom + 8) + 'px'; lista.style.bottom = 'auto'; }
+        else { lista.style.top = 'auto'; lista.style.bottom = (innerHeight - r.top + 8) + 'px'; }
+      };
+      const cerrar = () => {
+        if (abierto !== cerrar) return;
+        abierto = null;
+        lista.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.removeAttribute('aria-activedescendant');
+      };
+      const elegir = o => {
+        if (sel.value !== o.value) {
+          sel.value = o.value;
+          sel.dispatchEvent(new Event('input', { bubbles: true }));
+          sel.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        pintar();
+        cerrar();
+        btn.focus();
+      };
+      const abrir = () => {
+        if (btn.disabled) return;
+        if (abierto) abierto();
+        lista.textContent = '';
+        const ops = opciones();
+        ops.forEach(o => {
+          const li = document.createElement('li');
+          li.id = nuevoId();
+          li.setAttribute('role', 'option');
+          li.setAttribute('aria-selected', String(o.value === sel.value));
+          li.textContent = o.textContent;
+          li.addEventListener('mousedown', e => e.preventDefault());
+          li.addEventListener('click', () => elegir(o));
+          li.addEventListener('mousemove', () => { const i = items().indexOf(li); if (i !== activa) marcar(i); });
+          lista.appendChild(li);
+        });
+        lista.hidden = false;
+        abierto = cerrar;
+        btn.setAttribute('aria-expanded', 'true');
+        ubicar();
+        marcar(Math.max(ops.findIndex(o => o.value === sel.value), 0));
+      };
+      btn.addEventListener('click', () => (abierto === cerrar ? cerrar() : abrir()));
+      btn.addEventListener('keydown', e => {
+        const estaAbierto = abierto === cerrar;
+        if (!estaAbierto) {
+          if (['ArrowDown', 'ArrowUp'].includes(e.key)) { e.preventDefault(); abrir(); }
+          return;
+        }
+        const n = items().length;
+        if (e.key === 'ArrowDown') { e.preventDefault(); marcar((activa + 1) % n); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); marcar((activa - 1 + n) % n); }
+        else if (e.key === 'Home') { e.preventDefault(); marcar(0); }
+        else if (e.key === 'End') { e.preventDefault(); marcar(n - 1); }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); elegir(opciones()[activa]); }
+        else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cerrar(); }
+        else if (e.key === 'Tab') cerrar();
+        else if (e.key.length === 1) {
+          const i = opciones().findIndex(o => o.textContent.trim().toLowerCase().startsWith(e.key.toLowerCase()));
+          if (i >= 0) marcar(i);
+        }
+      });
+      sel.addEventListener('focus', () => btn.focus());
+      sel.addEventListener('change', pintar);
+      if (sel.form) sel.form.addEventListener('reset', () => setTimeout(pintar));
+      new MutationObserver(pintar).observe(sel, { childList: true, attributes: true, attributeFilter: ['disabled'] });
+      document.addEventListener('mousedown', e => { if (!lista.contains(e.target) && !btn.contains(e.target)) cerrar(); });
+      addEventListener('scroll', () => { if (abierto === cerrar) ubicar(); }, { passive: true, capture: true });
+      addEventListener('resize', cerrar);
+      pintar();
+    });
+  }
+
+  /* GSAP: entrada sobria y revelados al bajar y al subir */
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
   gsap.matchMedia().add({ mover: '(prefers-reduced-motion: no-preference)', angosto: '(max-width: 560px)' }, ctx => {
     const { mover, angosto } = ctx.conditions;
     if (!mover) return;
     if ($('.panel')) {
-      gsap.timeline({ defaults: { ease: 'power3.out' } })
+      const entrada = gsap.timeline({ defaults: { ease: 'power3.out' } })
         .from('.panel > img', { scale: 1.08, duration: 1.4, ease: 'power2.out' }, 0)
         .from('.panel .txt > *', { y: 18, autoAlpha: 0, duration: 0.7, stagger: 0.07 }, 0.1)
         .from('.barra .caja', { y: 24, duration: 0.7 }, 0.3);
+      ScrollTrigger.create({ trigger: '.panel', start: 'top bottom', end: 'bottom top', onEnterBack: () => entrada.restart() });
     }
     const revelar = $$('.rapido, .tarjeta, .dato, .paso, .cabeza > *, .contacto .lado > *, .bloque, .pregunta');
+    // Al bajar entran desde abajo y al subir desde arriba. Se ocultan solo cuando salen por abajo: así el
+    // revelado siguiente no muestra el elemento completo un instante antes de animarlo.
+    const entrar = (els, desde) => gsap.fromTo(els, { autoAlpha: 0, y: desde }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06, overwrite: true });
     if (revelar.length) ScrollTrigger.batch(revelar, {
-      start: 'top 90%', once: true,
-      onEnter: els => gsap.from(els, { autoAlpha: 0, y: 24, duration: 0.7, ease: 'power3.out', stagger: 0.06, overwrite: true })
+      start: 'top 90%', end: 'bottom top',
+      onEnter: els => entrar(els, 24),
+      onEnterBack: els => entrar([...els].reverse(), -24),
+      onLeaveBack: els => { gsap.killTweensOf(els); gsap.set(els, { autoAlpha: 0 }); }
     });
-    if ($('.trazo')) gsap.from('.trazo', { [angosto ? 'scaleY' : 'scaleX']: 0, duration: 1.1, ease: 'power2.inOut', scrollTrigger: { trigger: '.pasos-caja', start: 'top 80%', once: true } });
+    if ($('.trazo')) gsap.from('.trazo', { [angosto ? 'scaleY' : 'scaleX']: 0, duration: 1.1, ease: 'power2.inOut', scrollTrigger: { trigger: '.pasos-caja', start: 'top 80%', end: 'bottom top', toggleActions: 'play none restart reverse' } });
   });
 })();

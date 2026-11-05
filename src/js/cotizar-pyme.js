@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     Promise.all([
-        fetch('src/data/comunas.json').then((r) => r.json()),
-        fetch('src/data/ans-pyme-actividades.json').then((r) => r.json())
+        fetch('/src/data/comunas.json').then((r) => r.json()),
+        fetch('/src/data/ans-pyme-actividades.json').then((r) => r.json())
     ]).then(([c, a]) => {
         comunas = c.map((x) => ({ label: x.comuna, value: x.comuna, provincia: x.provincia, region: x.region, search: norm(`${x.comuna} ${x.region}`) }));
         actividades = a.map((x) => ({ label: x, value: x, search: norm(x) }));
@@ -230,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalWa = document.getElementById('modalWa');
+    let focoPrevio = null;
     function showModal(ok, title, message) {
         modalTitle.textContent = title;
         modalBody.textContent = message;
@@ -237,10 +239,28 @@ document.addEventListener('DOMContentLoaded', () => {
         modalIcon.innerHTML = ok
             ? '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
             : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        modalWa.style.display = ok ? 'none' : '';
+        focoPrevio = document.activeElement;
         responseModal.classList.add('active');
+        // El contenido se hace visible con una transición de 0,3 s: antes de eso no acepta el foco.
+        setTimeout(() => { if (responseModal.classList.contains('active')) (ok ? closeModalBtn : modalWa).focus(); }, 350);
     }
-    closeModalBtn.addEventListener('click', () => responseModal.classList.remove('active'));
-    window.addEventListener('click', (e) => { if (e.target === responseModal) responseModal.classList.remove('active'); });
+    function closeModal() {
+        if (!responseModal.classList.contains('active')) return;
+        responseModal.classList.remove('active');
+        if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+    }
+    closeModalBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if (e.target === responseModal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (!responseModal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key !== 'Tab') return;
+        const focos = [modalWa, closeModalBtn].filter((el) => el.style.display !== 'none');
+        const i = focos.indexOf(document.activeElement);
+        e.preventDefault();
+        focos[(i + (e.shiftKey ? focos.length - 1 : 1)) % focos.length].focus();
+    });
 
     // --- Lectura de valores ---
     const val = (id) => (document.getElementById(id).value || '').trim();
@@ -373,11 +393,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Enviando…';
+        // Si la red se cuelga, el error conserva el formulario y el mismo Idempotency-Key para reintentar.
+        const corte = new AbortController();
+        const reloj = setTimeout(() => corte.abort(), 20000);
         try {
             const response = await fetch('/api/cotizaciones/pyme', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyKey },
-                body: JSON.stringify(buildPayload())
+                body: JSON.stringify(buildPayload()),
+                signal: corte.signal
             });
             const result = await response.json().catch(() => ({}));
             if (!response.ok) throw new Error(result.message || 'Error al procesar la solicitud');
@@ -395,11 +419,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'cotizacion_pyme_submit', form_cluster: 'pyme' });
         } catch (error) {
-            const msg = (error.message || '').includes('fetch')
-                ? 'Hubo un error de conexión. Intenta de nuevo o escríbenos por WhatsApp.'
-                : (error.message || 'Hubo un error al procesar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.');
+            const msg = 'No pudimos confirmar el envío. Tus antecedentes siguen en el formulario. Puedes intentar otra vez o pedir ayuda por WhatsApp.';
             showModal(false, 'No pudimos enviar tus antecedentes', msg);
         } finally {
+            clearTimeout(reloj);
             submitBtn.disabled = false;
             submitBtn.textContent = originalBtnText;
         }

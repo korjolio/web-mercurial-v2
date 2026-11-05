@@ -31,14 +31,16 @@ Después conviene `git pull` en el checkout principal del Mac para que no quede 
 
 | Ruta | Archivo | Notas |
 |---|---|---|
-| `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización, formulario de cotización y de consultas/reclamos → correo. |
+| `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización y formulario de cotización → correo. |
 | `/seguros/flotas`, `/seguros/transporte`, `/seguros/incendio`, `/seguros/colectivos-de-salud` | `seguro-*.html` | Páginas de cada línea. Indexables (en `sitemap.xml`). Flotas y Salud sin coberturas hasta que se confirmen. |
 | `/condominio` | `condominio.html` | Landing Google Ads (Ley 21.442). `noindex`, sin menú. Formulario → correo. |
 | `/transporte` | `transporte.html` | Landing Google Ads. `noindex`, sin menú. Formulario → correo. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |
 | `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**. Estilos propios en `src/css/cotizar-pyme.css`. |
+| `/consultas-y-reclamos` | `consultas.html` | Formulario de consultas y reclamos → correo. Indexable (en `sitemap.xml`). `/#consultas` redirige aquí. |
 | `/politica-privacidad` | `privacidad.html` | Requerida por Meta/WhatsApp Business API. |
 | — | `terminos.html` | |
+| Cualquier ruta inexistente | `404.html` | `noindex`, responde 404. |
 
 `server.js` sirve **todo el directorio** con `express.static(__dirname)`. Cualquier archivo interno que no deba quedar público debe listarse en `BLOCKED_STATIC_FILES` (hoy: `server.js`, `package.json`, `package-lock.json`, `CLAUDE.md`, `.env*`). Los dotfiles, `node_modules/`, `docs/` e `instagram/` ya están bloqueados por el middleware (sin distinguir mayúsculas).
 
@@ -53,15 +55,17 @@ Después conviene `git pull` en el checkout principal del Mac para que no quede 
 - La página de Mercurial se administra desde el portfolio comercial y **no aparece en `/me/accounts`**: el script la pide por ID. Ese mismo usuario administra otras páginas con Instagram (p. ej. Monkey Car Wash); nunca tomar "la primera".
 - La API no programa: hay que correr `pendientes --si` cada día (cron) para seguir el calendario de `captions.md`.
 
+Logos (versión 2026): `src/img/logo/`; cabecera con `mercurial-horizontal-color.svg` y pie con `mercurial-horizontal-blanco.svg`. Logos de aseguradoras de la portada: `src/img/companias/`.
+
 Estilos del sitio nuevo: `src/css/marco.css` (tokens, cabecera de dos niveles, panel móvil, pie; lo cargan todas las páginas) + `src/css/sitio.css` (componentes de página). Albert Sans, azul marino `#0d2340` y azul Mercurial `#1a7ca4`. `src/js/sitio.js` maneja menú, panel móvil, formularios y movimiento (GSAP en `src/vendor/`, respeta `prefers-reduced-motion`). `styles.css` queda solo para el cuerpo de `/cotizar-pyme`; `mascotas.html` lleva su CSS inline con la paleta nueva. Fotos de Wikimedia Commons en `src/img/fotos/` (CC BY / CC BY-SA): **los créditos del pie son obligatorios**.
 
 ## Captura de leads
 
-**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot. Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número. El +56 9 7109 7657 quedó solo como `telephone` del JSON-LD de `index.html`.
+**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot. Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número.
 
 Tres caminos, según la página:
 
-1. **Portada, páginas de seguro, condominio y transporte**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
+1. **Portada, páginas de seguro, consultas y reclamos, condominio y transporte**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
 2. **Mascotas**: el lead queda registrado en BCI Seguros al completar el paso 1 del cotizador embebido; se consulta en la bandeja de trabajo de `sau.bciseguros.cl` (convenio "Mascotas S20", corredor Mercurial).
 3. **Pyme (`/cotizar-pyme`)**: `src/js/cotizar-pyme.js` → `POST /api/cotizaciones/pyme` (server.js valida contra `src/data/pyme-catalogos.js`, `comunas.json` y `ans-pyme-actividades.json`) → `POST {CRM_URL}/api/public/prospects` con header `x-api-key` e `Idempotency-Key` → prospecto en etapa "Nuevo" del CRM (`app.mercurial.cl`, repo `korjolio/studio`) con ramo "Multiriesgo Pyme", el resumen del riesgo en Notas y el JSON completo en `rawData`. Las listas del formulario son las exactas del cotizador "Seguro de Pymes" de ANS; la referencia está en `docs/referencia/ans-pyme-campos.md`. **No inventar opciones**: si el portal cambia, actualizar catálogo en la web y en el CRM a la vez.
 
@@ -117,5 +121,5 @@ Los datos de planes y coberturas de la landing provienen de los PDFs oficiales d
 
 - **QA en navegador obligatorio** para cambios de UI, antes de dar algo por terminado. Debe cubrir: desktop y móvil (390px), errores de consola, desborde horizontal, **el flujo completo** (no solo la primera pantalla) y **el paso del tiempo** (muestrear a 10s, 30s, 60s, 80s cuando haya lógica diferida o temporizadores). Confirmar en producción tras desplegar.
 - **Definir lo visual antes de codear** landings o rediseños: mockups aprobados primero, implementación después.
-- Contenido en **español de Chile**. Nada de cifras, coberturas ni beneficios inventados: son un producto financiero regulado.
+- Contenido en **español de Chile**. En textos visibles se escribe «compañía de seguros», no «aseguradora» (salvo «no aseguradora» en el pie). Nada de cifras, coberturas ni beneficios inventados: son un producto financiero regulado.
 - Landings de Ads (`condominio`, `transporte`) van `noindex`; las de producto son indexables y deben sumarse a `sitemap.xml`.

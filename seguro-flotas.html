@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/src/img/logo/favicon.svg">
   <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,8 +42,8 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=2"></script>
 
-  <link rel="stylesheet" href="/src/css/marco.css?v=3">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=4">
+  <link rel="stylesheet" href="/src/css/marco.css?v=5">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=9">
 </head>
 
 <body class="mc-marco">
@@ -78,11 +79,11 @@
 
   <div class="util mc-marco"><div class="wrap">
     <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
-    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
   </div></div>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
-    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <a class="logo" href="/"><img src="/src/img/logo/mercurial-horizontal-color.svg" alt="Mercurial Corredores de Seguros, inicio" width="655" height="190"></a>
     <nav aria-label="Principal">
       <ul class="menu">
         <li id="li-seguros">
@@ -101,7 +102,7 @@
           </div>
         </li>
         <li><a href="/#mercurial">Quiénes somos</a></li>
-        <li><a href="/#consultas">Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li>
         <li><a href="/#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -122,7 +123,7 @@
         <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen hipotecario</a></li>
         <li class="sub">Mercurial</li>
         <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
-        <li><a href="/#consultas"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
       </ul>
       <div class="acc"><a class="btn btn-azul" href="#cotizar">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
     </nav>
@@ -136,7 +137,7 @@
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Seguro de flotas</span>
           <h1 id="titular">Seguro para <b>los vehículos de tu empresa</b>.</h1>
           <p class="sub">Camiones, camionetas y autos a nombre de la empresa. Cotizamos con distintas compañías y te explicamos qué cubre cada propuesta.</p>
-          <ul class="puntos"><li><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg>Respuesta en 3 a 5 horas hábiles</li><li><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Varias compañías, una conversación</li></ul>
+          <ul class="puntos"><li><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg>Respuesta en 3 a 5 horas hábiles</li><li><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Cotizamos con distintas compañías de seguros</li></ul>
         </div>
       </div>
     </div></section>
@@ -147,17 +148,17 @@
           <div class="celda"><label for="b-empresa">Empresa</label><input id="b-empresa" name="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="160" aria-describedby="b-err" required></div>
           <div class="celda"><label for="b-tel">Teléfono</label><input id="b-tel" name="telefono" type="tel" inputmode="tel" placeholder="+56 9 1234 5678" autocomplete="tel" maxlength="20" aria-describedby="b-err" required></div>
           <div class="trampa" aria-hidden="true"><label for="b-sitio">No llenar</label><input id="b-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
-          <button class="btn btn-azul" type="submit"><span class="letra">Cotizar</span> <svg class="ico" aria-hidden="true"><use href="#der"/></svg></button>
+          <button class="btn btn-azul" type="submit"><span class="letra">Solicitar una llamada</span> <svg class="ico" aria-hidden="true"><use href="#der"/></svg></button>
         </form>
         <p class="ok" hidden tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#okc"/></svg><span><b>Listo.</b> Te llamamos en 3 a 5 horas hábiles al número que nos dejaste.</span></p>
-        <div class="pie-barra"><span>Te llamamos en 3 a 5 horas hábiles, de lunes a viernes de 9:00 a 18:30 h.</span><span class="err" id="b-err" role="alert"></span></div>
+        <div class="pie-barra"><span>Te llamamos en 3 a 5 horas hábiles, de lunes a viernes de 9:00 a 18:30 h.</span><span>Usamos estos datos para contactarte por tu solicitud. <a href="/politica-privacidad">Política de privacidad</a>.</span><span class="err" id="b-err" role="alert"></span></div>
       </div>
     </div></div></section>
 
     <section class="sec"><div class="wrap">
       <div class="bloques">
-        <div class="bloque"><h3><svg class="ico" aria-hidden="true"><use href="#personas"/></svg>Para quién es</h3><p>Empresas que usan vehículos para trabajar: transportistas, constructoras, distribuidoras, servicio técnico y cualquier empresa con autos o camionetas a su nombre.</p></div>
-        <div class="bloque"><h3><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Cómo te ayudamos</h3><p>Te llamamos para entender qué vehículos tienes y cómo los usas, cotizamos con distintas aseguradoras y te mostramos las diferencias antes de que decidas.</p></div>
+        <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#personas"/></svg>Para quién es</h2><p>Empresas que usan vehículos para trabajar: transportistas, constructoras, distribuidoras, servicio técnico y cualquier empresa con autos o camionetas a su nombre.</p></div>
+        <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Cómo te ayudamos</h2><p>Te llamamos para entender qué vehículos tienes y cómo los usas, cotizamos con distintas compañías de seguros y te mostramos las diferencias antes de que decidas.</p></div>
       </div>
     </div></section>
 
@@ -167,7 +168,7 @@
         <ol class="pasos">
           <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Empresa, teléfono y el seguro que te interesa. Toma menos de un minuto.</p></li>
           <li class="paso"><span class="n">2</span><h3>Te llamamos</h3><p>En 3 a 5 horas hábiles, para entender qué necesitas asegurar.</p></li>
-          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la aseguradora necesita y te presentamos las alternativas.</p></li>
+          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la compañía de seguros necesita y te presentamos las alternativas.</p></li>
           <li class="paso"><span class="n">4</span><h3>Gestionamos tu póliza</h3><p>Si decides contratar, te acompañamos en la emisión y en los cambios que necesites.</p></li>
         </ol>
       </div>
@@ -205,8 +206,8 @@
           <div class="campo"><label for="f-msj">Mensaje <small>(opcional)</small></label><textarea class="t-input" id="f-msj" name="mensaje" maxlength="3000" placeholder="Cuéntanos qué necesitas asegurar."></textarea></div>
           <div class="trampa" aria-hidden="true"><label for="f-sitio">No llenar</label><input id="f-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
           <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tu consulta.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
-          <button class="btn btn-azul enviar" type="submit"><span class="letra">Enviar consulta</span></button>
-          <p class="nota">Usamos tus datos solo para responder esta consulta. <a href="/politica-privacidad">Política de privacidad</a>.</p>
+          <button class="btn btn-azul enviar" type="submit"><span class="letra">Consultar por mi flota</span></button>
+          <p class="nota">Usamos tus datos para responder, preparar la cotización solicitada y gestionar su seguimiento. <a href="/politica-privacidad">Política de privacidad</a>.</p>
         </form>
         <div class="exito" hidden>
           <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -225,9 +226,9 @@
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
-      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
-      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Cotizar pyme en línea</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/#consultas">Consultas y reclamos</a></li></ul></div>
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
+      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
       <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
     </div>
     <div class="legal">
@@ -238,7 +239,7 @@
 
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=5"></script>
+  <script src="/src/js/sitio.js?v=7"></script>
 </body>
 
 </html>

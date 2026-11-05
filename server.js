@@ -25,11 +25,16 @@ app.use((err, req, res, next) => {
 // Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
 // express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
 // que cualquier archivo que no sea un asset público debe listarse acá explícitamente.
-const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'CLAUDE.md', 'PRODUCT.md', 'skills-lock.json']);
+const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'claude.md', 'product.md', 'skills-lock.json']);
 app.use((req, res, next) => {
-    const requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
-    const isBlockedFile = BLOCKED_STATIC_FILES.has(requestedPath);
+    let requestedPath;
+    try {
+        requestedPath = decodeURIComponent(req.path).replace(/^\/+/, '');
+    } catch (err) {
+        return res.status(400).type('text/plain').send('Solicitud inválida.');
+    }
     const lowerPath = requestedPath.toLowerCase();
+    const isBlockedFile = BLOCKED_STATIC_FILES.has(lowerPath);
     // De instagram/ solo se exponen los JPG exportados por mes: la Content Publishing API los descarga por URL
     const isInstagramMedia = /^instagram\/\d{4}-\d{2}\/[a-z0-9-]+\.jpg$/.test(requestedPath);
     const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/')
@@ -60,6 +65,9 @@ app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html',
 // El texto lleva "DH-META" para que la automatización de Chatwoot etiquete la conversación.
 app.get('/wa/desgravamen', (req, res) => res.redirect(302, 'https://wa.me/56939319546?text=' +
     encodeURIComponent('Hola, me rechazaron el seguro de desgravamen y quiero consultar por una alternativa (ref: DH-META)')));
+
+// --- Consultas y reclamos de clientes (formulario → correo) ---
+app.get('/consultas-y-reclamos', (req, res) => res.sendFile('consultas.html', { root: __dirname }));
 
 // --- Ruta limpia para Política de Privacidad (requerida por Meta for Developers / WhatsApp Business API) ---
 app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { root: __dirname }));
@@ -148,6 +156,7 @@ app.post('/api/meta/evento', express.text({ type: 'text/plain', limit: '4kb' }),
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     const { eventName, eventId, eventSourceUrl, customData } = body || {};
     if (!META_EVENTOS_NAVEGADOR.has(eventName) || !metaEventIdValido(eventId)) return res.status(400).end();
+    if (!metaPermitido(ipCliente(req))) return res.status(429).end();
     const custom = {};
     if (customData && typeof customData.content_name === 'string') custom.content_name = customData.content_name.slice(0, 100);
     if (customData && typeof customData.contact_channel === 'string') custom.contact_channel = customData.contact_channel.slice(0, 20);
@@ -203,6 +212,21 @@ const VENTANA_CONTACTO = 10 * 60 * 1000;
 // IP para el límite: la última entrada de X-Forwarded-For es la que agrega el proxy de Railway;
 // las anteriores las puede escribir el propio cliente.
 const ipCliente = req => (req.ips && req.ips.length ? req.ips[req.ips.length - 1] : req.ip) || 'desconocida';
+// Límites separados para el formulario pyme (reenvía al CRM) y los eventos de Meta.
+function crearLimite(maximo, ventana) {
+    const porIp = new Map();
+    return ip => {
+        const ahora = Date.now();
+        if (porIp.size > 5000) for (const [k, ts] of porIp) if (!ts.some(t => ahora - t < ventana)) porIp.delete(k);
+        const recientes = (porIp.get(ip) || []).filter(t => ahora - t < ventana);
+        if (recientes.length >= maximo) { porIp.set(ip, recientes); return false; }
+        recientes.push(ahora);
+        porIp.set(ip, recientes);
+        return true;
+    };
+}
+const pymePermitido = crearLimite(5, VENTANA_CONTACTO);
+const metaPermitido = crearLimite(60, VENTANA_CONTACTO);
 let ultimaLimpiezaContacto = 0;
 function contactoPermitido(ip) {
     const ahora = Date.now();
@@ -275,7 +299,7 @@ app.post('/api/contacto', async (req, res) => {
         return res.status(400).json({ success: false, message: 'Hay datos incompletos o inválidos. Revisa el formulario.', fields: errors });
     }
     if (b.tipo === 'desgravamen' && fueraDeAlcanceDesgravamen(b)) {
-        return res.status(422).json({ success: false, message: 'Esta alternativa es para compras o refinanciamientos con el seguro de desgravamen rechazado, en los bancos indicados y con un crédito desde UF 2.000. No gestionamos cobros, reclamos ni cambios de seguro sin refinanciar.' });
+        return res.status(422).json({ success: false, message: 'Esta alternativa es para compras o refinanciamientos con el seguro de desgravamen rechazado, en los bancos indicados y con un crédito desde UF 2.000.' });
     }
 
     const tipo = TIPOS_CONTACTO[b.tipo];
@@ -405,6 +429,9 @@ app.post('/api/cotizaciones/pyme', async (req, res) => {
     if (errors.length) {
         return res.status(400).json({ success: false, message: 'Hay datos incompletos o inválidos. Revisa el formulario.', fields: errors });
     }
+    if (!pymePermitido(ipCliente(req))) {
+        return res.status(429).json({ success: false, message: 'Recibimos varios envíos seguidos. Espera unos minutos o escríbenos por WhatsApp.' });
+    }
 
     const payload = {
         ...req.body,
@@ -440,9 +467,25 @@ app.post('/api/cotizaciones/pyme', async (req, res) => {
     }
 });
 
-// Capturar errores no controlados para no crashear silenciosamente
+// Página 404 del sitio; las rutas de la API conservan una respuesta sin HTML
+app.use((req, res) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api/') && req.accepts('html')) {
+        return res.status(404).sendFile('404.html', { root: __dirname });
+    }
+    res.status(404).json({ success: false, message: 'No encontrado.' });
+});
+
+// Errores de una solicitud: respuesta genérica, sin detalles internos
+app.use((err, req, res, next) => {
+    if (res.headersSent) return next(err);
+    console.error('[Error]', err.message);
+    res.status(err.status >= 400 && err.status < 600 ? err.status : 500).json({ success: false, message: 'No pudimos procesar la solicitud.' });
+});
+
+// Un error no controlado deja el proceso en estado incierto: se registra y Railway lo reinicia
 process.on('uncaughtException', (err) => {
-    // Silencio en producción o log a archivo si fuera necesario
+    console.error('[Error no controlado]', err.message);
+    process.exit(1);
 });
 
 app.listen(PORT, () => {

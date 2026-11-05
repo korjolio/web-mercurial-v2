@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/src/img/logo/favicon.svg">
   <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,8 +42,8 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=2"></script>
 
-  <link rel="stylesheet" href="/src/css/marco.css?v=3">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=4">
+  <link rel="stylesheet" href="/src/css/marco.css?v=5">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=9">
 </head>
 
 <body class="mc-marco">
@@ -77,7 +78,7 @@
   </svg>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
-    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <a class="logo" href="/"><img src="/src/img/logo/mercurial-horizontal-color.svg" alt="Mercurial Corredores de Seguros, inicio" width="655" height="190"></a>
     <div class="acc" style="display:flex"><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a><a class="btn btn-azul" href="#cotizar">Cotizar</a></div>
   </div></header>
 
@@ -87,9 +88,9 @@
         <img src="/src/img/fotos/las-condes.jpg" alt="" fetchpriority="high" style="object-position: 50% 60%">
         <div class="txt">
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Seguro de condominio · Ley 21.442</span>
-          <h1 id="titular">Cumple la Ley 21.442 con una póliza que <b>realmente protege tu comunidad</b>.</h1>
-          <p class="sub">La Ley 21.442 exige un seguro vigente para las áreas comunes. Te asesoramos para que tu póliza realmente cubra a tu comunidad.</p>
-          <ul class="puntos"><li><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg>Respuesta en 3 a 5 horas hábiles</li><li><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Varias compañías, una conversación</li></ul>
+          <h1 id="titular">Seguro de incendio <b>para tu condominio</b>.</h1>
+          <p class="sub">Revisamos qué bienes e instalaciones comunes necesita asegurar tu comunidad y las opciones para las unidades. Te explicamos las condiciones antes de contratar.</p>
+          <ul class="puntos"><li><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg>Respuesta en 3 a 5 horas hábiles</li><li><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Cotizamos con distintas compañías de seguros</li></ul>
         </div>
       </div>
     </div></section>
@@ -97,28 +98,28 @@
       <div class="caja">
         <form data-envio="cotizacion" data-errores="b-err" novalidate>
           <div class="celda"><label for="b-seguro">Seguro</label><input id="b-seguro" value="Condominio" readonly tabindex="-1" aria-readonly="true"><input type="hidden" name="seguro" value="Condominio"></div>
-          <div class="celda"><label for="b-empresa">Empresa</label><input id="b-empresa" name="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="160" aria-describedby="b-err" required></div>
+          <div class="celda"><label for="b-empresa">Condominio o comunidad</label><input id="b-empresa" name="empresa" placeholder="Nombre del condominio" autocomplete="organization" maxlength="160" aria-describedby="b-err" required></div>
           <div class="celda"><label for="b-tel">Teléfono</label><input id="b-tel" name="telefono" type="tel" inputmode="tel" placeholder="+56 9 1234 5678" autocomplete="tel" maxlength="20" aria-describedby="b-err" required></div>
           <div class="trampa" aria-hidden="true"><label for="b-sitio">No llenar</label><input id="b-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
-          <button class="btn btn-azul" type="submit"><span class="letra">Cotizar</span> <svg class="ico" aria-hidden="true"><use href="#der"/></svg></button>
+          <button class="btn btn-azul" type="submit"><span class="letra">Solicitar una llamada</span> <svg class="ico" aria-hidden="true"><use href="#der"/></svg></button>
         </form>
         <p class="ok" hidden tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#okc"/></svg><span><b>Listo.</b> Te llamamos en 3 a 5 horas hábiles al número que nos dejaste.</span></p>
-        <div class="pie-barra"><span>Te llamamos en 3 a 5 horas hábiles, de lunes a viernes de 9:00 a 18:30 h.</span><span class="err" id="b-err" role="alert"></span></div>
+        <div class="pie-barra"><span>Te llamamos en 3 a 5 horas hábiles, de lunes a viernes de 9:00 a 18:30 h.</span><span>Usamos estos datos para contactarte por tu solicitud. <a href="/politica-privacidad">Política de privacidad</a>.</span><span class="err" id="b-err" role="alert"></span></div>
       </div>
     </div></div></section>
 
     <section class="confianza oscuro"><div class="wrap">
       <div><h2>Corredores inscritos <b>en la CMF.</b></h2><p style="color:#c9d6e4;margin-top:12px">Registro N° 8929.</p></div>
-      <div class="dato"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg><b>Cumplimiento normativo</b><p>Estructuramos tu póliza conforme al Art. 43 de la Ley 21.442.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#edificio"/></svg><b>Cobertura real</b><p>Analizamos tu comunidad para evitar brechas de cobertura en las áreas comunes.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg><b>3 a 5 horas hábiles</b><p>Lo que tardamos en responderte, de lunes a viernes.</p></div>
+      <div class="dato"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg><b>Ley 21.442</b><p>Revisamos contigo qué exige la ley para tu comunidad.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#edificio"/></svg><b>Áreas comunes y unidades</b><p>Te mostramos las condiciones de cada propuesta antes de que decidas.</p></div><div class="dato"><svg class="ico" aria-hidden="true"><use href="#reloj"/></svg><b>3 a 5 horas hábiles</b><p>Lo que tardamos en responderte, de lunes a viernes.</p></div>
     </div></section>
 
     <section class="sec"><div class="wrap">
       <div class="cabeza"><h2 class="grande">Qué pasa <b>después de consultar</b></h2><p>Cuatro pasos, desde tu mensaje hasta la póliza.</p></div>
       <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
         <ol class="pasos">
-          <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Empresa, teléfono y el seguro que te interesa. Toma menos de un minuto.</p></li>
+          <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Nombre del condominio y teléfono de contacto.</p></li>
           <li class="paso"><span class="n">2</span><h3>Te llamamos</h3><p>En 3 a 5 horas hábiles, para entender qué necesitas asegurar.</p></li>
-          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la aseguradora necesita y te presentamos las alternativas.</p></li>
+          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la compañía de seguros necesita y te presentamos las alternativas.</p></li>
           <li class="paso"><span class="n">4</span><h3>Gestionamos tu póliza</h3><p>Si decides contratar, te acompañamos en la emisión y en los cambios que necesites.</p></li>
         </ol>
       </div>
@@ -136,7 +137,7 @@
         <form class="form" data-envio="cotizacion" data-principal novalidate>
           <div class="dos">
             <div class="campo t-input-wrap"><label for="f-nombre">Nombre y apellido</label><input class="t-input" id="f-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="e-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="e-nombre"></span></div>
-            <div class="campo t-input-wrap"><label for="f-empresa">Empresa</label><input class="t-input" id="f-empresa" name="empresa" autocomplete="organization" maxlength="160" required aria-describedby="e-empresa" data-msg="¿Para qué empresa es el seguro?"><span class="t-error-msg" id="e-empresa"></span></div>
+            <div class="campo t-input-wrap"><label for="f-empresa">Condominio o comunidad</label><input class="t-input" id="f-empresa" name="empresa" autocomplete="organization" maxlength="160" required aria-describedby="e-empresa" data-msg="Escribe el nombre del condominio."><span class="t-error-msg" id="e-empresa"></span></div>
           </div>
           <div class="dos">
             <div class="campo t-input-wrap"><label for="f-correo">Correo</label><input class="t-input" id="f-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="e-correo"></span></div>
@@ -146,8 +147,8 @@
           <div class="campo"><label for="f-msj">Mensaje <small>(opcional)</small></label><textarea class="t-input" id="f-msj" name="mensaje" maxlength="3000" placeholder="Cuéntanos qué necesitas asegurar."></textarea></div>
           <div class="trampa" aria-hidden="true"><label for="f-sitio">No llenar</label><input id="f-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
           <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tu consulta.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
-          <button class="btn btn-azul enviar" type="submit"><span class="letra">Enviar consulta</span></button>
-          <p class="nota">Usamos tus datos solo para responder esta consulta. <a href="/politica-privacidad">Política de privacidad</a>.</p>
+          <button class="btn btn-azul enviar" type="submit"><span class="letra">Consultar por mi condominio</span></button>
+          <p class="nota">Usamos tus datos para responder, preparar la cotización solicitada y gestionar su seguimiento. <a href="/politica-privacidad">Política de privacidad</a>.</p>
         </form>
         <div class="exito" hidden>
           <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -161,7 +162,7 @@
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
-      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile.</p></div>
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile.</p></div>
       <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li></ul></div>
       <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li></ul></div>
     </div>
@@ -173,7 +174,7 @@
 
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=5"></script>
+  <script src="/src/js/sitio.js?v=7"></script>
 </body>
 
 </html>

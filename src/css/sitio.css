@@ -217,7 +217,7 @@ fieldset { border: 0; min-width: 0; }
   .hamb { display: grid; }
   .nav .wrap { height: 68px; }
   .logo { padding: 6px 0; }
-  .logo img { height: 32px; }
+  .logo img { height: 42px; }
 }
 @media (max-width: 560px) {
   .wrap { width: calc(100% - 32px); }
@@ -251,8 +251,8 @@ fieldset { border: 0; min-width: 0; }
 .panel.chico { min-height: 460px; }
 .bloques { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .bloque { border: 1px solid var(--borde); border-radius: 16px; padding: 32px; }
-.bloque h3 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
-.bloque h3 .ico { color: var(--azul-b); }
+.bloque h2 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+.bloque h2 .ico { color: var(--azul-b); }
 .bloque p { margin-top: 10px; color: var(--tx2); font-size: 16px; }
 .bloque ul { list-style: none; margin-top: 14px; display: grid; gap: 8px; }
 .bloque li { display: flex; gap: 10px; font-size: 16px; }
@@ -294,3 +294,22 @@ fieldset { border: 0; min-width: 0; }
 }
 
 .pregunta .resp a, .bloque a:not(.btn) { color: var(--azul-h); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Franja de compañías: la pista lleva la lista dos veces para que el bucle no se note */
+.franja-cias .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); align-items: center; }
+.cias { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.cias-pista { display: flex; width: max-content; animation: cias-paso 42s linear infinite; }
+.cias ul { display: flex; gap: 12px; list-style: none; padding-right: 12px; }
+.cias li { display: flex; align-items: center; justify-content: center; height: 76px; padding: 0 26px; background: #fff; border-radius: 14px; }
+.cias img { display: block; width: auto; height: auto; max-width: 150px; max-height: 44px; }
+.cias img[src*="contempora"] { max-width: 160px; max-height: 66px; } /* el archivo trae márgenes transparentes */
+@keyframes cias-paso { to { transform: translateX(-50%); } }
+@media (max-width: 860px) { .franja-cias .wrap { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+@media (prefers-reduced-motion: reduce) {
+  .cias { -webkit-mask-image: none; mask-image: none; }
+  .cias-pista { animation: none; width: auto; }
+  .cias ul { flex-wrap: wrap; padding-right: 0; }
+  .cias ul[aria-hidden] { display: none; }
+}
+
+.pie-barra a { text-decoration: underline; text-underline-offset: 3px; }

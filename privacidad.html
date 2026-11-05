@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/src/img/logo/favicon.svg">
   <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/css/marco.css?v=3">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=4">
+  <link rel="stylesheet" href="/src/css/marco.css?v=5">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=9">
   <!-- Banner de cookies: acá solo sirve para el enlace "Configurar cookies" (esta página no mide nada) -->
   <script src="/src/js/consent.js?v=1"></script>
 </head>
@@ -45,11 +46,11 @@
   <!-- Navegación Simplificada -->
   <div class="util mc-marco"><div class="wrap">
     <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
-    <div class="der"><a href="/#consultas">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
   </div></div>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
-    <a class="logo" href="/"><img src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros, inicio" width="6225" height="1196"></a>
+    <a class="logo" href="/"><img src="/src/img/logo/mercurial-horizontal-color.svg" alt="Mercurial Corredores de Seguros, inicio" width="655" height="190"></a>
     <nav aria-label="Principal">
       <ul class="menu">
         <li id="li-seguros">
@@ -68,7 +69,7 @@
           </div>
         </li>
         <li><a href="/#mercurial">Quiénes somos</a></li>
-        <li><a href="/#consultas">Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li>
         <li><a href="/#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -89,7 +90,7 @@
         <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen hipotecario</a></li>
         <li class="sub">Mercurial</li>
         <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
-        <li><a href="/#consultas"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
+        <li><a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
       </ul>
       <div class="acc"><a class="btn btn-azul" href="/#contacto">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
     </nav>
@@ -114,8 +115,7 @@
         <li><strong>Formularios de cotización y de consultas y reclamos:</strong> nombre, correo, teléfono, empresa, el
           seguro que le interesa y el mensaje que usted escriba. Se envían por correo electrónico a
           contacto@mercurial.cl.</li>
-        <li><strong>Formulario de desgravamen:</strong> nombre, teléfono, correo, banco y situación de su crédito
-          hipotecario. Este formulario no pide diagnósticos ni antecedentes médicos.</li>
+        <li><strong>Formulario de seguro de desgravamen:</strong> nombre, teléfono, correo opcional, banco, situación del crédito hipotecario, si hubo rechazo previo del seguro de desgravamen y rango del monto del crédito a asegurar. Este formulario no pide diagnósticos ni antecedentes médicos.</li>
         <li><strong>Formulario de cotización Seguro Pyme:</strong> datos de contacto (nombre, apellido, email y
           teléfono), datos del titular (RUT y razón social o nombre), dirección y comuna del riesgo, y los antecedentes
           del inmueble, la actividad y los montos a asegurar que usted ingrese.</li>
@@ -207,9 +207,9 @@
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
-      <div><img class="logo-pie" src="/src/img/Mercurial Grande Sin Fondo.png" alt="Mercurial Corredores de Seguros" width="6225" height="1196" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
-      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Cotizar pyme en línea</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/#consultas">Consultas y reclamos</a></li></ul></div>
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
+      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
       <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
     </div>
     <div class="legal">
@@ -218,7 +218,7 @@
   </div></footer>
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=5"></script>
+  <script src="/src/js/sitio.js?v=7"></script>
 </body>
 
 </html>
