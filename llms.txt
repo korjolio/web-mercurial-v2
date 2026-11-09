@@ -13,14 +13,15 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 ## Servicios principales
 
 - **Gestión de riesgos corporativos**: Diseño de programas para protección de activos industriales y continuidad operacional, incluyendo cobertura de Perjuicio por Paralización.
-- **Transporte y logística**: Seguros de transporte de carga nacional e internacional. Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
+- **Transporte y logística**: Seguros de transporte de carga nacional e internacional (https://mercurial.cl/seguros/transporte). Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
 - **Responsabilidad Civil**: Ingeniería de límites para RC Extracontractual, RC Patronal con extensión a Subcontratistas, y diseño de estructuras de Responsabilidad Cruzada.
-- **Property e incendio**: Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
-- **Salud colectiva y beneficios**: Seguro complementario de salud para equipos de trabajo.
+- **Property e incendio** (https://mercurial.cl/seguros/incendio): Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
+- **Salud colectiva y beneficios**: Seguro complementario de salud para equipos de trabajo (https://mercurial.cl/seguros/colectivos-de-salud).
+- **Flotas**: Seguro para los vehículos de la empresa (https://mercurial.cl/seguros/flotas).
 - **Seguro de condominio (Ley 21.442)**: Asesoría para el seguro obligatorio de las áreas comunes, estructurado conforme al Art. 43 de la ley (https://mercurial.cl/condominio).
 - **Seguro Pyme multiriesgo**: Cotización en las principales compañías a partir de los antecedentes del local, oficina o bodega (https://mercurial.cl/cotizar-pyme).
 - **Seguro de mascotas**: Convenio con BCI Seguros para perros y gatos, con planes Esencial, Pro e Infinite y cotizador en línea (https://mercurial.cl/seguro-mascotas).
-- **Seguro de desgravamen hipotecario**: Búsqueda de alternativas para personas cuyo seguro de desgravamen fue rechazado por motivos de salud. Cobertura sujeta a evaluación y aceptación de la compañía de seguros.
+- **Seguro de desgravamen hipotecario**: Búsqueda de alternativas para personas cuyo seguro de desgravamen fue rechazado por motivos de salud. Cobertura sujeta a evaluación y aceptación de la compañía de seguros (https://mercurial.cl/desgravamen-rechazado).
 
 ## Rubros especializados
 
@@ -42,6 +43,7 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 - **Sitio web**: https://mercurial.cl
 - **Email consultas**: contacto@mercurial.cl
 - **Email reclamos**: reclamos@mercurial.cl
+- **Consultas y reclamos**: https://mercurial.cl/consultas-y-reclamos
 - **WhatsApp**: +56 9 3931 9546
 - **Dirección**: Santiago, Chile
 - **Horario**: Lunes a viernes, 09:00 – 18:30 hrs
