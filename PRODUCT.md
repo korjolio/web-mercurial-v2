@@ -18,7 +18,7 @@ mercurial.cl tiene que generar consultas comerciales para cuatro líneas priorit
 Corredora de seguros, no aseguradora, inscrita en la CMF (Registro N° 8929, RUT 76.826.322-1). Cotiza con aseguradoras y gestiona la póliza en nombre del cliente. Todavía no hay un diferenciador comprobado más allá de esto: no inventarlo.
 
 ## Operating Context
-- Leads: HubSpot retirado (oct. 2026); condominio, transporte y portada → WhatsApp hasta que el CRM reciba consultas; pyme/incendio → CRM propio (`/cotizar-pyme` → `/api/cotizaciones/pyme`, **intocable**); mascotas → BCI.
+- Leads: HubSpot retirado (oct. 2026); portada y páginas de seguro → correo/WhatsApp hasta que el CRM reciba consultas; pyme/incendio → CRM propio (`/cotizar-pyme` → `/api/cotizaciones/pyme`, **intocable**); mascotas → BCI.
 - Medición: GTM `GTM-K4SL5KSF`, píxel de Meta + API de conversiones con deduplicación (`src/js/meta.js`).
 - Contacto: WhatsApp +56 9 3931 9546 (Chatwoot, "Mercurial WABA"); horario L-V 09:00-18:30; correo de reclamos reclamos@mercurial.cl (Circular CMF N° 2131).
 - Compromiso de respuesta confirmado: 3 a 5 horas hábiles.

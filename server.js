@@ -48,9 +48,9 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname)); // Servir archivos estáticos (index.html, etc.)
 
-// --- Rutas limpias para Landing Pages de Google Ads ---
-app.get('/condominio', (req, res) => res.sendFile('condominio.html', { root: __dirname }));
-app.get('/transporte', (req, res) => res.sendFile('transporte.html', { root: __dirname }));
+// --- Antiguas landings de Google Ads (eliminadas el 09-11-2026): redirigen para no romper links viejos ---
+app.get(['/condominio', '/condominio.html'], (req, res) => res.redirect(301, '/'));
+app.get(['/transporte', '/transporte.html'], (req, res) => res.redirect(301, '/seguros/transporte'));
 
 // --- Páginas de cada seguro (sitio nuevo, octubre 2026) ---
 app.get('/seguros/flotas', (req, res) => res.sendFile('seguro-flotas.html', { root: __dirname }));

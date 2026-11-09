@@ -51,8 +51,6 @@
   window.mercurialMeta = { track: track, trackBrowser: trackBrowser, newEventId: newEventId, pageUrl: pageUrl };
 
   var PRODUCTOS = {
-    '/condominio': 'Seguro Condominio',
-    '/transporte': 'Seguro Transporte',
     '/seguro-mascotas': 'Seguro Mascotas',
     '/mascotas': 'Seguro Mascotas',
     '/cotizar-pyme': 'Seguro Pyme'

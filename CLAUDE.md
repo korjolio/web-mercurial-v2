@@ -11,7 +11,7 @@ npm start          # http://localhost:3001
 
 El formulario `/cotizar-pyme` necesita `CRM_URL` (p. ej. `https://app.mercurial.cl`) y `CRM_API_KEY` (misma clave que `PUBLIC_PROSPECTS_API_KEY` en el CRM). Sin ellas, `/api/cotizaciones/pyme` responde 503 y la página muestra el error con alternativa WhatsApp. Para probar en local sin CRM, levantar un servidor falso que acepte `POST /api/public/prospects`.
 
-`npm run frontend` (puerto 3000) sirve archivos estáticos con `npx serve`, **pero ahí no existen las rutas limpias** (`/seguro-mascotas`, `/condominio`, …). Para probar el sitio real, usar siempre `npm start`.
+`npm run frontend` (puerto 3000) sirve archivos estáticos con `npx serve`, **pero ahí no existen las rutas limpias** (`/seguro-mascotas`, `/cotizar-pyme`, …). Para probar el sitio real, usar siempre `npm start`.
 
 ## Deploy
 
@@ -33,8 +33,8 @@ Después conviene `git pull` en el checkout principal del Mac para que no quede 
 |---|---|---|
 | `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización y formulario de cotización → correo. |
 | `/seguros/flotas`, `/seguros/transporte`, `/seguros/incendio`, `/seguros/colectivos-de-salud` | `seguro-*.html` | Páginas de cada línea. Indexables (en `sitemap.xml`). Flotas y Salud sin coberturas hasta que se confirmen. |
-| `/condominio` | `condominio.html` | Landing Google Ads (Ley 21.442). `noindex`, sin menú. Formulario → correo. |
-| `/transporte` | `transporte.html` | Landing Google Ads. `noindex`, sin menú. Formulario → correo. |
+| `/condominio`, `/transporte` | — | Antiguas landings de Google Ads, **eliminadas el 09-11-2026** (no tenían contenido). Redirigen 301 a `/` y `/seguros/transporte`. |
+| `/desgravamen-rechazado` | `desgravamen.html` | Landing de la campaña de Meta (seguro de desgravamen rechazado). `noindex`, con menú. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |
 | `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**. Estilos propios en `src/css/cotizar-pyme.css`. |
 | `/consultas-y-reclamos` | `consultas.html` | Formulario de consultas y reclamos → correo. Indexable (en `sitemap.xml`). `/#consultas` redirige aquí. |
@@ -65,7 +65,7 @@ Estilos del sitio nuevo: `src/css/marco.css` (tokens, cabecera de dos niveles, p
 
 Tres caminos, según la página:
 
-1. **Portada, páginas de seguro, consultas y reclamos, condominio y transporte**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
+1. **Portada, páginas de seguro, consultas y reclamos y desgravamen**: `<form data-envio="cotizacion|consulta">` → `src/js/sitio.js` → `POST /api/contacto` → correo a `contacto@mercurial.cl` por el SMTP de Google Workspace (`SMTP_USER`, `SMTP_PASS` con contraseña de aplicación; `MAIL_TO` opcional). Sin SMTP responde 503 y la página ofrece WhatsApp. `MAIL_DRY_RUN=1` arma el correo sin enviarlo (solo local). Campo trampa `sitio_web` y límite de 5 envíos por IP cada 10 min. HubSpot se retiró; el paso siguiente es mandar estas consultas al CRM (`product: "consulta"`). WhatsApp de leads: Chatwoot "Mercurial WABA", +56 9 3931 9546.
 2. **Mascotas**: el lead queda registrado en BCI Seguros al completar el paso 1 del cotizador embebido; se consulta en la bandeja de trabajo de `sau.bciseguros.cl` (convenio "Mascotas S20", corredor Mercurial).
 3. **Pyme (`/cotizar-pyme`)**: `src/js/cotizar-pyme.js` → `POST /api/cotizaciones/pyme` (server.js valida contra `src/data/pyme-catalogos.js`, `comunas.json` y `ans-pyme-actividades.json`) → `POST {CRM_URL}/api/public/prospects` con header `x-api-key` e `Idempotency-Key` → prospecto en etapa "Nuevo" del CRM (`app.mercurial.cl`, repo `korjolio/studio`) con ramo "Multiriesgo Pyme", el resumen del riesgo en Notas y el JSON completo en `rawData`. Las listas del formulario son las exactas del cotizador "Seguro de Pymes" de ANS; la referencia está en `docs/referencia/ans-pyme-campos.md`. **No inventar opciones**: si el portal cambia, actualizar catálogo en la web y en el CRM a la vez.
 
@@ -122,4 +122,4 @@ Los datos de planes y coberturas de la landing provienen de los PDFs oficiales d
 - **QA en navegador obligatorio** para cambios de UI, antes de dar algo por terminado. Debe cubrir: desktop y móvil (390px), errores de consola, desborde horizontal, **el flujo completo** (no solo la primera pantalla) y **el paso del tiempo** (muestrear a 10s, 30s, 60s, 80s cuando haya lógica diferida o temporizadores). Confirmar en producción tras desplegar.
 - **Definir lo visual antes de codear** landings o rediseños: mockups aprobados primero, implementación después.
 - Contenido en **español de Chile**. En textos visibles se escribe «compañía de seguros», no «aseguradora» (salvo «no aseguradora» en el pie). Nada de cifras, coberturas ni beneficios inventados: son un producto financiero regulado.
-- Landings de Ads (`condominio`, `transporte`) van `noindex`; las de producto son indexables y deben sumarse a `sitemap.xml`.
+- Landings de anuncios (hoy solo `/desgravamen-rechazado`) van `noindex`; las de producto son indexables y deben sumarse a `sitemap.xml`. **Pendiente**: páginas indexables de seguro de condominio, pyme y seguro de desgravamen (hoy no aparecen en Google).
