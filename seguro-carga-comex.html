@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/src/img/logo/favicon.svg">
+  <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="/src/img/icono-180.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Seguro de carga para importaciones y exportaciones | Mercurial Corredores de Seguros</title>
+  <meta name="description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile. Te comparamos tu seguro actual.">
+  <link rel="canonical" href="https://mercurial.cl/seguros/transporte/importaciones-exportaciones">
+  <meta property="og:title" content="Seguro de carga para importaciones y exportaciones | Mercurial Corredores de Seguros">
+  <meta property="og:description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile. Te comparamos tu seguro actual.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mercurial.cl/seguros/transporte/importaciones-exportaciones">
+  <meta property="og:image" content="https://mercurial.cl/src/img/og-image-dark.png">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Mercurial Corredores de Seguros">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Consentimiento de cookies: debe ir antes de GTM y del píxel de Meta (ver src/js/consent.js) -->
+  <script src="/src/js/consent.js?v=1"></script>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K4SL5KSF');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
+  <script src="/src/js/meta.js?v=3"></script>
+
+  <link rel="stylesheet" href="/src/css/marco.css?v=5">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=10">
+<style>
+    /* Página de seguro de carga internacional */
+    .entradas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .entradas .btn { min-height: 52px; }
+    .panel .btn-claro { background: #fff; color: var(--navy); } .panel .btn-claro:hover { background: var(--celeste); }
+    .panel .btn-linea { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); color: #fff; background: transparent; } .panel .btn-linea:hover { background: rgba(255,255,255,.1); }
+    /* Caja de comparar bajo el hero */
+    .barra .comparar { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 14px 14px 14px 22px; }
+    .barra .comparar b { display: block; font-size: 18px; font-weight: 600; color: var(--navy); }
+    .barra .comparar span { font-size: 15px; color: var(--tx2); }
+    /* ¿Cuánto pagas hoy? */
+    .hoy { margin-top: 112px; }
+    .hoy .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; }
+    .oculto { border-radius: 20px; background: var(--navy); color: #fff; padding: 40px; display: flex; flex-direction: column; gap: 18px; }
+    .oculto .eti { font-size: 14px; font-weight: 500; color: #cfe3f1; display: flex; align-items: center; gap: 8px; }
+    .oculto .eti .ico { color: var(--acento); width: 18px; height: 18px; }
+    .oculto h2 { font-weight: 300; font-size: clamp(30px, 3vw, 40px); line-height: 1.12; letter-spacing: -.02em; }
+    .oculto h2 b { font-weight: 600; }
+    .oculto p { color: #dfe9f3; font-size: 17px; }
+    .ahorro { margin-top: auto; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; padding: 18px 20px; border-radius: 14px; background: rgba(242,166,90,.14); box-shadow: inset 0 0 0 1px rgba(242,166,90,.4); }
+    .ahorro b { font-size: clamp(40px, 4.4vw, 56px); font-weight: 600; letter-spacing: -.03em; line-height: 1; color: var(--acento); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .ahorro span { font-size: 16px; color: #fff; }
+    .ahorro small { display: block; margin-top: 4px; font-size: 13px; color: #a9bbcd; }
+    @media (max-width: 560px) { .ahorro { grid-template-columns: 1fr; gap: 8px; } }
+    .comp { border: 1px solid var(--borde); border-radius: 20px; padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 50px -36px rgba(13,35,64,.4); }
+    .comp h3 { font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+    .comp > p { color: var(--tx2); font-size: 16px; }
+    .comp ol { list-style: none; display: grid; gap: 14px; counter-reset: c; }
+    .comp li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; font-size: 16px; }
+    .comp li::before { counter-increment: c; content: counter(c); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--celeste); color: var(--azul-h); font-weight: 700; }
+    .comp li small { display: block; color: var(--tx2); font-size: 14px; }
+    .comp .acc { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+    /* Tabla */
+    .tabla { width: 100%; border-collapse: collapse; font-size: 16px; }
+    .tabla th, .tabla td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+    .tabla th { font-weight: 600; color: var(--navy); font-size: 14px; letter-spacing: .02em; text-transform: uppercase; }
+    .tabla td b { font-weight: 600; }
+    /* Exclusiones */
+    .filtro { margin-top: 112px; background: var(--gris); padding: 72px 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; max-width: 980px; }
+    .chips span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--borde); background: #fff; font-size: 15px; font-weight: 500; color: var(--tx); }
+    .filtro p.cierre { margin-top: 24px; font-size: 17px; }
+    .filtro p.cierre a { color: var(--azul-h); text-decoration: underline; text-underline-offset: 3px; }
+    .firma { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--borde); color: var(--tx2); font-size: 14px; }
+    @media (max-width: 860px) { .hoy .wrap { grid-template-columns: 1fr; } .oculto, .comp { padding: 28px 24px; } .barra .comparar { grid-template-columns: 1fr; padding: 16px; } .barra .comparar .btn { width: 100%; } .tabla { font-size: 15px; } .tabla th, .tabla td { padding: 12px 10px; } .tabla-scroll { overflow-x: auto; } }
+  </style>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "InsuranceAgency", "@id": "https://mercurial.cl/#org", "name": "Mercurial Corredores de Seguros Ltda.", "url": "https://mercurial.cl", "telephone": "+56939319546", "email": "contacto@mercurial.cl", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}, "identifier": {"@type": "PropertyValue", "name": "Registro CMF", "value": "8929"}}, {"@type": "Service", "name": "Seguro de carga para importaciones y exportaciones", "serviceType": "Seguro de transporte de carga internacional", "url": "https://mercurial.cl/seguros/transporte/importaciones-exportaciones", "provider": {"@id": "https://mercurial.cl/#org"}, "areaServed": "CL", "description": "Certificados de seguro Todo Riesgo (cláusula A) por embarque, sin póliza anual, para carga marítima, aérea y terrestre internacional."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Tengo que cambiar de agente de aduana?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tu agente sigue despachando. El seguro lo contratas con Mercurial y le entregas el certificado para el despacho."}}, {"@type": "Question", "name": "¿Sirve para exportaciones?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El certificado se pide hasta 72 horas después del zarpe en transporte marítimo, o hasta 24 horas después del inicio del viaje en aéreo y terrestre."}}, {"@type": "Question", "name": "¿Cuánto cuesta el seguro de mi embarque?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del valor, la mercadería, el embalaje y el trayecto. Si nos mandas el certificado de tu último embarque, te mostramos la comparación con lo que pagas hoy."}}, {"@type": "Question", "name": "¿Hay que firmar un contrato anual?", "acceptedAnswer": {"@type": "Answer", "text": "No. Es un certificado por embarque, sin permanencia."}}, {"@type": "Question", "name": "¿Cuándo tengo que pedir el certificado?", "acceptedAnswer": {"@type": "Answer", "text": "Antes de que la carga llegue a destino; en aéreo, hasta 48 horas después del arribo. Lo ideal es pedirlo cuando tienes la factura comercial y el documento de embarque."}}, {"@type": "Question", "name": "¿Y si el embarque supera US$300.000?", "acceptedAnswer": {"@type": "Answer", "text": "Nos avisas con 72 horas hábiles y la compañía fija la tarifa antes del embarque."}}, {"@type": "Question", "name": "¿Qué pasa si hay un siniestro?", "acceptedAnswer": {"@type": "Answer", "text": "Nos avisas, la compañía de seguros designa un liquidador y paga según la póliza. Mercurial acompaña el reclamo contigo."}}]}]}</script>
+</head>
+
+<body class="mc-marco">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="camion" viewBox="0 0 24 24"><path d="M3 16V7a1 1 0 0 1 1-1h9v10"/><path d="M13 9h4l3 3.5V16h-1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6M3 16h2"/></symbol>
+    <symbol id="caja" viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m4 7 8 4 8-4M12 11v10"/></symbol>
+    <symbol id="llama" viewBox="0 0 24 24"><path d="M12 21c-4 0-7-2.7-7-6.5 0-3.4 2.6-5.4 3.6-8.5 1.8 1.4 2.4 3 2.4 4.6 1-1 1.6-2.4 1.5-4.1C16.3 8.6 19 11.6 19 14.5 19 18.3 16 21 12 21z"/></symbol>
+    <symbol id="salud" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M9 11h2l1-2 1.5 4 1-2H17"/></symbol>
+    <symbol id="edificio" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 7l8 2v12M3 21h18M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01"/></symbol>
+    <symbol id="huella" viewBox="0 0 24 24"><circle cx="5.5" cy="10" r="1.8"/><circle cx="9.5" cy="6" r="1.8"/><circle cx="14.5" cy="6" r="1.8"/><circle cx="18.5" cy="10" r="1.8"/><path d="M12 11c-2.5 0-4.8 2.1-5.4 4.6-.4 1.7.9 3.4 2.7 3.4h5.4c1.8 0 3.1-1.7 2.7-3.4-.6-2.5-2.9-4.6-5.4-4.6z"/></symbol>
+    <symbol id="casa" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="escudo" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 10 4-1.8 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path d="M9.5 9.5c0 2.8 2.2 5 5 5l1-1.5-2-1-1 .8a3 3 0 0 1-2-2l.8-1-1-2z"/></symbol>
+    <symbol id="doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+    <symbol id="balanza" viewBox="0 0 24 24"><path d="M12 4v16M6 20h12M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0z"/></symbol>
+    <symbol id="mensaje" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="ico-cotizar" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+    <symbol id="personas" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 5.8M21 20c0-2.6-1.7-4.9-4-5.7"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="der" viewBox="0 0 24 24"><path d="M4 12h15M12.5 5.5 19 12l-6.5 6.5"/></symbol>
+    <symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="alerta" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></symbol>
+    <symbol id="barco" viewBox="0 0 24 24"><path d="M3 17c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0"/><path d="M4 14 5.5 9H18.5L20 14M12 9V4M8 9V6h8v3"/></symbol>
+    <symbol id="avion" viewBox="0 0 24 24"><path d="M10 13 3 10l1-2 8 1 4-5h2l-2 6 5 1 1 2-6 1-3 6h-2l1-6"/></symbol>
+    <symbol id="ojo" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="okc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></symbol>
+  </svg>
+
+  <div class="util mc-marco"><div class="wrap">
+    <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
+    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+  </div></div>
+
+  <header class="nav mc-marco" id="nav"><div class="wrap">
+    <a class="logo" href="/"><img src="/src/img/logo/mercurial-horizontal-color.svg" alt="Mercurial Corredores de Seguros, inicio" width="655" height="190"></a>
+    <nav aria-label="Principal">
+      <ul class="menu">
+        <li id="li-seguros">
+          <button type="button" id="btn-seguros" aria-expanded="false" aria-controls="menu-seguros">Seguros <svg class="ico chev" aria-hidden="true"><use href="#chev"/></svg></button>
+          <div class="t-dropdown" id="menu-seguros" inert>
+            <div class="grupo-menu"><p class="tit-menu">Empresas</p><ul>
+              <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg><div><b>Flotas</b><span>Camiones, camionetas y autos de la empresa</span></div></a></li>
+              <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Transporte</b><span>Carga por ruta, puerto o importada</span></div></a></li>
+              <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg><div><b>Incendio</b><span>Locales, oficinas, bodegas y plantas</span></div></a></li>
+              <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg><div><b>Colectivos de salud</b><span>Complemento a la Isapre o Fonasa</span></div></a></li>
+            </ul></div>
+            <div class="grupo-menu"><p class="tit-menu">Personas</p><ul>
+              <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg><div><b>Seguro de mascotas</b><span>Perros y gatos, con BCI Seguros</span></div></a></li>
+              <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg><div><b>Desgravamen hipotecario</b><span>Alternativas para tu crédito hipotecario</span></div></a></li>
+            </ul></div>
+          </div>
+        </li>
+        <li><a href="/#mercurial">Quiénes somos</a></li>
+        <li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="acc"><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener">Hablar con un ejecutivo</a><a class="btn btn-azul" href="#contacto">Cotizar</a></div>
+    <button class="hamb" type="button" id="hamb" aria-label="Menú" aria-expanded="false" aria-controls="panel-movil"><svg class="ico ico-abrir" aria-hidden="true"><use href="#menu"/></svg><svg class="ico ico-cerrar" aria-hidden="true"><use href="#x"/></svg></button>
+  </div></header>
+
+  <div class="panel-movil mc-marco" id="panel-movil" hidden>
+    <nav aria-label="Menú móvil">
+      <ul>
+        <li class="sub">Seguros para empresas</li>
+        <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></li>
+        <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></li>
+        <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></li>
+        <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></li>
+        <li class="sub">Seguros para personas</li>
+        <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg>Seguro de mascotas</a></li>
+        <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen hipotecario</a></li>
+        <li class="sub">Mercurial</li>
+        <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
+        <li><a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
+      </ul>
+      <div class="acc"><a class="btn btn-azul" href="#contacto">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- 1. Primera pantalla -->
+    <section class="hero oscuro" aria-labelledby="titular"><div class="wrap">
+      <div class="panel">
+        <img src="/src/img/fotos/valparaiso-puerto.jpg" alt="" fetchpriority="high" style="object-position: 40% 55%">
+        <div class="txt">
+          <span class="sello"><svg class="ico" aria-hidden="true"><use href="#barco"/></svg>Seguro de carga internacional</span>
+          <h1 id="titular">Seguro de carga para <b>importaciones y exportaciones</b></h1>
+          <p class="sub">Mercurial emite certificados de seguro Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile.</p>
+          <div class="entradas">
+            <a class="btn btn-claro" href="#importo"><svg class="ico" aria-hidden="true"><use href="#barco"/></svg>Importo</a>
+            <a class="btn btn-linea" href="#exporto"><svg class="ico" aria-hidden="true"><use href="#avion"/></svg>Exporto</a>
+          </div>
+        </div>
+      </div>
+    </div></section>
+    <section class="barra" id="comparar" aria-label="Compara tu seguro actual"><div class="wrap"><div>
+      <div class="caja comparar">
+        <div><b>¿Ya aseguras tus embarques?</b><span>Mándanos tu último certificado y te decimos cuánto ahorras.</span></div>
+        <a class="btn btn-azul" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20%C3%BAltimo%20embarque" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Compara tu seguro actual</a>
+        <a class="btn btn-borde" href="#contacto">Cotizar mi próximo embarque</a>
+      </div>
+    </div></div></section>
+    <!-- 2. ¿Cuánto pagas hoy? -->
+    <section class="hoy" id="importo" aria-labelledby="t-hoy"><div class="wrap">
+      <div class="oculto">
+        <span class="eti"><svg class="ico" aria-hidden="true"><use href="#ojo"/></svg>Si importas</span>
+        <h2 id="t-hoy">¿Cuánto pagas hoy <b>por asegurar tu carga?</b></h2>
+        <p>Muchas veces el seguro viene incluido en la factura del agente de aduana o del forwarder, junto a otros cobros. Pocas empresas saben qué tasa están pagando ni qué cubre.</p>
+        <div class="ahorro"><b>12 de 15</b><span>importadores que revisamos pagaban más por el mismo seguro. La mayoría, un <strong>75% más</strong>.</span></div>
+      </div>
+      <div class="comp">
+        <h3>Te lo comparamos con tu último embarque</h3>
+        <p>Sin compromiso. Si no te conviene, te lo decimos.</p>
+        <ol>
+          <li><span>Nos mandas tu último certificado<small>Por WhatsApp, en PDF o foto.</small></span></li>
+          <li><span>Revisamos tasa, cobertura y deducibles<small>Qué cláusula tienes, a nombre de quién y qué no cubre.</small></span></li>
+          <li><span>Te respondemos de inmediato<small>Con la prima de un certificado Todo Riesgo para el mismo embarque.</small></span></li>
+        </ol>
+        <div class="acc">
+          <a class="btn btn-azul" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20%C3%BAltimo%20embarque" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
+          <a class="btn btn-borde" href="#contacto">Cotizar mi próximo embarque</a>
+        </div>
+      </div>
+    </div></section>
+    <!-- 3. Cómo funciona -->
+    <section class="sec"><div class="wrap">
+      <div class="cabeza"><h2 class="grande">Cómo funciona, <b>embarque por embarque</b></h2><p>Tu agente de aduana o tu forwarder siguen haciendo su trabajo. Solo cambia quién emite el seguro.</p></div>
+      <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
+        <ol class="pasos">
+          <li class="paso"><span class="n">1</span><h3>Nos envías el embarque</h3><p>Factura comercial, origen y destino, medio de transporte, valor y fecha estimada de salida o arribo.</p></li>
+          <li class="paso"><span class="n">2</span><h3>Emitimos el certificado</h3><p>Antes del arribo de la nave o camión; en aéreo, hasta 48 h después. Te llega por correo.</p></li>
+          <li class="paso"><span class="n">3</span><h3>Lo usas en el despacho</h3><p>Se lo pasas a tu agente o lo adjuntas a la documentación del embarque, como cualquier otro certificado.</p></li>
+          <li class="paso"><span class="n">4</span><h3>Pagas al emitir</h3><p>La prima se paga al momento de emitir el certificado, en dólares o pesos. Si hay siniestro, la compañía liquida y nosotros acompañamos.</p></li>
+        </ol>
+      </div>
+    </div></section>
+    <!-- 4. Qué cubre -->
+    <section class="sec"><div class="wrap">
+      <div class="cabeza"><h2 class="grande">Qué cubre <b>tu certificado</b></h2><p>Condiciones del programa vigente. Antes de emitir te confirmamos por escrito las que aplican a tu embarque.</p></div>
+      <div class="bloques">
+        <div class="bloque"><h3><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Cobertura</h3>
+          <ul>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Todo Riesgo para mercadería nueva (cláusula "A"), durante el tramo en que la carga es responsabilidad de tu empresa</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Huelga incluida en todos los medios; guerra incluida en marítimo y aéreo</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Marítimo (contenedor completo o consolidado), aéreo y terrestre internacional</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Hasta US$300.000 por embarque. Mayores: avisa con 72 h hábiles y se tarifica aparte</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Alimentos congelados o refrigerados (excepto carne congelada), con requisitos: dos termógrafos, carta de frío y contenedor precintado</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Mercadería usada: cobertura restringida (cláusula "C"), se cotiza aparte</li>
+          </ul>
+        </div>
+        <div class="bloque"><h3><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Deducibles</h3>
+          <div class="tabla-scroll"><table class="tabla" style="margin-top:14px">
+            <tr><th>Embalaje o evento</th><th>Deducible</th></tr>
+            <tr><td>Contenedor completo seco (FCL) o camión cerrado</td><td><b>Sin deducible</b></td></tr>
+            <tr><td>Otros embalajes (consolidado, aéreo)</td><td>0,5% del monto, mín. US$500</td></tr>
+            <tr><td>Robo o asalto</td><td>10% de la pérdida, mín. US$1.000</td></tr>
+            <tr><td>Falla de frío</td><td>Detención de 24 h (marítimo) o 12 h (terrestre)</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </div></section>
+    <!-- 5. Filtro -->
+    <section class="filtro" aria-labelledby="t-filtro"><div class="wrap">
+      <h2 class="grande" id="t-filtro">Qué cargas <b>no entran</b> en el programa</h2>
+      <p style="color:var(--tx2);margin-top:12px;max-width:60ch;font-size:17px">Te lo decimos antes de que llenes nada. Si tu mercadería está aquí, la cotizamos por otra vía.</p>
+      <div class="chips">
+        <span>Electrónica</span><span>Celulares</span><span>Computadores</span><span>Línea blanca</span><span>Farmacéuticos y medicamentos</span><span>Vehículos</span><span>Cobre</span><span>Perfumes</span><span>Joyas y relojes</span><span>Semillas</span><span>Vidrio plano</span><span>Carga viva</span><span>Mudanzas</span><span>Carga sobredimensionada</span><span>Combustibles</span><span>Explosivos y corrosivos</span><span>Armas</span><span>Tabaco</span><span>Obras de arte y antigüedades</span><span>Oro, plata y metales preciosos</span><span>Dinero y documentos</span><span>Pieles</span><span>Prototipos</span><span>Harina de pescado</span><span>Carga sin conocimiento de embarque</span>
+      </div>
+      <p class="cierre">¿Tu carga está en la lista? <a href="https://wa.me/56939319546" target="_blank" rel="noopener">Escríbenos igual</a>: buscamos otra alternativa.</p>
+    </div></section>
+    <!-- 6. Preguntas -->
+    <section class="sec"><div class="wrap">
+      <div class="cabeza"><h2 class="grande">Preguntas <b>frecuentes</b></h2></div>
+      <div class="preguntas">
+        <details class="pregunta" open><summary>¿Tengo que cambiar de agente de aduana?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">No. Tu agente sigue despachando. El seguro lo contratas con nosotros y le entregas el certificado para el despacho.</p></details>
+        <details class="pregunta" id="exporto"><summary>¿Sirve para exportaciones?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">Sí. El certificado se pide hasta 72 horas después del zarpe en transporte marítimo, o hasta 24 horas después del inicio del viaje en aéreo y terrestre.</p></details>
+        <details class="pregunta"><summary>¿Cuánto cuesta el seguro de mi embarque?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">Depende del valor, la mercadería, el embalaje y el trayecto. Si nos mandas el certificado de tu último embarque, te mostramos la comparación con lo que pagas hoy.</p></details>
+        <details class="pregunta"><summary>¿Hay que firmar un contrato anual?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">No. Es un certificado por embarque, sin permanencia. Si embarcas todos los meses, cada certificado nuevo es un correo.</p></details>
+        <details class="pregunta"><summary>¿Cuándo tengo que pedir el certificado?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">Antes de que la carga llegue a destino; en aéreo, hasta 48 horas después del arribo. Lo ideal es pedirlo cuando tienes la factura comercial y el documento de embarque.</p></details>
+        <details class="pregunta"><summary>¿Y si el embarque supera US$300.000?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">Nos avisas con 72 horas hábiles y la compañía fija la tarifa antes del embarque.</p></details>
+        <details class="pregunta"><summary>¿Qué pasa si hay un siniestro?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><p class="resp">Nos avisas, la compañía de seguros designa un liquidador y paga según la póliza. Nosotros llevamos el reclamo contigo.</p></details>
+      </div>
+    </div></section>
+    <!-- 7. Formulario -->
+    <section class="sec" id="contacto"><div class="wrap contacto">
+      <div class="lado">
+        <h2 class="grande">Cotiza o <b>compara tu seguro</b></h2>
+        <p>Te respondemos de inmediato. Si nos mandas tu último certificado por WhatsApp, te decimos cuánto ahorras.</p>
+        <div class="alt">
+          <a href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg><div><b>WhatsApp +56 9 3931 9546</b><span>Lunes a viernes, de 9:00 a 18:30 h</span></div></a>
+        </div>
+      </div>
+      <div class="tarjeta-form">
+        <form class="form" data-envio="carga" novalidate>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="c-empresa">Empresa</label><input class="t-input" id="c-empresa" name="empresa" autocomplete="organization" maxlength="160" required data-msg="Escribe el nombre de la empresa."><span class="t-error-msg"></span></div>
+            <div class="campo t-input-wrap"><label for="c-nombre">Nombre y apellido</label><input class="t-input" id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required data-msg="Escribe tu nombre."><span class="t-error-msg"></span></div>
+          </div>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="c-correo">Correo <small>(opcional)</small></label><input class="t-input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="120" data-msg="Revisa el correo: no es válido."><span class="t-error-msg"></span></div>
+            <div class="campo t-input-wrap"><label for="c-tel">Teléfono</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
+          </div>
+          <fieldset class="campo"><legend>Tu operación</legend>
+            <div class="seg"><label><input type="radio" name="operacion" value="Importo" checked><span>Importo</span></label><label><input type="radio" name="operacion" value="Exporto"><span>Exporto</span></label></div>
+          </fieldset>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="c-merc">¿Qué mercadería? <small>(opcional)</small></label><input class="t-input" id="c-merc" name="mercaderia" maxlength="160" placeholder="Ej.: insumos químicos, repuestos, textiles"><span class="t-error-msg"></span></div>
+            <div class="campo t-input-wrap"><label for="c-origen">Origen o destino principal <small>(opcional)</small></label><input class="t-input" id="c-origen" name="origen" maxlength="80" placeholder="País"><span class="t-error-msg"></span></div>
+          </div>
+          <div class="dos">
+            <div class="campo t-input-wrap"><label for="c-emb">Embarques al año</label><select class="t-input" id="c-emb" name="embarques"><option>1 a 5</option><option>6 a 12</option><option>13 a 30</option><option>Más de 30</option></select><span class="t-error-msg"></span></div>
+            <div class="campo t-input-wrap"><label for="c-valor">Valor típico por embarque</label><select class="t-input" id="c-valor" name="valor"><option>Hasta US$20.000</option><option>US$20.000 a 100.000</option><option>US$100.000 a 300.000</option><option>Más de US$300.000</option></select><span class="t-error-msg"></span></div>
+          </div>
+          <fieldset class="campo"><legend>¿Cómo aseguras hoy?</legend>
+            <div class="opciones" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+              <label class="op"><input type="radio" name="asegura_hoy" value="Agente de aduana" checked><span>Agente de aduana</span></label>
+              <label class="op"><input type="radio" name="asegura_hoy" value="Forwarder"><span>Forwarder</span></label>
+              <label class="op"><input type="radio" name="asegura_hoy" value="Lo incluye mi proveedor"><span>Lo incluye mi proveedor</span></label>
+              <label class="op"><input type="radio" name="asegura_hoy" value="No aseguro"><span>No aseguro</span></label>
+            </div>
+          </fieldset>
+          <div class="campo t-input-wrap"><label for="c-fuente">¿Cómo nos encontraste? <small>(opcional)</small></label><select class="t-input" id="c-fuente" name="fuente"><option value="">Elige una opción</option><option>Google (búsqueda)</option><option>Google (respuesta de IA)</option><option>ChatGPT u otra IA</option><option>LinkedIn</option><option>Recomendación</option><option>Otro</option></select><span class="t-error-msg"></span></div>
+          <div class="trampa" aria-hidden="true"><label for="c-sitio">No llenar</label><input id="c-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
+          <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tus datos.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
+          <button class="btn btn-azul enviar" type="submit"><span class="letra">Enviar</span></button>
+          <p class="nota">Usamos tus datos solo para responder esta cotización. <a href="/politica-privacidad">Política de privacidad</a>.</p>
+        </form>
+        <div class="exito" hidden>
+          <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <h3 tabindex="-1">Recibimos tus datos.</h3>
+          <p>Te contactamos de inmediato. Si quieres que comparemos tu seguro actual, mándanos tu último certificado por WhatsApp.</p>
+        </div>
+        <p class="sr estado" role="status"></p>
+      </div>
+    </div></section>
+    <section class="sec" style="padding-bottom:112px"><div class="wrap">
+      <p style="color:var(--tx2);font-size:17px;max-width:70ch">¿Mueves carga dentro de Chile? También la aseguramos. <a href="/seguros/transporte" style="color:var(--azul-h);text-decoration:underline;text-underline-offset:3px">Ver seguro de transporte nacional</a>.</p>
+      <p class="firma">Página de Mercurial Corredores de Seguros Ltda., Registro CMF N° 8929. Actualizada el 9 de noviembre de 2026. Coberturas, deducibles y aceptación sujetos a las condiciones de la póliza y a la evaluación de la compañía de seguros.</p>
+    </div></section>
+  </main>
+
+  <footer class="oscuro mc-marco"><div class="wrap">
+    <div class="pie">
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile. Lunes a viernes, de 9:00 a 18:30 h.</p></div>
+      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
+      <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <div class="fila"><span>© 2026 Mercurial Corredores de Seguros Ltda. Corredora de seguros, no aseguradora: las pólizas las emiten las compañías de seguros.</span><span><a href="/terminos.html">Términos de uso</a> · <a href="/politica-privacidad">Privacidad</a></span></div>
+      <p>Fotografías vía Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Port_of_valparaiso_(3049864390).jpg" target="_blank" rel="noopener">Peretz Partensky</a> (CC BY-SA 2.0).</p>
+    </div>
+  </div></footer>
+
+  <script src="/src/vendor/gsap.min.js"></script>
+  <script src="/src/vendor/ScrollTrigger.min.js"></script>
+  <script src="/src/js/sitio.js?v=7"></script>
+</body>
+
+</html>

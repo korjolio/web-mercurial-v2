@@ -33,6 +33,7 @@ Después conviene `git pull` en el checkout principal del Mac para que no quede 
 |---|---|---|
 | `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización y formulario de cotización → correo. |
 | `/seguros/flotas`, `/seguros/transporte`, `/seguros/incendio`, `/seguros/colectivos-de-salud` | `seguro-*.html` | Páginas de cada línea. Indexables (en `sitemap.xml`). Flotas y Salud sin coberturas hasta que se confirmen. |
+| `/seguros/transporte/importaciones-exportaciones` | `seguro-carga-comex.html` | Seguro de carga internacional (certificado por embarque, póliza flotante Zurich). Indexable (en `sitemap.xml`). Formulario `data-envio="carga"` → `/api/contacto` → correo. **No publicar la tasa** (decisión de socios, 09-11-2026). Coberturas según cotización Zurich 06-11-2026. |
 | `/condominio`, `/transporte` | — | Antiguas landings de Google Ads, **eliminadas el 09-11-2026** (no tenían contenido). Redirigen 301 a `/` y `/seguros/transporte`. |
 | `/desgravamen-rechazado` | `desgravamen.html` | Página de producto: seguro de desgravamen rechazado (personas). **Indexable** (en `sitemap.xml`, desde el 09-11-2026). También recibe el tráfico de la campaña de Meta. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |

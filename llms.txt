@@ -13,7 +13,7 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 ## Servicios principales
 
 - **Gestión de riesgos corporativos**: Diseño de programas para protección de activos industriales y continuidad operacional, incluyendo cobertura de Perjuicio por Paralización.
-- **Transporte y logística**: Seguros de transporte de carga nacional e internacional (https://mercurial.cl/seguros/transporte). Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
+- **Transporte y logística**: Seguros de transporte de carga nacional e internacional (https://mercurial.cl/seguros/transporte). Para importaciones y exportaciones, certificados de seguro Todo Riesgo por embarque, sin póliza anual (https://mercurial.cl/seguros/transporte/importaciones-exportaciones). Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
 - **Responsabilidad Civil**: Ingeniería de límites para RC Extracontractual, RC Patronal con extensión a Subcontratistas, y diseño de estructuras de Responsabilidad Cruzada.
 - **Property e incendio** (https://mercurial.cl/seguros/incendio): Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
 - **Salud colectiva y beneficios**: Seguro complementario de salud para equipos de trabajo (https://mercurial.cl/seguros/colectivos-de-salud).

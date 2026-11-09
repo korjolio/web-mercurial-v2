@@ -57,6 +57,8 @@ app.get('/seguros/flotas', (req, res) => res.sendFile('seguro-flotas.html', { ro
 app.get('/seguros/transporte', (req, res) => res.sendFile('seguro-transporte.html', { root: __dirname }));
 app.get('/seguros/incendio', (req, res) => res.sendFile('seguro-incendio.html', { root: __dirname }));
 app.get('/seguros/colectivos-de-salud', (req, res) => res.sendFile('seguro-colectivos-salud.html', { root: __dirname }));
+// Seguro de carga para importaciones y exportaciones (certificado por embarque; indexable, en sitemap.xml).
+app.get('/seguros/transporte/importaciones-exportaciones', (req, res) => res.sendFile('seguro-carga-comex.html', { root: __dirname }));
 
 // --- Página de producto: seguro de desgravamen rechazado (personas; indexable, en sitemap.xml) ---
 app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html', { root: __dirname }));
@@ -193,7 +195,13 @@ if (!mailer) {
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
-const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario' };
+const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional' };
+// Formulario de /seguros/transporte/importaciones-exportaciones (listas cerradas: deben calzar con seguro-carga-comex.html).
+const OPERACIONES_CARGA = ['Importo', 'Exporto'];
+const EMBARQUES_CARGA = ['1 a 5', '6 a 12', '13 a 30', 'Más de 30'];
+const VALORES_CARGA = ['Hasta US$20.000', 'US$20.000 a 100.000', 'US$100.000 a 300.000', 'Más de US$300.000'];
+const ASEGURA_HOY_CARGA = ['Agente de aduana', 'Forwarder', 'Lo incluye mi proveedor', 'No aseguro'];
+const FUENTES_CARGA = ['Google (búsqueda)', 'Google (respuesta de IA)', 'ChatGPT u otra IA', 'LinkedIn', 'Recomendación', 'Otro'];
 // Situación del crédito en el formulario de desgravamen (sin datos de salud).
 const SITUACIONES_CREDITO = ['Compra con crédito hipotecario nuevo', 'Refinanciamiento o portabilidad', 'Cambiar solo el seguro, sin refinanciar', 'Cobrar o reclamar un seguro'];
 const RECHAZOS_DESGRAVAMEN = ['Sí, me lo rechazaron', 'Todavía no lo solicito', 'No, me lo aprobaron'];
@@ -266,6 +274,18 @@ function validarContacto(b) {
         // La barra de la portada pide solo seguro, empresa y teléfono; el formulario completo suma nombre y correo.
         if (!optTxt(b.nombre, 120)) errors.push('nombre');
         if (b.correo && !correoOk(b.correo)) errors.push('correo');
+    } else if (b.tipo === 'carga') {
+        if (!txt(b.empresa, 160)) errors.push('empresa');
+        if (!txt(b.nombre, 120)) errors.push('nombre');
+        if (!telOk(b.telefono)) errors.push('telefono');
+        if (b.correo && !correoOk(b.correo)) errors.push('correo');
+        if (!OPERACIONES_CARGA.includes(b.operacion)) errors.push('operacion');
+        if (!EMBARQUES_CARGA.includes(b.embarques)) errors.push('embarques');
+        if (!VALORES_CARGA.includes(b.valor)) errors.push('valor');
+        if (!ASEGURA_HOY_CARGA.includes(b.asegura_hoy)) errors.push('asegura_hoy');
+        if (!optTxt(b.mercaderia, 160)) errors.push('mercaderia');
+        if (!optTxt(b.origen, 80)) errors.push('origen');
+        if (b.fuente && !FUENTES_CARGA.includes(b.fuente)) errors.push('fuente');
     } else if (b.tipo === 'desgravamen') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!telOk(b.telefono)) errors.push('telefono');
@@ -308,7 +328,9 @@ app.post('/api/contacto', async (req, res) => {
     const enLinea = v => limpio(v).replace(/[\u0000-\u001f\u007f]+/g, ' ').slice(0, 120);
     const asunto = b.tipo === 'cotizacion'
         ? `[Web] Cotización ${b.seguro} · ${enLinea(b.empresa)}`
-        : `[Web] ${tipo} · ${enLinea(b.nombre)}`;
+        : b.tipo === 'carga'
+            ? `[Web] Seguro de carga (${b.operacion}, ${b.embarques} embarques/año) · ${enLinea(b.empresa)}`
+            : `[Web] ${tipo} · ${enLinea(b.nombre)}`;
     const lineas = [
         `Tipo: ${tipo}`,
         b.seguro && `Seguro: ${b.seguro}`,
@@ -321,6 +343,13 @@ app.post('/api/contacto', async (req, res) => {
         // Referencia fija de la campaña de Meta (lista blanca); cualquier otro valor se ignora.
         b.tipo === 'desgravamen' && b.ref === 'DH-META' && 'Procedencia: anuncio de Meta, formulario V2 (ref: DH-META)',
         b.rechazo && `¿Rechazo previo?: ${b.rechazo}`,
+        b.tipo === 'carga' && `Operación: ${b.operacion}`,
+        b.tipo === 'carga' && b.mercaderia && `Mercadería: ${limpio(b.mercaderia)}`,
+        b.tipo === 'carga' && b.origen && `Origen o destino principal: ${limpio(b.origen)}`,
+        b.tipo === 'carga' && `Embarques al año: ${b.embarques}`,
+        b.tipo === 'carga' && `Valor típico por embarque: ${b.valor}`,
+        b.tipo === 'carga' && `Cómo asegura hoy: ${b.asegura_hoy}`,
+        b.tipo === 'carga' && b.fuente && `Cómo nos encontró: ${b.fuente}`,
         b.capital && `Monto del crédito a asegurar: ${b.capital}${b.capital.startsWith('No lo sé') ? ' (revisión humana)' : ''}`,
         b.mensaje && `\nMensaje:\n${limpio(b.mensaje)}`,
         `\nEnviado desde: ${paginaLimpia(b.pagina) || 'mercurial.cl'}`,
