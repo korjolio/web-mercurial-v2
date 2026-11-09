@@ -34,7 +34,7 @@ Después conviene `git pull` en el checkout principal del Mac para que no quede 
 | `/` | `index.html` | Portada (sitio nuevo, oct. 2026). Indexable. Barra de cotización y formulario de cotización → correo. |
 | `/seguros/flotas`, `/seguros/transporte`, `/seguros/incendio`, `/seguros/colectivos-de-salud` | `seguro-*.html` | Páginas de cada línea. Indexables (en `sitemap.xml`). Flotas y Salud sin coberturas hasta que se confirmen. |
 | `/condominio`, `/transporte` | — | Antiguas landings de Google Ads, **eliminadas el 09-11-2026** (no tenían contenido). Redirigen 301 a `/` y `/seguros/transporte`. |
-| `/desgravamen-rechazado` | `desgravamen.html` | Landing de la campaña de Meta (seguro de desgravamen rechazado). `noindex`, con menú. |
+| `/desgravamen-rechazado` | `desgravamen.html` | Página de producto: seguro de desgravamen rechazado (personas). **Indexable** (en `sitemap.xml`, desde el 09-11-2026). También recibe el tráfico de la campaña de Meta. |
 | `/seguro-mascotas` | `mascotas.html` | Landing de producto. **Indexable** (está en `sitemap.xml`). Sin formulario propio. |
 | `/cotizar-pyme` | `cotizar-pyme.html` | Formulario de antecedentes para Seguro Pyme (multiriesgo). `noindex`. El lead va al **CRM propio**. Estilos propios en `src/css/cotizar-pyme.css`. |
 | `/consultas-y-reclamos` | `consultas.html` | Formulario de consultas y reclamos → correo. Indexable (en `sitemap.xml`). `/#consultas` redirige aquí. |
@@ -122,4 +122,4 @@ Los datos de planes y coberturas de la landing provienen de los PDFs oficiales d
 - **QA en navegador obligatorio** para cambios de UI, antes de dar algo por terminado. Debe cubrir: desktop y móvil (390px), errores de consola, desborde horizontal, **el flujo completo** (no solo la primera pantalla) y **el paso del tiempo** (muestrear a 10s, 30s, 60s, 80s cuando haya lógica diferida o temporizadores). Confirmar en producción tras desplegar.
 - **Definir lo visual antes de codear** landings o rediseños: mockups aprobados primero, implementación después.
 - Contenido en **español de Chile**. En textos visibles se escribe «compañía de seguros», no «aseguradora» (salvo «no aseguradora» en el pie). Nada de cifras, coberturas ni beneficios inventados: son un producto financiero regulado.
-- Landings de anuncios (hoy solo `/desgravamen-rechazado`) van `noindex`; las de producto son indexables y deben sumarse a `sitemap.xml`. **Pendiente**: páginas indexables de seguro de condominio, pyme y seguro de desgravamen (hoy no aparecen en Google).
+- Las páginas de producto son indexables y deben sumarse a `sitemap.xml`; solo las landings exclusivas de anuncios irían `noindex` (hoy no hay ninguna). **Pendiente**: páginas indexables de seguro de condominio y seguro pyme (hoy no aparecen en Google).

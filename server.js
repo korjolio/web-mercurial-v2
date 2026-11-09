@@ -58,7 +58,7 @@ app.get('/seguros/transporte', (req, res) => res.sendFile('seguro-transporte.htm
 app.get('/seguros/incendio', (req, res) => res.sendFile('seguro-incendio.html', { root: __dirname }));
 app.get('/seguros/colectivos-de-salud', (req, res) => res.sendFile('seguro-colectivos-salud.html', { root: __dirname }));
 
-// --- Landing de campaña: desgravamen hipotecario rechazado (personas; noindex) ---
+// --- Página de producto: seguro de desgravamen rechazado (personas; indexable, en sitemap.xml) ---
 app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html', { root: __dirname }));
 
 // --- Botón final del formulario instantáneo de Meta: Meta no acepta enlaces wa.me, así que pasa por aquí.
