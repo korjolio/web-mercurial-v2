@@ -258,12 +258,22 @@ function contactoPermitido(ip) {
     return true;
 }
 
-// Solo origen y ruta de mercurial.cl: sin query string (UTM u otros parámetros no van al correo).
+// Solo origen y ruta de mercurial.cl: sin query string. Los UTM van aparte y filtrados (enlaceMarcado).
 function paginaLimpia(v) {
     try {
         const u = new URL(String(v));
         return /(^|\.)mercurial\.cl$|^localhost$/.test(u.hostname) ? (u.origin + u.pathname).slice(0, 200) : '';
     } catch (e) { return ''; }
+}
+
+// Enlace marcado (UTM) con el que llegó el visitante, para saber en el correo de qué campaña o persona viene.
+// Cada valor admite solo letras, números, guion y guion bajo (hasta 60): así no entra texto libre ni enlaces.
+const UTM_CORREO = [['utm_source', 'fuente'], ['utm_medium', 'medio'], ['utm_campaign', 'campaña'], ['utm_content', 'contenido']];
+function enlaceMarcado(b) {
+    return UTM_CORREO
+        .filter(([k]) => typeof b[k] === 'string' && /^[A-Za-z0-9_-]{1,60}$/.test(b[k]))
+        .map(([k, nombre]) => `${nombre} ${b[k]}`)
+        .join(' · ');
 }
 
 function validarContacto(b) {
@@ -368,6 +378,7 @@ app.post('/api/contacto', async (req, res) => {
         b.capital && `Monto del crédito a asegurar: ${b.capital}${b.capital.startsWith('No lo sé') ? ' (revisión humana)' : ''}`,
         b.mensaje && `\nMensaje:\n${limpio(b.mensaje)}`,
         `\nEnviado desde: ${paginaLimpia(b.pagina) || 'mercurial.cl'}`,
+        enlaceMarcado(b) && `Enlace marcado: ${enlaceMarcado(b)}`,
         `Fecha: ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}`
     ].filter(Boolean);
 

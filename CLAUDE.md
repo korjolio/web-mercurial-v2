@@ -103,6 +103,8 @@ Los logs de Railway registran cada envío exitoso (`[Meta] <evento> recibido por
 
 Convención de campañas: cada persona identifica sus links con `utm_campaign`. Alejandro usa sus iniciales, p. ej. `mercurial.cl/seguro-mascotas?utm_campaign=as`.
 
+**Enlace marcado en el correo**: los formularios que van a `/api/contacto` agregan la línea «Enlace marcado: fuente … · medio … · campaña … · contenido …» con los `utm_source`, `utm_medium`, `utm_campaign` y `utm_content` del link por el que llegó el visitante. `sitio.js` los recuerda durante la visita (`sessionStorage`, clave `mercurial_enlace`) y `server.js` (`enlaceMarcado`) solo acepta letras, números, guion y guion bajo. Un contacto por el botón de WhatsApp no queda marcado.
+
 ## Landing de mascotas: el cotizador embebido (leer antes de tocarlo)
 
 `mascotas.html` embebe el cotizador de BCI (`cotizadormascotas.bciseguros.cl`) en un iframe **cross-origin**: no se puede leer su altura, ni sus clics, ni su estado. El código de esa sección parece rebuscado, pero **cada pieza corrige un fallo real verificado en navegador. No simplificar sin leer esto**:

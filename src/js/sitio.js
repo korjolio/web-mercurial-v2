@@ -12,6 +12,20 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const ms = n => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n)) || 0;
 
+  /* Enlace marcado (UTM): se recuerda durante la visita (sessionStorage, sin identificar a nadie) para que
+     el correo del formulario diga por qué enlace llegó la persona, aunque cambie de página antes de enviar.
+     El servidor filtra los valores (server.js, enlaceMarcado). */
+  const UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+  const enlaceMarcado = (() => {
+    const q = new URLSearchParams(location.search), e = {};
+    UTM.forEach(k => { const v = q.get(k); if (v) e[k] = v.slice(0, 60); });
+    try {
+      if (Object.keys(e).length) sessionStorage.setItem('mercurial_enlace', JSON.stringify(e));
+      else Object.assign(e, JSON.parse(sessionStorage.getItem('mercurial_enlace') || '{}'));
+    } catch (err) { /* sin almacenamiento solo vale la página de llegada */ }
+    return e;
+  })();
+
   /* Menú de seguros (transitions.dev · menu dropdown) */
   const btn = $('#btn-seguros'), menu = $('#menu-seguros'), li = $('#li-seguros');
   if (btn && menu && li) {
@@ -141,6 +155,7 @@
       const datos = Object.fromEntries(new FormData(form).entries());
       datos.tipo = datos.tipo || form.dataset.envio;
       datos.pagina = location.origin + location.pathname;
+      UTM.forEach(k => { if (typeof enlaceMarcado[k] === 'string') datos[k] = enlaceMarcado[k]; });
       // Seguro de auto: el Lead va a Meta con el mismo id desde el navegador y desde el servidor.
       // Sin consentimiento de cookies newEventId() no devuelve nada y no se mide.
       const idMeta = datos.tipo === 'auto' && window.mercurialMeta ? window.mercurialMeta.newEventId() : undefined;
