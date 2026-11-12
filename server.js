@@ -205,6 +205,17 @@ const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclam
 // Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
 const patenteLimpia = v => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
 const patenteOk = v => /^(?=.*\d)[A-Z0-9]{5,6}$/.test(patenteLimpia(v));
+// RUT chileno: 7 u 8 dígitos más el dígito verificador (módulo 11). Llega con o sin puntos y guion.
+const rutLimpio = v => (typeof v === 'string' && v.length <= 20 ? v.replace(/[^0-9kK]/g, '').toUpperCase() : '');
+const rutOk = v => {
+    const c = rutLimpio(v);
+    if (!/^\d{7,8}[0-9K]$/.test(c)) return false;
+    let suma = 0, factor = 2;
+    for (let i = c.length - 2; i >= 0; i--) { suma += Number(c[i]) * factor; factor = factor === 7 ? 2 : factor + 1; }
+    const dv = 11 - (suma % 11);
+    return c.slice(-1) === (dv === 11 ? '0' : dv === 10 ? 'K' : String(dv));
+};
+const rutConFormato = v => { const c = rutLimpio(v); return c.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + c.slice(-1); };
 // Formulario de /seguros/transporte/importaciones-exportaciones (listas cerradas: deben calzar con seguro-carga-comex.html).
 const OPERACIONES_CARGA = ['Importo', 'Exporto'];
 const EMBARQUES_CARGA = ['1 a 5', '6 a 12', '13 a 30', 'Más de 30'];
@@ -307,6 +318,7 @@ function validarContacto(b) {
         if (b.fuente && !FUENTES_CARGA.includes(b.fuente)) errors.push('fuente');
     } else if (b.tipo === 'auto') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
+        if (!rutOk(b.rut)) errors.push('rut');
         if (!telOk(b.telefono)) errors.push('telefono');
         if (!patenteOk(b.patente)) errors.push('patente');
         if (!correoOk(b.correo)) errors.push('correo');
@@ -360,6 +372,7 @@ app.post('/api/contacto', async (req, res) => {
         b.seguro && `Seguro: ${b.seguro}`,
         b.empresa && `Empresa: ${limpio(b.empresa)}`,
         b.nombre && `Nombre: ${limpio(b.nombre)}`,
+        b.tipo === 'auto' && `RUT: ${rutConFormato(b.rut)}`,
         b.correo && `Correo: ${limpio(b.correo)}`,
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
         b.tipo === 'auto' && `Patente: ${patenteLimpia(b.patente)}`,

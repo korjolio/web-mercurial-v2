@@ -191,7 +191,7 @@
       <div class="cabeza"><h2 class="grande">Cómo <b>funciona</b></h2></div>
       <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
         <ol class="pasos">
-          <li class="paso"><span class="n">1</span><h3>Nos dejas tu patente</h3><p>Con tu nombre y un teléfono. Toma menos de un minuto.</p></li>
+          <li class="paso"><span class="n">1</span><h3>Nos dejas tu patente</h3><p>Con tu nombre, tu RUT y un teléfono. Toma menos de un minuto.</p></li>
           <li class="paso"><span class="n">2</span><h3>Preparamos tu cotización</h3><p>Con alternativas de plan, deducible y taller.</p></li>
           <li class="paso"><span class="n">3</span><h3>Tú eliges</h3><p>Te explicamos las diferencias entre las alternativas.</p></li>
           <li class="paso"><span class="n">4</span><h3>Contratas</h3><p>La compañía de seguros evalúa tu auto y emite la póliza.</p></li>
@@ -202,7 +202,7 @@
     <section class="sec"><div class="wrap">
       <div class="cabeza"><h2 class="grande">Preguntas <b>frecuentes</b></h2></div>
       <div class="preguntas">
-        <details class="pregunta"><summary>¿Qué datos necesito para cotizar?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Para empezar, la patente, tu nombre y un teléfono. Para preparar la cotización te pediremos los datos del conductor habitual, como RUT, fecha de nacimiento y comuna.</p></div></details>
+        <details class="pregunta"><summary>¿Qué datos necesito para cotizar?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Para empezar, la patente, tu nombre, tu RUT, un teléfono y un correo. Para preparar la cotización te podemos pedir otros datos del conductor habitual, como fecha de nacimiento y comuna.</p></div></details>
         <details class="pregunta"><summary>¿Qué es el deducible?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Es el monto que pagas tú en cada siniestro; el resto lo cubre la compañía de seguros. En cobertura completa puedes elegir entre UF 0, 3, 5, 10 y 15.</p></div></details>
         <details class="pregunta"><summary>¿Puedo pagar en cuotas?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Sí. La póliza anual se paga en 11 cuotas y la póliza a dos años en 23 cuotas.</p></div></details>
         <details class="pregunta"><summary>¿Está garantizado que aseguren mi auto?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>No. La compañía de seguros revisa los antecedentes del auto y del conductor, y puede aceptar o rechazar el riesgo.</p></div></details>
@@ -221,12 +221,13 @@
       <div class="tarjeta-form">
         <form class="form" data-envio="auto" novalidate>
           <div class="campo t-input-wrap"><label for="a-nombre">Nombre y apellido</label><input class="t-input" id="a-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="ae-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="ae-nombre"></span></div>
+          <div class="campo t-input-wrap"><label for="a-rut">RUT</label><input class="t-input" id="a-rut" name="rut" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" placeholder="12.345.678-5" required aria-describedby="ae-rut" data-tipo="rut" data-msg="Revisa el RUT: va con dígito verificador, por ejemplo 12.345.678-5."><span class="t-error-msg" id="ae-rut"></span></div>
           <div class="dos"><div class="campo t-input-wrap"><label for="a-tel">Teléfono</label><input class="t-input" id="a-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required aria-describedby="ae-tel" data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg" id="ae-tel"></span></div><div class="campo t-input-wrap"><label for="a-pat">Patente</label><input class="t-input patente" id="a-pat" name="patente" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="ABCD12" required aria-describedby="ae-pat" data-msg="Revisa la patente: son 6 caracteres, por ejemplo ABCD12."><span class="t-error-msg" id="ae-pat"></span></div></div>
           <div class="campo t-input-wrap"><label for="a-correo">Correo</label><input class="t-input" id="a-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="ae-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="ae-correo"></span></div>
           <div class="trampa" aria-hidden="true"><label for="a-sitio">No llenar</label><input id="a-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
           <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tus datos.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
           <button class="btn btn-azul enviar" type="submit"><span class="letra">Cotizar mi auto</span></button>
-          <p class="nota">Usamos tus datos solo para contactarte por esta cotización. <a href="/politica-privacidad">Política de privacidad</a>.</p>
+          <p class="nota">Usamos tus datos solo para preparar tu cotización y contactarte. <a href="/politica-privacidad">Política de privacidad</a>.</p>
         </form>
         <div class="exito" hidden>
           <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -253,7 +254,7 @@
 
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=10"></script>
+  <script src="/src/js/sitio.js?v=11"></script>
 </body>
 
 </html>
