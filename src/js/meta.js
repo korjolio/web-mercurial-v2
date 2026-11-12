@@ -51,6 +51,8 @@
   window.mercurialMeta = { track: track, trackBrowser: trackBrowser, newEventId: newEventId, pageUrl: pageUrl };
 
   var PRODUCTOS = {
+    '/seguro-auto': 'Seguro de Auto',
+    '/seguro-auto/promocion': 'Seguro de Auto',
     '/seguro-mascotas': 'Seguro Mascotas',
     '/mascotas': 'Seguro Mascotas',
     '/cotizar-pyme': 'Seguro Pyme'

@@ -141,6 +141,10 @@
       const datos = Object.fromEntries(new FormData(form).entries());
       datos.tipo = datos.tipo || form.dataset.envio;
       datos.pagina = location.origin + location.pathname;
+      // Seguro de auto: el Lead va a Meta con el mismo id desde el navegador y desde el servidor.
+      // Sin consentimiento de cookies newEventId() no devuelve nada y no se mide.
+      const idMeta = datos.tipo === 'auto' && window.mercurialMeta ? window.mercurialMeta.newEventId() : undefined;
+      if (idMeta) datos.meta_event_id = idMeta;
       enviar.disabled = true; textoSuave(etiqueta, 'Enviando…');
       if (estado) estado.textContent = 'Enviando.';
 
@@ -175,6 +179,7 @@
       // Desgravamen se mide solo como "personas": el tipo de caso sugiere datos de salud y no va a la analítica.
       const tipoMedido = datos.tipo === 'desgravamen' ? 'personas' : datos.tipo;
       window.dataLayer.push({ event: 'formulario_enviado', form_tipo: tipoMedido, form_seguro: datos.seguro || '' });
+      if (idMeta) window.mercurialMeta.trackBrowser('Lead', { content_name: 'Seguro de Auto' }, idMeta);
       if (estado) estado.textContent = '';
       if (form.dataset.envio === 'cotizacion' && caja.classList.contains('caja')) {
         caja.classList.add('enviado'); const okMsg = $('.ok', caja); okMsg.hidden = false; okMsg.focus();

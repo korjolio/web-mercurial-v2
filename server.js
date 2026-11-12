@@ -379,6 +379,18 @@ app.post('/api/contacto', async (req, res) => {
             subject: asunto,
             text: lineas.join('\n')
         });
+        // Lead del seguro de auto hacia Meta (API de conversiones). El navegador manda el mismo event_id
+        // con el píxel; meta_event_id solo viene cuando el visitante aceptó las cookies (meta.js).
+        if (b.tipo === 'auto' && metaEventIdValido(b.meta_event_id)) {
+            const partes = limpio(b.nombre).split(/\s+/);
+            enviarEventoMeta(req, {
+                eventName: 'Lead',
+                eventId: b.meta_event_id,
+                eventSourceUrl: paginaLimpia(b.pagina) || undefined,
+                userData: { email: limpio(b.correo), phone: limpio(b.telefono), firstName: partes[0], lastName: partes.slice(1).join(' ') },
+                customData: { content_name: 'Seguro de Auto' }
+            });
+        }
         return res.status(200).json({ success: true });
     } catch (error) {
         // Sin datos personales en el log: solo el tipo y el código del error.
