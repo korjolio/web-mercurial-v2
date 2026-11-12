@@ -180,6 +180,8 @@ app.post('/api/meta/evento', express.text({ type: 'text/plain', limit: '4kb' }),
 // MAIL_DRY_RUN=1 arma el correo sin enviarlo (pruebas locales): nunca usarlo en producción.
 const nodemailer = require('nodemailer');
 const MAIL_TO = process.env.MAIL_TO || 'contacto@mercurial.cl';
+// Los contactos de seguro de auto van directo a la casilla de quien los atiende; el resto, a MAIL_TO.
+const MAIL_TO_AUTO = process.env.MAIL_TO_AUTO || 'ppbugueno@mercurial.cl';
 const MAIL_DRY_RUN = process.env.MAIL_DRY_RUN === '1';
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
@@ -385,7 +387,7 @@ app.post('/api/contacto', async (req, res) => {
     try {
         await mailer.sendMail({
             from: `"Sitio Mercurial" <${SMTP_USER || MAIL_TO}>`,
-            to: MAIL_TO,
+            to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
             replyTo: b.correo ? limpio(b.correo) : undefined,
             subject: asunto,
             text: lineas.join('\n')
