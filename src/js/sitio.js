@@ -202,6 +202,16 @@
       }
       form.hidden = true;
       if (exito) {
+        // Seguro de auto: el botón de WhatsApp de la pantalla de gracias lleva nombre, patente y el enlace marcado,
+        // para que la conversación llegue identificada a Chatwoot (el cliente escribe primero: ventana de 24 h).
+        const wa = datos.tipo === 'auto' && $('a.wa-cotizacion', exito);
+        if (wa) {
+          const ref = ['utm_source', 'utm_content'].map(k => enlaceMarcado[k]).filter(v => /^[A-Za-z0-9_-]{1,60}$/.test(v || '')).join('/');
+          const txt = `Hola Mercurial, soy ${String(datos.nombre || '').trim().slice(0, 80)}. Ya dejé mis datos en el sitio y quiero recibir la cotización de mi seguro de auto`
+            + (datos.ref === 'PROMO-AUTO' ? ' con la promoción del mes' : '')
+            + `. Patente: ${String(datos.patente || '').toUpperCase().replace(/[^A-Z0-9]/g, '')}.` + (ref ? ` (ref: ${ref})` : '');
+          wa.href = 'https://wa.me/56939319546?text=' + encodeURIComponent(txt);
+        }
         exito.hidden = false;
         const check = $('.t-success-check', exito); if (check) check.dataset.state = 'in';
         $('h3', exito).focus();

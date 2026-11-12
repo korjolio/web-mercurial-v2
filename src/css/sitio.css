@@ -155,6 +155,8 @@ fieldset { border: 0; min-width: 0; }
 .exito h3 { font-size: 28px; font-weight: 600; }
 .exito h3:focus { outline: none; }
 .exito p { color: var(--tx2); max-width: 38ch; }
+/* Botón de WhatsApp de la pantalla de gracias: en celular el texto ocupa dos líneas. */
+.exito .btn { margin-top: 6px; padding-block: 12px; line-height: 1.25; text-align: center; }
 .t-success-check { display: inline-grid; place-items: center; width: 76px; height: 76px; border-radius: 999px; background: var(--azul-b); color: #fff; opacity: 0; }
 .t-success-check svg { width: 36px; height: 36px; overflow: visible; }
 .t-success-check svg path { stroke-dasharray: 22; stroke-dashoffset: 22; }
