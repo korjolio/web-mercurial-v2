@@ -1,0 +1,97 @@
+/* Seguro de auto para personas: /seguro-auto (producto) y /seguro-auto/promocion (convenio del mes).
+   Requiere marco.css y sitio.css. */
+
+/* ---------- Comunes a las dos páginas ---------- */
+.bloques.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.patente { text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.patente::placeholder { letter-spacing: .06em; font-weight: 400; }
+.cob { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 40px; max-width: 980px; }
+.cob li { display: flex; gap: 12px; font-size: 17px; }
+.cob li .ico { width: 22px; height: 22px; color: var(--azul-b); margin-top: 2px; }
+.nota-cob { margin-top: 28px; max-width: 78ch; font-size: 15px; color: var(--tx2); }
+
+/* ---------- /seguro-auto: foto del panel y aviso del convenio del mes ---------- */
+.panel.foto-auto > img { inset: 0 0 0 40%; width: 60%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%); mask-image: linear-gradient(90deg, transparent 0%, #000 38%); }
+.panel.foto-auto::before { background: linear-gradient(90deg, var(--navy) 0%, var(--navy) 40%, rgba(13,35,64,.35) 70%, rgba(13,35,64,.1) 100%); }
+.mc-marco .aviso-promo { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding: 18px 24px; border-radius: 16px; color: #fff;
+  background: radial-gradient(420px 220px at 96% 0%, rgba(26,140,205,.55) 0%, rgba(26,140,205,0) 70%), linear-gradient(180deg, #0b1e38, var(--navy));
+  transition: transform var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out); }
+.aviso-promo:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -18px rgba(13,35,64,.6); }
+.aviso-promo .et { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; line-height: 1.2; padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); white-space: nowrap; }
+.aviso-promo .tx { font-size: 17px; color: #dbe8f3; }
+.aviso-promo .tx b { color: #fff; font-weight: 700; }
+.aviso-promo .ir { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; white-space: nowrap; }
+.aviso-promo .ir .ico { width: 18px; height: 18px; transition: transform var(--duration-fast) var(--ease-smooth-out); }
+.aviso-promo:hover .ir .ico { transform: translateX(3px); }
+.aviso-promo:focus-visible { outline-offset: 4px; border-radius: 16px; }
+
+/* ---------- /seguro-auto/promocion: portada del convenio del mes ---------- */
+.ah { position: relative; isolation: isolate; overflow: hidden; border-radius: 24px; color: #fff; min-height: 660px; padding: 48px 56px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 430px; column-gap: 48px; align-items: start;
+  background: radial-gradient(620px 460px at 58% 0%, rgba(26,140,205,.5) 0%, rgba(26,140,205,0) 68%), radial-gradient(520px 420px at 0% 100%, rgba(17,120,181,.32) 0%, rgba(17,120,181,0) 70%), linear-gradient(180deg, #0b1e38, var(--navy)); }
+.ah-foto { position: absolute; left: 0; bottom: 0; width: calc(100% - 430px - 56px); height: 340px; z-index: -2;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%), linear-gradient(90deg, #000 62%, transparent 100%); -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 38%), linear-gradient(90deg, #000 62%, transparent 100%); mask-composite: intersect; }
+.ah-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 20% 72%; }
+.ah-foto::after { content: ''; position: absolute; inset: 0; background: #12447a; mix-blend-mode: multiply; opacity: .5; }
+.ah-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; line-height: 1.2; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); white-space: nowrap; }
+.ah-tag span { margin-right: -10px; }
+.ah-tag i { width: 5px; height: 5px; border-radius: 50%; background: var(--azul-claro); flex: none; }
+.ah h1 { margin-top: 20px; display: grid; grid-template-columns: auto 1fr; column-gap: 22px; align-items: center; font-weight: 700; font-size: inherit; line-height: inherit; letter-spacing: 0; text-wrap: wrap; }
+.ah .hasta { grid-column: 1 / -1; font-size: 26px; font-weight: 800; line-height: 1.1; }
+.ah .pct { font-size: clamp(112px, 10.5vw, 148px); font-weight: 900; line-height: .92; letter-spacing: -.045em; padding-right: .04em; background: linear-gradient(175deg, #fff 30%, #8fd0f5 95%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 6px 0 rgba(8,24,46,.55)); }
+.ah .resto { font-size: 27px; line-height: 1.15; letter-spacing: -.01em; }
+.ah .resto b { display: table; margin-top: 10px; font-size: 36px; font-weight: 900; letter-spacing: -.02em; line-height: 1; padding: 8px 14px 10px; border-radius: 10px; background: linear-gradient(135deg, #1f8fbd, var(--azul-b) 55%, var(--azul-h)); transform: rotate(-2deg); box-shadow: 0 12px 24px rgba(3,14,30,.45), inset 0 1px 0 rgba(255,255,255,.35); white-space: nowrap; }
+.ah-taller { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 17px; font-weight: 600; color: #dbe8f3; }
+.ah-taller span { font-size: 15px; font-weight: 800; line-height: 1.2; padding: 5px 12px; border-radius: 999px; background: #fff; color: var(--navy); }
+.ah-plazo { margin-top: 18px; display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; }
+.ah-plazo i { width: 9px; height: 9px; border-radius: 50%; background: #6fd0ff; box-shadow: 0 0 0 5px rgba(111,208,255,.28); flex: none; margin-left: 5px; }
+.ah-sello { position: absolute; right: calc(56px + 430px + 40px); bottom: 150px; width: 200px; height: 200px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--navy); text-wrap: wrap;
+  background: radial-gradient(circle at 32% 24%, #fff 0%, #eaf5fd 70%, #d5eaf8 100%); transform: rotate(7deg); box-shadow: 0 0 0 6px rgba(255,255,255,.22), 0 20px 40px rgba(3,14,30,.55); }
+.ah-sello::before { content: ''; position: absolute; inset: 7px; border-radius: 50%; border: 2px dashed #86bfe3; }
+.ah-sello .ad { font-size: 13px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--azul-h); }
+.ah-sello .fila { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.ah-sello .fila b { font-size: 94px; font-weight: 900; line-height: .86; color: var(--azul-b); letter-spacing: -.04em; }
+.ah-sello .fila span { font-size: 25px; font-weight: 900; line-height: .94; letter-spacing: -.03em; text-transform: uppercase; }
+.ah-sello .q { margin-top: 7px; font-size: 14px; font-weight: 800; line-height: 1.2; color: #fff; background: var(--navy); padding: 4px 11px; border-radius: 999px; }
+.ah-form { grid-column: 2; grid-row: 1; align-self: center; background: #fff; color: var(--tx); border: 0; padding: 30px; box-shadow: 0 30px 60px -24px rgba(3,14,30,.7); scroll-margin-top: 24px; }
+.ah-form h2 { font-size: 26px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.ah-form .bajada { margin: 6px 0 18px; color: var(--tx2); font-size: 15px; }
+.ah-form .form { gap: 14px; }
+.ah-form .exito { padding: 40px 0; }
+.ah-legal { margin-top: 14px; font-size: 13px; line-height: 1.45; color: var(--tx2); max-width: 110ch; }
+
+@media (max-width: 1100px) {
+  .bloques.tres { grid-template-columns: 1fr; }
+  .panel.foto-auto > img { inset: 0; width: 100%; -webkit-mask-image: none; mask-image: none; }
+  .panel.foto-auto::before { background: linear-gradient(90deg, rgba(13,35,64,.95) 0%, rgba(13,35,64,.78) 60%, rgba(13,35,64,.5) 100%); }
+  .ah { padding: 40px; grid-template-columns: minmax(0, 1fr) 380px; column-gap: 32px; }
+  .ah-foto { width: calc(100% - 380px - 40px); }
+  .ah-sello { right: calc(40px + 380px + 20px); width: 172px; height: 172px; }
+  .ah-sello .fila b { font-size: 80px; } .ah-sello .fila span { font-size: 21px; } .ah-sello .ad { font-size: 12px; } .ah-sello .q { font-size: 13px; }
+  .ah h1 { grid-template-columns: 1fr; }
+  .ah .resto { margin-top: 8px; }
+  .mc-marco .aviso-promo { grid-template-columns: 1fr; gap: 10px; justify-items: start; }
+}
+@media (max-width: 860px) {
+  .ah { min-height: 0; padding: 28px 22px 22px; border-radius: 20px; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'txt' 'foto' 'form'; row-gap: 0; }
+  .ah-txt { grid-area: txt; }
+  .ah-foto { grid-area: foto; position: relative; left: auto; bottom: auto; width: auto; height: 220px; margin: 4px -22px 0;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 70%, transparent 100%); -webkit-mask-composite: source-over; mask-composite: add; }
+  .ah-foto img { object-position: 22% 70%; }
+  .ah-sello { grid-area: foto; position: relative; right: auto; bottom: auto; justify-self: end; align-self: start; margin: 0 -4px 0 0; width: 138px; height: 138px; }
+  .ah-sello::before { inset: 5px; }
+  .ah-sello .fila b { font-size: 64px; } .ah-sello .fila span { font-size: 17px; } .ah-sello .ad { font-size: 10px; } .ah-sello .q { font-size: 11px; margin-top: 5px; padding: 3px 9px; }
+  .ah-form { grid-area: form; grid-column: auto; grid-row: auto; margin-top: -34px; padding: 24px 18px; }
+  .ah-tag { font-size: 12px; }
+  .ah-tag span { display: none; }
+  .ah .pct { font-size: 104px; justify-self: start; }
+  .ah .resto { font-size: 22px; margin-top: 6px; }
+  .ah .resto b { font-size: 29px; }
+  .cob { grid-template-columns: 1fr; }
+  .cob li { font-size: 16px; }
+}
+@media (max-width: 560px) {
+  .panel.foto-auto > img { object-position: 24% 72% !important; }
+  .panel.foto-auto::before { background: linear-gradient(180deg, var(--navy) 0%, var(--navy) calc(100% - 300px), rgba(13,35,64,.55) calc(100% - 250px), rgba(13,35,64,0) calc(100% - 140px)); }
+}

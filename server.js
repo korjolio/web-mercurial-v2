@@ -77,6 +77,10 @@ app.get('/politica-privacidad', (req, res) => res.sendFile('privacidad.html', { 
 // --- Landing Seguro de Mascotas (convenio BCI Seguros "Mascotas S20", cotizador embebido) ---
 app.get('/seguro-mascotas', (req, res) => res.sendFile('mascotas.html', { root: __dirname }));
 
+// --- Seguro de auto para personas: página de producto (indexable) y convenio del mes (noindex, cambia cada mes) ---
+app.get('/seguro-auto', (req, res) => res.sendFile('seguro-auto.html', { root: __dirname }));
+app.get('/seguro-auto/promocion', (req, res) => res.sendFile('seguro-auto-promo.html', { root: __dirname }));
+
 // --- Formulario Seguro Pyme (antecedentes para cotizar; el lead va al CRM propio app.mercurial.cl) ---
 app.get('/cotizar-pyme', (req, res) => res.sendFile('cotizar-pyme.html', { root: __dirname }));
 
@@ -195,7 +199,10 @@ if (!mailer) {
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
-const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional' };
+const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional', auto: 'Seguro de auto' };
+// Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
+const patenteLimpia = v => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
+const patenteOk = v => /^(?=.*\d)[A-Z0-9]{5,6}$/.test(patenteLimpia(v));
 // Formulario de /seguros/transporte/importaciones-exportaciones (listas cerradas: deben calzar con seguro-carga-comex.html).
 const OPERACIONES_CARGA = ['Importo', 'Exporto'];
 const EMBARQUES_CARGA = ['1 a 5', '6 a 12', '13 a 30', 'Más de 30'];
@@ -286,6 +293,11 @@ function validarContacto(b) {
         if (!optTxt(b.mercaderia, 160)) errors.push('mercaderia');
         if (!optTxt(b.origen, 80)) errors.push('origen');
         if (b.fuente && !FUENTES_CARGA.includes(b.fuente)) errors.push('fuente');
+    } else if (b.tipo === 'auto') {
+        if (!txt(b.nombre, 120)) errors.push('nombre');
+        if (!telOk(b.telefono)) errors.push('telefono');
+        if (!patenteOk(b.patente)) errors.push('patente');
+        if (!correoOk(b.correo)) errors.push('correo');
     } else if (b.tipo === 'desgravamen') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!telOk(b.telefono)) errors.push('telefono');
@@ -338,6 +350,9 @@ app.post('/api/contacto', async (req, res) => {
         b.nombre && `Nombre: ${limpio(b.nombre)}`,
         b.correo && `Correo: ${limpio(b.correo)}`,
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
+        b.tipo === 'auto' && `Patente: ${patenteLimpia(b.patente)}`,
+        // Referencia fija de la página del convenio del mes (lista blanca); cualquier otro valor se ignora.
+        b.tipo === 'auto' && b.ref === 'PROMO-AUTO' && 'Procedencia: página de la promoción del mes (/seguro-auto/promocion)',
         b.banco && `Banco: ${limpio(b.banco)}`,
         b.situacion && `Para qué necesita el seguro: ${b.situacion}`,
         // Referencia fija de la campaña de Meta (lista blanca); cualquier otro valor se ignora.
