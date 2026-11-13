@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 // Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
 // express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
 // que cualquier archivo que no sea un asset público debe listarse acá explícitamente.
-const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'claude.md', 'product.md', 'skills-lock.json']);
+const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'claude.md', 'product.md', 'skills-lock.json', 'chatwoot.js']);
 app.use((req, res, next) => {
     let requestedPath;
     try {
@@ -200,6 +200,13 @@ if (!mailer) {
     console.warn('[AVISO] SMTP_USER/SMTP_PASS no definidas: /api/contacto responderá 503.');
 }
 
+// Leads de seguro de auto también a Chatwoot (contacto + conversación en el inbox API «Formulario web»).
+// El correo sigue saliendo siempre como respaldo; si Chatwoot falla, el formulario igual responde OK.
+const chatwoot = require('./chatwoot.js').crearChatwoot();
+if (!chatwoot.configurado && !chatwoot.dryRun) {
+    console.warn('[AVISO] CHATWOOT_URL/CHATWOOT_ACCOUNT_ID/CHATWOOT_API_TOKEN/CHATWOOT_INBOX_ID incompletas: los leads de auto no van a Chatwoot.');
+}
+
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
 const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional', auto: 'Seguro de auto' };
 // Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
@@ -286,9 +293,10 @@ function paginaLimpia(v) {
 // Enlace marcado (UTM) con el que llegó el visitante, para saber en el correo de qué campaña o persona viene.
 // Cada valor admite solo letras, números, guion y guion bajo (hasta 60): así no entra texto libre ni enlaces.
 const UTM_CORREO = [['utm_source', 'fuente'], ['utm_medium', 'medio'], ['utm_campaign', 'campaña'], ['utm_content', 'contenido']];
+const utmValido = (b, k) => (typeof b[k] === 'string' && /^[A-Za-z0-9_-]{1,60}$/.test(b[k]) ? b[k] : '');
 function enlaceMarcado(b) {
     return UTM_CORREO
-        .filter(([k]) => typeof b[k] === 'string' && /^[A-Za-z0-9_-]{1,60}$/.test(b[k]))
+        .filter(([k]) => utmValido(b, k))
         .map(([k, nombre]) => `${nombre} ${b[k]}`)
         .join(' · ');
 }
@@ -411,6 +419,22 @@ app.post('/api/contacto', async (req, res) => {
             subject: asunto,
             text: lineas.join('\n')
         });
+        if (b.tipo === 'auto') {
+            // Sin await: Chatwoot nunca demora ni rompe la respuesta al visitante (chatwoot.js no lanza).
+            chatwoot.enviar({
+                nombre: limpio(b.nombre),
+                telefono: `+56${limpio(b.telefono).replace(/\D/g, '').replace(/^56/, '')}`,
+                correo: limpio(b.correo).toLowerCase(),
+                rut: rutConFormato(b.rut),
+                comuna: comunaOficial(b.comuna),
+                patente: patenteLimpia(b.patente),
+                origen: [utmValido(b, 'utm_source'), utmValido(b, 'utm_content')].filter(Boolean).join('/') || 'directo',
+                campana: utmValido(b, 'utm_campaign'),
+                procedencia: b.ref === 'PROMO-AUTO' ? 'Promoción del mes (/seguro-auto/promocion)' : 'Página de seguro de auto',
+                etiquetaOrigen: utmValido(b, 'utm_source') || 'directo',
+                enlace: enlaceMarcado(b)
+            });
+        }
         // Lead del seguro de auto hacia Meta (API de conversiones). El navegador manda el mismo event_id
         // con el píxel; meta_event_id solo viene cuando el visitante aceptó las cookies (meta.js).
         if (b.tipo === 'auto' && metaEventIdValido(b.meta_event_id)) {
