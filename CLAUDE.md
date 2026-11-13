@@ -62,7 +62,7 @@ Estilos del sitio nuevo: `src/css/marco.css` (tokens, cabecera de dos niveles, p
 
 ## Captura de leads
 
-**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot. Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número.
+**WhatsApp de atención: +56 9 3931 9546** (`wa.me/56939319546`), atendido en Chatwoot (https://chat.mercurial.cl; Railway, proyecto `chatwoot`, cuenta 2). Todos los botones de WhatsApp del sitio, `llms.txt`, `ai.txt` y el perfil de Instagram usan ese número.
 
 Tres caminos, según la página:
 
