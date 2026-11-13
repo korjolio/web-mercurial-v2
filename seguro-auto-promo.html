@@ -150,7 +150,7 @@
           <p class="bajada">Déjanos tu patente y te enviamos tu cotización con la promoción.</p>
           <form class="form" data-envio="auto" novalidate>
           <div class="campo t-input-wrap"><label for="p-nombre">Nombre y apellido</label><input class="t-input" id="p-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="pe-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="pe-nombre"></span></div>
-          <div class="campo t-input-wrap"><label for="p-rut">RUT</label><input class="t-input" id="p-rut" name="rut" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" placeholder="12.345.678-5" required aria-describedby="pe-rut" data-tipo="rut" data-msg="Revisa el RUT: va con dígito verificador, por ejemplo 12.345.678-5."><span class="t-error-msg" id="pe-rut"></span></div>
+          <div class="dos"><div class="campo t-input-wrap"><label for="p-rut">RUT</label><input class="t-input" id="p-rut" name="rut" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" placeholder="12.345.678-5" required aria-describedby="pe-rut" data-tipo="rut" data-msg="Revisa el RUT: va con dígito verificador, por ejemplo 12.345.678-5."><span class="t-error-msg" id="pe-rut"></span></div><div class="campo t-input-wrap"><label for="p-comuna">Comuna</label><input class="t-input" id="p-comuna" name="comuna" list="p-comunas" autocomplete="off" spellcheck="false" maxlength="80" placeholder="Escribe tu comuna" required aria-describedby="pe-comuna" data-tipo="comuna" data-msg="Elige tu comuna de la lista."><span class="t-error-msg" id="pe-comuna"></span><datalist id="p-comunas" data-comunas></datalist></div></div>
           <div class="dos"><div class="campo t-input-wrap"><label for="p-tel">Teléfono</label><input class="t-input" id="p-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required aria-describedby="pe-tel" data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg" id="pe-tel"></span></div><div class="campo t-input-wrap"><label for="p-pat">Patente</label><input class="t-input patente" id="p-pat" name="patente" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="ABCD12" required aria-describedby="pe-pat" data-msg="Revisa la patente: son 6 caracteres, por ejemplo ABCD12."><span class="t-error-msg" id="pe-pat"></span></div></div>
           <div class="campo t-input-wrap"><label for="p-correo">Correo</label><input class="t-input" id="p-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="pe-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="pe-correo"></span></div>
           <input type="hidden" name="ref" value="PROMO-AUTO">
@@ -185,7 +185,7 @@
       <div class="cabeza"><h2 class="grande">Cómo <b>funciona</b></h2></div>
       <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
         <ol class="pasos">
-          <li class="paso"><span class="n">1</span><h3>Nos dejas tu patente</h3><p>Con tu nombre, tu RUT y un teléfono. Toma menos de un minuto.</p></li>
+          <li class="paso"><span class="n">1</span><h3>Nos dejas tu patente</h3><p>Con tu nombre, tu RUT, tu comuna y un teléfono. Toma menos de un minuto.</p></li>
           <li class="paso"><span class="n">2</span><h3>Preparamos tu cotización</h3><p>Con el descuento y las alternativas de deducible y taller.</p></li>
           <li class="paso"><span class="n">3</span><h3>Tú eliges</h3><p>Te explicamos las diferencias entre las alternativas.</p></li>
           <li class="paso"><span class="n">4</span><h3>Contratas antes del 30</h3><p>La compañía de seguros evalúa tu auto y emite la póliza.</p></li>
@@ -199,7 +199,7 @@
         <details class="pregunta"><summary>¿Hasta cuándo dura la promoción?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>La promoción es válida para pólizas de 24 meses contratadas entre el 1 y el 30 de noviembre de 2026.</p></div></details>
         <details class="pregunta"><summary>¿Cuáles son las cuotas gratis?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>La cuota 6 y la cuota 9 de tu póliza.</p></div></details>
         <details class="pregunta"><summary>¿El 40% de descuento es para todos los autos?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>El descuento es de hasta 40% en planes de cobertura completa. El que corresponde a tu auto va en tu cotización y está sujeto a la evaluación de la compañía de seguros.</p></div></details>
-        <details class="pregunta"><summary>¿Qué datos necesito para cotizar?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Para empezar, la patente, tu nombre, tu RUT, un teléfono y un correo. Para preparar la cotización te podemos pedir otros datos del conductor habitual, como fecha de nacimiento y comuna.</p></div></details>
+        <details class="pregunta"><summary>¿Qué datos necesito para cotizar?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Para empezar, la patente, tu nombre, tu RUT, tu comuna, un teléfono y un correo. Para preparar la cotización te podemos pedir otros datos del conductor habitual, como la fecha de nacimiento.</p></div></details>
         <details class="pregunta"><summary>¿Está garantizado que aseguren mi auto?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>No. La compañía de seguros revisa los antecedentes del auto y del conductor, y puede aceptar o rechazar el riesgo.</p></div></details>
         <details class="pregunta"><summary>¿Quiénes son ustedes?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Mercurial es una corredora de seguros inscrita en la Comisión para el Mercado Financiero (Registro N° 8929). No somos una compañía de seguros: cotizamos con ellas y gestionamos tu póliza.</p></div></details>
       </div>
@@ -224,7 +224,7 @@
   <script>
   document.querySelectorAll('a[href^="https://wa.me/56939319546"]').forEach(a => { a.href = 'https://wa.me/56939319546?text=Hola%20Mercurial%2C%20quiero%20cotizar%20mi%20seguro%20de%20auto%20con%20la%20promoci%C3%B3n%20de%20noviembre.'; });
   </script>
-  <script src="/src/js/sitio.js?v=11"></script>
+  <script src="/src/js/sitio.js?v=12"></script>
 </body>
 
 </html>

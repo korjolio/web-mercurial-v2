@@ -215,6 +215,10 @@ const rutOk = v => {
     const dv = 11 - (suma % 11);
     return c.slice(-1) === (dv === 11 ? '0' : dv === 10 ? 'K' : String(dv));
 };
+// Comuna de la lista oficial (la misma que carga el navegador), sin distinguir mayúsculas ni tildes.
+const sinTildes = v => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
+const COMUNAS_CL = new Map(require('./src/data/comunas.json').map(c => [sinTildes(c.comuna), c.comuna]));
+const comunaOficial = v => (typeof v === 'string' && v.length <= 80 ? COMUNAS_CL.get(sinTildes(v)) : undefined);
 const rutConFormato = v => { const c = rutLimpio(v); return c.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + c.slice(-1); };
 // Formulario de /seguros/transporte/importaciones-exportaciones (listas cerradas: deben calzar con seguro-carga-comex.html).
 const OPERACIONES_CARGA = ['Importo', 'Exporto'];
@@ -319,6 +323,7 @@ function validarContacto(b) {
     } else if (b.tipo === 'auto') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!rutOk(b.rut)) errors.push('rut');
+        if (!comunaOficial(b.comuna)) errors.push('comuna');
         if (!telOk(b.telefono)) errors.push('telefono');
         if (!patenteOk(b.patente)) errors.push('patente');
         if (!correoOk(b.correo)) errors.push('correo');
@@ -373,6 +378,7 @@ app.post('/api/contacto', async (req, res) => {
         b.empresa && `Empresa: ${limpio(b.empresa)}`,
         b.nombre && `Nombre: ${limpio(b.nombre)}`,
         b.tipo === 'auto' && `RUT: ${rutConFormato(b.rut)}`,
+        b.tipo === 'auto' && `Comuna: ${comunaOficial(b.comuna)}`,
         b.correo && `Correo: ${limpio(b.correo)}`,
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
         b.tipo === 'auto' && `Patente: ${patenteLimpia(b.patente)}`,

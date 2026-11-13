@@ -103,6 +103,17 @@
     return c.slice(-1) === (dv === 11 ? '0' : dv === 10 ? 'K' : String(dv));
   };
   const rutConFormato = v => { const c = rutLimpio(v); return c.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + c.slice(-1); };
+  // Comuna: se elige de la lista oficial (src/data/comunas.json), sin distinguir mayúsculas ni tildes.
+  // Mientras la lista no carga se acepta lo escrito y valida el servidor.
+  const sinTildes = v => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
+  let comunas = null;
+  const comunaOficial = v => (comunas ? comunas.get(sinTildes(v)) : v.trim());
+  if ($('input[data-tipo="comuna"]')) {
+    fetch('/src/data/comunas.json').then(r => r.json()).then(lista => {
+      comunas = new Map(lista.map(c => [sinTildes(c.comuna), c.comuna]));
+      $$('datalist[data-comunas]').forEach(d => d.append(...lista.map(c => new Option(c.comuna, c.comuna))));
+    }).catch(() => {});
+  }
   const sacudir = el => { el.classList.remove('is-shaking'); void el.offsetWidth; el.classList.add('is-shaking'); };
   document.addEventListener('animationend', e => e.target.classList && e.target.classList.remove('is-shaking'));
   const textoSuave = (el, t) => {
@@ -116,6 +127,7 @@
     if (inp.type === 'email') return correoValido(v);
     if (inp.dataset.tipo === 'tel' || inp.type === 'tel') return telValido(v);
     if (inp.dataset.tipo === 'rut') return rutValido(v);
+    if (inp.dataset.tipo === 'comuna') return !!comunaOficial(v);
     return true;
   };
   // Cada campo vive en .t-input-wrap (formularios completos) o en .celda (barra de cotización).
@@ -148,6 +160,7 @@
       i.addEventListener('input', () => valido(i) && limpiar(i));
       i.addEventListener('blur', () => {
         if (i.dataset.tipo === 'rut' && rutValido(i.value)) i.value = rutConFormato(i.value);
+        if (i.dataset.tipo === 'comuna' && comunaOficial(i.value)) i.value = comunaOficial(i.value);
         if (i.value.trim() && !valido(i)) marcar(i);
       });
     });
