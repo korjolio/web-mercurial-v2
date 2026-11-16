@@ -95,3 +95,19 @@
   .panel.foto-auto > img { object-position: 24% 72% !important; }
   .panel.foto-auto::before { background: linear-gradient(180deg, var(--navy) 0%, var(--navy) calc(100% - 300px), rgba(13,35,64,.55) calc(100% - 250px), rgba(13,35,64,0) calc(100% - 140px)); }
 }
+
+[data-si-nuevo][hidden], [data-si-usado][hidden] { display: none !important; }
+
+/* Interruptor estilo iPhone «Es nuevo (0 km)» junto a la etiqueta de Patente */
+.fila-patente { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.fila-patente .tit-campo, .fila-patente .tit-campo label { font-weight: 600; font-size: 15px; }
+.switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: var(--tx2); user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .pista { position: relative; width: 44px; height: 26px; border-radius: 999px; background: #d1d5db; transition: background-color var(--duration-quick, .2s) ease-out; flex: none; }
+.switch .pista::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform var(--duration-quick, .2s) cubic-bezier(.3,.7,.4,1); }
+.switch input:checked + .pista { background: #34c759; }
+.switch input:checked + .pista::after { transform: translateX(18px); }
+.switch input:focus-visible + .pista { outline: 3px solid var(--azul-h); outline-offset: 2px; }
+.tres { display: grid; grid-template-columns: 1fr 1.3fr .7fr; gap: 8px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 420px) { .tres { grid-template-columns: 1fr 1fr; } .tres .campo:last-child { grid-column: span 2; } }

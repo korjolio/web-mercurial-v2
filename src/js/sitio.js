@@ -128,6 +128,7 @@
     if (inp.dataset.tipo === 'tel' || inp.type === 'tel') return telValido(v);
     if (inp.dataset.tipo === 'rut') return rutValido(v);
     if (inp.dataset.tipo === 'comuna') return !!comunaOficial(v);
+    if (inp.dataset.tipo === 'anio') { const n = Number(v); return /^\d{4}$/.test(v) && n >= 2000 && n <= new Date().getFullYear() + 2; }
     return true;
   };
   // Cada campo vive en .t-input-wrap (formularios completos) o en .celda (barra de cotización).
@@ -164,12 +165,30 @@
         if (i.value.trim() && !valido(i)) marcar(i);
       });
     });
+    // Seguro de auto: interruptor «Es nuevo (0 km)». Apagado → patente (los datos del auto salen de la patente).
+    // Encendido (0 km, sin patente) → marca, modelo y año en una fila.
+    const swNuevo = $('input[data-auto-nuevo]', form);
+    if (swNuevo) {
+      const extras = ['marca', 'modelo', 'anio'].map(n => $(`input[name="${n}"]`, form));
+      const pat = $('input[name="patente"]', form);
+      const aplicar = enfocar => {
+        const nuevo = swNuevo.checked;
+        swNuevo.setAttribute('aria-checked', String(nuevo));
+        $$('[data-si-usado]', form).forEach(c => { c.hidden = nuevo; });
+        $$('[data-si-nuevo]', form).forEach(c => { c.hidden = !nuevo; });
+        pat.required = !nuevo; pat.disabled = nuevo; limpiar(pat);
+        extras.forEach(i => { i.required = nuevo; i.disabled = !nuevo; limpiar(i); });
+        if (enfocar) (nuevo ? extras[0] : pat).focus();
+      };
+      swNuevo.addEventListener('change', () => aplicar(true));
+      aplicar(false);
+    }
     if (grupo) grupo.addEventListener('change', () => { grupo.classList.remove('is-error'); $('.t-error-msg', grupo).textContent = ''; });
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if (aviso) aviso.hidden = true;
-      const malos = campos.filter(i => !valido(i));
+      const malos = campos.filter(i => !i.disabled && !valido(i));
       malos.forEach(i => marcar(i));
       const sinSeguro = grupo && !$('input[name="seguro"]:checked', form);
       if (sinSeguro) { grupo.classList.add('is-error'); $('.t-error-msg', grupo).textContent = 'Elige el seguro que te interesa.'; sacudir($('.opciones', grupo)); }
@@ -237,7 +256,9 @@
           const ref = ['utm_source', 'utm_content'].map(k => enlaceMarcado[k]).filter(v => /^[A-Za-z0-9_-]{1,60}$/.test(v || '')).join('/');
           const txt = `Hola Mercurial, soy ${String(datos.nombre || '').trim().slice(0, 80)}. Ya dejé mis datos en el sitio y quiero recibir la cotización de mi seguro de auto`
             + (datos.ref === 'PROMO-AUTO' ? ' con la promoción del mes' : '')
-            + `. Patente: ${String(datos.patente || '').toUpperCase().replace(/[^A-Z0-9]/g, '')}.` + (ref ? ` (ref: ${ref})` : '');
+            + (datos.auto_nuevo === 'si'
+              ? `. Auto nuevo 0 km: ${[datos.marca, datos.modelo, datos.anio].map(v => String(v || '').trim()).join(' ').slice(0, 100)}.`
+              : `. Patente: ${String(datos.patente || '').toUpperCase().replace(/[^A-Z0-9]/g, '')}.`) + (ref ? ` (ref: ${ref})` : '');
           wa.href = 'https://wa.me/56939319546?text=' + encodeURIComponent(txt);
         }
         exito.hidden = false;

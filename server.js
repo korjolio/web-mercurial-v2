@@ -221,6 +221,9 @@ const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclam
 // Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
 const patenteLimpia = v => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
 const patenteOk = v => /^(?=.*\d)[A-Z0-9]{5,6}$/.test(patenteLimpia(v));
+// Auto nuevo (0 km, sin patente): año de 4 dígitos, entre 2000 y el año siguiente al próximo.
+const anioOk = v => /^\d{4}$/.test(String(v || '').trim()) && Number(v) >= 2000 && Number(v) <= new Date().getFullYear() + 2;
+const autoNuevoTxt = b => [b.marca, b.modelo, b.anio].map(v => String(v || '').trim()).join(' ');
 // RUT chileno: 7 u 8 dígitos más el dígito verificador (módulo 11). Llega con o sin puntos y guion.
 const rutLimpio = v => (typeof v === 'string' && v.length <= 20 ? v.replace(/[^0-9kK]/g, '').toUpperCase() : '');
 const rutOk = v => {
@@ -342,7 +345,11 @@ function validarContacto(b) {
         if (!rutOk(b.rut)) errors.push('rut');
         if (!comunaOficial(b.comuna)) errors.push('comuna');
         if (!telOk(b.telefono)) errors.push('telefono');
-        if (!patenteOk(b.patente)) errors.push('patente');
+        if (b.auto_nuevo === 'si') {
+            if (!txt(b.marca, 40)) errors.push('marca');
+            if (!txt(b.modelo, 60)) errors.push('modelo');
+            if (!anioOk(b.anio)) errors.push('anio');
+        } else if (!patenteOk(b.patente)) errors.push('patente');
         if (!correoOk(b.correo)) errors.push('correo');
     } else if (b.tipo === 'desgravamen') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
@@ -398,7 +405,9 @@ app.post('/api/contacto', async (req, res) => {
         b.tipo === 'auto' && `Comuna: ${comunaOficial(b.comuna)}`,
         b.correo && `Correo: ${limpio(b.correo)}`,
         b.telefono && `Teléfono: ${limpio(b.telefono)}`,
-        b.tipo === 'auto' && `Patente: ${patenteLimpia(b.patente)}`,
+        b.tipo === 'auto' && (b.auto_nuevo === 'si'
+            ? `Auto nuevo 0 km (sin patente): ${autoNuevoTxt(b)}`
+            : `Patente: ${patenteLimpia(b.patente)}`),
         // Referencia fija de la página del convenio del mes (lista blanca); cualquier otro valor se ignora.
         b.tipo === 'auto' && b.ref === 'PROMO-AUTO' && 'Procedencia: página de la promoción del mes (/seguro-auto/promocion)',
         b.banco && `Banco: ${limpio(b.banco)}`,
@@ -432,7 +441,9 @@ app.post('/api/contacto', async (req, res) => {
                 telefono: limpio(b.telefono),
                 correo: limpio(b.correo).toLowerCase(),
                 rut: rutConFormato(b.rut),
-                datos: { patente: patenteLimpia(b.patente), comuna: comunaOficial(b.comuna) },
+                datos: b.auto_nuevo === 'si'
+                    ? { auto: 'Nuevo 0 km (sin patente)', marca: limpio(b.marca), modelo: limpio(b.modelo), anio: String(b.anio).trim(), comuna: comunaOficial(b.comuna) }
+                    : { patente: patenteLimpia(b.patente), comuna: comunaOficial(b.comuna) },
                 fuente: utmValido(b, 'utm_source'),
                 medio: utmValido(b, 'utm_medium'),
                 campana: utmValido(b, 'utm_campaign'),
@@ -459,7 +470,7 @@ app.post('/api/contacto', async (req, res) => {
                 correo: limpio(b.correo).toLowerCase(),
                 rut: rutConFormato(b.rut),
                 comuna: comunaOficial(b.comuna),
-                patente: patenteLimpia(b.patente),
+                patente: b.auto_nuevo === 'si' ? `NUEVO 0 km: ${autoNuevoTxt(b)}` : patenteLimpia(b.patente),
                 origen: [utmValido(b, 'utm_source'), utmValido(b, 'utm_content')].filter(Boolean).join('/') || 'directo',
                 campana: utmValido(b, 'utm_campaign'),
                 procedencia: b.ref === 'PROMO-AUTO' ? 'Promoción del mes (/seguro-auto/promocion)' : 'Página de seguro de auto',
