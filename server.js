@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 // Bloquear acceso público a archivos internos del servidor antes de servir estáticos.
 // express.static(__dirname) sirve TODO el directorio por defecto (incluído él mismo), así
 // que cualquier archivo que no sea un asset público debe listarse acá explícitamente.
-const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'claude.md', 'product.md', 'skills-lock.json', 'chatwoot.js']);
+const BLOCKED_STATIC_FILES = new Set(['server.js', 'package.json', 'package-lock.json', 'claude.md', 'product.md', 'skills-lock.json', 'chatwoot.js', 'motor.js']);
 app.use((req, res, next) => {
     let requestedPath;
     try {
@@ -200,11 +200,17 @@ if (!mailer) {
     console.warn('[AVISO] SMTP_USER/SMTP_PASS no definidas: /api/contacto responderá 503.');
 }
 
-// Leads de seguro de auto también a Chatwoot (contacto + conversación en el inbox API «Formulario web»).
-// El correo sigue saliendo siempre como respaldo; si Chatwoot falla, el formulario igual responde OK.
+// Leads de seguro de auto → motor de leads (motor.js): los guarda en su base y deja UNA conversación en
+// el inbox de WhatsApp de Chatwoot. Con el motor activo, el correo sale solo como respaldo si el motor falla.
+const motor = require('./motor.js').crearMotor();
+// Flujo anterior, solo mientras el motor no esté configurado: correo siempre + conversación en el
+// inbox API «Formulario web» (chatwoot.js).
 const chatwoot = require('./chatwoot.js').crearChatwoot();
-if (!chatwoot.configurado && !chatwoot.dryRun) {
-    console.warn('[AVISO] CHATWOOT_URL/CHATWOOT_ACCOUNT_ID/CHATWOOT_API_TOKEN/CHATWOOT_INBOX_ID incompletas: los leads de auto no van a Chatwoot.');
+if (!motor.configurado && !motor.dryRun) {
+    console.warn('[AVISO] MOTOR_LEADS_URL/MOTOR_LEADS_TOKEN no definidas: los leads de auto siguen por correo + Chatwoot «Formulario web».');
+    if (!chatwoot.configurado && !chatwoot.dryRun) {
+        console.warn('[AVISO] CHATWOOT_URL/CHATWOOT_ACCOUNT_ID/CHATWOOT_API_TOKEN/CHATWOOT_INBOX_ID incompletas: los leads de auto no van a Chatwoot.');
+    }
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
@@ -412,14 +418,37 @@ app.post('/api/contacto', async (req, res) => {
     ].filter(Boolean);
 
     try {
-        await mailer.sendMail({
-            from: `"Sitio Mercurial" <${SMTP_USER || MAIL_TO}>`,
-            to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
-            replyTo: b.correo ? limpio(b.correo) : undefined,
-            subject: asunto,
-            text: lineas.join('\n')
-        });
-        if (b.tipo === 'auto') {
+        // Auto con el motor activo: el lead va al motor y el correo sobra. Si el motor no lo deja en
+        // Chatwoot (caído, lento o Chatwoot falló), sale el correo de siempre, marcado como respaldo.
+        const conMotor = b.tipo === 'auto' && (motor.configurado || motor.dryRun);
+        let enMotor = false;
+        if (conMotor) {
+            const r = await motor.enviar({
+                producto: 'auto',
+                nombre: limpio(b.nombre),
+                telefono: limpio(b.telefono),
+                correo: limpio(b.correo).toLowerCase(),
+                rut: rutConFormato(b.rut),
+                datos: { patente: patenteLimpia(b.patente), comuna: comunaOficial(b.comuna) },
+                fuente: utmValido(b, 'utm_source'),
+                medio: utmValido(b, 'utm_medium'),
+                campana: utmValido(b, 'utm_campaign'),
+                contenido: utmValido(b, 'utm_content'),
+                procedencia: b.ref === 'PROMO-AUTO' ? 'Promoción del mes (/seguro-auto/promocion)' : 'Página de seguro de auto',
+                pagina: paginaLimpia(b.pagina)
+            });
+            enMotor = r.entregado;
+        }
+        if (!enMotor) {
+            await mailer.sendMail({
+                from: `"Sitio Mercurial" <${SMTP_USER || MAIL_TO}>`,
+                to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
+                replyTo: b.correo ? limpio(b.correo) : undefined,
+                subject: conMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : asunto,
+                text: lineas.join('\n')
+            });
+        }
+        if (b.tipo === 'auto' && !conMotor) {
             // Sin await: Chatwoot nunca demora ni rompe la respuesta al visitante (chatwoot.js no lanza).
             chatwoot.enviar({
                 nombre: limpio(b.nombre),
