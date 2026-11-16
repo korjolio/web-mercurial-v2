@@ -175,7 +175,9 @@ app.post('/api/meta/evento', express.text({ type: 'text/plain', limit: '4kb' }),
 });
 
 // --- Endpoint: formularios de la portada (cotización, consulta, reclamo) -> correo ---
-// Se envían por el SMTP de Google Workspace (mercurial.cl) con una contraseña de aplicación.
+// Se envían por SMTP: Resend (SMTP_HOST=smtp.resend.com, SMTP_USER=resend, SMTP_PASS=clave de Resend)
+// o Google Workspace (contraseña de aplicación). MAIL_FROM fija el remitente (ej. avisos@mercurial.cl);
+// sin MAIL_FROM se usa SMTP_USER.
 // Sin SMTP_USER/SMTP_PASS el endpoint responde 503 y la página ofrece WhatsApp.
 // MAIL_DRY_RUN=1 arma el correo sin enviarlo (pruebas locales): nunca usarlo en producción.
 const nodemailer = require('nodemailer');
@@ -185,6 +187,7 @@ const MAIL_TO_AUTO = process.env.MAIL_TO_AUTO || 'ppbugueno@mercurial.cl';
 const MAIL_DRY_RUN = process.env.MAIL_DRY_RUN === '1';
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
+const MAIL_FROM = process.env.MAIL_FROM || SMTP_USER || MAIL_TO;
 const mailer = MAIL_DRY_RUN
     ? nodemailer.createTransport({ jsonTransport: true })
     : (SMTP_USER && SMTP_PASS)
@@ -441,7 +444,7 @@ app.post('/api/contacto', async (req, res) => {
         }
         if (!enMotor) {
             await mailer.sendMail({
-                from: `"Sitio Mercurial" <${SMTP_USER || MAIL_TO}>`,
+                from: `"Sitio Mercurial" <${MAIL_FROM}>`,
                 to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
                 replyTo: b.correo ? limpio(b.correo) : undefined,
                 subject: conMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : asunto,
