@@ -178,8 +178,8 @@
         if (i.value.trim() && !valido(i)) marcar(i);
       });
     });
-    // Seguro de auto: interruptor «Es nuevo (0 km)». Apagado → patente (los datos del auto salen de la patente).
-    // Encendido (0 km, sin patente) → marca, modelo y año en una fila.
+    // Seguro de auto: interruptor «Aún no tengo la patente». Apagado → patente (los datos del auto salen de la patente).
+    // Encendido (sin patente) → marca, modelo y año en una fila.
     const swNuevo = $('input[data-auto-nuevo]', form);
     if (swNuevo) {
       const extras = ['marca', 'modelo', 'anio'].map(n => $(`input[name="${n}"]`, form));
@@ -271,7 +271,7 @@
           const txt = `Hola Mercurial, soy ${String(datos.nombre || '').trim().slice(0, 80)}. Ya dejé mis datos en el sitio y quiero recibir la cotización de mi seguro de auto`
             + (datos.ref === 'PROMO-AUTO' ? ' con la promoción del mes' : '')
             + (datos.auto_nuevo === 'si'
-              ? `. Auto nuevo 0 km: ${[datos.marca, datos.modelo, datos.anio].map(v => String(v || '').trim()).join(' ').slice(0, 100)}.`
+              ? `. Aún no tengo la patente: ${[datos.marca, datos.modelo, datos.anio].map(v => String(v || '').trim()).join(' ').slice(0, 100)}.`
               : `. Patente: ${String(datos.patente || '').toUpperCase().replace(/[^A-Z0-9]/g, '')}.`) + (ref ? ` (ref: ${ref})` : '');
           wa.href = 'https://wa.me/56939319546?text=' + encodeURIComponent(txt);
         }
