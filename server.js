@@ -111,13 +111,14 @@ function metaCookie(req, name) {
 }
 
 // Datos del cliente: los de contacto van con hash SHA-256; IP, UA y cookies del píxel, en claro.
-function metaUserData(req, { email, phone, firstName, lastName, city } = {}) {
+// fbc: sin cookie _fbc se usa el armado desde el fbclid de la URL de llegada (metaFbcDesdeClic).
+function metaUserData(req, { email, phone, firstName, lastName, city, fbc } = {}) {
     const hashed = { em: metaNorm(email), ph: metaPhone(phone), fn: metaNorm(firstName), ln: metaNorm(lastName), ct: metaNorm(city).replace(/[^\p{L}]/gu, '') };
     const userData = {
         client_ip_address: req.ip,
         client_user_agent: req.get('user-agent'),
         fbp: metaCookie(req, '_fbp'),
-        fbc: metaCookie(req, '_fbc')
+        fbc: metaCookie(req, '_fbc') || fbc
     };
     Object.entries(hashed).forEach(([k, v]) => { if (v) userData[k] = [sha256(v)]; });
     if (userData.em || userData.ph) userData.country = [sha256('cl')];
@@ -154,6 +155,16 @@ async function enviarEventoMeta(req, { eventName, eventId, eventSourceUrl, userD
 
 const META_EVENTOS_NAVEGADOR = new Set(['ViewContent', 'Contact', 'CustomizeProduct']);
 const metaEventIdValido = (v) => typeof v === 'string' && /^[A-Za-z0-9-]{8,80}$/.test(v);
+
+// fbc a partir del fbclid con que llegó el visitante (sitio.js lo guarda en la visita), para atribuir el
+// Lead al anuncio aunque no haya cookie _fbc. Formato de Meta: fb.1.<ms del clic>.<fbclid>.
+// La hora de llegada solo se acepta si es de los últimos 90 días; si no, se usa la actual.
+function metaFbcDesdeClic(fbclid, llegada) {
+    if (typeof fbclid !== 'string' || !/^[A-Za-z0-9_-]{10,500}$/.test(fbclid)) return undefined;
+    const ahora = Date.now(), t = Number(llegada);
+    const ms = Number.isInteger(t) && t <= ahora && ahora - t < 90 * 24 * 3600 * 1000 ? t : ahora;
+    return `fb.1.${ms}.${fbclid}`;
+}
 
 // Copia de servidor de los eventos sin formulario (los Lead salen de sus propios endpoints).
 // sendBeacon manda el cuerpo como text/plain en algunos navegadores; express.json lo ignora.
@@ -478,15 +489,20 @@ app.post('/api/contacto', async (req, res) => {
                 enlace: enlaceMarcado(b)
             });
         }
-        // Lead del seguro de auto hacia Meta (API de conversiones). El navegador manda el mismo event_id
-        // con el píxel; meta_event_id solo viene cuando el visitante aceptó las cookies (meta.js).
-        if (b.tipo === 'auto' && metaEventIdValido(b.meta_event_id)) {
+        // Lead del seguro de auto hacia Meta (API de conversiones), SIEMPRE, con o sin cookies: el formulario
+        // lo avisa bajo el botón y la política de privacidad lo explica (decisión de Pepa, nov 2026).
+        // Con cookies el navegador manda el píxel con el mismo meta_event_id y Meta deduplica; sin él,
+        // el id se genera aquí y solo cuenta el servidor.
+        if (b.tipo === 'auto') {
             const partes = limpio(b.nombre).split(/\s+/);
             enviarEventoMeta(req, {
                 eventName: 'Lead',
-                eventId: b.meta_event_id,
+                eventId: metaEventIdValido(b.meta_event_id) ? b.meta_event_id : crypto.randomUUID(),
                 eventSourceUrl: paginaLimpia(b.pagina) || undefined,
-                userData: { email: limpio(b.correo), phone: limpio(b.telefono), firstName: partes[0], lastName: partes.slice(1).join(' ') },
+                userData: {
+                    email: limpio(b.correo), phone: limpio(b.telefono), firstName: partes[0], lastName: partes.slice(1).join(' '),
+                    fbc: metaFbcDesdeClic(b.fbclid, b.fbclid_t)
+                },
                 customData: { content_name: 'Seguro de Auto' }
             });
         }

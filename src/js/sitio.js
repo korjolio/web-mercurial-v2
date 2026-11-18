@@ -26,6 +26,19 @@
     return e;
   })();
 
+  /* Clic de anuncio de Meta (?fbclid=): se recuerda durante la visita con la hora de llegada, para que el
+     Lead del seguro de auto se atribuya al anuncio aunque no haya cookie _fbc. El servidor valida el formato
+     (server.js, metaFbcDesdeClic). */
+  const clicMeta = (() => {
+    const v = new URLSearchParams(location.search).get('fbclid');
+    const c = v && /^[A-Za-z0-9_-]{10,500}$/.test(v) ? { fbclid: v, t: Date.now() } : null;
+    try {
+      if (c) sessionStorage.setItem('mercurial_fbclid', JSON.stringify(c));
+      else return JSON.parse(sessionStorage.getItem('mercurial_fbclid') || 'null');
+    } catch (err) { /* sin almacenamiento solo vale la página de llegada */ }
+    return c;
+  })();
+
   /* Menú de seguros (transitions.dev · menu dropdown) */
   const btn = $('#btn-seguros'), menu = $('#menu-seguros'), li = $('#li-seguros');
   if (btn && menu && li) {
@@ -207,6 +220,7 @@
       // Sin consentimiento de cookies newEventId() no devuelve nada y no se mide.
       const idMeta = datos.tipo === 'auto' && window.mercurialMeta ? window.mercurialMeta.newEventId() : undefined;
       if (idMeta) datos.meta_event_id = idMeta;
+      if (datos.tipo === 'auto' && clicMeta && typeof clicMeta.fbclid === 'string') { datos.fbclid = clicMeta.fbclid; datos.fbclid_t = clicMeta.t; }
       enviar.disabled = true; textoSuave(etiqueta, 'Enviando…');
       if (estado) estado.textContent = 'Enviando.';
 
