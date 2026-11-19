@@ -76,23 +76,14 @@
     .op-switch .switch input:focus-visible + .pista { outline: 3px solid var(--azul-h); outline-offset: 2px; }
     @media (prefers-reduced-motion: reduce) { .op-switch .pista, .op-switch .pista::after { transition: none; } }
     /* Confianza y preguntas */
-    .lp-confianza { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 40px 0 0; padding: 0; }
-    .lp-confianza li { display: flex; gap: 12px; align-items: flex-start; padding: 18px 20px; border: 1px solid var(--borde); border-radius: 16px; background: #fff; font-size: 15px; color: var(--tx2); line-height: 1.4; }
-    .lp-confianza li b { display: block; color: var(--navy); font-size: 16px; font-weight: 600; margin-bottom: 2px; }
-    .lp-ejemplo { margin: 16px 0 0; padding: 16px 20px; border-radius: 16px; background: var(--gris); color: var(--tx2); font-size: 15px; line-height: 1.5; }
-    .lp-ejemplo b { color: var(--navy); }
-    .lp-confianza .ico { flex: none; width: 22px; height: 22px; color: var(--azul-b); margin-top: 1px; }
     .lp-preg { margin-top: 40px; }
-    .lp .lp-confianza { margin-top: 20px; }
     .lp-preg h2 { font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 14px; }
     .lp-preg .preguntas { max-width: none; }
-    .lp-preg .pregunta, .lp-confianza li { opacity: 1 !important; transform: none !important; }
     .firma { margin: 40px 0 72px; padding-top: 20px; border-top: 1px solid var(--borde); color: var(--tx2); font-size: 14px; }
     @media (max-width: 960px) {
       .lp-panel { grid-template-columns: 1fr; padding: 40px 32px 32px; gap: 32px; }
       .lp-card { max-width: 560px; }
     }
-    @media (max-width: 760px) { .lp-confianza { grid-template-columns: 1fr; gap: 10px; } .lp-confianza li { padding: 14px 16px; } }
     @media (max-width: 560px) {
       .lp { padding-top: 12px; }
       .lp-panel { padding: 28px 18px 18px; border-radius: 20px; gap: 22px; }
@@ -102,7 +93,6 @@
       .lp-txt .wa { width: 100%; margin-top: 20px; }
       .lp-txt .wa-nota { text-align: center; }
       .lp-card { padding: 22px 18px; border-radius: 16px; }
-      .lp .lp-confianza { margin-top: 14px; }
       .lp-preg { margin-top: 28px; }
       .pregunta summary { font-size: 16px; min-height: 56px; padding: 14px 18px; }
       .firma { margin: 28px 0 48px; }
@@ -241,13 +231,6 @@
           <p class="sr estado" role="status"></p>
         </div>
       </div>
-
-      <ul class="lp-confianza">
-        <li><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg><div><b>Todo Riesgo</b>Para mercadería nueva</div></li>
-        <li><svg class="ico" aria-hidden="true"><use href="#check"/></svg><div><b>Sin contrato anual</b>Aseguras solo los embarques que quieras</div></li>
-        <li><svg class="ico" aria-hidden="true"><use href="#barco"/></svg><div><b>Certificado por correo</b>Antes del arribo de tu carga</div></li>
-      </ul>
-      <p class="lp-ejemplo"><b>Ejemplo:</b> importas un contenedor de repuestos desde China. Nos mandas la factura comercial y el B/L, y te llega el certificado por correo antes de que la nave llegue a Chile.</p>
 
       <div class="lp-preg">
         <h2>Preguntas rápidas</h2>
