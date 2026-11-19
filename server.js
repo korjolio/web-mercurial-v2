@@ -292,6 +292,93 @@ function crearLimite(maximo, ventana) {
 }
 const pymePermitido = crearLimite(5, VENTANA_CONTACTO);
 const metaPermitido = crearLimite(60, VENTANA_CONTACTO);
+
+// ── Cotización automática de certificados de carga (landing del anuncio) · Pepa, 19-nov-2026 ─────────────────
+// No se muestra en la página: se le envía al cliente por WhatsApp (plantilla cotizacion_carga) y por correo.
+// Misma tarifa que el bot (Autos-Web/cotizador/carga.py) = 1,8 × la técnica de la póliza 692881:
+//   internacional 0,18%, mínimo US$18, exento de IVA, monto asegurado = CIF + 10%, límite US$300.000;
+//   nacional 0,36%, mínimo US$162, afecto a IVA (19%), monto = valor de la mercadería, límite US$150.000.
+//   +10% si hay transbordo. Cobro en pesos al dólar observado del día.
+const TARIFAS_CARGA = {
+    internacional: { tasa: 0.0018, minimo: 18, iva: 0, gastos: 0.10, limite: 300000 },
+    nacional: { tasa: 0.0036, minimo: 162, iva: 0.19, gastos: 0, limite: 150000 }
+};
+const OPERACIONES_CERTIFICADO = ['Importación', 'Exportación', 'Nacional'];
+const MEDIOS_CARGA = ['Marítimo', 'Aéreo', 'Terrestre'];
+const EMBALAJES_CARGA = ['Contenedor completo (FCL)', 'Contenedor consolidado (LCL)', 'Cajas o pallets', 'Camión cerrado', 'Otro'];
+// Mercaderías que el programa por embarque no cubre (póliza 692881): sin precio automático, se ofrece póliza anual.
+const EXCLUIDAS_CARGA = /celular|smartphone|computador|notebook|laptop|tablet|electr[oó]nic|televisor|consola|software|l[ií]nea blanca|refrigerador|lavadora|secadora|microondas|medicament|farmac|veh[ií]culo|autom[oó]vil|\bautos?\b|\bmotos?\b|cobre|joya|reloj|\boro\b|\bplata\b|piedras? preciosa|perfume|tabaco|cigarr|combustible|explosiv|corrosiv|\barmas?\b|munici[oó]n|mudanza|enseres|efectos personales|vidrio|cristal plano|semilla|animales? vivo|carga viva|harina de pescado|obras? de arte|antig[uü]edad|pieles|diamante|petr[oó]leo|dinero|prototipo/i;
+const dolarCache = { dia: '', valor: 0, fecha: '' };
+async function dolarObservado() {
+    const hoy = new Date().toLocaleDateString('es-CL', { timeZone: 'America/Santiago' });
+    if (dolarCache.dia === hoy && dolarCache.valor) return dolarCache;
+    for (const url of ['https://findic.cl/api/dolar', 'https://mindicador.cl/api/dolar']) {
+        try {
+            const { data } = await axios.get(url, { timeout: 6000 });
+            const serie = data && data.serie && data.serie[0];
+            if (serie && Number(serie.valor) > 0) {
+                Object.assign(dolarCache, { dia: hoy, valor: Number(serie.valor), fecha: String(serie.fecha).slice(0, 10) });
+                return dolarCache;
+            }
+        } catch (e) { console.error(`[Carga] No pude leer el dólar en ${url}: ${e.message}`); }
+    }
+    return dolarCache.valor ? dolarCache : null;
+}
+const numCl = (x, dec = 0) => Number(x).toLocaleString('es-CL', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const valorUsd = v => { const n = Number(String(v ?? '').replace(/[^\d]/g, '')); return Number.isFinite(n) ? n : 0; };
+// { ok, ambito, valor, monto, neta, prima, primaClp, dolar, fecha } · o { ok: false, motivo: 'excluida' | 'limite' }
+async function cotizarCarga(b) {
+    const ambito = b.operacion === 'Nacional' ? 'nacional' : 'internacional';
+    const t = TARIFAS_CARGA[ambito];
+    const valor = valorUsd(b.valor_mercaderia);
+    if (EXCLUIDAS_CARGA.test(b.mercaderia || '')) return { ok: false, motivo: 'excluida', ambito, valor };
+    const monto = Math.round(valor * (1 + t.gastos) * 100) / 100;
+    if (monto > t.limite) return { ok: false, motivo: 'limite', ambito, valor, monto };
+    let neta = Math.max(t.minimo, monto * t.tasa);
+    if (b.transbordo === 'Sí') neta *= 1.10;
+    neta = Math.round(neta * 100) / 100;
+    const prima = Math.round(neta * (1 + t.iva) * 100) / 100;
+    const d = await dolarObservado();
+    return { ok: true, ambito, valor, monto, neta, prima, iva: t.iva > 0,
+             primaClp: d ? Math.ceil(prima * d.valor) : null, dolar: d ? d.valor : null, fecha: d ? d.fecha : '' };
+}
+const ivaTxt = c => (c.iva ? 'IVA incluido' : 'exento de IVA');
+const textoCotizacionCarga = c => c && c.ok
+    ? `${c.primaClp ? `$${numCl(c.primaClp)} ` : ''}(US$${numCl(c.prima, 2)}, ${ivaTxt(c)}) · monto asegurado US$${numCl(c.monto)}${c.ambito === 'internacional' ? ' (CIF + 10%)' : ''}${c.dolar ? ` · dólar observado ${c.fecha}: $${numCl(c.dolar, 2)}` : ''}`
+    : c && c.motivo === 'excluida' ? 'Sin precio automático: mercadería fuera del programa por embarque (ofrecer póliza anual)'
+    : c && c.motivo === 'limite' ? `Sin precio automático: monto asegurado US$${numCl(c.monto)} sobre el límite por embarque (pedir a la compañía)` : '';
+const escHtml = v => String(v ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+// Correo al cliente con la cotización (formato de los correos de cotización: botón verde de WhatsApp con ícono).
+function correoCotizacionCarga(b, c) {
+    const nombre = String(b.nombre || '').trim().split(/\s+/)[0];
+    const wa = `https://wa.me/56939319546?text=${encodeURIComponent(`Hola Mercurial, soy ${nombre} de ${String(b.empresa || '').trim()}. Quiero emitir el certificado de mi embarque (cotización de US$${numCl(c.prima, 2)}).`)}`;
+    const precio = c.primaClp ? `$${numCl(c.primaClp)}` : `US$${numCl(c.prima, 2)}`;
+    const detalle = `${c.primaClp ? `US$${numCl(c.prima, 2)}, ` : ''}${ivaTxt(c)}`;
+    const operacion = { Importación: 'importación', Exportación: 'exportación', Nacional: 'transporte nacional' }[b.operacion] || 'embarque';
+    const filas = [
+        ['Operación', b.operacion], ['Mercadería', b.mercaderia], ['Medio', b.medio], ['Embalaje', b.embalaje],
+        ['Valor de la mercadería', `US$${numCl(c.valor)}`], ['Monto asegurado', `US$${numCl(c.monto)}${c.ambito === 'internacional' ? ' (CIF + 10%)' : ''}`],
+        ['Transbordo', b.transbordo || 'No']
+    ].filter(([, v]) => v);
+    const html = `<div style="font-family:Arial,Helvetica,sans-serif;color:#1f2a44;font-size:14px;line-height:1.5">
+<p>Hola ${escHtml(nombre)},</p>
+<p>Gracias por cotizar con Mercurial. Este es el valor del certificado de seguro de tu ${escHtml(operacion)}:</p>
+<table cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;width:420px"><tr><td bgcolor="#e8f4fa" style="background-color:#e8f4fa;padding:14px 16px">
+<span style="font-size:13px;color:#536479">Certificado por embarque</span><br><b style="font-size:24px;color:#0d2340">${escHtml(precio)}</b><br><span style="color:#536479">${escHtml(detalle)}${c.dolar ? ` · dólar observado del ${escHtml(c.fecha)}` : ''}</span>
+</td></tr></table>
+<table cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;width:420px;margin-top:12px;font-size:14px">
+${filas.map(([k, v], i) => `<tr><td style="padding:6px 12px;border-bottom:1px solid #e6e9f0;color:#536479">${escHtml(k)}</td><td style="padding:6px 12px;border-bottom:1px solid #e6e9f0" align="right">${escHtml(v)}</td></tr>`).join('\n')}
+</table>
+<p style="margin-top:16px"><b>¿Lo emitimos?</b> Te pedimos unos datos del embarque y te enviamos el link de pago. Pagado, el certificado te llega por correo.</p>
+<table cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;margin:4px 0 16px"><tr><td bgcolor="#25D366" style="background-color:#25D366;border-radius:24px;padding:11px 22px"><a href="${escHtml(wa)}" target="_blank" style="color:#ffffff;text-decoration:none;font-weight:bold;font-size:15px;font-family:Arial,Helvetica,sans-serif;display:inline-block;line-height:20px"><img src="https://mercurial.cl/src/img/correo/whatsapp-blanco.png" width="20" height="20" alt="" style="vertical-align:middle;border:0;margin-right:8px"><span style="vertical-align:middle">Escríbenos por WhatsApp</span></a></td></tr></table>
+<p>Saludos,<br>Mercurial Corredores de Seguros</p>
+<p style="font-size:11px;color:#9ca3af">Valor referencial calculado con los datos que nos enviaste; se confirma al emitir. Cobertura sujeta a las condiciones de la póliza. ${c.ambito === 'internacional' ? 'Pide el certificado antes del arribo (importación) o hasta 72 horas después del zarpe (exportación).' : 'El certificado se emite antes del inicio del viaje.'}</p>
+</div>`;
+    const texto = `Hola ${nombre},\n\nGracias por cotizar con Mercurial. El certificado de seguro de tu ${operacion} sale ${precio} (${detalle}).\n\n`
+        + filas.map(([k, v]) => `${k}: ${v}`).join('\n')
+        + `\n\n¿Lo emitimos? Te pedimos unos datos del embarque y te enviamos el link de pago. Escríbenos por WhatsApp: ${wa}\n\nSaludos,\nMercurial Corredores de Seguros`;
+    return { asunto: `Tu cotización de seguro de carga: ${precio} – Mercurial`, html, texto };
+}
 let ultimaLimpiezaContacto = 0;
 function contactoPermitido(ip) {
     const ahora = Date.now();
@@ -359,7 +446,14 @@ function validarContacto(b) {
         if (!txt(b.empresa, 160)) errors.push('empresa');
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!telOk(b.telefono)) errors.push('telefono');
-        if (!OPERACIONES_CARGA.includes(b.operacion)) errors.push('operacion');
+        if (!OPERACIONES_CERTIFICADO.includes(b.operacion)) errors.push('operacion');
+        if (!correoOk(b.correo)) errors.push('correo');
+        const v = valorUsd(b.valor_mercaderia);
+        if (!v || v < 100 || v > 50000000) errors.push('valor_mercaderia');
+        if (!MEDIOS_CARGA.includes(b.medio)) errors.push('medio');
+        if (!EMBALAJES_CARGA.includes(b.embalaje)) errors.push('embalaje');
+        if (!['No', 'Sí'].includes(b.transbordo)) errors.push('transbordo');
+        if (!txt(b.mercaderia, 160)) errors.push('mercaderia');
     } else if (b.tipo === 'auto') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!rutOk(b.rut)) errors.push('rut');
@@ -408,6 +502,8 @@ app.post('/api/contacto', async (req, res) => {
     }
 
     const tipo = TIPOS_CONTACTO[b.tipo];
+    // Certificado: el precio se calcula aquí y se le envía al cliente por WhatsApp y por correo (no en la página).
+    const cotCarga = b.tipo === 'certificado' ? await cotizarCarga(b) : null;
     // Referencia fija de la página de póliza anual (lista blanca); cualquier otro valor se ignora.
     const polizaAnual = b.tipo === 'carga' && b.ref === 'POLIZA-ANUAL';
     const esCarga = b.tipo === 'carga' || b.tipo === 'certificado';
@@ -423,7 +519,7 @@ app.post('/api/contacto', async (req, res) => {
         : b.tipo === 'carga'
             ? `[Web] ${polizaAnual ? 'Póliza anual de transporte' : 'Seguro de carga'} (${b.operacion}, ${b.embarques} embarques/año) · ${enLinea(b.empresa)}`
         : b.tipo === 'certificado'
-            ? `[Web] Certificado de carga – anuncio (${b.operacion}) · ${enLinea(b.empresa)}`
+            ? `[Web] Certificado de carga – ${b.operacion}, US$${numCl(valorUsd(b.valor_mercaderia))} · ${enLinea(b.empresa)}`
             : `[Web] ${tipo} · ${enLinea(b.nombre)}`;
     const lineas = [
         `Tipo: ${tipo}`,
@@ -446,6 +542,10 @@ app.post('/api/contacto', async (req, res) => {
         b.rechazo && `¿Rechazo previo?: ${b.rechazo}`,
         esCarga && `Operación: ${b.operacion}`,
         esCarga && `Procedencia: ${procedenciaCarga}`,
+        b.tipo === 'certificado' && `Mercadería: ${limpio(b.mercaderia)}`,
+        b.tipo === 'certificado' && `Valor de la mercadería: US$${numCl(valorUsd(b.valor_mercaderia))}`,
+        b.tipo === 'certificado' && `Medio: ${b.medio} · Embalaje: ${b.embalaje} · Transbordo: ${b.transbordo}`,
+        cotCarga && `Cotización enviada al cliente: ${textoCotizacionCarga(cotCarga)}`,
         b.tipo === 'carga' && b.mercaderia && `Mercadería: ${limpio(b.mercaderia)}`,
         b.tipo === 'carga' && b.origen && `Origen o destino principal: ${limpio(b.origen)}`,
         b.tipo === 'carga' && `Embarques al año: ${b.embarques}`,
@@ -475,8 +575,19 @@ app.post('/api/contacto', async (req, res) => {
                 datos: {
                     empresa: limpio(b.empresa), operacion: b.operacion, mercaderia: limpio(b.mercaderia),
                     origen: limpio(b.origen), embarques: b.embarques || '', valor: b.valor || '', asegura_hoy: b.asegura_hoy || '',
-                    como_nos_encontro: b.fuente || (b.tipo === 'certificado' ? 'Anuncio (landing de certificados)' : '')
+                    como_nos_encontro: b.fuente || (b.tipo === 'certificado' ? 'Anuncio (landing de certificados)' : ''),
+                    ...(b.tipo === 'certificado' ? {
+                        valor_mercaderia: `US$${numCl(valorUsd(b.valor_mercaderia))}`, medio: b.medio, embalaje: b.embalaje,
+                        transbordo: b.transbordo, cotizacion: textoCotizacionCarga(cotCarga)
+                    } : {})
                 },
+                // Con precio: la plantilla de WhatsApp lleva la cotización (si Meta aún no la aprueba, el motor manda la de bienvenida).
+                ...(cotCarga && cotCarga.ok ? {
+                    plantilla: 'cotizacion_carga',
+                    plantilla_parametros: [limpio(b.nombre).split(' ')[0], `US$${numCl(cotCarga.valor)}`,
+                        cotCarga.primaClp ? `$${numCl(cotCarga.primaClp)}` : `US$${numCl(cotCarga.prima, 2)}`,
+                        `US$${numCl(cotCarga.prima, 2)}, ${ivaTxt(cotCarga)}`]
+                } : {}),
                 fuente: utmValido(b, 'utm_source'),
                 medio: utmValido(b, 'utm_medium'),
                 campana: utmValido(b, 'utm_campaign'),
@@ -513,6 +624,15 @@ app.post('/api/contacto', async (req, res) => {
                 subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (esCarga && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
                 text: lineas.join('\n')
             });
+        }
+        if (cotCarga && cotCarga.ok) {
+            try {
+                const c = correoCotizacionCarga(b, cotCarga);
+                await mailer.sendMail({
+                    from: `"Mercurial Seguros" <${MAIL_FROM}>`, to: limpio(b.correo), replyTo: MAIL_TO,
+                    subject: c.asunto, html: c.html, text: c.texto
+                });
+            } catch (e) { console.error('[Carga] No se pudo enviar la cotización al cliente:', e.message); }
         }
         if (b.tipo === 'auto' && !conMotor) {
             // Sin await: Chatwoot nunca demora ni rompe la respuesta al visitante (chatwoot.js no lanza).

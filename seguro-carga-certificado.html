@@ -203,24 +203,30 @@
           <a class="btn btn-azul wa" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20embarque" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
         </div>
         <div class="lp-card tarjeta-form" id="formulario">
-          <h2>¿Prefieres que te escribamos?</h2>
-          <p class="bajada">Déjanos tus datos y te contactamos por WhatsApp.</p>
+          <h2>Cotiza tu certificado</h2>
+          <p class="bajada">Cuéntanos de tu embarque y te enviamos el valor por WhatsApp y correo.</p>
           <form class="form" data-envio="certificado" novalidate>
-            <div class="campo t-input-wrap"><label for="c-nombre">Nombre</label><input class="t-input" id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required data-msg="Escribe tu nombre."><span class="t-error-msg"></span></div>
-            <div class="campo t-input-wrap"><label for="c-empresa">Empresa</label><input class="t-input" id="c-empresa" name="empresa" autocomplete="organization" maxlength="160" required data-msg="Escribe el nombre de la empresa."><span class="t-error-msg"></span></div>
-            <div class="campo t-input-wrap"><label for="c-tel">WhatsApp</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el número: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
-            <div class="campo fila-op">
-              <span class="tit-campo" id="t-op">Tu operación</span>
-              <div class="op-switch" role="group" aria-labelledby="t-op">
-                <button type="button" class="lado is-activo" data-op="Importo">Importo</button>
-                <label class="switch"><input type="checkbox" role="switch" id="c-exporta" aria-label="Exporto"><span class="pista" aria-hidden="true"></span></label>
-                <button type="button" class="lado" data-op="Exporto">Exporto</button>
-                <input type="hidden" name="operacion" id="c-operacion" value="Importo">
-              </div>
+            <div class="dos">
+              <div class="campo t-input-wrap"><label for="c-op">Operación</label><select class="t-input" id="c-op" name="operacion"><option>Importación</option><option>Exportación</option><option value="Nacional">Nacional (dentro de Chile)</option></select><span class="t-error-msg"></span></div>
+              <div class="campo t-input-wrap"><label for="c-valor">Valor de la mercadería (US$)</label><input class="t-input" id="c-valor" name="valor_mercaderia" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="Ej.: 40.000" required data-msg="Escribe el valor en dólares, por ejemplo 40.000."><span class="t-error-msg"></span></div>
+            </div>
+            <div class="campo t-input-wrap"><label for="c-merc">¿Qué mercadería es?</label><input class="t-input" id="c-merc" name="mercaderia" maxlength="160" placeholder="Ej.: repuestos de maquinaria nuevos" required data-msg="Cuéntanos qué mercadería es."><span class="t-error-msg"></span></div>
+            <div class="dos">
+              <div class="campo t-input-wrap"><label for="c-medio">Medio</label><select class="t-input" id="c-medio" name="medio"><option>Marítimo</option><option>Aéreo</option><option>Terrestre</option></select><span class="t-error-msg"></span></div>
+              <div class="campo t-input-wrap"><label for="c-emb">Embalaje</label><select class="t-input" id="c-emb" name="embalaje"><option>Contenedor completo (FCL)</option><option>Contenedor consolidado (LCL)</option><option>Cajas o pallets</option><option>Camión cerrado</option><option>Otro</option></select><span class="t-error-msg"></span></div>
+            </div>
+            <div class="campo t-input-wrap"><label for="c-tb">¿Tiene transbordo?</label><select class="t-input" id="c-tb" name="transbordo"><option>No</option><option>Sí</option></select><span class="t-error-msg"></span></div>
+            <div class="dos">
+              <div class="campo t-input-wrap"><label for="c-nombre">Nombre</label><input class="t-input" id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required data-msg="Escribe tu nombre."><span class="t-error-msg"></span></div>
+              <div class="campo t-input-wrap"><label for="c-empresa">Empresa</label><input class="t-input" id="c-empresa" name="empresa" autocomplete="organization" maxlength="160" required data-msg="Escribe el nombre de la empresa."><span class="t-error-msg"></span></div>
+            </div>
+            <div class="dos">
+              <div class="campo t-input-wrap"><label for="c-tel">WhatsApp</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el número: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
+              <div class="campo t-input-wrap"><label for="c-correo">Correo</label><input class="t-input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="120" required data-msg="Revisa el correo: ahí te llega la cotización."><span class="t-error-msg"></span></div>
             </div>
             <div class="trampa" aria-hidden="true"><label for="c-sitio">No llenar</label><input id="c-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
             <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tus datos.</span> Intenta de nuevo o <a href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20embarque" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
-            <button class="btn btn-azul enviar" type="submit"><span class="letra">Quiero comparar mi seguro</span></button>
+            <button class="btn btn-azul enviar" type="submit"><span class="letra">Recibir mi cotización</span></button>
             <p class="nota">Usamos tus datos para responder esta cotización y contactarte, y compartimos tu solicitud de forma cifrada con Meta para medir nuestros anuncios. <a href="/politica-privacidad">Política de privacidad</a>.</p>
           </form>
           <div class="exito" hidden>
@@ -276,6 +282,18 @@
     sw.addEventListener('change', function () { poner(sw.checked); });
     lados.forEach(function (b) { b.addEventListener('click', function () { poner(b.dataset.op === 'Exporto'); }); });
     var f = sw.closest('form'); if (f) f.addEventListener('reset', function () { setTimeout(function () { poner(false); }); });
+  })();
+</script>
+<script>
+  // Valor de la mercadería: puntos de miles al escribir (el servidor solo lee los dígitos).
+  (function () {
+    var v = document.getElementById('c-valor'); if (!v) return;
+    v.addEventListener('input', function () {
+      var d = v.value.replace(/\D/g, '').slice(0, 11);
+      v.value = d ? Number(d).toLocaleString('es-CL') : '';
+    });
+    var op = document.getElementById('c-op'), medio = document.getElementById('c-medio');
+    if (op && medio) op.addEventListener('change', function () { if (op.value === 'Nacional') medio.value = 'Terrestre'; medio.dispatchEvent(new Event('change')); });
   })();
 </script>
 </body>
