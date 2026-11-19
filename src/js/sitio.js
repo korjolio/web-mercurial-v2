@@ -218,7 +218,7 @@
       UTM.forEach(k => { if (typeof enlaceMarcado[k] === 'string') datos[k] = enlaceMarcado[k]; });
       // Seguro de auto y de carga: el Lead va a Meta con el mismo id desde el navegador y desde el servidor.
       // Sin consentimiento de cookies newEventId() no devuelve nada y no se mide.
-      const midoMeta = datos.tipo === 'auto' || datos.tipo === 'carga';
+      const midoMeta = datos.tipo === 'auto' || datos.tipo === 'carga' || datos.tipo === 'certificado';
       const idMeta = midoMeta && window.mercurialMeta ? window.mercurialMeta.newEventId() : undefined;
       if (idMeta) datos.meta_event_id = idMeta;
       if (midoMeta && clicMeta && typeof clicMeta.fbclid === 'string') { datos.fbclid = clicMeta.fbclid; datos.fbclid_t = clicMeta.t; }
@@ -256,7 +256,7 @@
       // Desgravamen se mide solo como "personas": el tipo de caso sugiere datos de salud y no va a la analítica.
       const tipoMedido = datos.tipo === 'desgravamen' ? 'personas' : datos.tipo;
       window.dataLayer.push({ event: 'formulario_enviado', form_tipo: tipoMedido, form_seguro: datos.seguro || '' });
-      if (idMeta) window.mercurialMeta.trackBrowser('Lead', { content_name: datos.tipo === 'carga' ? 'Seguro de Carga' : 'Seguro de Auto' }, idMeta);
+      if (idMeta) window.mercurialMeta.trackBrowser('Lead', { content_name: datos.tipo === 'auto' ? 'Seguro de Auto' : 'Seguro de Carga' }, idMeta);
       if (estado) estado.textContent = '';
       if (form.dataset.envio === 'cotizacion' && caja.classList.contains('caja')) {
         caja.classList.add('enviado'); const okMsg = $('.ok', caja); okMsg.hidden = false; okMsg.focus();

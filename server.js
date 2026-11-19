@@ -59,6 +59,9 @@ app.get('/seguros/incendio', (req, res) => res.sendFile('seguro-incendio.html', 
 app.get('/seguros/colectivos-de-salud', (req, res) => res.sendFile('seguro-colectivos-salud.html', { root: __dirname }));
 // Seguro de carga para importaciones y exportaciones (certificado por embarque; indexable, en sitemap.xml).
 app.get('/seguros/transporte/importaciones-exportaciones', (req, res) => res.sendFile('seguro-carga-comex.html', { root: __dirname }));
+// Landing corta del anuncio de Meta (certificados por embarque) y página de póliza anual (límite máximo / STP).
+app.get('/seguros/transporte/certificado', (req, res) => res.sendFile('seguro-carga-certificado.html', { root: __dirname }));
+app.get('/seguros/transporte/poliza-anual', (req, res) => res.sendFile('seguro-transporte-poliza-anual.html', { root: __dirname }));
 
 // --- Página de producto: seguro de desgravamen rechazado (personas; indexable, en sitemap.xml) ---
 app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html', { root: __dirname }));
@@ -228,7 +231,7 @@ if (!motor.configurado && !motor.dryRun) {
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
-const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional', auto: 'Seguro de auto' };
+const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional', certificado: 'Certificado de carga (anuncio)', auto: 'Seguro de auto' };
 // Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
 const patenteLimpia = v => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
 const patenteOk = v => /^(?=.*\d)[A-Z0-9]{5,6}$/.test(patenteLimpia(v));
@@ -351,6 +354,12 @@ function validarContacto(b) {
         if (!optTxt(b.mercaderia, 160)) errors.push('mercaderia');
         if (!optTxt(b.origen, 80)) errors.push('origen');
         if (b.fuente && !FUENTES_CARGA.includes(b.fuente)) errors.push('fuente');
+    } else if (b.tipo === 'certificado') {
+        // Landing corta del anuncio: solo lo necesario para escribirle por WhatsApp.
+        if (!txt(b.empresa, 160)) errors.push('empresa');
+        if (!txt(b.nombre, 120)) errors.push('nombre');
+        if (!telOk(b.telefono)) errors.push('telefono');
+        if (!OPERACIONES_CARGA.includes(b.operacion)) errors.push('operacion');
     } else if (b.tipo === 'auto') {
         if (!txt(b.nombre, 120)) errors.push('nombre');
         if (!rutOk(b.rut)) errors.push('rut');
@@ -399,13 +408,22 @@ app.post('/api/contacto', async (req, res) => {
     }
 
     const tipo = TIPOS_CONTACTO[b.tipo];
+    // Referencia fija de la página de póliza anual (lista blanca); cualquier otro valor se ignora.
+    const polizaAnual = b.tipo === 'carga' && b.ref === 'POLIZA-ANUAL';
+    const esCarga = b.tipo === 'carga' || b.tipo === 'certificado';
+    const procedenciaCarga = b.tipo === 'certificado'
+        ? 'Landing del anuncio de certificados (/seguros/transporte/certificado)'
+        : polizaAnual ? 'Página de póliza anual de transporte (/seguros/transporte/poliza-anual)'
+        : 'Página de carga comex (/seguros/transporte/importaciones-exportaciones)';
     const limpio = v => (typeof v === 'string' ? v.trim() : '');
     // El asunto lleva texto del visitante: sin saltos de línea ni caracteres de control.
     const enLinea = v => limpio(v).replace(/[\u0000-\u001f\u007f]+/g, ' ').slice(0, 120);
     const asunto = b.tipo === 'cotizacion'
         ? `[Web] Cotización ${b.seguro} · ${enLinea(b.empresa)}`
         : b.tipo === 'carga'
-            ? `[Web] Seguro de carga (${b.operacion}, ${b.embarques} embarques/año) · ${enLinea(b.empresa)}`
+            ? `[Web] ${polizaAnual ? 'Póliza anual de transporte' : 'Seguro de carga'} (${b.operacion}, ${b.embarques} embarques/año) · ${enLinea(b.empresa)}`
+        : b.tipo === 'certificado'
+            ? `[Web] Certificado de carga – anuncio (${b.operacion}) · ${enLinea(b.empresa)}`
             : `[Web] ${tipo} · ${enLinea(b.nombre)}`;
     const lineas = [
         `Tipo: ${tipo}`,
@@ -426,7 +444,8 @@ app.post('/api/contacto', async (req, res) => {
         // Referencia fija de la campaña de Meta (lista blanca); cualquier otro valor se ignora.
         b.tipo === 'desgravamen' && b.ref === 'DH-META' && 'Procedencia: anuncio de Meta, formulario V2 (ref: DH-META)',
         b.rechazo && `¿Rechazo previo?: ${b.rechazo}`,
-        b.tipo === 'carga' && `Operación: ${b.operacion}`,
+        esCarga && `Operación: ${b.operacion}`,
+        esCarga && `Procedencia: ${procedenciaCarga}`,
         b.tipo === 'carga' && b.mercaderia && `Mercadería: ${limpio(b.mercaderia)}`,
         b.tipo === 'carga' && b.origen && `Origen o destino principal: ${limpio(b.origen)}`,
         b.tipo === 'carga' && `Embarques al año: ${b.embarques}`,
@@ -445,9 +464,9 @@ app.post('/api/contacto', async (req, res) => {
         // Chatwoot (caído, lento o Chatwoot falló), sale el correo de siempre, marcado como respaldo.
         // Carga (certificados por embarque) también va al motor desde el 19-nov: una conversación en WhatsApp con
         // los datos como nota y etiqueta «transporte». El bot de auto no la atiende: avisa a una persona.
-        const conMotor = (b.tipo === 'auto' || b.tipo === 'carga') && (motor.configurado || motor.dryRun);
+        const conMotor = (b.tipo === 'auto' || esCarga) && (motor.configurado || motor.dryRun);
         let enMotor = false;
-        if (conMotor && b.tipo === 'carga') {
+        if (conMotor && esCarga) {
             const r = await motor.enviar({
                 producto: 'transporte',
                 nombre: limpio(b.nombre),
@@ -455,14 +474,14 @@ app.post('/api/contacto', async (req, res) => {
                 correo: limpio(b.correo).toLowerCase(),
                 datos: {
                     empresa: limpio(b.empresa), operacion: b.operacion, mercaderia: limpio(b.mercaderia),
-                    origen: limpio(b.origen), embarques: b.embarques, valor: b.valor, asegura_hoy: b.asegura_hoy,
-                    como_nos_encontro: b.fuente || ''
+                    origen: limpio(b.origen), embarques: b.embarques || '', valor: b.valor || '', asegura_hoy: b.asegura_hoy || '',
+                    como_nos_encontro: b.fuente || (b.tipo === 'certificado' ? 'Anuncio (landing de certificados)' : '')
                 },
                 fuente: utmValido(b, 'utm_source'),
                 medio: utmValido(b, 'utm_medium'),
                 campana: utmValido(b, 'utm_campaign'),
                 contenido: utmValido(b, 'utm_content'),
-                procedencia: 'Página de carga comex (/seguros/transporte/importaciones-exportaciones)',
+                procedencia: procedenciaCarga,
                 pagina: paginaLimpia(b.pagina)
             });
             enMotor = r.entregado;
@@ -486,12 +505,12 @@ app.post('/api/contacto', async (req, res) => {
             enMotor = r.entregado;
         }
         // Carga: el correo sale SIEMPRE (nadie cotiza carga en automático y el aviso es lo que hace responder rápido).
-        if (!enMotor || b.tipo === 'carga') {
+        if (!enMotor || esCarga) {
             await mailer.sendMail({
                 from: `"Sitio Mercurial" <${MAIL_FROM}>`,
                 to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
                 replyTo: b.correo ? limpio(b.correo) : undefined,
-                subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (b.tipo === 'carga' && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
+                subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (esCarga && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
                 text: lineas.join('\n')
             });
         }
@@ -515,7 +534,7 @@ app.post('/api/contacto', async (req, res) => {
         // lo avisa bajo el botón y la política de privacidad lo explica (decisión de Pepa, nov 2026; carga desde el 19-nov).
         // Con cookies el navegador manda el píxel con el mismo meta_event_id y Meta deduplica; sin él,
         // el id se genera aquí y solo cuenta el servidor.
-        if (b.tipo === 'auto' || b.tipo === 'carga') {
+        if (b.tipo === 'auto' || esCarga) {
             const partes = limpio(b.nombre).split(/\s+/);
             enviarEventoMeta(req, {
                 eventName: 'Lead',
@@ -525,7 +544,7 @@ app.post('/api/contacto', async (req, res) => {
                     email: limpio(b.correo), phone: limpio(b.telefono), firstName: partes[0], lastName: partes.slice(1).join(' '),
                     fbc: metaFbcDesdeClic(b.fbclid, b.fbclid_t)
                 },
-                customData: { content_name: b.tipo === 'carga' ? 'Seguro de Carga' : 'Seguro de Auto' }
+                customData: { content_name: esCarga ? 'Seguro de Carga' : 'Seguro de Auto' }
             });
         }
         return res.status(200).json({ success: true });
