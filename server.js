@@ -255,7 +255,7 @@ const OPERACIONES_CARGA = ['Importo', 'Exporto'];
 const EMBARQUES_CARGA = ['1 a 5', '6 a 12', '13 a 30', 'Más de 30'];
 const VALORES_CARGA = ['Hasta US$20.000', 'US$20.000 a 100.000', 'US$100.000 a 300.000', 'Más de US$300.000'];
 const ASEGURA_HOY_CARGA = ['Agente de aduana', 'Forwarder', 'Lo incluye mi proveedor', 'No aseguro'];
-const FUENTES_CARGA = ['Google (búsqueda)', 'Google (respuesta de IA)', 'ChatGPT u otra IA', 'LinkedIn', 'Recomendación', 'Otro'];
+const FUENTES_CARGA = ['Google (búsqueda)', 'Google (respuesta de IA)', 'ChatGPT u otra IA', 'Facebook o Instagram', 'LinkedIn', 'Recomendación', 'Otro'];
 // Situación del crédito en el formulario de desgravamen (sin datos de salud).
 const SITUACIONES_CREDITO = ['Compra con crédito hipotecario nuevo', 'Refinanciamiento o portabilidad', 'Cambiar solo el seguro, sin refinanciar', 'Cobrar o reclamar un seguro'];
 const RECHAZOS_DESGRAVAMEN = ['Sí, me lo rechazaron', 'Todavía no lo solicito', 'No, me lo aprobaron'];
@@ -443,9 +443,30 @@ app.post('/api/contacto', async (req, res) => {
     try {
         // Auto con el motor activo: el lead va al motor y el correo sobra. Si el motor no lo deja en
         // Chatwoot (caído, lento o Chatwoot falló), sale el correo de siempre, marcado como respaldo.
-        const conMotor = b.tipo === 'auto' && (motor.configurado || motor.dryRun);
+        // Carga (certificados por embarque) también va al motor desde el 19-nov: una conversación en WhatsApp con
+        // los datos como nota y etiqueta «transporte». El bot de auto no la atiende: avisa a una persona.
+        const conMotor = (b.tipo === 'auto' || b.tipo === 'carga') && (motor.configurado || motor.dryRun);
         let enMotor = false;
-        if (conMotor) {
+        if (conMotor && b.tipo === 'carga') {
+            const r = await motor.enviar({
+                producto: 'transporte',
+                nombre: limpio(b.nombre),
+                telefono: limpio(b.telefono),
+                correo: limpio(b.correo).toLowerCase(),
+                datos: {
+                    empresa: limpio(b.empresa), operacion: b.operacion, mercaderia: limpio(b.mercaderia),
+                    origen: limpio(b.origen), embarques: b.embarques, valor: b.valor, asegura_hoy: b.asegura_hoy,
+                    como_nos_encontro: b.fuente || ''
+                },
+                fuente: utmValido(b, 'utm_source'),
+                medio: utmValido(b, 'utm_medium'),
+                campana: utmValido(b, 'utm_campaign'),
+                contenido: utmValido(b, 'utm_content'),
+                procedencia: 'Página de carga comex (/seguros/transporte/importaciones-exportaciones)',
+                pagina: paginaLimpia(b.pagina)
+            });
+            enMotor = r.entregado;
+        } else if (conMotor) {
             const r = await motor.enviar({
                 producto: 'auto',
                 nombre: limpio(b.nombre),
@@ -464,12 +485,13 @@ app.post('/api/contacto', async (req, res) => {
             });
             enMotor = r.entregado;
         }
-        if (!enMotor) {
+        // Carga: el correo sale SIEMPRE (nadie cotiza carga en automático y el aviso es lo que hace responder rápido).
+        if (!enMotor || b.tipo === 'carga') {
             await mailer.sendMail({
                 from: `"Sitio Mercurial" <${MAIL_FROM}>`,
                 to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
                 replyTo: b.correo ? limpio(b.correo) : undefined,
-                subject: conMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : asunto,
+                subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (b.tipo === 'carga' && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
                 text: lineas.join('\n')
             });
         }
@@ -489,11 +511,11 @@ app.post('/api/contacto', async (req, res) => {
                 enlace: enlaceMarcado(b)
             });
         }
-        // Lead del seguro de auto hacia Meta (API de conversiones), SIEMPRE, con o sin cookies: el formulario
-        // lo avisa bajo el botón y la política de privacidad lo explica (decisión de Pepa, nov 2026).
+        // Lead de auto y de carga hacia Meta (API de conversiones), SIEMPRE, con o sin cookies: el formulario
+        // lo avisa bajo el botón y la política de privacidad lo explica (decisión de Pepa, nov 2026; carga desde el 19-nov).
         // Con cookies el navegador manda el píxel con el mismo meta_event_id y Meta deduplica; sin él,
         // el id se genera aquí y solo cuenta el servidor.
-        if (b.tipo === 'auto') {
+        if (b.tipo === 'auto' || b.tipo === 'carga') {
             const partes = limpio(b.nombre).split(/\s+/);
             enviarEventoMeta(req, {
                 eventName: 'Lead',
@@ -503,7 +525,7 @@ app.post('/api/contacto', async (req, res) => {
                     email: limpio(b.correo), phone: limpio(b.telefono), firstName: partes[0], lastName: partes.slice(1).join(' '),
                     fbc: metaFbcDesdeClic(b.fbclid, b.fbclid_t)
                 },
-                customData: { content_name: 'Seguro de Auto' }
+                customData: { content_name: b.tipo === 'carga' ? 'Seguro de Carga' : 'Seguro de Auto' }
             });
         }
         return res.status(200).json({ success: true });
