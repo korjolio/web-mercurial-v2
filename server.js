@@ -449,7 +449,7 @@ function validarContacto(b) {
         if (!OPERACIONES_CERTIFICADO.includes(b.operacion)) errors.push('operacion');
         if (!correoOk(b.correo)) errors.push('correo');
         const v = valorUsd(b.valor_mercaderia);
-        if (!v || v < 100 || v > 50000000) errors.push('valor_mercaderia');
+        if (!v || v > 50000000) errors.push('valor_mercaderia');
         if (!MEDIOS_CARGA.includes(b.medio)) errors.push('medio');
         if (!EMBALAJES_CARGA.includes(b.embalaje)) errors.push('embalaje');
         if (!['No', 'Sí'].includes(b.transbordo)) errors.push('transbordo');
