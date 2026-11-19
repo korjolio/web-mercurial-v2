@@ -122,6 +122,8 @@ label small { font-weight: 400; color: var(--tx2); }
 textarea.t-input { min-height: 96px; resize: vertical; }
 .t-input-wrap.is-error .t-input { border-color: var(--error); }
 select.t-input { -webkit-appearance: none; appearance: none; padding-right: 40px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d2340' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center; }
+select.t-input:invalid, select.t-input:has(option[value=""]:checked) { color: #61738a; }
+select.t-input option { color: var(--tx); }
 .t-error-msg { display: block; margin-top: 6px; font-size: 14px; color: var(--error); font-weight: 600; }
 .t-error-msg:empty { display: none; }
 .is-shaking { animation: t-input-shake calc(var(--shake-dur-a) * 2 + var(--shake-dur-b) * 2) linear; }

@@ -43,9 +43,24 @@
   <script src="/src/js/meta.js?v=4"></script>
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=13">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=14">
 <style>
     /* Página de seguro de carga internacional */
+    /* «Tu operación»: interruptor estilo iPhone, igual al «Aún no tengo la patente» del cotizador de autos */
+    .fila-op { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .fila-op .tit-campo { font-weight: 600; font-size: 15px; color: var(--tx); }
+    .op-switch { display: inline-flex; align-items: center; gap: 10px; }
+    .op-switch .lado { border: 0; background: none; padding: 6px 2px; font: 500 15px var(--sans); color: var(--tx2); cursor: pointer; transition: color var(--duration-quick) ease-out; }
+    .op-switch .lado.is-activo { color: var(--navy); font-weight: 600; }
+    .op-switch .lado:focus-visible { outline: 3px solid var(--azul-h); outline-offset: 2px; border-radius: 6px; }
+    .op-switch .switch { position: relative; display: inline-flex; margin: 0; align-items: center; cursor: pointer; user-select: none; }
+    .op-switch .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .op-switch .switch .pista { display: block; position: relative; width: 44px; height: 26px; border-radius: 999px; background: #d1d5db; transition: background-color var(--duration-quick, .2s) ease-out; flex: none; }
+    .op-switch .switch .pista::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform var(--duration-quick, .2s) cubic-bezier(.3,.7,.4,1); }
+    .op-switch .switch input:checked + .pista { background: #34c759; }
+    .op-switch .switch input:checked + .pista::after { transform: translateX(18px); }
+    .op-switch .switch input:focus-visible + .pista { outline: 3px solid var(--azul-h); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { .op-switch .pista, .op-switch .pista::after { transition: none; } }
     /* Hero sin botones: en celular, sin alto mínimo para que el texto no quede flotando */
     @media (max-width: 560px) { .panel { min-height: 0; padding-top: 40px; padding-bottom: 104px; } }
     /* Caja de comparar bajo el hero */
@@ -310,9 +325,15 @@
             <div class="campo t-input-wrap"><label for="c-correo">Correo <small>(opcional)</small></label><input class="t-input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="120" data-msg="Revisa el correo: no es válido."><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-tel">Teléfono</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
           </div>
-          <fieldset class="campo"><legend>Tu operación</legend>
-            <div class="seg"><label><input type="radio" name="operacion" value="Importo" checked><span>Importo</span></label><label><input type="radio" name="operacion" value="Exporto"><span>Exporto</span></label></div>
-          </fieldset>
+          <div class="campo fila-op">
+            <span class="tit-campo" id="t-op">Tu operación</span>
+            <div class="op-switch" role="group" aria-labelledby="t-op">
+              <button type="button" class="lado is-activo" data-op="Importo">Importo</button>
+              <label class="switch"><input type="checkbox" role="switch" id="c-exporta" aria-label="Exporto"><span class="pista" aria-hidden="true"></span></label>
+              <button type="button" class="lado" data-op="Exporto">Exporto</button>
+              <input type="hidden" name="operacion" id="c-operacion" value="Importo">
+            </div>
+          </div>
           <div class="dos">
             <div class="campo t-input-wrap"><label for="c-merc">¿Qué mercadería? <small>(opcional)</small></label><input class="t-input" id="c-merc" name="mercaderia" maxlength="160" placeholder="Ej.: insumos químicos, repuestos, textiles"><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-origen">Origen o destino principal <small>(opcional)</small></label><input class="t-input" id="c-origen" name="origen" maxlength="80" placeholder="País"><span class="t-error-msg"></span></div>
@@ -321,14 +342,7 @@
             <div class="campo t-input-wrap"><label for="c-emb">Embarques al año</label><select class="t-input" id="c-emb" name="embarques"><option>1 a 5</option><option>6 a 12</option><option>13 a 30</option><option>Más de 30</option></select><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-valor">Valor típico por embarque</label><select class="t-input" id="c-valor" name="valor"><option>Hasta US$20.000</option><option>US$20.000 a 100.000</option><option>US$100.000 a 300.000</option><option>Más de US$300.000</option></select><span class="t-error-msg"></span></div>
           </div>
-          <fieldset class="campo"><legend>¿Cómo aseguras hoy?</legend>
-            <div class="opciones" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-              <label class="op"><input type="radio" name="asegura_hoy" value="Agente de aduana" checked><span>Agente de aduana</span></label>
-              <label class="op"><input type="radio" name="asegura_hoy" value="Forwarder"><span>Forwarder</span></label>
-              <label class="op"><input type="radio" name="asegura_hoy" value="Lo incluye mi proveedor"><span>Lo incluye mi proveedor</span></label>
-              <label class="op"><input type="radio" name="asegura_hoy" value="No aseguro"><span>No aseguro</span></label>
-            </div>
-          </fieldset>
+          <div class="campo t-input-wrap"><label for="c-aseg">¿Cómo aseguras hoy?</label><select class="t-input" id="c-aseg" name="asegura_hoy" required data-msg="Cuéntanos cómo aseguras hoy."><option value="">Elige una opción</option><option>Agente de aduana</option><option>Forwarder</option><option>Lo incluye mi proveedor</option><option>No aseguro</option></select><span class="t-error-msg"></span></div>
           <div class="campo t-input-wrap"><label for="c-fuente">¿Cómo nos encontraste? <small>(opcional)</small></label><select class="t-input" id="c-fuente" name="fuente"><option value="">Elige una opción</option><option>Google (búsqueda)</option><option>Google (respuesta de IA)</option><option>ChatGPT u otra IA</option><option>Facebook o Instagram</option><option>LinkedIn</option><option>Recomendación</option><option>Otro</option></select><span class="t-error-msg"></span></div>
           <div class="trampa" aria-hidden="true"><label for="c-sitio">No llenar</label><input id="c-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
           <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tus datos.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
@@ -365,6 +379,34 @@
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
   <script src="/src/js/sitio.js?v=14"></script>
+<script>
+  // «Tu operación»: el interruptor y las palabras Importo/Exporto escriben el valor en el campo oculto que viaja con el formulario.
+  (function () {
+    var sw = document.getElementById('c-exporta'), campo = document.getElementById('c-operacion');
+    if (!sw || !campo) return;
+    var lados = document.querySelectorAll('.op-switch .lado');
+    function poner(exporta) {
+      sw.checked = exporta; campo.value = exporta ? 'Exporto' : 'Importo';
+      lados.forEach(function (b) { b.classList.toggle('is-activo', b.dataset.op === campo.value); });
+    }
+    sw.addEventListener('change', function () { poner(sw.checked); });
+    lados.forEach(function (b) { b.addEventListener('click', function () { poner(b.dataset.op === 'Exporto'); }); });
+    var f = sw.closest('form'); if (f) f.addEventListener('reset', function () { setTimeout(function () { poner(false); }); });
+    // «¿Cómo aseguras hoy?» es obligatorio: si falta, se marca antes de que sitio.js envíe.
+    var aseg = document.getElementById('c-aseg');
+    if (f && aseg) {
+      var caja = aseg.closest('.t-input-wrap'), msg = caja.querySelector('.t-error-msg');
+      document.addEventListener('submit', function (e) {
+        if (e.target !== f || aseg.value) return;
+        e.preventDefault(); e.stopPropagation();
+        caja.classList.add('is-error'); msg.textContent = aseg.dataset.msg;
+        var vis = caja.querySelector('.sel-btn') || aseg; vis.focus();
+        vis.classList.remove('is-shaking'); void vis.offsetWidth; vis.classList.add('is-shaking');
+      }, true);
+      aseg.addEventListener('change', function () { caja.classList.remove('is-error'); msg.textContent = ''; });
+    }
+  })();
+</script>
 </body>
 
 </html>
