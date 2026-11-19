@@ -24,6 +24,19 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 - **Seguro de mascotas**: Convenio con BCI Seguros para perros y gatos, con planes Esencial, Pro e Infinite y cotizador en línea (https://mercurial.cl/seguro-mascotas).
 - **Seguro de desgravamen hipotecario**: Búsqueda de alternativas para personas cuyo seguro de desgravamen fue rechazado por motivos de salud. Cobertura sujeta a evaluación y aceptación de la compañía de seguros (https://mercurial.cl/desgravamen-rechazado).
 
+## Seguro de carga para importaciones y exportaciones (datos clave)
+
+Página: https://mercurial.cl/seguros/transporte/importaciones-exportaciones. Condiciones del programa vigente; antes de emitir, Mercurial confirma por escrito las que aplican a cada embarque.
+
+- Modalidad: un certificado de seguro por embarque, sin contrato anual ni permanencia. El agente de aduana o forwarder del cliente sigue haciendo su trabajo.
+- Cobertura: Todo Riesgo para mercadería nueva mientras la carga es responsabilidad del cliente según el Incoterm; huelga incluida en todos los medios y guerra en marítimo y aéreo. Condiciones inscritas en la CMF: marítimo POL 1 2013 0700 (Carga «A»), aéreo POL 1 2013 0716, terrestre POL 1 2013 0730. Mercadería usada: condiciones restringidas (POL 1 2013 0703).
+- Monto asegurado: valor CIF más 10% por gastos y derechos de internación. Límite de US$300.000 por embarque; sobre eso se avisa con 72 horas hábiles y se tarifica aparte.
+- Deducibles: sin deducible en contenedor completo seco (FCL) o camión cerrado; 0,5% del monto (mínimo US$500) en otros embalajes; 10% de la pérdida (mínimo US$1.000) en robo o asalto.
+- Plazos: en importaciones, el certificado se emite antes del arribo de la nave o camión (aéreo: hasta 48 horas después del arribo); en exportaciones, hasta 72 horas después del zarpe (marítimo) o 24 horas después del inicio del viaje (aéreo y terrestre).
+- Estadía en aduana cubierta: 60 días marítimo, 30 días aéreo o terrestre. Robo con fractura o asalto en tramo terrestre: hasta US$150.000 por evento, con medidas de seguridad.
+- Exclusiones del programa por embarque: electrónica, celulares, computadores, línea blanca, farmacéuticos, vehículos, cobre, joyas y metales preciosos, carga viva, mudanzas, entre otras; esas mercaderías se pueden asegurar con una póliza anual específica. Fuera de cobertura los países con sanciones internacionales.
+- Cotización: se cotiza por embarque; el cliente puede enviar su último certificado por WhatsApp (+56 9 3931 9546) para comparar.
+
 ## Rubros especializados
 
 - Logística y cadena de suministro
