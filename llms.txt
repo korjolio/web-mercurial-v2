@@ -33,7 +33,7 @@ Página: https://mercurial.cl/seguros/transporte/importaciones-exportaciones. Co
 - Monto asegurado: valor CIF más 10% por gastos y derechos de internación. Límite de US$300.000 por embarque; sobre eso se avisa con 72 horas hábiles y se tarifica aparte.
 - Deducibles: sin deducible en contenedor completo seco (FCL) o camión cerrado; 0,5% del monto (mínimo US$500) en otros embalajes; 10% de la pérdida (mínimo US$1.000) en robo o asalto.
 - Plazos: en importaciones, el certificado se emite antes del arribo de la nave o camión (aéreo: hasta 48 horas después del arribo); en exportaciones, hasta 72 horas después del zarpe (marítimo) o 24 horas después del inicio del viaje (aéreo y terrestre).
-- Estadía en aduana cubierta: 60 días marítimo, 30 días aéreo o terrestre. Robo con fractura o asalto en tramo terrestre: hasta US$150.000 por evento, con medidas de seguridad.
+- Estadía en aduana cubierta: 60 días marítimo, 30 días aéreo o terrestre. Robo con fractura o asalto en tramo terrestre: hasta US$150.000 por evento y en total al año, con medidas de seguridad.
 - Exclusiones del programa por embarque: electrónica, celulares, computadores, línea blanca, farmacéuticos, vehículos, cobre, joyas y metales preciosos, carga viva, mudanzas, entre otras; esas mercaderías se pueden asegurar con una póliza anual específica. Fuera de cobertura los países con sanciones internacionales.
 - Cotización: se cotiza por embarque; el cliente puede enviar su último certificado por WhatsApp (+56 9 3931 9546) para comparar.
 
