@@ -127,11 +127,11 @@ footer.mc-marco .pie h4 { color: #fff; }
 /* Desplegables propios (sitio.js). El <select> queda oculto y sigue guardando el valor */
 .sel-oculto { position: absolute !important; width: 1px !important; height: 1px !important; min-height: 0 !important; padding: 0 !important; border: 0 !important; opacity: 0; pointer-events: none; }
 .sel-btn { display: block; width: 100%; min-width: 0; text-align: left; font: inherit; color: #0d2340; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 34px; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d2340' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 12px center; }
-.sel-btn.t-input, .sel-btn.cp-select { background-color: #fff; }
+.sel-btn.t-input, .sel-btn.cp-select { background-color: #fff; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d2340' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
 .sel-btn.t-input { line-height: 1.4; }
 .sel-btn.is-ph { color: #61738a; }
 .sel-btn:disabled { opacity: .55; cursor: not-allowed; }
-.sel-btn[aria-expanded="true"] { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a7ca4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); }
+.sel-btn[aria-expanded="true"], .sel-btn.t-input[aria-expanded="true"], .sel-btn.cp-select[aria-expanded="true"] { background-repeat: no-repeat; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a7ca4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); }
 .barra .sel-btn { border: 0; font: 600 17px var(--sans); padding: 2px 28px 2px 0; background-position: right 0 center; }
 .barra .sel-btn:focus-visible { outline: 0; }
 .cp-uf .sel-btn { flex: 1; width: auto; border: 0; padding: 0.9rem 2.5rem 0.9rem 1rem; font-size: 1rem; }

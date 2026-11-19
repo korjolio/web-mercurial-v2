@@ -42,14 +42,12 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=4"></script>
 
-  <link rel="stylesheet" href="/src/css/marco.css?v=5">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=10">
+  <link rel="stylesheet" href="/src/css/marco.css?v=6">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=13">
 <style>
     /* Página de seguro de carga internacional */
-    .entradas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    .entradas .btn { min-height: 52px; }
-    .panel .btn-claro { background: #fff; color: var(--navy); } .panel .btn-claro:hover { background: var(--celeste); }
-    .panel .btn-linea { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); color: #fff; background: transparent; } .panel .btn-linea:hover { background: rgba(255,255,255,.1); }
+    /* Hero sin botones: en celular, sin alto mínimo para que el texto no quede flotando */
+    @media (max-width: 560px) { .panel { min-height: 0; padding-top: 40px; padding-bottom: 104px; } }
     /* Caja de comparar bajo el hero */
     .barra .comparar { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 14px 14px 14px 22px; }
     .barra .comparar b { display: block; font-size: 18px; font-weight: 600; color: var(--navy); }
@@ -191,10 +189,6 @@
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#barco"/></svg>Seguro de carga internacional</span>
           <h1 id="titular">Seguro de carga para <b>importaciones y exportaciones</b></h1>
           <p class="sub">Mercurial emite certificados de seguro Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile.</p>
-          <div class="entradas">
-            <a class="btn btn-claro" href="#importo"><svg class="ico" aria-hidden="true"><use href="#barco"/></svg>Importo</a>
-            <a class="btn btn-linea" href="#exporto"><svg class="ico" aria-hidden="true"><use href="#avion"/></svg>Exporto</a>
-          </div>
         </div>
       </div>
     </div></section>

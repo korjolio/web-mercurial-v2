@@ -121,6 +121,7 @@ label small { font-weight: 400; color: var(--tx2); }
 .t-input:focus-visible { outline: 3px solid var(--azul-h); outline-offset: 1px; border-color: var(--azul-h); border-radius: 10px; }
 textarea.t-input { min-height: 96px; resize: vertical; }
 .t-input-wrap.is-error .t-input { border-color: var(--error); }
+select.t-input { -webkit-appearance: none; appearance: none; padding-right: 40px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d2340' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center; }
 .t-error-msg { display: block; margin-top: 6px; font-size: 14px; color: var(--error); font-weight: 600; }
 .t-error-msg:empty { display: none; }
 .is-shaking { animation: t-input-shake calc(var(--shake-dur-a) * 2 + var(--shake-dur-b) * 2) linear; }
@@ -175,12 +176,17 @@ fieldset { border: 0; min-width: 0; }
 .consultas .lado li { display: flex; gap: 10px; font-size: 15px; color: var(--tx2); }
 .consultas .lado li .ico { color: var(--azul-b); width: 20px; height: 20px; margin-top: 1px; }
 .consultas .tarjeta-form { background: #fff; }
-.seg { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: var(--gris); border: 1px solid var(--borde); }
-.seg label { position: relative; }
-.seg input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.seg span { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 22px; border-radius: 9px; font-weight: 600; font-size: 15px; color: var(--tx2); transition: background-color var(--duration-fast) var(--ease-smooth-out), color var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out); }
-.seg input:checked + span { background: #fff; color: var(--navy); box-shadow: 0 1px 2px rgba(13,35,64,.12), 0 0 0 1px var(--borde); }
-.seg input:focus-visible + span { outline: 3px solid var(--azul-h); outline-offset: 2px; }
+.seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; width: 100%; max-width: 340px; padding: 3px; border-radius: 11px; background: #e8edf2; isolation: isolate; }
+.seg::before { content: ""; position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 8px; background: #fff; box-shadow: 0 3px 8px rgba(13,35,64,.12), 0 1px 1px rgba(13,35,64,.04), 0 0 0 .5px rgba(13,35,64,.08); transition: transform var(--duration-fast) var(--ease-smooth-out); }
+.seg:has(label:nth-child(2) input:checked)::before { transform: translateX(100%); }
+.seg label { position: relative; z-index: 1; }
+.seg input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.seg span { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 16px; border-radius: 8px; font-weight: 500; font-size: 15px; color: var(--tx2); transition: color var(--duration-fast) var(--ease-smooth-out); }
+.seg input:checked + span { font-weight: 600; color: var(--navy); }
+.seg label:hover input:not(:checked) + span { color: var(--tx); }
+.seg input:focus-visible + span { outline: 3px solid var(--azul-h); outline-offset: 1px; }
+@supports not selector(:has(*)) { .seg::before { display: none; } .seg input:checked + span { background: #fff; box-shadow: 0 3px 8px rgba(13,35,64,.12), 0 0 0 .5px rgba(13,35,64,.08); } }
+@media (prefers-reduced-motion: reduce) { .seg::before { transition: none; } }
 .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ---------- Responsive ---------- */
