@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Consentimiento de cookies: debe ir antes de GTM y del píxel de Meta (ver src/js/consent.js) -->
-  <script src="/src/js/consent.js?v=1"></script>
+  <script src="/src/js/consent.js?v=20261120"></script>
 
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
@@ -47,8 +47,8 @@
   <!-- Píxel de Meta + API de conversiones (ver src/js/meta.js) -->
   <script src="/src/js/meta.js?v=4"></script>
 
-  <link rel="stylesheet" href="/src/css/marco.css?v=6">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=15">
+  <link rel="stylesheet" href="/src/css/marco.css?v=20261120">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=20261120">
 <style>
     /* Landing de anuncio: certificado de seguro de carga por embarque (Meta). Corta y pensada para celular. */
     .lp { padding: 24px 0 0; }
@@ -120,6 +120,7 @@
 </head>
 
 <body class="mc-marco">
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4SL5KSF" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
@@ -156,7 +157,7 @@
 
   <div class="util mc-marco"><div class="wrap">
     <span class="util-txt">Corredora de seguros inscrita en la CMF · <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Registro N° 8929</a></span>
-    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
+    <div class="der"><a href="/consultas-y-reclamos">Consultas y reclamos</a><a href="https://wa.me/56939319546?text=Hola%20Mercurial%2C%20quiero%20cotizar%20el%20seguro%20de%20carga%20de%20un%20embarque." target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></div>
   </div></div>
 
   <header class="nav mc-marco" id="nav"><div class="wrap">
@@ -166,14 +167,15 @@
         <li id="li-seguros">
           <button type="button" id="btn-seguros" aria-expanded="false" aria-controls="menu-seguros">Seguros <svg class="ico chev" aria-hidden="true"><use href="#chev"/></svg></button>
           <div class="t-dropdown" id="menu-seguros" inert>
-            <div class="grupo-menu"><p class="tit-menu">Empresas</p><ul>
+            <div class="grupo-menu"><p class="tit-menu" id="dm-emp">Empresas</p><ul aria-labelledby="dm-emp">
               <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg><div><b>Flotas</b><span>Camiones, camionetas y autos de la empresa</span></div></a></li>
-              <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Transporte</b><span>Carga por ruta, puerto o importada</span></div></a></li>
-              <li><a href="/seguros/transporte/poliza-anual"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Póliza anual de transporte</b><span>Flotante o STP para quienes mueven carga todo el año</span></div></a></li>
+              <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg><div><b>Transporte</b><span>Carga por ruta, puerto o importada</span></div></a>
+                <ul class="sub-menu" aria-label="Transporte: más opciones"><li><a href="/seguros/transporte/importaciones-exportaciones">Importaciones y exportaciones</a></li><li><a href="/seguros/transporte/certificado" aria-current="page">Certificado por embarque</a></li><li><a href="/seguros/transporte/poliza-anual">Póliza anual</a></li></ul>
+              </li>
               <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg><div><b>Incendio</b><span>Locales, oficinas, bodegas y plantas</span></div></a></li>
               <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg><div><b>Colectivos de salud</b><span>Complemento a la Isapre o Fonasa</span></div></a></li>
             </ul></div>
-            <div class="grupo-menu"><p class="tit-menu">Personas</p><ul>
+            <div class="grupo-menu"><p class="tit-menu" id="dm-per">Personas</p><ul aria-labelledby="dm-per">
               <li><a href="/seguro-auto"><svg class="ico" aria-hidden="true"><use href="#auto"/></svg><div><b>Seguro de auto</b><span>Cobertura completa, pérdida total o RC</span></div></a></li>
               <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg><div><b>Seguro de mascotas</b><span>Perros y gatos, con BCI Seguros</span></div></a></li>
               <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg><div><b>Desgravamen hipotecario</b><span>Alternativas para tu crédito hipotecario</span></div></a></li>
@@ -181,37 +183,38 @@
           </div>
         </li>
         <li><a href="/#mercurial">Quiénes somos</a></li>
-        <li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li>
-        <li><a href="/#contacto">Contacto</a></li>
       </ul>
     </nav>
-    <div class="acc"><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener">Hablar con un ejecutivo</a><a class="btn btn-azul" href="#formulario">Cotizar</a></div>
+    <div class="acc"><a class="btn btn-borde" href="https://wa.me/56939319546?text=Hola%20Mercurial%2C%20quiero%20cotizar%20el%20seguro%20de%20carga%20de%20un%20embarque." target="_blank" rel="noopener">Hablar con un ejecutivo</a><a class="btn btn-azul" href="#formulario">Cotizar</a></div>
     <button class="hamb" type="button" id="hamb" aria-label="Menú" aria-expanded="false" aria-controls="panel-movil"><svg class="ico ico-abrir" aria-hidden="true"><use href="#menu"/></svg><svg class="ico ico-cerrar" aria-hidden="true"><use href="#x"/></svg></button>
   </div></header>
 
   <div class="panel-movil mc-marco" id="panel-movil" hidden>
     <nav aria-label="Menú móvil">
-      <ul>
-        <li class="sub">Seguros para empresas</li>
+      <p class="sub" id="pm-emp">Seguros para empresas</p>
+      <ul aria-labelledby="pm-emp">
         <li><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></li>
-        <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></li>
-        <li><a href="/seguros/transporte/poliza-anual"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Póliza anual de transporte</a></li>
+        <li><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a><ul class="sub-menu"><li><a href="/seguros/transporte/importaciones-exportaciones">Importaciones y exportaciones</a></li><li><a href="/seguros/transporte/certificado" aria-current="page">Certificado por embarque</a></li><li><a href="/seguros/transporte/poliza-anual">Póliza anual</a></li></ul></li>
         <li><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></li>
         <li><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></li>
-        <li class="sub">Seguros para personas</li>
+      </ul>
+      <p class="sub" id="pm-per">Seguros para personas</p>
+      <ul aria-labelledby="pm-per">
         <li><a href="/seguro-auto"><svg class="ico" aria-hidden="true"><use href="#auto"/></svg>Seguro de auto</a></li>
         <li><a href="/seguro-mascotas"><svg class="ico" aria-hidden="true"><use href="#huella"/></svg>Seguro de mascotas</a></li>
         <li><a href="/desgravamen-rechazado"><svg class="ico" aria-hidden="true"><use href="#casa"/></svg>Desgravamen hipotecario</a></li>
-        <li class="sub">Mercurial</li>
+      </ul>
+      <p class="sub" id="pm-mer">Mercurial</p>
+      <ul aria-labelledby="pm-mer">
         <li><a href="/#mercurial"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Quiénes somos</a></li>
         <li><a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a></li>
       </ul>
-      <div class="acc"><a class="btn btn-azul" href="#formulario">Cotizar</a><a class="btn btn-borde" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
+      <div class="acc"><a class="btn btn-borde" href="https://wa.me/56939319546?text=Hola%20Mercurial%2C%20quiero%20cotizar%20el%20seguro%20de%20carga%20de%20un%20embarque." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>WhatsApp +56 9 3931 9546</a></div>
     </nav>
   </div>
 
 
-  <main>
+  <main id="contenido" tabindex="-1">
     <section class="lp" aria-labelledby="titular"><div class="wrap">
       <div class="lp-panel oscuro">
         <picture>
@@ -284,10 +287,10 @@
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
-      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p style="margin-top:18px;max-width:34ch">Corredores de seguros para empresas. Santiago, Chile.</p></div>
-      <div><h4>Seguros</h4><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h4 style="margin-top:22px">Personas</h4><ul><li><a href="/seguro-auto">Seguro de auto</a></li><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
-      <div><h4>Información regulatoria</h4><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
+      <div><img class="logo-pie" src="/src/img/logo/mercurial-horizontal-blanco.svg" alt="Mercurial Corredores de Seguros" width="655" height="190" loading="lazy"><p class="pie-txt">Corredores de seguros para empresas y personas. Santiago, Chile.</p></div>
+      <div><h2 class="pie-tit">Empresas</h2><ul><li><a href="/seguros/flotas">Flotas</a></li><li><a href="/seguros/transporte">Transporte</a></li><li><a href="/seguros/transporte/importaciones-exportaciones">Importaciones y exportaciones</a></li><li><a href="/seguros/transporte/certificado" aria-current="page">Certificado por embarque</a></li><li><a href="/seguros/transporte/poliza-anual">Póliza anual de transporte</a></li><li><a href="/seguros/incendio">Incendio</a></li><li><a href="/seguros/colectivos-de-salud">Colectivos de salud</a></li><li><a href="/cotizar-pyme">Enviar antecedentes pyme</a></li></ul><h2 class="pie-tit">Personas</h2><ul><li><a href="/seguro-auto">Seguro de auto</a></li><li><a href="/seguro-mascotas">Seguro de mascotas</a></li><li><a href="/desgravamen-rechazado">Desgravamen hipotecario</a></li></ul></div>
+      <div><h2 class="pie-tit">Contacto</h2><ul><li><a href="https://wa.me/56939319546?text=Hola%20Mercurial%2C%20quiero%20cotizar%20el%20seguro%20de%20carga%20de%20un%20embarque." target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a></li><li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos">Consultas y reclamos</a></li></ul></div>
+      <div><h2 class="pie-tit">Información regulatoria</h2><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li><li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>
     </div>
     <div class="legal">
       <div class="fila"><span>© 2026 Mercurial Corredores de Seguros Ltda. Corredora de seguros, no aseguradora: las pólizas las emiten las compañías de seguros.</span><span><a href="/terminos.html">Términos de uso</a> · <a href="/politica-privacidad">Privacidad</a></span></div>
@@ -297,7 +300,7 @@
 
   <script src="/src/vendor/gsap.min.js"></script>
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
-  <script src="/src/js/sitio.js?v=15"></script>
+  <script src="/src/js/sitio.js?v=20261120"></script>
 <script>
   // «Tu operación»: el interruptor y las palabras Importo/Exporto escriben el valor en el campo oculto que viaja con el formulario.
   (function () {

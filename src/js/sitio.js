@@ -39,15 +39,22 @@
     return c;
   })();
 
+  /* Con el menú abierto (desplegable o panel móvil) el aviso de cookies se esconde para no taparlo (marco.css). */
+  const navAbierta = (quien, v) => {
+    const r = document.documentElement;
+    r.dataset.navAbierta = (r.dataset.navAbierta || '').split(' ').filter(x => x && x !== quien).concat(v ? [quien] : []).join(' ');
+    r.classList.toggle('nav-abierta', !!r.dataset.navAbierta);
+  };
+
   /* Menú de seguros (transitions.dev · menu dropdown) */
   const btn = $('#btn-seguros'), menu = $('#menu-seguros'), li = $('#li-seguros');
   if (btn && menu && li) {
     let cierre;
     const abierto = () => menu.classList.contains('is-open');
-    const abrir = () => { clearTimeout(cierre); menu.classList.remove('is-closing'); menu.classList.add('is-open'); menu.inert = false; btn.setAttribute('aria-expanded', 'true'); };
+    const abrir = () => { clearTimeout(cierre); menu.classList.remove('is-closing'); menu.classList.add('is-open'); menu.inert = false; btn.setAttribute('aria-expanded', 'true'); navAbierta('menu', true); };
     const cerrar = () => {
       if (!abierto()) return;
-      menu.classList.remove('is-open'); menu.classList.add('is-closing'); menu.inert = true; btn.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open'); menu.classList.add('is-closing'); menu.inert = true; btn.setAttribute('aria-expanded', 'false'); navAbierta('menu', false);
       cierre = setTimeout(() => menu.classList.remove('is-closing'), ms('--dropdown-close-dur'));
     };
     btn.addEventListener('click', () => (abierto() ? cerrar() : abrir()));
@@ -60,22 +67,27 @@
   /* Panel móvil (transitions.dev · panel reveal) */
   const hamb = $('#hamb'), panel = $('#panel-movil'), nav = $('#nav');
   if (hamb && panel && nav) {
-    let ocultar;
+    let ocultar, inertes = [];
     // Mientras el panel está abierto, el resto de la página no recibe foco (Tab queda dentro del panel y la cabecera).
-    const exterior = $$('body > :not(#nav):not(#panel-movil):not(script):not(svg):not(noscript)');
-    const fijarInerte = v => exterior.forEach(el => { el.inert = v; });
+    // La lista se arma al abrir, no al cargar: así incluye lo que se agregó después (el aviso de cookies, listas de
+    // los desplegables) y al cerrar se devuelve exactamente lo que se dejó inerte.
+    const fijarInerte = v => {
+      if (v) inertes = $$('body > :not(#nav):not(#panel-movil):not(script):not(style):not(svg):not(noscript)').filter(el => !el.inert);
+      inertes.forEach(el => { el.inert = v; });
+      if (!v) inertes = [];
+    };
     const abrirPanel = () => {
       clearTimeout(ocultar);
       panel.style.setProperty('--cab-movil', Math.round(nav.getBoundingClientRect().bottom) + 'px');
       panel.hidden = false; void panel.offsetWidth; panel.classList.add('is-open');
       hamb.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden';
-      fijarInerte(true);
+      fijarInerte(true); navAbierta('panel', true);
       panel.querySelector('a').focus();
     };
     const cerrarPanel = (foco = true) => {
       if (hamb.getAttribute('aria-expanded') !== 'true') return;
       panel.classList.remove('is-open'); hamb.setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';
-      fijarInerte(false);
+      fijarInerte(false); navAbierta('panel', false);
       ocultar = setTimeout(() => { panel.hidden = true; }, ms('--duration-slow'));
       if (foco) hamb.focus();
     };
@@ -87,8 +99,26 @@
       const destino = a.hash && a.pathname === location.pathname && document.querySelector(a.hash);
       if (destino) { if (!destino.hasAttribute('tabindex')) destino.setAttribute('tabindex', '-1'); setTimeout(() => destino.focus({ preventScroll: true }), 0); }
     });
+    // «Cotizar» y el logo de la cabecera fija también cierran el panel (el destino queda a la vista).
+    $$('.acc a, .logo', nav).forEach(a => a.addEventListener('click', () => cerrarPanel(false)));
+    // Tocar fuera del panel (en la cabecera, fuera de sus enlaces) lo cierra.
+    nav.addEventListener('click', e => { if (!e.target.closest('a, button')) cerrarPanel(false); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarPanel(); });
     window.matchMedia('(min-width: 861px)').addEventListener('change', m => m.matches && cerrarPanel(false));
+  }
+
+  /* Celular: el «Cotizar» de la cabecera fija se esconde mientras su destino (el formulario) o un botón que lleva a él
+     está a la vista, para que nunca haya dos llamados iguales en pantalla (marco.css, .cta-en-vista). */
+  const cta = nav && $('.acc .btn-azul[href^="#"]', nav);
+  if (cta && 'IntersectionObserver' in window) {
+    const dest = cta.getAttribute('href');
+    const objetivos = [$(dest), ...$$(`a[href="${dest}"]`).filter(a => !a.closest('#nav, #panel-movil'))].filter(Boolean);
+    const visibles = new Set();
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => (e.isIntersecting ? visibles.add(e.target) : visibles.delete(e.target)));
+      nav.classList.toggle('cta-en-vista', visibles.size > 0);
+    }, { rootMargin: '-68px 0px -20% 0px' });
+    objetivos.forEach(o => io.observe(o));
   }
 
   /* Enlaces que dejan marcado el seguro en el formulario de cotización de la página */
