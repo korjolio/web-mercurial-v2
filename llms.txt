@@ -39,6 +39,14 @@ Condiciones del programa vigente; antes de emitir, Mercurial confirma por escrit
 - Exclusiones del programa por embarque: electrónica, celulares, computadores, línea blanca, farmacéuticos, vehículos, cobre, joyas y metales preciosos, carga viva, mudanzas, entre otras; esas mercaderías se pueden evaluar en una póliza anual específica (https://mercurial.cl/seguros/transporte/poliza-anual), sujeta a la aceptación de la compañía. Fuera de cobertura los países con sanciones internacionales.
 - Cotización: se cotiza por embarque; el cliente puede enviar su último certificado por WhatsApp (+56 9 3931 9546) para comparar.
 
+## Preguntas frecuentes por línea
+
+Respuestas completas, ordenadas por tema (las páginas de producto muestran solo las más importantes):
+
+- Seguro de transporte y carga (importación, exportación, certificado por embarque, póliza anual, nacional): https://mercurial.cl/seguros/transporte/preguntas-frecuentes
+- Seguro de auto: https://mercurial.cl/seguro-auto/preguntas-frecuentes
+- Incendio, colectivos de salud, flotas y desgravamen: preguntas al final de cada página de producto.
+
 ## Rubros especializados
 
 - Logística y cadena de suministro

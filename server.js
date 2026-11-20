@@ -57,6 +57,8 @@ const RUTA_LIMPIA = {
     'seguro-carga-comex.html': '/seguros/transporte/importaciones-exportaciones',
     'seguro-carga-certificado.html': '/seguros/transporte/certificado',
     'seguro-transporte-poliza-anual.html': '/seguros/transporte/poliza-anual',
+    'preguntas-frecuentes-transporte.html': '/seguros/transporte/preguntas-frecuentes',
+    'preguntas-frecuentes-auto.html': '/seguro-auto/preguntas-frecuentes',
     'desgravamen.html': '/desgravamen-rechazado',
     'consultas.html': '/consultas-y-reclamos',
     'privacidad.html': '/politica-privacidad',
@@ -115,6 +117,9 @@ app.get('/seguros/transporte/importaciones-exportaciones', (req, res) => res.sen
 // Landing corta del anuncio de Meta (certificados por embarque) y página de póliza anual (límite máximo / STP).
 app.get('/seguros/transporte/certificado', (req, res) => res.sendFile('seguro-carga-certificado.html', { root: __dirname }));
 app.get('/seguros/transporte/poliza-anual', (req, res) => res.sendFile('seguro-transporte-poliza-anual.html', { root: __dirname }));
+// Preguntas frecuentes por línea (las páginas de producto muestran solo las 4 más decisivas)
+app.get('/seguros/transporte/preguntas-frecuentes', (req, res) => res.sendFile('preguntas-frecuentes-transporte.html', { root: __dirname }));
+app.get('/seguro-auto/preguntas-frecuentes', (req, res) => res.sendFile('preguntas-frecuentes-auto.html', { root: __dirname }));
 
 // --- Página de producto: seguro de desgravamen rechazado (personas; indexable, en sitemap.xml) ---
 app.get('/desgravamen-rechazado', (req, res) => res.sendFile('desgravamen.html', { root: __dirname }));

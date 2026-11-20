@@ -30,6 +30,8 @@ PAGINAS = {
     'seguro-incendio.html': ('/seguros/incendio', '#cotizar', 'Hola Mercurial, quiero cotizar un seguro de incendio.', True),
     'seguro-colectivos-salud.html': ('/seguros/colectivos-de-salud', '#cotizar', 'Hola Mercurial, quiero cotizar un seguro colectivo de salud.', True),
     'seguro-auto.html': ('/seguro-auto', '#cotizar', 'Hola Mercurial, quiero cotizar mi seguro de auto.', True),
+    'preguntas-frecuentes-transporte.html': ('/seguros/transporte/preguntas-frecuentes', None, 'Hola Mercurial, tengo una pregunta sobre el seguro de transporte.', True),
+    'preguntas-frecuentes-auto.html': ('/seguro-auto/preguntas-frecuentes', None, 'Hola Mercurial, tengo una pregunta sobre el seguro de auto.', True),
     'seguro-auto-promo.html': ('/seguro-auto/promocion', '#cotizar', 'Hola Mercurial, quiero cotizar mi seguro de auto con la promoción de noviembre.', True),
     'mascotas.html': ('/seguro-mascotas', '#cotizador', 'Hola Mercurial, quiero cotizar un seguro para mi mascota.', True),
     'desgravamen.html': ('/desgravamen-rechazado', '#evaluacion', 'Hola Mercurial, quiero ayuda con mi seguro de desgravamen.', True),
@@ -173,7 +175,9 @@ def pie(ruta, texto_wa, horario, creditos):
         f'      <div><h2 class="pie-tit">Empresas</h2>{lista_pie(EMPRESAS, ruta, [("/cotizar-pyme", "Enviar antecedentes pyme")])}'
         f'<h2 class="pie-tit">Personas</h2>{lista_pie(PERSONAS, ruta)}</div>\n'
         f'      <div><h2 class="pie-tit">Contacto</h2><ul><li><a href="{wa(texto_wa)}" target="_blank" rel="noopener">WhatsApp {WA_VISIBLE}</a></li>'
-        f'<li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos"{cur("/consultas-y-reclamos", ruta)}>Consultas y reclamos</a></li></ul></div>\n'
+        f'<li><a href="mailto:contacto@mercurial.cl">contacto@mercurial.cl</a></li><li><a href="/consultas-y-reclamos"{cur("/consultas-y-reclamos", ruta)}>Consultas y reclamos</a></li>'
+        f'<li><a href="/seguros/transporte/preguntas-frecuentes"{cur("/seguros/transporte/preguntas-frecuentes", ruta)}>Preguntas frecuentes: transporte</a></li>'
+        f'<li><a href="/seguro-auto/preguntas-frecuentes"{cur("/seguro-auto/preguntas-frecuentes", ruta)}>Preguntas frecuentes: auto</a></li></ul></div>\n'
         '      <div><h2 class="pie-tit">Información regulatoria</h2><ul><li>Registro CMF N° 8929</li><li>RUT 76.826.322-1</li><li>Reclamos según la Circular CMF N° 2131</li>'
         '<li><a href="https://www.cmfchile.cl" target="_blank" rel="noopener">Portal CMF</a></li></ul></div>\n'
         '    </div>\n'
