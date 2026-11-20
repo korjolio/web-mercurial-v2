@@ -208,6 +208,7 @@ def generar(archivo, s):
     if 'class="saltar"' not in s:
         s = re.sub(r'(<body[^>]*>\n)', lambda m_: m_.group(1) + '  ' + saltar() + '\n', s, count=1)
     # Destino del salto: <main> (mascotas.html no tiene <main>: su <header class="hero">)
+    s = s.replace('<main id="contenido">', '<main id="contenido" tabindex="-1">')  # el salto debe poder recibir el foco
     if 'id="contenido"' not in s:
         if re.search(r'<main\b', s):
             s = re.sub(r'<main\b', '<main id="contenido" tabindex="-1"', s, count=1)
