@@ -37,7 +37,7 @@ app.use((req, res, next) => {
     const isBlockedFile = BLOCKED_STATIC_FILES.has(lowerPath);
     // De instagram/ solo se exponen los JPG exportados por mes: la Content Publishing API los descarga por URL
     const isInstagramMedia = /^instagram\/\d{4}-\d{2}\/[a-z0-9-]+\.jpg$/.test(requestedPath);
-    const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/')
+    const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/') || lowerPath.startsWith('tests/')
         || lowerPath.startsWith('tests/')
         || (lowerPath.startsWith('instagram/') && !isInstagramMedia);
     const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
@@ -306,8 +306,9 @@ const sinTildes = v => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowe
 const COMUNAS_CL = new Map(require('./src/data/comunas.json').map(c => [sinTildes(c.comuna), c.comuna]));
 const comunaOficial = v => (typeof v === 'string' && v.length <= 80 ? COMUNAS_CL.get(sinTildes(v)) : undefined);
 const rutConFormato = v => { const c = rutLimpio(v); return c.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + c.slice(-1); };
-// Formulario de /seguros/transporte/importaciones-exportaciones (listas cerradas: deben calzar con seguro-carga-comex.html).
-const OPERACIONES_CARGA = ['Importo', 'Exporto'];
+// Formularios de carga (tipo «carga»): /seguros/transporte/importaciones-exportaciones (Importo/Exporto) y
+// /seguros/transporte/poliza-anual (Importo/Exporto/Nacional). Listas cerradas: deben calzar con esos HTML.
+const OPERACIONES_CARGA = ['Importo', 'Exporto', 'Nacional'];
 const EMBARQUES_CARGA = ['1 a 5', '6 a 12', '13 a 30', 'Más de 30'];
 const VALORES_CARGA = ['Hasta US$20.000', 'US$20.000 a 100.000', 'US$100.000 a 300.000', 'Más de US$300.000'];
 const ASEGURA_HOY_CARGA = ['Agente de aduana', 'Forwarder', 'Lo incluye mi proveedor', 'No aseguro'];

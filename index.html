@@ -51,6 +51,22 @@
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
   <link rel="stylesheet" href="/src/css/sitio.css?v=15">
+  <style>
+    /* Portada: un solo formulario (la barra de arriba); el cierre solo lleva enlaces. */
+    .ir-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; color: var(--azul-h); text-decoration: underline; text-underline-offset: 3px; }
+    .ir-link .ico { width: 18px; height: 18px; }
+    .cierre .enlaces { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+    /* Quiénes somos: texto propio junto a las compañías */
+    .confianza .quienes p { margin-top: 14px; color: #cfdbe8; font-size: 16px; max-width: 38ch; }
+    /* Pasos en celular: una grilla compacta de 2×2 en vez de una lista larga */
+    @media (max-width: 560px) {
+      .pasos-compactos .pasos { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+      .pasos-compactos.pasos-caja { padding-left: 0; padding-top: 24px; }
+      .pasos-compactos.pasos-caja::before, .pasos-compactos .trazo { top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 2px; transform-origin: left; }
+      .pasos-compactos .paso h3 { font-size: 17px; margin-top: 10px; }
+      .pasos-compactos .paso p { font-size: 14px; }
+    }
+  </style>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -203,12 +219,15 @@
       </div>
     </div></div></section>
 
-    <section class="rapidos" aria-label="Accesos rápidos"><div class="wrap">
-      <span class="tit">Accesos rápidos</span>
-      <a class="rapido" href="#contacto"><svg class="ico" aria-hidden="true"><use href="#ico-cotizar"/></svg>Cotizar con más detalle</a>
-      <a class="rapido" href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Hablar por WhatsApp</a>
-      <a class="rapido" href="/cotizar-pyme"><svg class="ico" aria-hidden="true"><use href="#doc"/></svg>Enviar antecedentes pyme</a>
-      <a class="rapido" href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg>Consultas y reclamos</a>
+
+    <section class="sec" id="seguros"><div class="wrap">
+      <div class="cabeza"><h2 class="grande">Cuatro seguros <b>para tu empresa</b></h2><p>Cotizamos el seguro que necesita tu empresa y te explicamos las diferencias entre las propuestas.</p></div>
+      <div class="tarjetas">
+        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/ruta-68-letreros-640.avif 640w, /src/img/fotos/ruta-68-letreros-1024.avif 1024w, /src/img/fotos/ruta-68-letreros-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/ruta-68-letreros-640.webp 640w, /src/img/fotos/ruta-68-letreros-1024.webp 1024w, /src/img/fotos/ruta-68-letreros-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/ruta-68-letreros-1024.jpg" alt="" loading="lazy" style="object-position: 50% 50%" width="1024" height="608"></picture></figure><div class="cuerpo"><h3><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></h3><p>Camiones, camionetas y autos de la empresa: transportistas, constructoras, distribuidoras y servicio técnico.</p><span class="ir" aria-hidden="true">Ver Flotas <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
+        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/valparaiso-puerto-640.avif 640w, /src/img/fotos/valparaiso-puerto-1024.avif 1024w, /src/img/fotos/valparaiso-puerto-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/valparaiso-puerto-640.webp 640w, /src/img/fotos/valparaiso-puerto-1024.webp 1024w, /src/img/fotos/valparaiso-puerto-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/valparaiso-puerto-1024.jpg" alt="" loading="lazy" style="object-position: 40% 55%" width="1024" height="768"></picture></figure><div class="cuerpo"><h3><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></h3><p>Carga propia o de terceros, por ruta, puerto o importada.</p><ul><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Carga nacional e internacional</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Robo con fractura o asalto</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Fallas en equipos de frío</li></ul><span class="ir" aria-hidden="true">Ver Transporte <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
+        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/mercado-central-640.avif 640w, /src/img/fotos/mercado-central-1024.avif 1024w, /src/img/fotos/mercado-central-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/mercado-central-640.webp 640w, /src/img/fotos/mercado-central-1024.webp 1024w, /src/img/fotos/mercado-central-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/mercado-central-1024.jpg" alt="" loading="lazy" style="object-position: 55% 50%" width="1024" height="683"></picture></figure><div class="cuerpo"><h3><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></h3><p>Locales, oficinas, bodegas y plantas, con montos en UF.</p><ul><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Edificio, contenidos y mercaderías</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Maquinaria y equipos electrónicos</li></ul><a class="extra" href="/cotizar-pyme">¿Eres pyme? Envía tus antecedentes para cotizar</a><span class="ir" aria-hidden="true">Ver Incendio <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
+        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/sanhattan-torres-640.avif 640w, /src/img/fotos/sanhattan-torres-1024.avif 1024w, /src/img/fotos/sanhattan-torres-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/sanhattan-torres-640.webp 640w, /src/img/fotos/sanhattan-torres-1024.webp 1024w, /src/img/fotos/sanhattan-torres-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/sanhattan-torres-1024.jpg" alt="" loading="lazy" style="object-position: 50% 30%" width="1024" height="681"></picture></figure><div class="cuerpo"><h3><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></h3><p>Un seguro complementario a la Isapre o Fonasa para tu equipo.</p><span class="ir" aria-hidden="true">Ver Colectivos de salud <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
+      </div>
     </div></section>
 
     <!-- BANNERS ROTATIVOS DE LA PORTADA. Cada <article class="bn"> es un banner: para sumar, quitar o reordenar
@@ -221,8 +240,8 @@
           <div class="bn-txt">
             <span class="bn-tag">Seguro de auto<i></i><span>Promoción de&nbsp;</span>noviembre</span>
             <h2><span class="hasta">Hasta</span> <span class="pct">40%</span> <span class="resto">de descuento en tu seguro <b>Full Cobertura</b></span></h2>
-            <p class="bn-taller">Distintas modalidades de taller: <span>Multimarca</span><span>Preferente</span></p>
-            <div class="bn-acc"><a class="btn btn-blanco" href="/seguro-auto/promocion">Cotiza el tuyo <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a><span class="bn-plazo"><i></i>Hasta el 30 de noviembre</span></div>
+            <p class="bn-taller">Taller Multimarca o Preferente</p>
+            <div class="bn-acc"><a class="btn btn-blanco" href="/seguro-auto/promocion">Cotiza el tuyo <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a><span class="bn-plazo">Hasta el 30 de noviembre</span></div>
           </div>
           <p class="bn-sello"><span class="ad">Además</span><span class="fila"><b>2</b><span>cuotas<br>gratis</span></span><span class="q">Cuotas 6 y 9</span></p>
           <p class="bn-legal">Válido para pólizas de 24 meses contratadas entre el 1 y el 30 de noviembre de 2026. Descuento, cuotas gratis y cobertura sujetos a evaluación y a las condiciones de la compañía de seguros.</p>
@@ -247,18 +266,8 @@
       </div>
     </div></section>
 
-    <section class="sec" id="seguros"><div class="wrap">
-      <div class="cabeza"><h2 class="grande">Cuatro seguros <b>para tu empresa</b></h2><p>Cotizamos el seguro que necesita tu empresa y te explicamos las diferencias entre las propuestas.</p></div>
-      <div class="tarjetas">
-        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/ruta-68-letreros-640.avif 640w, /src/img/fotos/ruta-68-letreros-1024.avif 1024w, /src/img/fotos/ruta-68-letreros-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/ruta-68-letreros-640.webp 640w, /src/img/fotos/ruta-68-letreros-1024.webp 1024w, /src/img/fotos/ruta-68-letreros-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/ruta-68-letreros-1024.jpg" alt="" loading="lazy" style="object-position: 50% 50%" width="1024" height="608"></picture></figure><div class="cuerpo"><h3><a href="/seguros/flotas"><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</a></h3><p>Camiones, camionetas y autos de la empresa: transportistas, constructoras, distribuidoras y servicio técnico.</p><span class="ir" aria-hidden="true">Ver Flotas <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
-        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/valparaiso-puerto-640.avif 640w, /src/img/fotos/valparaiso-puerto-1024.avif 1024w, /src/img/fotos/valparaiso-puerto-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/valparaiso-puerto-640.webp 640w, /src/img/fotos/valparaiso-puerto-1024.webp 1024w, /src/img/fotos/valparaiso-puerto-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/valparaiso-puerto-1024.jpg" alt="" loading="lazy" style="object-position: 40% 55%" width="1024" height="768"></picture></figure><div class="cuerpo"><h3><a href="/seguros/transporte"><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</a></h3><p>Carga propia o de terceros, por ruta, puerto o importada.</p><ul><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Carga nacional e internacional</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Robo con fractura o asalto</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Fallas en equipos de frío</li></ul><span class="ir" aria-hidden="true">Ver Transporte <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
-        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/mercado-central-640.avif 640w, /src/img/fotos/mercado-central-1024.avif 1024w, /src/img/fotos/mercado-central-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/mercado-central-640.webp 640w, /src/img/fotos/mercado-central-1024.webp 1024w, /src/img/fotos/mercado-central-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/mercado-central-1024.jpg" alt="" loading="lazy" style="object-position: 55% 50%" width="1024" height="683"></picture></figure><div class="cuerpo"><h3><a href="/seguros/incendio"><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</a></h3><p>Locales, oficinas, bodegas y plantas, con montos en UF.</p><ul><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Edificio, contenidos y mercaderías</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Maquinaria y equipos electrónicos</li></ul><a class="extra" href="/cotizar-pyme">¿Eres pyme? Envía tus antecedentes para cotizar</a><span class="ir" aria-hidden="true">Ver Incendio <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
-        <article class="tarjeta"><figure><picture><source type="image/avif" srcset="/src/img/fotos/sanhattan-torres-640.avif 640w, /src/img/fotos/sanhattan-torres-1024.avif 1024w, /src/img/fotos/sanhattan-torres-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><source type="image/webp" srcset="/src/img/fotos/sanhattan-torres-640.webp 640w, /src/img/fotos/sanhattan-torres-1024.webp 1024w, /src/img/fotos/sanhattan-torres-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 34px), min(305px, calc(25vw - 27px))"><img src="/src/img/fotos/sanhattan-torres-1024.jpg" alt="" loading="lazy" style="object-position: 50% 30%" width="1024" height="681"></picture></figure><div class="cuerpo"><h3><a href="/seguros/colectivos-de-salud"><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Colectivos de salud</a></h3><p>Un seguro complementario a la Isapre o Fonasa para tu equipo.</p><span class="ir" aria-hidden="true">Ver Colectivos de salud <svg class="ico" style="width:18px"><use href="#der"/></svg></span></div></article>
-      </div>
-    </div></section>
-
     <section class="confianza oscuro franja-cias" id="mercurial"><div class="wrap">
-      <div><h2>Somos Mercurial, <b>corredores de seguros</b></h2></div>
+      <div class="quienes"><h2>Somos Mercurial, <b>corredores de seguros</b></h2><p>No somos una compañía de seguros: cotizamos con distintas compañías, te explicamos las diferencias entre las propuestas y, si decides contratar, gestionamos tu póliza. Respondemos en 3 a 5 horas hábiles.</p></div>
       <div class="cias" role="region" aria-label="Compañías de seguros">
         <div class="cias-pista">
           <ul><li><img src="/src/img/companias/bci.svg" alt="BCI Seguros" width="600" height="136" loading="lazy"></li><li><img src="/src/img/companias/chubb.png" alt="Chubb" width="550" height="92" loading="lazy"></li><li><img src="/src/img/companias/consorcio.svg" alt="Consorcio" width="136" height="28" loading="lazy"></li><li><img src="/src/img/companias/contempora.png" alt="Contempora" width="542" height="200" loading="lazy"></li><li><img src="/src/img/companias/continental.png" alt="Continental" width="300" height="83" loading="lazy"></li><li><img src="/src/img/companias/hdi.png" alt="HDI Seguros" width="100" height="64" loading="lazy"></li><li><img src="/src/img/companias/metlife.png" alt="MetLife" width="354" height="80" loading="lazy"></li><li><img src="/src/img/companias/reale.png" alt="Reale Seguros" width="1600" height="562" loading="lazy"></li><li><img src="/src/img/companias/sura.png" alt="SURA" width="582" height="265" loading="lazy"></li><li><img src="/src/img/companias/southbridge.png" alt="Southbridge" width="400" height="82" loading="lazy"></li><li><img src="/src/img/companias/zurich.svg" alt="Zurich" width="129" height="33" loading="lazy"></li></ul>
@@ -269,7 +278,7 @@
 
     <section class="sec"><div class="wrap">
       <div class="cabeza"><h2 class="grande">Qué pasa <b>después de consultar</b></h2><p>Cuatro pasos, desde tu mensaje hasta la póliza.</p></div>
-      <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
+      <div class="pasos-caja pasos-compactos"><span class="trazo" aria-hidden="true"></span>
         <ol class="pasos">
           <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Empresa, teléfono y el seguro que te interesa. Toma menos de un minuto.</p></li>
           <li class="paso"><span class="n">2</span><h3>Te llamamos</h3><p>Para entender qué necesitas asegurar.</p></li>
@@ -279,48 +288,13 @@
       </div>
     </div></section>
 
-    <section class="sec" id="contacto"><div class="wrap contacto">
-      <div class="lado">
-        <h2 class="grande">Cuéntanos qué <b>necesitas asegurar</b></h2>
-        <p>Si prefieres, escríbenos directo.</p>
-        <div class="alt">
-          <a href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg><div><b>WhatsApp +56 9 3931 9546</b><span>Lunes a viernes, de 9:00 a 18:30 h</span></div></a>
-          <a href="/consultas-y-reclamos"><svg class="ico" aria-hidden="true"><use href="#mensaje"/></svg><div><b>Consultas y reclamos</b><span>Si ya eres cliente, escríbenos por aquí</span></div></a>
+    <section class="sec" id="contacto"><div class="wrap">
+      <div class="aviso-pyme cierre">
+        <div><b>¿Prefieres escribirnos?</b><span>WhatsApp +56 9 3931 9546, de lunes a viernes de 9:00 a 18:30 h. Si ya eres cliente, usa Consultas y reclamos.</span></div>
+        <div class="enlaces">
+          <a class="ir-link" href="https://wa.me/56939319546" target="_blank" rel="noopener">Escribir por WhatsApp <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
+          <a class="ir-link" href="#cotizar">Volver al formulario <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
         </div>
-      </div>
-      <div class="tarjeta-form">
-        <form class="form" data-envio="cotizacion" data-principal novalidate>
-          <div class="dos">
-            <div class="campo t-input-wrap"><label for="f-nombre">Nombre y apellido</label><input class="t-input" id="f-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="e-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="e-nombre"></span></div>
-            <div class="campo t-input-wrap"><label for="f-empresa">Empresa</label><input class="t-input" id="f-empresa" name="empresa" autocomplete="organization" maxlength="160" required aria-describedby="e-empresa" data-msg="¿Para qué empresa es el seguro?"><span class="t-error-msg" id="e-empresa"></span></div>
-          </div>
-          <div class="dos">
-            <div class="campo t-input-wrap"><label for="f-correo">Correo</label><input class="t-input" id="f-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="e-correo"></span></div>
-            <div class="campo t-input-wrap"><label for="f-tel">Teléfono</label><input class="t-input" id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required aria-describedby="e-tel" data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg" id="e-tel"></span></div>
-          </div>
-          <fieldset class="t-input-wrap grupo" aria-describedby="e-interes">
-            <legend>¿Qué seguro te interesa?</legend>
-            <div class="opciones">
-              <label class="op"><input type="radio" name="seguro" value="Flotas"><span><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Transporte"><span><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Incendio"><span><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Colectivo de salud"><span><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Salud colectiva</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Otro"><span><svg class="ico" aria-hidden="true"><use href="#doc"/></svg>Otro</span></label>
-            </div>
-            <span class="t-error-msg" id="e-interes"></span>
-          </fieldset>
-          <div class="campo"><label for="f-msj">Mensaje <small>(opcional)</small></label><textarea class="t-input" id="f-msj" name="mensaje" maxlength="3000" placeholder="Cuéntanos qué necesitas asegurar."></textarea></div>
-          <div class="trampa" aria-hidden="true"><label for="f-sitio">No llenar</label><input id="f-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
-          <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tu consulta.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
-          <button class="btn btn-azul enviar" type="submit"><span class="letra">Enviar consulta</span></button>
-          <p class="nota">Usamos tus datos para responder, preparar la cotización solicitada y gestionar su seguimiento. <a href="/politica-privacidad">Política de privacidad</a>.</p>
-        </form>
-        <div class="exito" hidden>
-          <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-          <h3 tabindex="-1">Recibimos tu consulta.</h3>
-          <p>Te vamos a contactar para revisar lo que necesitas. Si es urgente, escríbenos al WhatsApp +56 9 3931 9546.</p>
-        </div>
-        <p class="sr estado" role="status"></p>
       </div>
     </div></section>
 

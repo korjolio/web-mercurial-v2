@@ -13,7 +13,7 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 ## Servicios principales
 
 - **Gestión de riesgos corporativos**: Diseño de programas para protección de activos industriales y continuidad operacional, incluyendo cobertura de Perjuicio por Paralización.
-- **Transporte y logística**: Seguros de transporte de carga nacional e internacional (https://mercurial.cl/seguros/transporte). Para importaciones y exportaciones, certificados de seguro Todo Riesgo por embarque, sin póliza anual (https://mercurial.cl/seguros/transporte/importaciones-exportaciones). Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
+- **Transporte y logística**: Seguros de transporte de carga nacional e internacional (https://mercurial.cl/seguros/transporte). Para importaciones y exportaciones, certificados de seguro Todo Riesgo por embarque, sin póliza anual (https://mercurial.cl/seguros/transporte/importaciones-exportaciones). Para empresas que mueven carga todo el año, póliza anual de transporte a nombre de la empresa, flotante con límite por embarque o Stock Throughput (STP, tránsito y bodega), para importación, exportación o carga dentro de Chile (https://mercurial.cl/seguros/transporte/poliza-anual). Especialización en auditoría de Cláusulas de Medidas de Seguridad, cobertura de Robo con Fractura/Asalto, y gestión de siniestros por Soltura de Amarras o fallas en Equipos de Frío.
 - **Responsabilidad Civil**: Ingeniería de límites para RC Extracontractual, RC Patronal con extensión a Subcontratistas, y diseño de estructuras de Responsabilidad Cruzada.
 - **Property e incendio** (https://mercurial.cl/seguros/incendio): Valoración de activos a Valor de Reposición a Nuevo. Estructuras contra riesgos de fuerza mayor y riesgos políticos.
 - **Salud colectiva y beneficios**: Seguro complementario de salud para equipos de trabajo (https://mercurial.cl/seguros/colectivos-de-salud).
@@ -26,7 +26,9 @@ Mercurial Corredores de Seguros Ltda. es una corredora inscrita en la CMF, Regis
 
 ## Seguro de carga para importaciones y exportaciones (datos clave)
 
-Página: https://mercurial.cl/seguros/transporte/importaciones-exportaciones. Condiciones del programa vigente; antes de emitir, Mercurial confirma por escrito las que aplican a cada embarque.
+Página: https://mercurial.cl/seguros/transporte/importaciones-exportaciones
+
+Condiciones del programa vigente; antes de emitir, Mercurial confirma por escrito las que aplican a cada embarque.
 
 - Modalidad: un certificado de seguro por embarque, sin contrato anual ni permanencia. El agente de aduana o forwarder del cliente sigue haciendo su trabajo.
 - Cobertura: Todo Riesgo para mercadería nueva mientras la carga es responsabilidad del cliente según el Incoterm; huelga incluida en todos los medios y guerra en marítimo y aéreo. Condiciones inscritas en la CMF: marítimo POL 1 2013 0700 (Carga «A»), aéreo POL 1 2013 0716, terrestre POL 1 2013 0730. Mercadería usada: condiciones restringidas (POL 1 2013 0703).
@@ -34,7 +36,7 @@ Página: https://mercurial.cl/seguros/transporte/importaciones-exportaciones. Co
 - Deducibles: sin deducible en contenedor completo seco (FCL) o camión cerrado; 0,5% del monto (mínimo US$500) en otros embalajes; 10% de la pérdida (mínimo US$1.000) en robo o asalto.
 - Plazos: en importaciones, el certificado se emite antes del arribo de la nave o camión (aéreo: hasta 48 horas después del arribo); en exportaciones, hasta 72 horas después del zarpe (marítimo) o 24 horas después del inicio del viaje (aéreo y terrestre).
 - Estadía en aduana cubierta: 60 días marítimo, 30 días aéreo o terrestre. Robo con fractura o asalto en tramo terrestre: hasta US$150.000 por evento y en total al año, con medidas de seguridad.
-- Exclusiones del programa por embarque: electrónica, celulares, computadores, línea blanca, farmacéuticos, vehículos, cobre, joyas y metales preciosos, carga viva, mudanzas, entre otras; esas mercaderías se pueden asegurar con una póliza anual específica. Fuera de cobertura los países con sanciones internacionales.
+- Exclusiones del programa por embarque: electrónica, celulares, computadores, línea blanca, farmacéuticos, vehículos, cobre, joyas y metales preciosos, carga viva, mudanzas, entre otras; esas mercaderías se pueden evaluar en una póliza anual específica (https://mercurial.cl/seguros/transporte/poliza-anual), sujeta a la aceptación de la compañía. Fuera de cobertura los países con sanciones internacionales.
 - Cotización: se cotiza por embarque; el cliente puede enviar su último certificado por WhatsApp (+56 9 3931 9546) para comparar.
 
 ## Rubros especializados
