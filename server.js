@@ -256,6 +256,8 @@ const nodemailer = require('nodemailer');
 const MAIL_TO = process.env.MAIL_TO || 'contacto@mercurial.cl';
 // Los contactos de seguro de auto van directo a la casilla de quien los atiende; el resto, a MAIL_TO.
 const MAIL_TO_AUTO = process.env.MAIL_TO_AUTO || 'ppbugueno@mercurial.cl';
+// Reclamos de clientes: casilla de reclamos (Circular CMF N° 2131); confirmado por Pepa el 20-nov-2026.
+const MAIL_TO_RECLAMOS = process.env.MAIL_TO_RECLAMOS || 'reclamos@mercurial.cl';
 const MAIL_DRY_RUN = process.env.MAIL_DRY_RUN === '1';
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
@@ -678,7 +680,7 @@ app.post('/api/contacto', async (req, res) => {
         if (!enMotor || esCarga) {
             await mailer.sendMail({
                 from: `"Sitio Mercurial" <${MAIL_FROM}>`,
-                to: b.tipo === 'auto' ? MAIL_TO_AUTO : MAIL_TO,
+                to: b.tipo === 'auto' ? MAIL_TO_AUTO : b.tipo === 'reclamo' ? MAIL_TO_RECLAMOS : MAIL_TO,
                 replyTo: b.correo ? limpio(b.correo) : undefined,
                 subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (esCarga && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
                 text: lineas.join('\n')
