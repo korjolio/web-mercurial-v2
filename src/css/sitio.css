@@ -403,8 +403,10 @@ fieldset { border: 0; min-width: 0; }
 
 /* ---------- Rendimiento ---------- */
 /* Las fotos van en <picture> (AVIF/WebP/JPG en 3 anchos): <picture> no genera caja, así la <img> se ubica
-   como si fuera hija directa del panel (los paneles son grid). */
+   como si fuera hija directa del panel (los paneles son grid). Los <source> se ocultan: si no, pasan a ser celdas
+   vacías del grid y empujan el texto hacia abajo. */
 picture { display: contents; }
+picture > source { display: none; }
 /* Respaldo con las métricas de Albert Sans (calculadas con fontTools sobre los archivos de Google Fonts):
    mientras carga la fuente (display=swap) el texto ocupa casi lo mismo y no salta al cambiar (CLS).
    Arial: Mac, Windows e iPhone. Roboto: Android. */
