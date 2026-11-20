@@ -9,11 +9,11 @@
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
-  <title>Póliza anual de transporte para empresas | Mercurial Corredores de Seguros</title>
-  <meta name="description" content="Póliza anual de transporte de carga a nombre de tu empresa: flotante con límite máximo por embarque o Stock Throughput (STP). Cuéntanos tu operación y cotizamos con las compañías.">
+  <title>Póliza anual de transporte para empresas | Mercurial</title>
+  <meta name="description" content="Póliza anual de transporte a nombre de tu empresa: flotante con límite por embarque o STP, para importación, exportación o carga dentro de Chile.">
   <link rel="canonical" href="https://mercurial.cl/seguros/transporte/poliza-anual">
-  <meta property="og:title" content="Póliza anual de transporte para empresas | Mercurial Corredores de Seguros">
-  <meta property="og:description" content="Póliza anual de transporte de carga a nombre de tu empresa: flotante con límite máximo por embarque o Stock Throughput (STP). Cuéntanos tu operación y cotizamos con las compañías.">
+  <meta property="og:title" content="Póliza anual de transporte para empresas | Mercurial">
+  <meta property="og:description" content="Póliza anual de transporte a nombre de tu empresa: flotante con límite por embarque o STP, para importación, exportación o carga dentro de Chile.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mercurial.cl/seguros/transporte/poliza-anual">
   <meta property="og:image" content="https://mercurial.cl/src/img/og-image-dark.png">
@@ -47,25 +47,15 @@
 <style>
     /* Página de póliza anual de transporte */
     /* Página de seguro de carga internacional */
-    /* «Tu operación»: interruptor estilo iPhone, igual al «Aún no tengo la patente» del cotizador de autos */
-    .fila-op { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .fila-op .tit-campo { font-weight: 600; font-size: 15px; color: var(--tx); }
-    .op-switch { display: inline-flex; align-items: center; gap: 10px; }
-    .op-switch .lado { border: 0; background: none; padding: 6px 2px; font: 500 15px var(--sans); color: var(--tx2); cursor: pointer; transition: color var(--duration-quick) ease-out; }
-    .op-switch .lado.is-activo { color: var(--navy); font-weight: 600; }
-    .op-switch .lado:focus-visible { outline: 3px solid var(--azul-h); outline-offset: 2px; border-radius: 6px; }
-    .op-switch .switch { position: relative; display: inline-flex; margin: 0; align-items: center; cursor: pointer; user-select: none; }
-    .op-switch .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-    .op-switch .switch .pista { display: block; position: relative; width: 44px; height: 26px; border-radius: 999px; background: #d1d5db; transition: background-color var(--duration-quick, .2s) ease-out; flex: none; }
-    .op-switch .switch .pista::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform var(--duration-quick, .2s) cubic-bezier(.3,.7,.4,1); }
-    .op-switch .switch input:checked + .pista::after { transform: translateX(18px); }
-    .op-switch .switch input:focus-visible + .pista { outline: 3px solid var(--azul-h); outline-offset: 2px; }
+    /* «Tu operación»: 2 o 3 opciones excluyentes, visibles (guía de formularios: radios, no interruptor ni desplegable) */
+    .opciones.op-cortas { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+    .opciones.op-cortas .op span { justify-content: center; }
     /* Hero sin barra flotante debajo: menos alto y sin espacio vacío */
     .panel { min-height: 480px; padding-bottom: 72px; }
     @media (max-width: 560px) { .panel { min-height: 0; padding: 36px 20px 44px; } }
     .opciones-pol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 8px; }
     .pol { border: 1px solid var(--borde); border-radius: 20px; padding: 32px 32px 28px; display: flex; flex-direction: column; gap: 14px; background: #fff; box-shadow: 0 24px 50px -40px rgba(13,35,64,.45); }
-    .pol .eti { align-self: flex-start; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--azul-h); background: var(--celeste); padding: 6px 10px; border-radius: 999px; }
+    .pol .eti { align-self: flex-start; font-size: 14px; font-weight: 600; color: var(--azul-h); background: var(--celeste); padding: 6px 10px; border-radius: 999px; }
     .pol h3 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; color: var(--navy); line-height: 1.25; }
     .pol p { color: var(--tx2); font-size: 16px; }
     .pol ul { list-style: none; display: grid; gap: 10px; margin-top: 4px; }
@@ -77,7 +67,7 @@
     .firma { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--borde); color: var(--tx2); font-size: 14px; }
     @media (max-width: 860px) { .opciones-pol { grid-template-columns: 1fr; } .pol { padding: 26px 22px; } }
   </style>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "InsuranceAgency", "@id": "https://mercurial.cl/#org", "name": "Mercurial Corredores de Seguros Ltda.", "url": "https://mercurial.cl", "telephone": "+56939319546", "email": "contacto@mercurial.cl", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}, "identifier": {"@type": "PropertyValue", "name": "Registro CMF", "value": "8929"}}, {"@type": "Service", "name": "Póliza anual de transporte de carga", "serviceType": "Seguro de transporte de carga para empresas", "url": "https://mercurial.cl/seguros/transporte/poliza-anual", "provider": {"@id": "https://mercurial.cl/#org"}, "areaServed": "CL", "description": "Evaluación y cotización de pólizas anuales de transporte a nombre de la empresa: flotante con límite máximo de responsabilidad por embarque o Stock Throughput (STP), para importación, exportación y transporte nacional."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿En qué se diferencia del certificado por embarque?", "acceptedAnswer": {"@type": "Answer", "text": "El certificado por embarque se compra viaje a viaje dentro del programa de Mercurial, sin contrato. La póliza anual queda a nombre de tu empresa, con condiciones pensadas para tu operación, y conviene cuando mueves carga todo el año o necesitas asegurar mercaderías que el programa por embarque no cubre."}}, {"@type": "Question", "name": "¿Qué información necesitan para cotizar?", "acceptedAnswer": {"@type": "Answer", "text": "Para empezar, lo del formulario: qué mueves, cuántos embarques al año y su valor típico. Después te pedimos el detalle que pida la compañía, como el monto anual estimado, los trayectos, los embalajes y, si aplica, dónde almacenas la mercadería."}}, {"@type": "Question", "name": "¿Cuánto demora la propuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Depende de la compañía y de la información de tu operación. Te avisamos el plazo apenas recibimos tus datos."}}, {"@type": "Question", "name": "¿Pueden asegurar mercaderías como electrónica?", "acceptedAnswer": {"@type": "Answer", "text": "Sí se pueden evaluar en una póliza anual, aunque el programa por embarque las excluya. La aceptación y las condiciones las define la compañía de seguros."}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "InsuranceAgency", "@id": "https://mercurial.cl/#organization", "name": "Mercurial Corredores de Seguros Ltda.", "url": "https://mercurial.cl", "telephone": "+56939319546", "email": "contacto@mercurial.cl", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}, "identifier": {"@type": "PropertyValue", "name": "Registro CMF", "value": "8929"}}, {"@type": "Service", "name": "Póliza anual de transporte de carga", "serviceType": "Seguro de transporte de carga para empresas", "url": "https://mercurial.cl/seguros/transporte/poliza-anual", "provider": {"@id": "https://mercurial.cl/#organization"}, "areaServed": "CL", "description": "Evaluación y cotización de pólizas anuales de transporte a nombre de la empresa: flotante con límite máximo de responsabilidad por embarque o Stock Throughput (STP), para importación, exportación y transporte nacional."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿En qué se diferencia del certificado por embarque?", "acceptedAnswer": {"@type": "Answer", "text": "El certificado por embarque se compra viaje a viaje dentro del programa de Mercurial, sin contrato. La póliza anual queda a nombre de tu empresa, con condiciones pensadas para tu operación, y conviene cuando mueves carga todo el año o necesitas asegurar mercaderías que el programa por embarque no cubre."}}, {"@type": "Question", "name": "¿Qué información necesitan para cotizar?", "acceptedAnswer": {"@type": "Answer", "text": "Para empezar, lo del formulario: qué mueves, cuántos embarques al año y su valor típico. Después te pedimos el detalle que pida la compañía, como el monto anual estimado, los trayectos, los embalajes y, si aplica, dónde almacenas la mercadería."}}, {"@type": "Question", "name": "¿Cuánto demora la propuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Depende de la compañía y de la información de tu operación. Te avisamos el plazo apenas recibimos tus datos."}}, {"@type": "Question", "name": "¿Pueden asegurar mercaderías como electrónica?", "acceptedAnswer": {"@type": "Answer", "text": "Sí se pueden evaluar en una póliza anual, aunque el programa por embarque las excluya. La aceptación y las condiciones las define la compañía de seguros."}}]}]}</script>
 </head>
 
 <body class="mc-marco">
@@ -180,6 +170,7 @@
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#barco"/></svg>Seguro de transporte para empresas</span>
           <h1 id="titular">Póliza anual de transporte, <b>a nombre de tu empresa</b></h1>
           <p class="sub">Para empresas que mueven carga todo el año: importación, exportación o dentro de Chile. Una sola póliza, cotizada con las compañías.</p>
+          <a class="btn btn-azul" href="#contacto" style="margin-top:26px">Solicitar evaluación <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
         </div>
       </div>
     </div></section>
@@ -197,7 +188,7 @@
           </ul>
         </article>
         <article class="pol">
-          <span class="eti">STP · Stock Throughput</span>
+          <span class="eti">Tránsito y bodega (STP)</span>
           <h3>Tránsito y almacenamiento en una sola póliza</h3>
           <p>Cubre la mercadería mientras viaja y mientras está guardada, desde el origen hasta su destino final.</p>
           <ul>
@@ -239,15 +230,10 @@
             <div class="campo t-input-wrap"><label for="c-correo">Correo <small>(opcional)</small></label><input class="t-input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="120" data-msg="Revisa el correo: no es válido."><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-tel">Teléfono</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
           </div>
-          <div class="campo fila-op">
-            <span class="tit-campo" id="t-op">Tu operación</span>
-            <div class="op-switch" role="group" aria-labelledby="t-op">
-              <button type="button" class="lado is-activo" data-op="Importo">Importo</button>
-              <label class="switch"><input type="checkbox" role="switch" id="c-exporta" aria-label="Exporto"><span class="pista" aria-hidden="true"></span></label>
-              <button type="button" class="lado" data-op="Exporto">Exporto</button>
-              <input type="hidden" name="operacion" id="c-operacion" value="Importo">
-            </div>
-          </div>
+          <fieldset class="campo">
+            <legend>Tu operación</legend>
+            <div class="opciones op-cortas"><label class="op"><input type="radio" name="operacion" value="Importo" checked><span>Importo</span></label><label class="op"><input type="radio" name="operacion" value="Exporto"><span>Exporto</span></label><label class="op"><input type="radio" name="operacion" value="Nacional"><span>Nacional</span></label></div>
+          </fieldset>
           <div class="dos">
             <div class="campo t-input-wrap"><label for="c-merc">¿Qué mercadería? <small>(opcional)</small></label><input class="t-input" id="c-merc" name="mercaderia" maxlength="160" placeholder="Ej.: insumos químicos, repuestos, textiles"><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-origen">Origen o destino principal <small>(opcional)</small></label><input class="t-input" id="c-origen" name="origen" maxlength="80" placeholder="País"><span class="t-error-msg"></span></div>
@@ -302,18 +288,10 @@
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
   <script src="/src/js/sitio.js?v=15"></script>
 <script>
-  // «Tu operación»: el interruptor y las palabras Importo/Exporto escriben el valor en el campo oculto que viaja con el formulario.
+  // «Tu operación» son opciones visibles (name="operacion"); aquí solo se valida «¿Cómo aseguras hoy?».
   (function () {
-    var sw = document.getElementById('c-exporta'), campo = document.getElementById('c-operacion');
-    if (!sw || !campo) return;
-    var lados = document.querySelectorAll('.op-switch .lado');
-    function poner(exporta) {
-      sw.checked = exporta; campo.value = exporta ? 'Exporto' : 'Importo';
-      lados.forEach(function (b) { b.classList.toggle('is-activo', b.dataset.op === campo.value); });
-    }
-    sw.addEventListener('change', function () { poner(sw.checked); });
-    lados.forEach(function (b) { b.addEventListener('click', function () { poner(b.dataset.op === 'Exporto'); }); });
-    var f = sw.closest('form'); if (f) f.addEventListener('reset', function () { setTimeout(function () { poner(false); }); });
+    var aseg = document.getElementById('c-aseg');
+    var f = aseg && aseg.form;
     // «¿Cómo aseguras hoy?» es obligatorio: si falta, se marca antes de que sitio.js envíe.
     var aseg = document.getElementById('c-aseg');
     if (f && aseg) {

@@ -8,10 +8,18 @@
   <link rel="icon" type="image/png" href="/src/img/favicon-32.png">
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seguro de Mascotas con Respaldo BCI Seguros | Mercurial Corredores de Seguros</title>
-  <meta name="description"
-    content="Protege a tu perro o gato con un seguro de BCI Seguros y la asesoría de Mercurial. Cotiza en línea.">
+  <meta name="robots" content="index, follow">
+  <title>Seguro de mascotas con BCI Seguros | Mercurial</title>
+  <meta name="description" content="Seguro para perros y gatos de BCI Seguros, con planes Esencial, Pro e Infinite y la asesoría de Mercurial. Cotiza en línea en el sitio de BCI.">
   <link rel="canonical" href="https://mercurial.cl/seguro-mascotas">
+  <meta property="og:title" content="Seguro de mascotas con BCI Seguros | Mercurial">
+  <meta property="og:description" content="Seguro para perros y gatos de BCI Seguros, con planes Esencial, Pro e Infinite y la asesoría de Mercurial. Cotiza en línea en el sitio de BCI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mercurial.cl/seguro-mascotas">
+  <meta property="og:image" content="https://mercurial.cl/src/img/og-image-dark.png">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Mercurial Corredores de Seguros">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google Fonts: Lora (display) + Inter (texto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,7 +131,7 @@
     .razones-grid { display: grid; grid-template-columns: 1fr; gap: 2.25rem; }
     @media (min-width: 768px) { .razones-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
     .razon svg { color: var(--m-accent); margin-bottom: 0.75rem; }
-    .razon h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.6rem; }
+    .razon h2 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.6rem; }
     .razon p { font-size: 0.95rem; color: var(--m-text-soft); line-height: 1.65; }
 
     /* Planes */
@@ -153,22 +161,17 @@
     .cotizador-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
     .cotizador-header p { font-size: 1.05rem; color: var(--m-text-soft); max-width: 620px; margin: 0 auto; }
 
-    .cotizador-frame {
+    /* El cotizador de BCI se abre en su sitio, en una pestaña nueva: embebido (iframe de terceros) fallaba con
+       «Id desconocido» en navegadores que bloquean cookies de terceros (Safari por defecto). */
+    .cotizador-card {
+      max-width: 720px; margin: 0; padding: 2rem; display: grid; gap: 1rem; justify-items: start;
       background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 20px;
-      overflow: hidden; box-shadow: 0 24px 50px -36px rgba(13, 35, 64, 0.4);
     }
-    /* El cotizador BCI es cross-origin (no se puede leer su altura). Alturas medidas contra el
-       contenido real: paso 1 = 774px desktop / 1204px móvil; paso 2 (tabla de planes) ≈ 1725px.
-       El marco parte compacto y se expande a la altura del paso más alto cuando el usuario
-       cambia de paso (ver script), evitando scroll interno sin dejar hueco inicial. */
-    .cotizador-frame iframe { display: block; width: 100%; height: 950px; border: 0; transition: height 0.5s ease; }
-    .cotizador-frame.expandido iframe { height: 1780px; }
-    @media (max-width: 600px) {
-      .cotizador-frame iframe { height: 1280px; }
-      .cotizador-frame.expandido iframe { height: 2200px; }
-    }
-    .cotizador-fallback { margin-top: 1.1rem; text-align: center; font-size: 0.88rem; color: var(--m-text-soft); }
-    .cotizador-fallback a { font-weight: 600; }
+    .cotizador-card ol { padding-left: 1.2rem; color: var(--m-text-soft); display: grid; gap: 0.35rem; }
+    .cotizador-card ol a { text-decoration: underline; text-underline-offset: 3px; }
+    .cotizador-card .nota-bci { font-size: 0.88rem; color: var(--m-text-soft); }
+    .planes-header, .cotizador-header { text-align: left; }
+    .planes-header p, .cotizador-header p { margin: 0; }
 
     .cotizador-legal { margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--m-text-soft); line-height: 1.6; }
 
@@ -195,6 +198,58 @@
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
   </style>
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "InsuranceAgency",
+        "@id": "https://mercurial.cl/#organization",
+        "name": "Mercurial Corredores de Seguros",
+        "url": "https://mercurial.cl",
+        "telephone": "+56939319546",
+        "email": "contacto@mercurial.cl",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://mercurial.cl/seguro-mascotas#servicio",
+        "name": "Seguro de mascotas con BCI Seguros",
+        "serviceType": "Seguro de mascotas",
+        "url": "https://mercurial.cl/seguro-mascotas",
+        "provider": {
+          "@id": "https://mercurial.cl/#organization"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Chile"
+        },
+        "description": "Seguro para perros y gatos de BCI Seguros, con planes Esencial, Pro e Infinite, que se cotiza en línea en el sitio de BCI Seguros con la asesoría de Mercurial."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://mercurial.cl/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Seguro de mascotas",
+            "item": "https://mercurial.cl/seguro-mascotas"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -284,7 +339,8 @@
     </nav>
   </div>
 
-  <header class="hero">
+  <main id="contenido">
+  <section class="hero" aria-labelledby="titular">
     <div class="container hero-grid">
       <div class="fade-in-up">
         <span class="hero-kicker">
@@ -296,10 +352,10 @@
           </svg>
           Seguro de mascotas · BCI Seguros
         </span>
-        <h1 class="hero-title">Protege a quien <b style="font-weight:600">te espera todos los días</b> en casa.</h1>
+        <h1 class="hero-title" id="titular">Protege a quien <b style="font-weight:600">te espera todos los días</b> en casa.</h1>
         <p class="hero-subtitle">Tu perro o tu gato es parte de la familia. Cotiza el seguro de tu perro o gato en línea con BCI Seguros y la orientación de Mercurial.</p>
         <div class="hero-cta-row">
-          <a href="#cotizador" class="btn-hero" data-track="cta-hero">Cotiza para tu mascota</a>
+          <a href="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE" class="btn-hero" target="_blank" rel="noopener" data-track="cta-hero" data-bci>Cotiza para tu mascota</a>
           <span class="hero-cta-note">Perros y gatos, desde los 6 meses y antes de cumplir 10 años</span>
         </div>
       </div>
@@ -311,7 +367,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </section>
 
   <section class="razones">
     <div class="container razones-grid">
@@ -320,7 +376,7 @@
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
         </svg>
-        <h3>Porque es de la familia</h3>
+        <h2>Porque es de la familia</h2>
         <p>Un imprevisto no debería ser una decisión económica: el seguro cubre urgencias por enfermedad o accidente
           de tu perro o gato, más responsabilidad civil ante daños a terceros.</p>
       </div>
@@ -329,15 +385,15 @@
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
-        <h3>Respaldo real</h3>
-        <p>La póliza la emite BCI Seguros. Mercurial te orienta antes de contratar y es corredora regulada por la CMF (Registro N° 8929).</p>
+        <h2>Respaldo real</h2>
+        <p>La póliza la emite BCI Seguros. Mercurial, tu corredora de seguros, te orienta antes de contratar.</p>
       </div>
       <div class="razon fade-in-up" style="animation-delay: 0.3s;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline>
         </svg>
-        <h3>Atención en red con Bono Pet</h3>
+        <h2>Atención en red con Bono Pet</h2>
         <p>En la red veterinaria puedes usar Bono Pet y pagar el copago que corresponda a tu plan. Fuera de la red, revisa las condiciones de reembolso.</p>
       </div>
     </div>
@@ -388,26 +444,24 @@
     <div class="container">
       <div class="cotizador-header">
         <h2>Compara los planes <b style="font-weight:600">para tu perro o gato</b></h2>
-        <p>Ingresa al cotizador de BCI Seguros para revisar las alternativas disponibles para tu mascota.</p>
+        <p>El cotizador de BCI Seguros te muestra los planes disponibles para tu mascota y su valor.</p>
       </div>
-      <div class="cotizador-frame">
-        <!-- El src se asigna recién cuando el visitante llega a la sección (ver script):
-             la app de BCI roba el foco al cargar y arrastra el scroll de toda la página. -->
-        <iframe id="cotizadorBci"
-          data-src="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE"
-          title="Cotizador de seguro de mascotas de BCI Seguros"></iframe>
+      <div class="cotizador-card">
+        <ol>
+          <li>Abre el cotizador oficial de BCI Seguros (se abre en una pestaña nueva).</li>
+          <li>Ingresa los datos de tu mascota y compara los planes Esencial, Pro e Infinite.</li>
+          <li>Si tienes dudas antes de contratar, escríbenos al <a href="https://wa.me/56939319546" target="_blank" rel="noopener">WhatsApp +56 9 3931 9546</a>.</li>
+        </ol>
+        <a href="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE" class="btn-hero" target="_blank" rel="noopener" data-track="cotizador-bci" data-bci>Abrir el cotizador de BCI Seguros</a>
+        <p class="nota-bci">El cotizador está en el sitio de BCI Seguros y ya identifica a Mercurial como tu corredora.</p>
       </div>
-      <p class="cotizador-fallback">¿Problemas para cotizar?
-        <a href="https://cotizadormascotas.bciseguros.cl/wallet/32067439FC62A6073A37E211F5F65E9F/8EE4575999D488C03A4C80DA2AC91DBA79811C47E2E40F654D45E340EE8BC77D00D711FEBDC7B91C677718104E55A3A81689F9630CF6877A3D1ADA3EF8D60E386B3B56EEFB3F870988705C2EB66707B20249FE03BF40B8722BAD90C76AA46CAE08C9FC53A2C9A803297194BEB23B0013DBA420772A5420D89048F79075B569FCA6DDEB901CADA29B734AF7C34AC64E5921A624025AFCDD090868B839EE3B3DE5A6C093CA179CD7A41383E5A302ED605DD756FED26DCB612CECAD415D87B82356F5FB7328DBC7CC8388153BC8AF8C6CF09F7EE9C9872DDC4729CFFFBAF47E9BA4F24AB4CBFB7581F12FBA3F82A2461264CD220E1E5EE4B42D35C1A83B6010CE6EFD56987D532C262AF560F0DF90E7CEF3179F3174FB348580C0E6D1887F6DD1CE"
-          target="_blank" rel="noopener noreferrer" data-track="cotizador-nueva-pestana">ábrelo en una pestaña
-          nueva</a>
-      </p>
       <p class="cotizador-legal">*Sólo se puede asegurar una mascota por póliza. Seguro sólo para perros y gatos: al
         contratar, la mascota debe tener entre 6 meses y 9 años con 364 días de edad, con permanencia máxima hasta los
         12 años. No cubre preexistencias, ni mascotas destinadas a actividad laboral o reproducción, ni con enfermedad
         terminal.</p>
     </div>
   </section>
+  </main>
 
   <footer class="oscuro mc-marco"><div class="wrap">
     <div class="pie">
@@ -441,85 +495,25 @@
       });
     });
 
-    // --- Cotizador embebido de BCI ---
-    // Restricciones del iframe cross-origin: no se puede leer su altura ni sus clics, y la app
-    // de BCI roba el foco al terminar de cargar (arrastrando el scroll de la página al iframe).
-    // Defecto conocido y asumido: el banner de cookies de BCI (OneTrust) recarga su propia
-    // página al aceptar y su consentimiento no persiste en contexto de terceros, así que puede
-    // reaparecer entre visitas. Es del sitio de BCI; no se corrige desde acá (cerrarlo con la
-    // "X" no recarga).
-    //
-    // 1) Carga diferida: el src se asigna recién cuando el visitante llega a la sección, para
-    //    que el autofocus de BCI no secuestre el scroll de quien está viendo el hero.
-    // 2) Expansión: el marco parte compacto (paso 1 mide 774px desktop / 1204px móvil) y crece
-    //    a la altura del paso más alto (~1725px, la tabla de planes) cuando el usuario cambia
-    //    de paso, para que ningún paso genere scroll interno. El espacio extra crece hacia
-    //    abajo, fuera de la vista.
-    var cotizadorIframe = document.getElementById('cotizadorBci');
-    var cotizadorFrame = document.querySelector('.cotizador-frame');
-
-    function expandirCotizador() {
-      cotizadorFrame.classList.add('expandido');
+    // --- Cotizador de BCI (se abre en pestaña nueva) ---
+    // Ver la sección: «cotizador_visto». Abrir el cotizador: «cotizador_interaccion» + CustomizeProduct de Meta
+    // (antes se medía con el hover sobre el iframe embebido).
+    var seccionCotizador = document.getElementById('cotizador');
+    if (seccionCotizador && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries, observer) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        observer.disconnect();
+        window.dataLayer.push({ event: 'cotizador_visto' });
+      }, { threshold: 0.3 }).observe(seccionCotizador);
     }
-
-    new IntersectionObserver(function (entries, observer) {
-      if (!entries.some(function (e) { return e.isIntersecting; })) return;
-      observer.disconnect();
-      cotizadorIframe.src = cotizadorIframe.getAttribute('data-src');
-      window.dataLayer.push({ event: 'cotizador_visto' });
-
-      // Expansión al cambiar de paso: la navegación interna del iframe (paso 1 → paso 2)
-      // crece el historial compartido, lo único observable cross-origin. Para no confundirla
-      // con el arranque, la base se recalibra tras cada carga real del iframe ('load': carga
-      // inicial, recarga del banner de cookies) más 3s de gracia, que absorben el redirect SPA
-      // de arranque (/wallet/... → /contratar/datos-contratante/...). Pasada la calibración,
-      // cualquier crecimiento es un cambio de paso.
-      // Sin temporizadores de respaldo: expandir "por si acaso" tras N segundos deja un hueco
-      // blanco enorme a quien todavía está llenando el paso 1 (que toma más de un minuto).
-      var historialBase = history.length;
-      var calibrado = false;
-
-      function recalibrarHistorial() {
-        calibrado = false;
-        historialBase = history.length;
-        setTimeout(function () { historialBase = history.length; calibrado = true; }, 3000);
-      }
-      cotizadorIframe.addEventListener('load', recalibrarHistorial);
-      recalibrarHistorial();
-
-      var vigilante = setInterval(function () {
-        if (calibrado && history.length > historialBase) {
-          expandirCotizador();
-          clearInterval(vigilante);
-        }
-      }, 400);
-    }, { threshold: 0.3 }).observe(cotizadorFrame);
-
-    // Señal de analytics (mejor esfuerzo, solo desktop): hover sostenido sobre el cotizador, o
-    // clic que mete el foco al iframe con el mouse encima. Se reporta una sola vez.
-    var cotizadorTracked = false;
-    var mouseSobreCotizador = false;
-    var hoverTimer = null;
-
-    function marcarInteraccionCotizador() {
-      if (cotizadorTracked) return;
-      cotizadorTracked = true;
-      window.dataLayer.push({ event: 'cotizador_interaccion' });
-      if (window.mercurialMeta) window.mercurialMeta.track('CustomizeProduct', { content_name: 'Seguro Mascotas' });
-    }
-
-    cotizadorIframe.addEventListener('mouseenter', function () {
-      mouseSobreCotizador = true;
-      hoverTimer = setTimeout(marcarInteraccionCotizador, 900);
-    });
-    cotizadorIframe.addEventListener('mouseleave', function () {
-      mouseSobreCotizador = false;
-      clearTimeout(hoverTimer);
-    });
-    window.addEventListener('blur', function () {
-      if (document.activeElement === cotizadorIframe && mouseSobreCotizador) {
-        marcarInteraccionCotizador();
-      }
+    var cotizadorAbierto = false;
+    document.querySelectorAll('[data-bci]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (cotizadorAbierto) return;
+        cotizadorAbierto = true;
+        window.dataLayer.push({ event: 'cotizador_interaccion' });
+        if (window.mercurialMeta) window.mercurialMeta.track('CustomizeProduct', { content_name: 'Seguro Mascotas' });
+      });
     });
   </script>
 </body>

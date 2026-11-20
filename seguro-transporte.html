@@ -44,6 +44,97 @@
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
   <link rel="stylesheet" href="/src/css/sitio.css?v=14">
+  <style>
+    /* Página de línea: un solo formulario (la barra de arriba, con el seguro ya fijado); el cierre solo lleva enlaces. */
+    .barra form.linea { grid-template-columns: 1fr 1fr auto; }
+    @media (max-width: 1100px) { .barra form.linea { grid-template-columns: 1fr 1fr; } .barra form.linea .celda:nth-child(2) { border-right: 1px solid var(--borde); } .barra form.linea .celda:nth-child(3) { border-right: 0; } }
+    @media (max-width: 560px) { .barra form.linea { grid-template-columns: 1fr; } .barra form.linea .celda { border-right: 0; } }
+    .ir-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; color: var(--azul-h); text-decoration: underline; text-underline-offset: 3px; }
+    .ir-link .ico { width: 18px; height: 18px; }
+    .cierre .enlaces { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+  </style>
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "InsuranceAgency",
+        "@id": "https://mercurial.cl/#organization",
+        "name": "Mercurial Corredores de Seguros",
+        "url": "https://mercurial.cl",
+        "telephone": "+56939319546",
+        "email": "contacto@mercurial.cl",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://mercurial.cl/seguros/transporte#servicio",
+        "name": "Seguro de transporte de carga",
+        "serviceType": "Seguro de transporte de carga",
+        "url": "https://mercurial.cl/seguros/transporte",
+        "provider": {
+          "@id": "https://mercurial.cl/#organization"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Chile"
+        },
+        "description": "Seguro de transporte para mercadería propia o de terceros, nacional e internacional: por ruta, puerto o importada."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://mercurial.cl/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Seguro de transporte",
+            "item": "https://mercurial.cl/seguros/transporte"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mercurial.cl/seguros/transporte#preguntas",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia hay entre asegurar el camión y asegurar la carga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Son seguros distintos. El seguro del vehículo (flota) protege el camión; el seguro de transporte protege la mercadería que lleva. Según tu operación puedes necesitar uno o ambos: te ayudamos a verlo en la primera llamada."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Se puede asegurar carga de terceros?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, cotizamos cobertura tanto para mercadería propia como de terceros. Las condiciones dependen de la compañía de seguros y del tipo de carga."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué es la cláusula de medidas de seguridad?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Es una condición de la póliza que exige ciertas medidas mínimas de protección para que la cobertura opere. Antes de contratar te explicamos cuáles aplican a tu caso."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body class="mc-marco">
@@ -147,8 +238,8 @@
     </div></section>
     <section class="barra" id="cotizar" aria-label="Cotización rápida"><div class="wrap"><div>
       <div class="caja">
-        <form data-envio="cotizacion" data-errores="b-err" novalidate>
-          <div class="celda"><label for="b-seguro">¿Qué necesitas asegurar?</label><select id="b-seguro" name="seguro"><option value="Flotas">Flota de vehículos</option><option value="Transporte" selected>Transporte de carga</option><option value="Incendio">Incendio (local, bodega, planta)</option><option value="Colectivo de salud">Colectivo de salud</option><option value="Otro">Otro seguro para empresas</option></select></div>
+        <form class="linea" data-envio="cotizacion" data-errores="b-err" novalidate>
+          <input type="hidden" name="seguro" value="Transporte">
           <div class="celda"><label for="b-empresa">Empresa</label><input id="b-empresa" name="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="160" aria-describedby="b-err" required></div>
           <div class="celda"><label for="b-tel">Teléfono</label><input id="b-tel" name="telefono" type="tel" inputmode="tel" placeholder="+56 9 1234 5678" autocomplete="tel" maxlength="20" aria-describedby="b-err" required></div>
           <div class="trampa" aria-hidden="true"><label for="b-sitio">No llenar</label><input id="b-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
@@ -164,8 +255,8 @@
         <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#personas"/></svg>Para quién es</h2><p>Empresas que mueven mercadería propia o de terceros: por la Ruta 5, a regiones o en importaciones y exportaciones.</p></div>
         <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Qué se puede asegurar</h2><ul><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Carga nacional e internacional</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Robo con fractura o asalto</li><li><svg class="ico" aria-hidden="true"><use href="#check"/></svg>Fallas en equipos de frío</li></ul></div>
       </div>
-      <div class="aviso-pyme"><div><b>¿Importas o exportas?</b><span>Certificados de seguro Todo Riesgo por embarque, sin póliza anual.</span></div><a class="btn btn-azul" href="/seguros/transporte/certificado">Cotizar un certificado <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a></div>
-      <div class="aviso-pyme"><div><b>¿Mueves carga todo el año?</b><span>Póliza anual a nombre de tu empresa: flotante con límite por embarque o STP (tránsito y bodega).</span></div><a class="btn btn-azul" href="/seguros/transporte/poliza-anual">Evaluar póliza anual <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a></div>
+      <div class="aviso-pyme"><div><b>¿Importas o exportas?</b><span>Certificados de seguro Todo Riesgo por embarque, sin póliza anual.</span></div><a class="ir-link" href="/seguros/transporte/certificado">Cotizar un certificado <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a></div>
+      <div class="aviso-pyme"><div><b>¿Mueves carga todo el año?</b><span>Póliza anual a nombre de tu empresa: flotante con límite por embarque o STP (tránsito y bodega).</span></div><a class="ir-link" href="/seguros/transporte/poliza-anual">Evaluar póliza anual <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a></div>
     </div></section>
 
     <section class="sec" id="preguntas"><div class="wrap">
@@ -177,59 +268,14 @@
       </div>
     </div></section>
 
-    <section class="sec"><div class="wrap">
-      <div class="cabeza"><h2 class="grande">Qué pasa <b>después de consultar</b></h2><p>Cuatro pasos, desde tu mensaje hasta la póliza.</p></div>
-      <div class="pasos-caja"><span class="trazo" aria-hidden="true"></span>
-        <ol class="pasos">
-          <li class="paso"><span class="n">1</span><h3>Nos dejas tus datos</h3><p>Empresa, teléfono y el seguro que te interesa. Toma menos de un minuto.</p></li>
-          <li class="paso"><span class="n">2</span><h3>Te llamamos</h3><p>Para entender qué necesitas asegurar.</p></li>
-          <li class="paso"><span class="n">3</span><h3>Cotizamos</h3><p>Te pedimos solo lo que la compañía de seguros necesita y te presentamos las alternativas.</p></li>
-          <li class="paso"><span class="n">4</span><h3>Gestionamos tu póliza</h3><p>Si decides contratar, te acompañamos en la emisión y en los cambios que necesites.</p></li>
-        </ol>
-      </div>
-    </div></section>
 
-    <section class="sec" id="contacto"><div class="wrap contacto">
-      <div class="lado">
-        <h2 class="grande">Cuéntanos qué <b>necesitas asegurar</b></h2>
-        <p>Si prefieres, escríbenos directo.</p>
-        <div class="alt">
-          <a href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg><div><b>WhatsApp +56 9 3931 9546</b><span>Lunes a viernes, de 9:00 a 18:30 h</span></div></a>
+    <section class="sec" id="contacto"><div class="wrap">
+      <div class="aviso-pyme cierre">
+        <div><b>¿Prefieres escribirnos?</b><span>WhatsApp +56 9 3931 9546, de lunes a viernes de 9:00 a 18:30 h. Respondemos en 3 a 5 horas hábiles.</span></div>
+        <div class="enlaces">
+          <a class="ir-link" href="https://wa.me/56939319546" target="_blank" rel="noopener">Escribir por WhatsApp <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
+          <a class="ir-link" href="#cotizar">Volver al formulario <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
         </div>
-      </div>
-      <div class="tarjeta-form">
-        <form class="form" data-envio="cotizacion" data-principal novalidate>
-          <div class="dos">
-            <div class="campo t-input-wrap"><label for="f-nombre">Nombre y apellido</label><input class="t-input" id="f-nombre" name="nombre" autocomplete="name" maxlength="120" required aria-describedby="e-nombre" data-msg="Escribe tu nombre."><span class="t-error-msg" id="e-nombre"></span></div>
-            <div class="campo t-input-wrap"><label for="f-empresa">Empresa</label><input class="t-input" id="f-empresa" name="empresa" autocomplete="organization" maxlength="160" required aria-describedby="e-empresa" data-msg="¿Para qué empresa es el seguro?"><span class="t-error-msg" id="e-empresa"></span></div>
-          </div>
-          <div class="dos">
-            <div class="campo t-input-wrap"><label for="f-correo">Correo</label><input class="t-input" id="f-correo" name="correo" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-correo" data-msg="Revisa el correo: falta o no es válido."><span class="t-error-msg" id="e-correo"></span></div>
-            <div class="campo t-input-wrap"><label for="f-tel">Teléfono</label><input class="t-input" id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required aria-describedby="e-tel" data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg" id="e-tel"></span></div>
-          </div>
-          <fieldset class="t-input-wrap grupo" aria-describedby="e-interes">
-            <legend>¿Qué seguro te interesa?</legend>
-            <div class="opciones">
-              <label class="op"><input type="radio" name="seguro" value="Flotas"><span><svg class="ico" aria-hidden="true"><use href="#camion"/></svg>Flotas</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Transporte" checked><span><svg class="ico" aria-hidden="true"><use href="#caja"/></svg>Transporte</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Incendio"><span><svg class="ico" aria-hidden="true"><use href="#llama"/></svg>Incendio</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Colectivo de salud"><span><svg class="ico" aria-hidden="true"><use href="#salud"/></svg>Salud colectiva</span></label>
-              <label class="op"><input type="radio" name="seguro" value="Otro"><span><svg class="ico" aria-hidden="true"><use href="#doc"/></svg>Otro</span></label>
-            </div>
-            <span class="t-error-msg" id="e-interes"></span>
-          </fieldset>
-          <div class="campo"><label for="f-msj">Mensaje <small>(opcional)</small></label><textarea class="t-input" id="f-msj" name="mensaje" maxlength="3000" placeholder="Cuéntanos qué necesitas asegurar."></textarea></div>
-          <div class="trampa" aria-hidden="true"><label for="f-sitio">No llenar</label><input id="f-sitio" name="sitio_web" tabindex="-1" autocomplete="off"></div>
-          <p class="aviso" role="alert" hidden><svg class="ico" aria-hidden="true"><use href="#alerta"/></svg><span><span class="aviso-txt">No pudimos enviar tu consulta.</span> Intenta de nuevo o <a href="https://wa.me/56939319546" target="_blank" rel="noopener">escríbenos por WhatsApp</a>; no perdiste lo que escribiste.</span></p>
-          <button class="btn btn-azul enviar" type="submit"><span class="letra">Consultar por mi carga</span></button>
-          <p class="nota">Usamos tus datos para responder, preparar la cotización solicitada y gestionar su seguimiento. <a href="/politica-privacidad">Política de privacidad</a>.</p>
-        </form>
-        <div class="exito" hidden>
-          <span class="t-success-check" aria-hidden="true"><svg viewBox="0 0 24 24" class="ico" style="stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-          <h3 tabindex="-1">Recibimos tu consulta.</h3>
-          <p>Te vamos a contactar para revisar lo que necesitas. Si es urgente, escríbenos al WhatsApp +56 9 3931 9546.</p>
-        </div>
-        <p class="sr estado" role="status"></p>
       </div>
     </div></section>
 

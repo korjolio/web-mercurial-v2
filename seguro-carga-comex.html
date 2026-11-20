@@ -9,11 +9,11 @@
   <link rel="apple-touch-icon" href="/src/img/icono-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
-  <title>Seguro de carga para importaciones y exportaciones | Mercurial Corredores de Seguros</title>
-  <meta name="description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile. Te comparamos tu seguro actual.">
+  <title>Seguro de carga para importar y exportar | Mercurial</title>
+  <meta name="description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile.">
   <link rel="canonical" href="https://mercurial.cl/seguros/transporte/importaciones-exportaciones">
-  <meta property="og:title" content="Seguro de carga para importaciones y exportaciones | Mercurial Corredores de Seguros">
-  <meta property="og:description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile. Te comparamos tu seguro actual.">
+  <meta property="og:title" content="Seguro de carga para importar y exportar | Mercurial">
+  <meta property="og:description" content="Certificados de seguro de carga Todo Riesgo por embarque, sin póliza anual, para empresas que importan o exportan desde Chile.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mercurial.cl/seguros/transporte/importaciones-exportaciones">
   <meta property="og:image" content="https://mercurial.cl/src/img/og-image-dark.png">
@@ -46,20 +46,9 @@
   <link rel="stylesheet" href="/src/css/sitio.css?v=14">
 <style>
     /* Página de seguro de carga internacional */
-    /* «Tu operación»: interruptor estilo iPhone, igual al «Aún no tengo la patente» del cotizador de autos */
-    .fila-op { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .fila-op .tit-campo { font-weight: 600; font-size: 15px; color: var(--tx); }
-    .op-switch { display: inline-flex; align-items: center; gap: 10px; }
-    .op-switch .lado { border: 0; background: none; padding: 6px 2px; font: 500 15px var(--sans); color: var(--tx2); cursor: pointer; transition: color var(--duration-quick) ease-out; }
-    .op-switch .lado.is-activo { color: var(--navy); font-weight: 600; }
-    .op-switch .lado:focus-visible { outline: 3px solid var(--azul-h); outline-offset: 2px; border-radius: 6px; }
-    .op-switch .switch { position: relative; display: inline-flex; margin: 0; align-items: center; cursor: pointer; user-select: none; }
-    .op-switch .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-    .op-switch .switch .pista { display: block; position: relative; width: 44px; height: 26px; border-radius: 999px; background: #d1d5db; transition: background-color var(--duration-quick, .2s) ease-out; flex: none; }
-    .op-switch .switch .pista::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform var(--duration-quick, .2s) cubic-bezier(.3,.7,.4,1); }
-    .op-switch .switch input:checked + .pista::after { transform: translateX(18px); }
-    .op-switch .switch input:focus-visible + .pista { outline: 3px solid var(--azul-h); outline-offset: 2px; }
-    @media (prefers-reduced-motion: reduce) { .op-switch .pista, .op-switch .pista::after { transition: none; } }
+    /* «Tu operación»: 2 o 3 opciones excluyentes, visibles (guía de formularios: radios, no interruptor ni desplegable) */
+    .opciones.op-cortas { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+    .opciones.op-cortas .op span { justify-content: center; }
     /* Hero sin botones: en celular, sin alto mínimo para que el texto no quede flotando */
     @media (max-width: 560px) { .panel { min-height: 0; padding-top: 40px; padding-bottom: 104px; } }
     /* Caja de comparar bajo el hero */
@@ -75,11 +64,6 @@
     .oculto h2 { font-weight: 300; font-size: clamp(30px, 3vw, 40px); line-height: 1.12; letter-spacing: -.02em; }
     .oculto h2 b { font-weight: 600; }
     .oculto p { color: #dfe9f3; font-size: 17px; }
-    .ahorro { margin-top: auto; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; padding: 18px 20px; border-radius: 14px; background: rgba(242,166,90,.14); box-shadow: inset 0 0 0 1px rgba(242,166,90,.4); }
-    .ahorro b { font-size: clamp(40px, 4.4vw, 56px); font-weight: 600; letter-spacing: -.03em; line-height: 1; color: var(--acento); font-variant-numeric: tabular-nums; white-space: nowrap; }
-    .ahorro span { font-size: 16px; color: #fff; }
-    .ahorro small { display: block; margin-top: 4px; font-size: 13px; color: #a9bbcd; }
-    @media (max-width: 560px) { .ahorro { grid-template-columns: 1fr; gap: 8px; } }
     .comp { border: 1px solid var(--borde); border-radius: 20px; padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 50px -36px rgba(13,35,64,.4); }
     .comp h3 { font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
     .comp > p { color: var(--tx2); font-size: 16px; }
@@ -88,6 +72,8 @@
     .comp li::before { counter-increment: c; content: counter(c); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--celeste); color: var(--azul-h); font-weight: 700; }
     .comp li small { display: block; color: var(--tx2); font-size: 14px; }
     .comp .acc { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+    .ir-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; color: var(--azul-h); text-decoration: underline; text-underline-offset: 3px; }
+    .ir-link .ico { width: 18px; height: 18px; }
     /* Tabla */
     .tabla { width: 100%; border-collapse: collapse; font-size: 16px; }
     .tabla th, .tabla td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--borde); vertical-align: top; }
@@ -102,7 +88,7 @@
     .firma { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--borde); color: var(--tx2); font-size: 14px; }
     @media (max-width: 860px) { .hoy .wrap { grid-template-columns: 1fr; } .oculto, .comp { padding: 28px 24px; } .barra .comparar { grid-template-columns: 1fr; padding: 16px; } .barra .comparar .btn { width: 100%; } .tabla { font-size: 15px; } .tabla th, .tabla td { padding: 12px 10px; } .tabla-scroll { overflow-x: auto; } }
   </style>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "InsuranceAgency", "@id": "https://mercurial.cl/#org", "name": "Mercurial Corredores de Seguros Ltda.", "url": "https://mercurial.cl", "telephone": "+56939319546", "email": "contacto@mercurial.cl", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}, "identifier": {"@type": "PropertyValue", "name": "Registro CMF", "value": "8929"}}, {"@type": "Service", "name": "Seguro de carga para importaciones y exportaciones", "serviceType": "Seguro de transporte de carga internacional", "url": "https://mercurial.cl/seguros/transporte/importaciones-exportaciones", "provider": {"@id": "https://mercurial.cl/#org"}, "areaServed": "CL", "description": "Certificados de seguro Todo Riesgo (cláusula A) por embarque, sin póliza anual, para carga marítima, aérea y terrestre internacional."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Tengo que cambiar de agente de aduana?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tu agente sigue despachando. El seguro lo contratas con Mercurial y le entregas el certificado para el despacho."}}, {"@type": "Question", "name": "¿Sirve para exportaciones?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El certificado se pide hasta 72 horas después del zarpe en transporte marítimo, o hasta 24 horas después del inicio del viaje en aéreo y terrestre."}}, {"@type": "Question", "name": "¿Cuánto cuesta el seguro de mi embarque?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del valor, la mercadería, el embalaje y el trayecto. Si le mandas a Mercurial el certificado de tu último embarque, te muestra la comparación con lo que pagas hoy."}}, {"@type": "Question", "name": "¿Hay que firmar un contrato anual?", "acceptedAnswer": {"@type": "Answer", "text": "No. Es un certificado por embarque, sin permanencia. Si embarcas todos los meses, cada certificado nuevo es un correo."}}, {"@type": "Question", "name": "¿Cuándo tengo que pedir el certificado?", "acceptedAnswer": {"@type": "Answer", "text": "Antes de que la nave o el camión llegue a destino; en aéreo, hasta 48 horas después del arribo. Lo ideal es pedirlo cuando tienes la factura comercial y el documento de embarque. Si se pide tarde, solo se puede emitir con condiciones restringidas: sirve para el trámite de aduana, pero cubre menos."}}, {"@type": "Question", "name": "¿Qué cubre el seguro?", "acceptedAnswer": {"@type": "Answer", "text": "La mercadería nueva queda cubierta «Todo Riesgo» mientras es responsabilidad de tu empresa, con huelga incluida en todos los medios y guerra en marítimo y aéreo. Usa condiciones inscritas en la CMF: marítimo POL 1 2013 0700 (Carga «A»), aéreo POL 1 2013 0716 y terrestre POL 1 2013 0730."}}, {"@type": "Question", "name": "¿Por cuánto queda asegurada mi carga?", "acceptedAnswer": {"@type": "Answer", "text": "Por el valor CIF más un 10%, para cubrir los gastos y derechos de internación."}}, {"@type": "Question", "name": "¿Hay deducible?", "acceptedAnswer": {"@type": "Answer", "text": "En contenedor completo seco (FCL) o camión cerrado, no hay deducible. En otros embalajes es 0,5% del monto asegurado, con mínimo de US$500, y en robo o asalto, 10% de la pérdida, con mínimo de US$1.000."}}, {"@type": "Question", "name": "¿Desde cuándo me cubre en una importación?", "acceptedAnswer": {"@type": "Answer", "text": "Desde que la carga pasa a ser responsabilidad de tu empresa según el Incoterm de la compra; por ejemplo, en FOB, desde que se carga en el puerto de origen. Mientras está a cargo del vendedor, no."}}, {"@type": "Question", "name": "¿Y si la mercadería es usada o reacondicionada?", "acceptedAnswer": {"@type": "Answer", "text": "Se asegura con condiciones restringidas (en marítimo, Carga «C», POL 1 2013 0703), que cubren menos riesgos que el «Todo Riesgo». Se cotiza aparte."}}, {"@type": "Question", "name": "Mi mercadería está en la lista de exclusiones, ¿no la pueden asegurar?", "acceptedAnswer": {"@type": "Answer", "text": "Este programa por embarque no la cubre, pero se puede asegurar con una póliza anual específica para tu empresa. Mercurial la pide a la compañía."}}, {"@type": "Question", "name": "¿Desde qué países puedo asegurar?", "acceptedAnswer": {"@type": "Answer", "text": "Desde cualquier parte del mundo hasta tu bodega en Chile, y al revés, salvo países con sanciones internacionales, como Rusia, Ucrania, Irán, Cuba, Venezuela, Corea del Norte o Siria."}}, {"@type": "Question", "name": "¿En qué embalajes aplica?", "acceptedAnswer": {"@type": "Answer", "text": "Marítimo: contenedor completo (FCL/FCL), consolidado o refrigerado. Aéreo: cartones, cajones de madera y pallets. Terrestre: camión furgón cerrado, encarpado o refrigerado."}}, {"@type": "Question", "name": "¿Cuánto tiempo queda cubierta en aduana?", "acceptedAnswer": {"@type": "Answer", "text": "Hasta 60 días en marítimo y 30 días en aéreo o terrestre, desde la llegada. No cubre almacén particular ni regímenes suspensivos como la admisión temporal."}}, {"@type": "Question", "name": "¿Cubre robo en el tramo terrestre?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, robo con fractura o asalto, hasta US$150.000 por evento y en total al año, si el camión cumple las medidas de seguridad: furgón metálico cerrado con candado, estacionamiento en recintos vigilados y custodia satelital cuando corresponde."}}, {"@type": "Question", "name": "¿Y si hay transbordo?", "acceptedAnswer": {"@type": "Answer", "text": "Queda cubierto. Solo hay que avisar a Mercurial apenas lo sepas."}}, {"@type": "Question", "name": "¿Y si el embarque supera US$300.000?", "acceptedAnswer": {"@type": "Answer", "text": "Avisas a Mercurial con 72 horas hábiles y la compañía fija la tarifa antes del embarque."}}, {"@type": "Question", "name": "¿Qué pasa si hay un siniestro?", "acceptedAnswer": {"@type": "Answer", "text": "Avisas a Mercurial apenas lo detectes. La póliza ya tiene un liquidador asignado, que revisa el daño, y la compañía paga según la póliza; Mercurial lleva el reclamo contigo. Al recibir la carga, deja constancia por escrito de cómo llegó, para poder reclamarle al transportista."}}]}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "InsuranceAgency", "@id": "https://mercurial.cl/#organization", "name": "Mercurial Corredores de Seguros Ltda.", "url": "https://mercurial.cl", "telephone": "+56939319546", "email": "contacto@mercurial.cl", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}, "identifier": {"@type": "PropertyValue", "name": "Registro CMF", "value": "8929"}}, {"@type": "Service", "name": "Seguro de carga para importaciones y exportaciones", "serviceType": "Seguro de transporte de carga internacional", "url": "https://mercurial.cl/seguros/transporte/importaciones-exportaciones", "provider": {"@id": "https://mercurial.cl/#organization"}, "areaServed": "CL", "description": "Certificados de seguro Todo Riesgo (cláusula A) por embarque, sin póliza anual, para carga marítima, aérea y terrestre internacional."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Tengo que cambiar de agente de aduana?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tu agente sigue despachando. El seguro lo contratas con Mercurial y le entregas el certificado para el despacho."}}, {"@type": "Question", "name": "¿Sirve para exportaciones?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El certificado se pide hasta 72 horas después del zarpe en transporte marítimo, o hasta 24 horas después del inicio del viaje en aéreo y terrestre."}}, {"@type": "Question", "name": "¿Cuánto cuesta el seguro de mi embarque?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del valor, la mercadería, el embalaje y el trayecto. Si le mandas a Mercurial el certificado de tu último embarque, te muestra la comparación con lo que pagas hoy."}}, {"@type": "Question", "name": "¿Hay que firmar un contrato anual?", "acceptedAnswer": {"@type": "Answer", "text": "No. Es un certificado por embarque, sin permanencia. Si embarcas todos los meses, cada certificado nuevo es un correo."}}, {"@type": "Question", "name": "¿Cuándo tengo que pedir el certificado?", "acceptedAnswer": {"@type": "Answer", "text": "Antes de que la nave o el camión llegue a destino; en aéreo, hasta 48 horas después del arribo. Lo ideal es pedirlo cuando tienes la factura comercial y el documento de embarque. Si se pide tarde, solo se puede emitir con condiciones restringidas: sirve para el trámite de aduana, pero cubre menos."}}, {"@type": "Question", "name": "¿Qué cubre el seguro?", "acceptedAnswer": {"@type": "Answer", "text": "La mercadería nueva queda cubierta «Todo Riesgo» mientras es responsabilidad de tu empresa, con huelga incluida en todos los medios y guerra en marítimo y aéreo. Usa condiciones inscritas en la CMF: marítimo POL 1 2013 0700 (Carga «A»), aéreo POL 1 2013 0716 y terrestre POL 1 2013 0730."}}, {"@type": "Question", "name": "¿Por cuánto queda asegurada mi carga?", "acceptedAnswer": {"@type": "Answer", "text": "Por el valor CIF más un 10%, para cubrir los gastos y derechos de internación."}}, {"@type": "Question", "name": "¿Hay deducible?", "acceptedAnswer": {"@type": "Answer", "text": "En contenedor completo seco (FCL) o camión cerrado, no hay deducible. En otros embalajes es 0,5% del monto asegurado, con mínimo de US$500, y en robo o asalto, 10% de la pérdida, con mínimo de US$1.000."}}, {"@type": "Question", "name": "¿Desde cuándo me cubre en una importación?", "acceptedAnswer": {"@type": "Answer", "text": "Desde que la carga pasa a ser responsabilidad de tu empresa según el Incoterm de la compra; por ejemplo, en FOB, desde que se carga en el puerto de origen. Mientras está a cargo del vendedor, no."}}, {"@type": "Question", "name": "¿Y si la mercadería es usada o reacondicionada?", "acceptedAnswer": {"@type": "Answer", "text": "Se asegura con condiciones restringidas (en marítimo, Carga «C», POL 1 2013 0703), que cubren menos riesgos que el «Todo Riesgo». Se cotiza aparte."}}, {"@type": "Question", "name": "Mi mercadería está en la lista de exclusiones, ¿no la pueden asegurar?", "acceptedAnswer": {"@type": "Answer", "text": "Este programa por embarque no la cubre, pero se puede asegurar con una póliza anual específica para tu empresa. Mercurial la pide a la compañía."}}, {"@type": "Question", "name": "¿Desde qué países puedo asegurar?", "acceptedAnswer": {"@type": "Answer", "text": "Desde cualquier parte del mundo hasta tu bodega en Chile, y al revés, salvo países con sanciones internacionales, como Rusia, Ucrania, Irán, Cuba, Venezuela, Corea del Norte o Siria."}}, {"@type": "Question", "name": "¿En qué embalajes aplica?", "acceptedAnswer": {"@type": "Answer", "text": "Marítimo: contenedor completo (FCL/FCL), consolidado o refrigerado. Aéreo: cartones, cajones de madera y pallets. Terrestre: camión furgón cerrado, encarpado o refrigerado."}}, {"@type": "Question", "name": "¿Cuánto tiempo queda cubierta en aduana?", "acceptedAnswer": {"@type": "Answer", "text": "Hasta 60 días en marítimo y 30 días en aéreo o terrestre, desde la llegada. No cubre almacén particular ni regímenes suspensivos como la admisión temporal."}}, {"@type": "Question", "name": "¿Cubre robo en el tramo terrestre?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, robo con fractura o asalto, hasta US$150.000 por evento y en total al año, si el camión cumple las medidas de seguridad: furgón metálico cerrado con candado, estacionamiento en recintos vigilados y custodia satelital cuando corresponde."}}, {"@type": "Question", "name": "¿Y si hay transbordo?", "acceptedAnswer": {"@type": "Answer", "text": "Queda cubierto. Solo hay que avisar a Mercurial apenas lo sepas."}}, {"@type": "Question", "name": "¿Y si el embarque supera US$300.000?", "acceptedAnswer": {"@type": "Answer", "text": "Avisas a Mercurial con 72 horas hábiles y la compañía fija la tarifa antes del embarque."}}, {"@type": "Question", "name": "¿Qué pasa si hay un siniestro?", "acceptedAnswer": {"@type": "Answer", "text": "Avisas a Mercurial apenas lo detectes. La póliza ya tiene un liquidador asignado, que revisa el daño, y la compañía paga según la póliza; Mercurial lleva el reclamo contigo. Al recibir la carga, deja constancia por escrito de cómo llegó, para poder reclamarle al transportista."}}]}]}</script>
 </head>
 
 <body class="mc-marco">
@@ -210,7 +196,7 @@
     </div></section>
     <section class="barra" id="comparar" aria-label="Compara tu seguro actual"><div class="wrap"><div>
       <div class="caja comparar">
-        <div><b>¿Ya aseguras tus embarques?</b><span>Mándanos tu último certificado y te decimos cuánto ahorras.</span></div>
+        <div><b>¿Ya aseguras tus embarques?</b><span>Mándanos tu último certificado y lo comparamos con lo que pagas hoy.</span></div>
         <a class="btn btn-azul" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20%C3%BAltimo%20embarque" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Compara tu seguro actual</a>
         <a class="btn btn-borde" href="#contacto">Cotizar mi próximo embarque</a>
       </div>
@@ -221,7 +207,6 @@
         <span class="eti"><svg class="ico" aria-hidden="true"><use href="#ojo"/></svg>Si importas</span>
         <h2 id="t-hoy">¿Cuánto pagas hoy <b>por asegurar tu carga?</b></h2>
         <p>Muchas veces el seguro viene incluido en la factura del agente de aduana o del forwarder, junto a otros cobros. Pocas empresas saben qué tasa están pagando ni qué cubre.</p>
-        <div class="ahorro"><b>12 de 15</b><span>importadores que revisamos pagaban más por el mismo seguro. La mayoría, un <strong>75% más</strong>.</span></div>
       </div>
       <div class="comp">
         <h3>Te lo comparamos con tu último embarque</h3>
@@ -232,8 +217,7 @@
           <li><span>Te respondemos de inmediato<small>Con la prima de un certificado Todo Riesgo para el mismo embarque.</small></span></li>
         </ol>
         <div class="acc">
-          <a class="btn btn-azul" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20%C3%BAltimo%20embarque" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
-          <a class="btn btn-borde" href="#contacto">Cotizar mi próximo embarque</a>
+          <a class="ir-link" href="https://wa.me/56939319546?text=Hola%2C%20quiero%20comparar%20el%20seguro%20de%20mi%20%C3%BAltimo%20embarque" target="_blank" rel="noopener">Enviar mi certificado por WhatsApp <svg class="ico" aria-hidden="true"><use href="#der"/></svg></a>
         </div>
       </div>
     </div></section>
@@ -311,7 +295,7 @@
     <section class="sec" id="contacto"><div class="wrap contacto">
       <div class="lado">
         <h2 class="grande">Cotiza o <b>compara tu seguro</b></h2>
-        <p>Te respondemos de inmediato. Si nos mandas tu último certificado por WhatsApp, te decimos cuánto ahorras.</p>
+        <p>Te respondemos de inmediato. Si nos mandas tu último certificado por WhatsApp, lo comparamos con lo que pagas hoy.</p>
         <div class="alt">
           <a href="https://wa.me/56939319546" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg><div><b>WhatsApp +56 9 3931 9546</b><span>Lunes a viernes, de 9:00 a 18:30 h</span></div></a>
         </div>
@@ -326,15 +310,10 @@
             <div class="campo t-input-wrap"><label for="c-correo">Correo <small>(opcional)</small></label><input class="t-input" id="c-correo" name="correo" type="email" autocomplete="email" maxlength="120" data-msg="Revisa el correo: no es válido."><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-tel">Teléfono</label><input class="t-input" id="c-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+56 9 1234 5678" required data-tipo="tel" data-msg="Revisa el teléfono: son 9 dígitos, por ejemplo +56 9 1234 5678."><span class="t-error-msg"></span></div>
           </div>
-          <div class="campo fila-op">
-            <span class="tit-campo" id="t-op">Tu operación</span>
-            <div class="op-switch" role="group" aria-labelledby="t-op">
-              <button type="button" class="lado is-activo" data-op="Importo">Importo</button>
-              <label class="switch"><input type="checkbox" role="switch" id="c-exporta" aria-label="Exporto"><span class="pista" aria-hidden="true"></span></label>
-              <button type="button" class="lado" data-op="Exporto">Exporto</button>
-              <input type="hidden" name="operacion" id="c-operacion" value="Importo">
-            </div>
-          </div>
+          <fieldset class="campo">
+            <legend>Tu operación</legend>
+            <div class="opciones op-cortas"><label class="op"><input type="radio" name="operacion" value="Importo" checked><span>Importo</span></label><label class="op"><input type="radio" name="operacion" value="Exporto"><span>Exporto</span></label></div>
+          </fieldset>
           <div class="dos">
             <div class="campo t-input-wrap"><label for="c-merc">¿Qué mercadería? <small>(opcional)</small></label><input class="t-input" id="c-merc" name="mercaderia" maxlength="160" placeholder="Ej.: insumos químicos, repuestos, textiles"><span class="t-error-msg"></span></div>
             <div class="campo t-input-wrap"><label for="c-origen">Origen o destino principal <small>(opcional)</small></label><input class="t-input" id="c-origen" name="origen" maxlength="80" placeholder="País"><span class="t-error-msg"></span></div>
@@ -381,18 +360,10 @@
   <script src="/src/vendor/ScrollTrigger.min.js"></script>
   <script src="/src/js/sitio.js?v=15"></script>
 <script>
-  // «Tu operación»: el interruptor y las palabras Importo/Exporto escriben el valor en el campo oculto que viaja con el formulario.
+  // «Tu operación» son opciones visibles (name="operacion"); aquí solo se valida «¿Cómo aseguras hoy?».
   (function () {
-    var sw = document.getElementById('c-exporta'), campo = document.getElementById('c-operacion');
-    if (!sw || !campo) return;
-    var lados = document.querySelectorAll('.op-switch .lado');
-    function poner(exporta) {
-      sw.checked = exporta; campo.value = exporta ? 'Exporto' : 'Importo';
-      lados.forEach(function (b) { b.classList.toggle('is-activo', b.dataset.op === campo.value); });
-    }
-    sw.addEventListener('change', function () { poner(sw.checked); });
-    lados.forEach(function (b) { b.addEventListener('click', function () { poner(b.dataset.op === 'Exporto'); }); });
-    var f = sw.closest('form'); if (f) f.addEventListener('reset', function () { setTimeout(function () { poner(false); }); });
+    var aseg = document.getElementById('c-aseg');
+    var f = aseg && aseg.form;
     // «¿Cómo aseguras hoy?» es obligatorio: si falta, se marca antes de que sitio.js envíe.
     var aseg = document.getElementById('c-aseg');
     if (f && aseg) {
