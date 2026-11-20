@@ -33,7 +33,7 @@ footer.mc-marco :focus-visible { outline-color: var(--azul-claro); }
 .util .wrap { display: flex; align-items: stretch; gap: 24px; height: 40px; }
 .util a { display: flex; align-items: center; }
 .util a:hover { color: var(--navy); }
-.util a[aria-current="page"] { color: var(--navy); font-weight: 600; box-shadow: inset 0 -2px 0 var(--azul-b); }
+.util a[aria-current="page"] { color: var(--navy); }
 .util .der { margin-left: auto; display: flex; gap: 24px; }
 .nav { position: relative; z-index: 40; background: #fff; border-bottom: 1px solid var(--borde); }
 .nav .wrap { display: flex; align-items: center; gap: 32px; height: 80px; }
@@ -73,9 +73,8 @@ html { scroll-padding-top: 24px; }
 /* Subpáginas de Transporte: enlaces compactos, alineados con el texto (14 + 22 + 12 px) */
 .t-dropdown .sub-menu { display: grid; gap: 0; margin: -8px 0 4px; }
 .t-dropdown .sub-menu a { display: flex; align-items: center; min-height: 36px; padding: 6px 14px 6px 48px; font-size: 15px; font-weight: 500; color: var(--tx); }
-/* Página actual: fondo y barra lateral (no solo color) */
-.t-dropdown a[aria-current="page"], .panel-movil a[aria-current="page"] { background: var(--celeste); box-shadow: inset 3px 0 0 var(--azul-b); }
-.menu #btn-seguros:has(+ .t-dropdown [aria-current="page"]) { box-shadow: inset 0 -2px 0 var(--azul-b); }
+/* Página actual: sobria, sin barras ni fondos (Pepa, 20-nov: los marcadores se veían «muy IA»). aria-current queda para lectores de pantalla. */
+.t-dropdown a[aria-current="page"] b, .panel-movil a[aria-current="page"] { color: var(--azul-h); }
 
 /* Panel móvil (transitions.dev · panel reveal) */
 .panel-movil { position: fixed; inset: 0; top: var(--cab-movil, 109px); z-index: 39; overflow-y: auto; overscroll-behavior: contain; background: #fff; padding: 8px 16px 0;
@@ -85,9 +84,7 @@ html { scroll-padding-top: 24px; }
 .panel-movil ul { list-style: none; }
 .panel-movil li a { display: flex; align-items: center; gap: 12px; min-height: 56px; border-bottom: 1px solid var(--borde); font-size: 19px; font-weight: 500; }
 .panel-movil li a .ico { color: var(--azul-b); }
-.panel-movil li a[aria-current="page"] { padding-left: 10px; }
 .panel-movil .sub-menu li a { min-height: 48px; padding-left: 34px; font-size: 17px; }
-.panel-movil .sub-menu li a[aria-current="page"] { padding-left: 34px; }
 .panel-movil nav > ul:last-of-type { margin-bottom: 24px; }
 /* WhatsApp queda siempre a la vista al pie del panel */
 .panel-movil .acc { position: sticky; bottom: 0; display: grid; margin: 0 -16px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: #fff; box-shadow: 0 -1px 0 var(--borde); }
@@ -100,7 +97,7 @@ footer { margin-top: 112px; background: var(--navy); color: #c9d6e4; padding: 72
 .pie .pie-tit { color: #fff; font: 600 16px/1.3 var(--sans); letter-spacing: 0; margin: 0 0 12px; }
 .pie ul + .pie-tit { margin-top: 22px; }
 .pie .pie-txt { margin-top: 18px; max-width: 34ch; }
-.pie a[aria-current="page"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.pie a[aria-current="page"] { color: #fff; }
 .pie ul { list-style: none; display: grid; gap: 8px; }
 .pie a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); display: grid; gap: 12px; font-size: 13px; }
