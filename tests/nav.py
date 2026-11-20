@@ -21,7 +21,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 PAGINAS = ['/', '/seguros/flotas', '/seguros/transporte', '/seguros/transporte/importaciones-exportaciones',
            '/seguros/transporte/certificado', '/seguros/transporte/poliza-anual', '/seguros/incendio',
            '/seguros/colectivos-de-salud', '/seguro-auto', '/seguro-auto/promocion', '/seguro-mascotas',
-           '/desgravamen-rechazado', '/cotizar-pyme', '/consultas-y-reclamos', '/politica-privacidad']
+           '/desgravamen-rechazado', '/cotizar-pyme', '/consultas-y-reclamos', '/politica-privacidad',
+           '/seguros/transporte/preguntas-frecuentes', '/seguro-auto/preguntas-frecuentes']
 # Páginas que deben estar en el menú Seguros (escritorio y celular)
 EN_MENU = ['/seguros/flotas', '/seguros/transporte', '/seguros/transporte/importaciones-exportaciones',
            '/seguros/transporte/certificado', '/seguros/transporte/poliza-anual', '/seguros/incendio',
