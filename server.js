@@ -38,6 +38,7 @@ app.use((req, res, next) => {
     // De instagram/ solo se exponen los JPG exportados por mes: la Content Publishing API los descarga por URL
     const isInstagramMedia = /^instagram\/\d{4}-\d{2}\/[a-z0-9-]+\.jpg$/.test(requestedPath);
     const isNodeModules = lowerPath.startsWith('node_modules/') || lowerPath.startsWith('docs/')
+        || lowerPath.startsWith('tests/')
         || (lowerPath.startsWith('instagram/') && !isInstagramMedia);
     const isDotfile = requestedPath.split('/').some(segment => segment.startsWith('.'));
     if (isBlockedFile || isNodeModules || isDotfile) {
@@ -46,7 +47,59 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(__dirname)); // Servir archivos estáticos (index.html, etc.)
+// --- Los .html que tienen ruta limpia redirigen 301 a ella (evita URL duplicadas en Google); conserva la query ---
+const RUTA_LIMPIA = {
+    'index.html': '/',
+    'seguro-flotas.html': '/seguros/flotas',
+    'seguro-transporte.html': '/seguros/transporte',
+    'seguro-incendio.html': '/seguros/incendio',
+    'seguro-colectivos-salud.html': '/seguros/colectivos-de-salud',
+    'seguro-carga-comex.html': '/seguros/transporte/importaciones-exportaciones',
+    'seguro-carga-certificado.html': '/seguros/transporte/certificado',
+    'seguro-transporte-poliza-anual.html': '/seguros/transporte/poliza-anual',
+    'desgravamen.html': '/desgravamen-rechazado',
+    'consultas.html': '/consultas-y-reclamos',
+    'privacidad.html': '/politica-privacidad',
+    'mascotas.html': '/seguro-mascotas',
+    'seguro-auto.html': '/seguro-auto',
+    'seguro-auto-promo.html': '/seguro-auto/promocion',
+    'cotizar-pyme.html': '/cotizar-pyme',
+};
+app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+    const destino = RUTA_LIMPIA[req.path.replace(/^\/+/, '').toLowerCase()];
+    if (!destino) return next();
+    const q = req.originalUrl.indexOf('?');
+    res.redirect(301, destino + (q >= 0 ? req.originalUrl.slice(q) : ''));
+});
+
+// --- Caché ---
+// HTML: no-cache (el navegador y Cloudflare revalidan con ETag/Last-Modified en cada visita).
+// /src/** con ?v=N: un año e immutable (al cambiar el archivo se sube el ?v=, así que nunca queda viejo).
+// /src/** sin ?v=: imágenes y fuentes 30 días (si cambias una foto, cámbiale el nombre); css/js/datos 4 horas.
+const CACHE_HTML = 'no-cache';
+const CACHE_VERSIONADO = 'public, max-age=31536000, immutable';
+const CACHE_MEDIOS = 'public, max-age=2592000';
+const CACHE_SIN_VERSION = 'public, max-age=14400';
+app.use((req, res, next) => {
+    // Rutas limpias (sin extensión) y la 404: siempre revalidar. send/sendFile no pisan una cabecera ya puesta.
+    if ((req.method === 'GET' || req.method === 'HEAD') && !req.path.startsWith('/api/') && !path.extname(req.path)) {
+        res.setHeader('Cache-Control', CACHE_HTML);
+    }
+    next();
+});
+// El mime de express 4 no conoce AVIF: sin esto se serviría como application/octet-stream.
+express.static.mime.define({ 'image/avif': ['avif'] });
+function cabecerasCache(res, filePath) {
+    const rel = path.relative(__dirname, filePath).split(path.sep).join('/');
+    if (rel.endsWith('.html')) return res.setHeader('Cache-Control', CACHE_HTML);
+    if (!rel.startsWith('src/')) return;
+    if (res.req && res.req.query && res.req.query.v) return res.setHeader('Cache-Control', CACHE_VERSIONADO);
+    const medio = /\.(avif|webp|jpe?g|png|gif|svg|ico|woff2?)$/i.test(rel);
+    res.setHeader('Cache-Control', medio ? CACHE_MEDIOS : CACHE_SIN_VERSION);
+}
+
+app.use(express.static(__dirname, { setHeaders: cabecerasCache })); // Servir archivos estáticos (index.html, etc.)
 
 // --- Antiguas landings de Google Ads (eliminadas el 09-11-2026): redirigen para no romper links viejos ---
 app.get(['/condominio', '/condominio.html'], (req, res) => res.redirect(301, '/'));
