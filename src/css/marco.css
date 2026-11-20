@@ -183,3 +183,6 @@ footer.mc-marco .pie .pie-tit { color: #fff; }
 .sel-lista li[aria-selected="true"]::after { content: ""; position: absolute; right: 12px; top: 50%; width: 14px; height: 8px; margin-top: -6px; border-left: 2px solid #1a7ca4; border-bottom: 2px solid #1a7ca4; transform: rotate(-45deg) scale(.8); }
 @keyframes sel-entra { from { opacity: 0; transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .sel-lista { animation: none; } }
+/* Cabecera: «Hablar con un ejecutivo» como enlace, para que el único botón sea «Cotizar» (pocos botones) */
+.nav .acc .btn-borde { box-shadow: none; background: transparent; padding-inline: 10px; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color var(--duration-quick, .15s) ease-out; }
+.nav .acc .btn-borde:hover { background: transparent; text-decoration-color: currentColor; }
