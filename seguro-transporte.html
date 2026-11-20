@@ -43,7 +43,7 @@
   <script src="/src/js/meta.js?v=3"></script>
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=14">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=15">
 </head>
 
 <body class="mc-marco">
@@ -137,7 +137,11 @@
   <main>
     <section class="hero oscuro" aria-labelledby="titular"><div class="wrap">
       <div class="panel chico">
-        <img src="/src/img/fotos/valparaiso-puerto.jpg" alt="" fetchpriority="high" style="object-position: 40% 55%">
+        <picture>
+          <source type="image/avif" srcset="/src/img/fotos/valparaiso-puerto-640.avif 640w, /src/img/fotos/valparaiso-puerto-1024.avif 1024w, /src/img/fotos/valparaiso-puerto-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(845px, calc(66vw - 32px))">
+          <source type="image/webp" srcset="/src/img/fotos/valparaiso-puerto-640.webp 640w, /src/img/fotos/valparaiso-puerto-1024.webp 1024w, /src/img/fotos/valparaiso-puerto-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(845px, calc(66vw - 32px))">
+          <img src="/src/img/fotos/valparaiso-puerto-1024.jpg" alt="" fetchpriority="high" style="object-position: 40% 55%" width="1024" height="768">
+        </picture>
         <div class="txt">
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Seguro de transporte de carga</span>
           <h1 id="titular">Seguro de transporte para <b>la carga que mueves</b>.</h1>

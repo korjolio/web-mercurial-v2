@@ -43,7 +43,7 @@
   <script src="/src/js/meta.js?v=3"></script>
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=14">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=15">
 <style>.form .fuera{margin:4px 0 12px;padding:12px 14px;border-left:4px solid #1a7ca4;background:#eef6fa;color:#0d2340;font-size:15px;line-height:1.4}.form .ayuda{display:block;font-size:13px;color:#5b6b80;margin-top:4px}</style>
 </head>
 
@@ -138,7 +138,11 @@
   <main>
     <section class="hero oscuro" aria-labelledby="titular"><div class="wrap">
       <div class="panel chico foto-abajo">
-        <img src="/src/img/fotos/desgravamen-pareja.jpg" alt="" fetchpriority="high" style="object-position: 72% 35%">
+        <picture>
+          <source type="image/avif" srcset="/src/img/fotos/desgravamen-pareja-640.avif 640w, /src/img/fotos/desgravamen-pareja-1024.avif 1024w, /src/img/fotos/desgravamen-pareja-1536.avif 1536w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(845px, calc(66vw - 32px))">
+          <source type="image/webp" srcset="/src/img/fotos/desgravamen-pareja-640.webp 640w, /src/img/fotos/desgravamen-pareja-1024.webp 1024w, /src/img/fotos/desgravamen-pareja-1536.webp 1536w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(845px, calc(66vw - 32px))">
+          <img src="/src/img/fotos/desgravamen-pareja-1024.jpg" alt="" fetchpriority="high" style="object-position: 72% 35%" width="1024" height="683">
+        </picture>
         <div class="txt">
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#escudo"/></svg>Seguro de desgravamen hipotecario</span>
           <h1 id="titular">¿Te rechazaron el seguro de <b>desgravamen hipotecario?</b></h1>

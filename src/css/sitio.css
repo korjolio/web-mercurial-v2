@@ -17,7 +17,7 @@ p { text-wrap: pretty; }
 /* ---------- Hero ---------- */
 .hero { padding: 20px 0 0; }
 .panel { position: relative; border-radius: 24px; overflow: hidden; background: var(--navy); color: #fff; min-height: 560px; display: grid; padding: 64px 64px 128px; isolation: isolate; }
-.panel > img { position: absolute; inset: 0 0 0 34%; width: 66%; height: 100%; object-fit: cover; object-position: 40% 55%; z-index: -2; }
+.panel > img, .panel > picture > img { position: absolute; inset: 0 0 0 34%; width: 66%; height: 100%; object-fit: cover; object-position: 40% 55%; z-index: -2; }
 .panel::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--navy) 0%, var(--navy) 34%, rgba(13,35,64,.5) 58%, rgba(13,35,64,.12) 100%); }
 .panel .txt { align-self: center; max-width: 620px; }
 .sello { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #cfe3f1; margin-bottom: 22px; }
@@ -202,7 +202,7 @@ fieldset { border: 0; min-width: 0; }
   .panel { padding: 48px 40px 120px; }
   .nav .acc .btn-borde { display: none; }
   .nav .wrap { gap: 20px; }
-  .panel > img { inset: 0; width: 100%; }
+  .panel > img, .panel > picture > img { inset: 0; width: 100%; }
   .panel::before { background: linear-gradient(90deg, rgba(13,35,64,.95) 0%, rgba(13,35,64,.75) 60%, rgba(13,35,64,.45) 100%); }
   .barra form { grid-template-columns: 1fr 1fr; }
   .barra .celda { border-bottom: 1px solid var(--borde); }
@@ -294,7 +294,7 @@ fieldset { border: 0; min-width: 0; }
 /* Landing sin barra de cotización: en celular la foto se ve abajo del texto */
 @media (max-width: 560px) {
   .panel.foto-abajo { min-height: 0; padding-bottom: 280px; }
-  .panel.foto-abajo > img { inset: auto 0 0 0; width: 100%; height: 300px; object-position: 76% 28% !important; }
+  .panel.foto-abajo > img, .panel.foto-abajo > picture > img { inset: auto 0 0 0; width: 100%; height: 300px; object-position: 76% 28% !important; }
   .panel.foto-abajo::before { background: linear-gradient(180deg, var(--navy) 0%, var(--navy) calc(100% - 300px), rgba(13,35,64,.55) calc(100% - 250px), rgba(13,35,64,0) calc(100% - 140px)); }
 }
 
@@ -400,3 +400,16 @@ fieldset { border: 0; min-width: 0; }
   .bn-acc { flex-direction: column; align-items: stretch; margin-top: 22px; }
   .bn-plazo { justify-content: center; }
 }
+
+/* ---------- Rendimiento ---------- */
+/* Las fotos van en <picture> (AVIF/WebP/JPG en 3 anchos): <picture> no genera caja, así la <img> se ubica
+   como si fuera hija directa del panel (los paneles son grid). */
+picture { display: contents; }
+/* Respaldo con las métricas de Albert Sans (calculadas con fontTools sobre los archivos de Google Fonts):
+   mientras carga la fuente (display=swap) el texto ocupa casi lo mismo y no salta al cambiar (CLS).
+   Arial: Mac, Windows e iPhone. Roboto: Android. */
+@font-face { font-family: 'Albert Sans Fallback'; src: local('Arial'), local('ArialMT'); font-weight: 100 549; size-adjust: 103%; ascent-override: 92.2%; descent-override: 24.3%; line-gap-override: 0%; }
+@font-face { font-family: 'Albert Sans Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 550 900; size-adjust: 96.8%; ascent-override: 98.1%; descent-override: 25.8%; line-gap-override: 0%; }
+@font-face { font-family: 'Albert Sans Fallback Roboto'; src: local('Roboto'), local('Roboto-Regular'); font-weight: 100 549; size-adjust: 103.3%; ascent-override: 92%; descent-override: 24.2%; line-gap-override: 0%; }
+@font-face { font-family: 'Albert Sans Fallback Roboto'; src: local('Roboto Bold'), local('Roboto-Bold'); font-weight: 550 900; size-adjust: 102.8%; ascent-override: 92.4%; descent-override: 24.3%; line-gap-override: 0%; }
+:root { --sans: 'Albert Sans', 'Albert Sans Fallback', 'Albert Sans Fallback Roboto', system-ui, sans-serif; }

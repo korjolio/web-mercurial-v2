@@ -43,8 +43,8 @@
   <script src="/src/js/meta.js?v=4"></script>
 
   <link rel="stylesheet" href="/src/css/marco.css?v=6">
-  <link rel="stylesheet" href="/src/css/sitio.css?v=14">
-  <link rel="stylesheet" href="/src/css/seguro-auto.css?v=4">
+  <link rel="stylesheet" href="/src/css/sitio.css?v=15">
+  <link rel="stylesheet" href="/src/css/seguro-auto.css?v=5">
 </head>
 
 <body class="mc-marco">
@@ -138,7 +138,11 @@
   <main>
     <section class="hero oscuro" aria-labelledby="titular"><div class="wrap">
       <div class="panel chico foto-abajo foto-auto">
-        <img src="/src/img/fotos/auto-promo.jpg" alt="" fetchpriority="high" style="object-position: 30% 62%">
+        <picture>
+          <source type="image/avif" srcset="/src/img/fotos/auto-promo-640.avif 640w, /src/img/fotos/auto-promo-1024.avif 1024w, /src/img/fotos/auto-promo-1600.avif 1600w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(768px, calc(60vw - 29px))">
+          <source type="image/webp" srcset="/src/img/fotos/auto-promo-640.webp 640w, /src/img/fotos/auto-promo-1024.webp 1024w, /src/img/fotos/auto-promo-1600.webp 1600w" sizes="(max-width: 560px) calc(100vw - 16px), (max-width: 1100px) calc(100vw - 48px), min(768px, calc(60vw - 29px))">
+          <img src="/src/img/fotos/auto-promo-1024.jpg" alt="" fetchpriority="high" style="object-position: 30% 62%" width="1024" height="680">
+        </picture>
         <div class="txt">
           <span class="sello"><svg class="ico" aria-hidden="true"><use href="#auto"/></svg>Seguro de auto para personas</span>
           <h1 id="titular">Seguro para tu auto: <b>nosotros comparamos, tú decides</b></h1>
