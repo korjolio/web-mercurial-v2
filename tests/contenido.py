@@ -47,7 +47,7 @@ PAGINAS = [
     ('/', 'portada', 1, 'barra', False),
     ('/seguros/flotas', 'flotas', 1, 'barra', False),
     ('/seguros/transporte', 'transporte', 1, 'barra', False),
-    ('/seguros/transporte/importaciones-exportaciones', 'comex', 1, 'carga', False),
+    ('/seguros/transporte/importaciones-exportaciones', 'comex', 0, None, False),  # cotizar va a /certificado (Pepa, 20-nov)
     ('/seguros/transporte/certificado', 'certificado', 1, 'certificado', True),
     ('/seguros/transporte/poliza-anual', 'poliza-anual', 1, 'poliza', False),
     ('/seguros/incendio', 'incendio', 1, 'barra', False),

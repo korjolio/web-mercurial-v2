@@ -60,77 +60,85 @@
   </style>
   <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "InsuranceAgency",
-        "@id": "https://mercurial.cl/#organization",
-        "name": "Mercurial Corredores de Seguros",
-        "url": "https://mercurial.cl",
-        "telephone": "+56939319546",
-        "email": "contacto@mercurial.cl",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Santiago",
-          "addressCountry": "CL"
-        }
-      },
-      {
-        "@type": "Service",
-        "@id": "https://mercurial.cl/seguros/flotas#servicio",
-        "name": "Seguro de flotas para empresas",
-        "serviceType": "Seguro de vehículos para empresas",
-        "url": "https://mercurial.cl/seguros/flotas",
-        "provider": {
-          "@id": "https://mercurial.cl/#organization"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Chile"
-        },
-        "description": "Seguro para camiones, camionetas y autos a nombre de la empresa. Mercurial cotiza con distintas compañías de seguros y explica qué cubre cada propuesta."
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Inicio",
-            "item": "https://mercurial.cl/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Seguro de flotas",
-            "item": "https://mercurial.cl/seguros/flotas"
-          }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://mercurial.cl/seguros/flotas#preguntas",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "¿Qué necesito para cotizar?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Para empezar, el nombre de la empresa y un teléfono. En la llamada te preguntamos qué vehículos tienes y cómo los usas, y con eso cotizamos con distintas compañías de seguros."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿El seguro de flota cubre la carga que llevan los camiones?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Son seguros distintos: el seguro de flota protege los vehículos y el seguro de transporte protege la mercadería que llevan. Según tu operación puedes necesitar uno o ambos; lo vemos en la primera llamada."
-            }
-          }
-        ]
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "InsuranceAgency",
+      "@id": "https://mercurial.cl/#organization",
+      "name": "Mercurial Corredores de Seguros",
+      "url": "https://mercurial.cl",
+      "telephone": "+56939319546",
+      "email": "contacto@mercurial.cl",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressCountry": "CL"
       }
-    ]
-  }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://mercurial.cl/seguros/flotas#servicio",
+      "name": "Seguro de flotas para empresas",
+      "serviceType": "Seguro de vehículos para empresas",
+      "url": "https://mercurial.cl/seguros/flotas",
+      "provider": {
+        "@id": "https://mercurial.cl/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Chile"
+      },
+      "description": "Seguro para camiones, camionetas y autos a nombre de la empresa. Mercurial cotiza con distintas compañías de seguros y explica qué cubre cada propuesta."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://mercurial.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Seguro de flotas",
+          "item": "https://mercurial.cl/seguros/flotas"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://mercurial.cl/seguros/flotas#preguntas",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Desde cuántos vehículos es una flota?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Desde 5 vehículos armamos una póliza colectiva para toda la flota. Si tienes menos, cotizamos una póliza independiente para cada vehículo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué necesito para cotizar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para autos y camionetas: patente, marca, modelo y año de cada vehículo. Para camiones y otros vehículos pesados: patente, marca, modelo, año, monto asegurado y el equipamiento, si lo tiene. Si prefieres, déjanos tu teléfono y te pedimos el listado en la llamada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El seguro de flota cubre la carga que llevan los camiones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Son seguros distintos: el seguro de flota protege los vehículos y el seguro de transporte protege la mercadería que llevan. Según tu operación puedes necesitar uno o ambos; lo vemos en la primera llamada."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 
@@ -256,7 +264,7 @@
 
     <section class="sec"><div class="wrap">
       <div class="bloques">
-        <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#personas"/></svg>Para quién es</h2><p>Empresas que usan vehículos para trabajar: transportistas, constructoras, distribuidoras, servicio técnico y cualquier empresa con autos o camionetas a su nombre.</p></div>
+        <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#personas"/></svg>Para quién es</h2><p>Empresas con 5 o más vehículos a su nombre: transportistas, constructoras, distribuidoras, servicio técnico. Desde 5 vehículos armamos una póliza colectiva para toda la flota; si tienes menos, aseguramos cada vehículo con su propia póliza.</p></div>
         <div class="bloque"><h2><svg class="ico" aria-hidden="true"><use href="#balanza"/></svg>Cómo te ayudamos</h2><p>Te llamamos para entender qué vehículos tienes y cómo los usas, cotizamos con distintas compañías de seguros y te mostramos las diferencias antes de que decidas.</p></div>
       </div>
     </div></section>
@@ -264,8 +272,9 @@
     <section class="sec" id="preguntas"><div class="wrap">
       <div class="cabeza"><h2 class="grande">Preguntas <b>frecuentes</b></h2></div>
       <div class="preguntas">
-        <details class="pregunta"><summary>¿Qué necesito para cotizar?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>Para empezar, el nombre de la empresa y un teléfono. En la llamada te preguntamos qué vehículos tienes y cómo los usas, y con eso cotizamos con distintas compañías de seguros.</p></div></details>
-        <details class="pregunta"><summary>¿El seguro de flota cubre la carga que llevan los camiones?<svg class="ico" aria-hidden="true"><use href="#chev"/></svg></summary><div class="resp"><p>No. Son seguros distintos: el seguro de flota protege los vehículos y el <a href="/seguros/transporte">seguro de transporte</a> protege la mercadería que llevan. Según tu operación puedes necesitar uno o ambos; lo vemos en la primera llamada.</p></div></details>
+        <details class="pregunta"><summary>¿Desde cuántos vehículos es una flota?</summary><div class="resp"><p>Desde 5 vehículos armamos una póliza colectiva para toda la flota. Si tienes menos, cotizamos una póliza independiente para cada vehículo.</p></div></details>
+        <details class="pregunta"><summary>¿Qué necesito para cotizar?</summary><div class="resp"><p>Para autos y camionetas: patente, marca, modelo y año de cada vehículo. Para camiones y otros vehículos pesados: patente, marca, modelo, año, monto asegurado y el equipamiento, si lo tiene. Si prefieres, déjanos tu teléfono y te pedimos el listado en la llamada.</p></div></details>
+        <details class="pregunta"><summary>¿El seguro de flota cubre la carga que llevan los camiones?</summary><div class="resp"><p>No. Son seguros distintos: el seguro de flota protege los vehículos y el <a href="/seguros/transporte">seguro de transporte</a> protege la mercadería que llevan. Según tu operación puedes necesitar uno o ambos; lo vemos en la primera llamada.</p></div></details>
       </div>
     </div></section>
 
