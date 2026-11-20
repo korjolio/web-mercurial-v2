@@ -35,7 +35,12 @@
           new Date().getTime(), event: 'gtm.js'
       }); var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      // Cloudflare (Google tag gateway) inyecta GTM desde /8wkd/ al inicio del <head>: si ya está, no se descarga dos
+      // veces (mismo comportamiento probado con y sin cookies). Si 3 s después de cargar GTM no corrió, se pide a Google.
+      if ((w.google_tags_first_party || []).indexOf(i) < 0) f.parentNode.insertBefore(j, f);
+      else w.addEventListener('load', function () { setTimeout(function () {
+        if (!(w.google_tag_manager && w.google_tag_manager[i])) f.parentNode.insertBefore(j, f); }, 3000); });
     })(window, document, 'script', 'dataLayer', 'GTM-K4SL5KSF');</script>
   <!-- End Google Tag Manager -->
 
