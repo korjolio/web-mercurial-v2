@@ -291,6 +291,8 @@ if (!motor.configurado && !motor.dryRun) {
 }
 
 const SEGUROS_CONTACTO = ['Flotas', 'Transporte', 'Incendio', 'Colectivo de salud', 'Condominio', 'Otro'];
+// Producto que recibe el motor de leads por cada seguro del formulario genérico (queda en el atributo `producto`).
+const PRODUCTO_RAMO = { Flotas: 'flotas', Transporte: 'transporte', Incendio: 'incendio', 'Colectivo de salud': 'colectivos', Condominio: 'condominio', Otro: 'otro' };
 const TIPOS_CONTACTO = { cotizacion: 'Cotización', consulta: 'Consulta', reclamo: 'Reclamo', desgravamen: 'Desgravamen hipotecario', carga: 'Seguro de carga internacional', certificado: 'Certificado de carga (anuncio)', auto: 'Seguro de auto' };
 // Patente chilena sin puntos ni guiones: 6 caracteres en autos (ABCD12 o AB1234), 5 en motos.
 const patenteLimpia = v => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
@@ -544,6 +546,15 @@ function validarContacto(b) {
     return errors;
 }
 
+// Aviso a Telegram cuando un lead web NO quedó en Chatwoot. Nunca lanza ni demora la respuesta (sin await, 5 s).
+function avisarTelegramRespaldo(asunto, lineas) {
+    const token = process.env.TELEGRAM_BOT_TOKEN, chat = process.env.TELEGRAM_CHAT_ID;
+    if (!token || !chat) return;
+    const text = `🚨 <b>Lead web que NO llegó a Chatwoot</b>\n${escHtml(asunto)}\n\n${escHtml(lineas.join('\n'))}`.slice(0, 4000);
+    require('axios').post(`https://api.telegram.org/bot${token}/sendMessage`, { chat_id: chat, text, parse_mode: 'HTML' }, { timeout: 5000 })
+        .catch(e => console.error('[Telegram] No se pudo avisar el respaldo:', e.response?.status || e.code || e.message));
+}
+
 app.post('/api/contacto', async (req, res) => {
     const b = req.body || {};
     // Campo trampa: los humanos no lo ven; si viene con algo, se responde éxito sin enviar.
@@ -626,6 +637,9 @@ app.post('/api/contacto', async (req, res) => {
         // Carga (certificados por embarque) también va al motor desde el 19-nov: una conversación en WhatsApp con
         // los datos como nota y etiqueta «transporte». El bot de auto no la atiende: avisa a una persona.
         const conMotor = (b.tipo === 'auto' || esCarga) && (motor.configurado || motor.dryRun);
+        // Resto de los ramos (no auto, no carga). Los reclamos no son leads: siguen solo por correo a reclamos@ (CMF).
+        const otroRamo = b.tipo === 'cotizacion' ? (PRODUCTO_RAMO[b.seguro] || 'otro')
+            : b.tipo === 'desgravamen' ? 'desgravamen' : b.tipo === 'consulta' ? 'consulta' : '';
         let enMotor = false;
         if (conMotor && esCarga) {
             const r = await motor.enviar({
@@ -675,17 +689,43 @@ app.post('/api/contacto', async (req, res) => {
                 pagina: paginaLimpia(b.pagina)
             });
             enMotor = r.entregado;
+        } else if (otroRamo && (motor.configurado || motor.dryRun)) {
+            // Cotizaciones de las páginas de cada ramo, portada, consultas y desgravamen: también al motor, para que
+            // TODO lead web tenga su conversación en Chatwoot (lead C&G logística, 23-nov-2026, quedó solo en el correo).
+            const r = await motor.enviar({
+                producto: otroRamo,
+                nombre: limpio(b.nombre) || limpio(b.empresa),
+                telefono: limpio(b.telefono),
+                correo: limpio(b.correo).toLowerCase(),
+                datos: Object.fromEntries(Object.entries({
+                    tipo, seguro: b.seguro || '', empresa: limpio(b.empresa), banco: limpio(b.banco),
+                    situacion: b.situacion || '', rechazo: b.rechazo || '', capital: b.capital || '',
+                    mensaje: limpio(b.mensaje).slice(0, 1000)
+                }).filter(([, v]) => v)),
+                fuente: utmValido(b, 'utm_source'),
+                medio: utmValido(b, 'utm_medium'),
+                campana: utmValido(b, 'utm_campaign'),
+                contenido: utmValido(b, 'utm_content'),
+                procedencia: `Formulario web (${tipo}${b.seguro ? ' ' + b.seguro : ''})`,
+                pagina: paginaLimpia(b.pagina)
+            });
+            enMotor = r.entregado;
         }
         // Carga: el correo sale SIEMPRE (nadie cotiza carga en automático y el aviso es lo que hace responder rápido).
-        if (!enMotor || esCarga) {
+        // Los demás ramos también mandan siempre el correo (nadie los cotiza en automático), avisando si quedó en Chatwoot.
+        if (!enMotor || esCarga || otroRamo) {
             await mailer.sendMail({
                 from: `"Sitio Mercurial" <${MAIL_FROM}>`,
                 to: b.tipo === 'auto' ? MAIL_TO_AUTO : b.tipo === 'reclamo' ? MAIL_TO_RECLAMOS : MAIL_TO,
                 replyTo: b.correo ? limpio(b.correo) : undefined,
-                subject: conMotor && !enMotor ? `[RESPALDO: no llegó a Chatwoot] ${asunto}` : (esCarga && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
+                subject: (conMotor || (otroRamo && (motor.configurado || motor.dryRun))) && !enMotor
+                    ? `[RESPALDO: no llegó a Chatwoot] ${asunto}`
+                    : ((esCarga || otroRamo) && enMotor ? `${asunto} · ya está en Chatwoot` : asunto),
                 text: lineas.join('\n')
             });
         }
+        // Respaldo también por Telegram (mismo grupo que avisa los leads de Chatwoot). Sin variables no hace nada.
+        if (!enMotor && (conMotor || (otroRamo && (motor.configurado || motor.dryRun)))) avisarTelegramRespaldo(asunto, lineas);
         if (cotCarga && cotCarga.ok) {
             try {
                 const c = correoCotizacionCarga(b, cotCarga);
