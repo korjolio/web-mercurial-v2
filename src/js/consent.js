@@ -3,7 +3,7 @@
  * - Google Consent Mode v2: todo denegado por defecto; GTM y GA4 lo respetan. Las etiquetas de
  *   terceros dentro de GTM (LinkedIn, Signals Gateway) deben exigir consentimiento en su
  *   configuración de GTM, porque no lo leen solas.
- * - El píxel de Meta (meta.js) no se carga hasta que el visitante acepta.
+ * - Los píxeles de Meta (meta.js) y OpenAI (openai.js) no se cargan hasta que el visitante acepta.
  * - La elección queda en localStorage. window.mercurialConsent.open() vuelve a mostrar el banner
  *   (enlace "Configurar cookies" de la política de privacidad).
  * El banner trae su propio CSS para verse igual en las páginas con styles.css y en mascotas.html.
@@ -91,7 +91,7 @@
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Uso de cookies');
     banner.innerHTML =
-      '<p>Usamos cookies propias y de Google, Meta y LinkedIn para medir visitas y anuncios. ' +
+      '<p>Usamos cookies propias y de Google, Meta, LinkedIn y OpenAI para medir visitas y anuncios. ' +
       '<a href="/politica-privacidad#cookies">Más información</a></p>' +
       '<div class="mc-consent-acciones">' +
       '<button type="button" data-consent="rechazado">Rechazar</button>' +

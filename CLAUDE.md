@@ -95,6 +95,10 @@ Eventos propios que emite `mascotas.html` al `dataLayer`:
 - GA4 respeta Consent Mode solo. **Las demás etiquetas de GTM no**: toda etiqueta de terceros debe tener en GTM "La etiqueta requiere consentimiento adicional" (`ad_storage`), o se dispara aunque el visitante rechace. LinkedIn Insight ya lo tiene (GTM versión 8) y además se activa con el evento `cookie_consent_update` (activador "CE - Cookie Consent Update", versión 9), así también mide la página donde el visitante acepta. Verificado en producción: con rechazo, 0 solicitudes a LinkedIn; al aceptar en la misma página, se activa. Ojo al probar: el navegador guarda `gtm.js` 15 min (`max-age=900`), así que justo después de publicar puede correr la versión anterior.
 - Sin consentimiento, `meta.js` no carga el píxel y `mercurialMeta.newEventId()` devuelve `undefined`, así que `/api/leads` no manda el Lead a Meta; el formulario pyme marca `tracking.metaConsent` y el servidor lo exige.
 
+### OpenAI (píxel de anuncios en ChatGPT)
+
+`src/js/openai.js`, cargado después de `meta.js` en las mismas páginas. Píxel `CZHRJYHEQCciDYpmcFB2K4`. Igual que Meta, solo se carga si el visitante acepta las cookies. Solo hace `init` (sin eventos propios por ahora). `debug` va en `false` en producción; se activa en localhost o con `?oaiq_debug=1` en la URL.
+
 ### Meta (píxel + API de conversiones)
 
 `src/js/meta.js` (navegador) + `enviarEventoMeta` en `server.js` (servidor) mandan cada evento dos veces con el mismo `event_id` para que Meta deduplique. Conjunto de datos `1129934969998097` ("API de Eventos mercurial.cl"). Variables: `META_CAPI_TOKEN` (sin ella solo queda el navegador), `META_TEST_EVENT_CODE` (solo para pruebas, nunca en Railway). Eventos: `ViewContent` (landings), `Contact` (WhatsApp/correo), `CustomizeProduct` (cotizador de mascotas), `Lead` (formularios).
