@@ -97,7 +97,7 @@ Eventos propios que emite `mascotas.html` al `dataLayer`:
 
 ### OpenAI (píxel de anuncios en ChatGPT)
 
-`src/js/openai.js`, cargado después de `meta.js` en las mismas páginas. Píxel `CZHRJYHEQCciDYpmcFB2K4`. Igual que Meta, solo se carga si el visitante acepta las cookies. Solo hace `init` (sin eventos propios por ahora). `debug` va en `false` en producción; se activa en localhost o con `?oaiq_debug=1` en la URL.
+`src/js/openai.js`, cargado después de `meta.js` en las mismas páginas. Píxel `CZHRJYHEQCciDYpmcFB2K4`. Igual que Meta, solo se carga si el visitante acepta las cookies. Además de `init`, manda la conversión estándar `lead_created` (`window.mercurialOpenAI.lead()`) cuando se envía con éxito una cotización: formularios `auto`, `carga`, `certificado` y `cotizacion` de `sitio.js`, y el formulario pyme. Consultas, reclamos y desgravamen no cuentan. Formato según https://developers.openai.com/ads/measurement-pixel. `debug` va en `false` en producción; se activa en localhost o con `?oaiq_debug=1` en la URL.
 
 ### Meta (píxel + API de conversiones)
 
