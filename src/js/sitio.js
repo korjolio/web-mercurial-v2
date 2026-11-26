@@ -287,6 +287,8 @@
       const tipoMedido = datos.tipo === 'desgravamen' ? 'personas' : datos.tipo;
       window.dataLayer.push({ event: 'formulario_enviado', form_tipo: tipoMedido, form_seguro: datos.seguro || '' });
       if (idMeta) window.mercurialMeta.trackBrowser('Lead', { content_name: datos.tipo === 'auto' ? 'Seguro de Auto' : 'Seguro de Carga' }, idMeta);
+      // ChatGPT Ads: solo las cotizaciones son conversión (no consultas ni reclamos; desgravamen tampoco, por datos de salud).
+      if (['auto', 'carga', 'certificado', 'cotizacion'].includes(datos.tipo) && window.mercurialOpenAI) window.mercurialOpenAI.lead();
       if (estado) estado.textContent = '';
       if (form.dataset.envio === 'cotizacion' && caja.classList.contains('caja')) {
         caja.classList.add('enviado'); const okMsg = $('.ok', caja); okMsg.hidden = false; okMsg.focus();

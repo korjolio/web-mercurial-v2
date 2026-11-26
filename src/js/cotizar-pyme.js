@@ -418,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showModal(true, 'Antecedentes recibidos', 'Gracias. Un ejecutivo de Mercurial revisará la información y te contactará con la cotización.');
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'cotizacion_pyme_submit', form_cluster: 'pyme' });
+            if (window.mercurialOpenAI) window.mercurialOpenAI.lead();
         } catch (error) {
             const msg = 'No pudimos confirmar el envío. Tus antecedentes siguen en el formulario. Puedes intentar otra vez o pedir ayuda por WhatsApp.';
             showModal(false, 'No pudimos enviar tus antecedentes', msg);
